@@ -1,0 +1,72 @@
+.banner-arrow {
+    width: 100%;
+    max-width: calc(900px + 2rem);
+    height: 630px;
+    position: relative;
+    z-index: 10;
+    justify-content: space-between;
+    top: 50%;
+    float: right;
+    transition: all 0.5s ease;
+    margin-right: 90px;
+    .slider-arrow {
+        background: rgba(0, 0, 0, 0);
+        color: transparent;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        outline: none !important;
+        border-radius: 50%;
+        padding-left: 4px;
+        position: relative;
+        cursor: pointer;
+        z-index: 12;
+        transition: all 0.5s ease;
+        .icon {
+            width: 2rem;
+            height: 2rem;
+            filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.25));
+        }
+        &.right-arrow,
+        &.left-arrow {
+            left: 1rem;
+            top: -4rem;
+        }
+        &.left-arrow {
+            transform: rotate(180deg);
+            &:hover,
+            &:focus-visible {
+                filter: drop-shadow(-4px -4px 4px rgba(0, 0, 0, 0.25));
+                .icon {
+                    filter: drop-shadow(-4px -4px 4px rgba(0, 0, 0, 0.25));
+                }
+            }
+        }
+        &.right-arrow {
+            &:hover,
+            &:focus-visible {
+                filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+                .icon {
+                    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+                }
+            }
+        }
+        &:hover,
+        &:focus ~ .slider-arrow,
+        &.right-arrow:focus ~ .left-arrow,
+        &:focus-visible {
+            background: rgba(0, 0, 0, 0.5);
+            color: $white;
+        }
+        &:focus-visible {
+            border: 2px solid $primary-blue !important;
+        }
+    }
+    &:hover,
+    &:focus {
+        .slider-arrow {
+            background: rgba(0, 0, 0, 0.5);
+            color: $white;
+        }
+    }
+}

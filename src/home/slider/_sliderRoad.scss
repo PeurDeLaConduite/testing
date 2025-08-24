@@ -1,0 +1,98 @@
+.P {
+    fill: #f1f1f0;
+}
+.Q {
+    opacity: 0.25;
+}
+.R {
+    opacity: 0.54;
+}
+.S {
+    fill: #fdf8fb;
+}
+.T {
+    font-family: "Roboto Flex", sans-serif;
+}
+.U {
+    font-size: 24px;
+}
+.sld-container {
+    height: calc(100vh);
+    max-height: 630px;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    .sld-road,
+    .sld-flag,
+    .sld-road-med,
+    .slider-number {
+        top: -10px;
+        padding: 0 35px 0 0;
+        max-width: 1656px;
+        height: auto;
+        position: absolute;
+        z-index: 2;
+        margin: 0 auto;
+        filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+    .sld-road-med {
+        display: none;
+    }
+    .sld-flag {
+        max-width: inherit;
+        width: 1685px;
+        padding-right: 45px;
+        // max-height: 630px;
+        top: -20px;
+        // height: auto;
+        // object-fit: cover;
+        filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+    }
+    .slider-number {
+        top: 15px;
+        position: absolute;
+        max-width: 1640px;
+        .sld-numb1,
+        .sld-numb2,
+        .sld-numb3,
+        .sld-numb4,
+        .sld-numb5 {
+            animation: none;
+            display: none;
+        }
+        &.sld5 {
+            .sld-numb5 {
+                display: block;
+                animation: opacityAnimation 0.5s ease-in-out;
+            }
+        }
+        &.sld4 {
+            .sld-numb4 {
+                display: block;
+                animation: opacityAnimation 0.5s ease-in-out;
+            }
+        }
+        &.sld3 {
+            .sld-numb3 {
+                display: block;
+                animation: opacityAnimation 0.5s ease-in-out;
+            }
+        }
+        &.sld2 {
+            .sld-numb2 {
+                display: block;
+                animation: opacityAnimation 0.5s ease-in-out;
+            }
+        }
+        &.sld1 {
+            .sld-numb1 {
+                display: block;
+                animation: opacityAnimation 0.5s ease-in-out;
+            }
+        }
+    }
+}

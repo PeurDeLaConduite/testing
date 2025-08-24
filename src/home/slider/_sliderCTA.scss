@@ -1,0 +1,34 @@
+.sld-CTA {
+    width: 270px;
+    height: 180px;
+    border-radius: 24px;
+    cursor: pointer;
+    background: $white;
+    position: absolute;
+    z-index: 100;
+    margin: 0 0 0 90px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 21px 0;
+    top: 168px;
+    transform: scale(1);
+    transition: transform 0.25s ease-out;
+    will-change: transform;
+    &:hover,
+    &:focus-visible {
+        transform: scale(1.05);
+    }
+    p {
+        width: 175px;
+        @include bannerDescribeBold;
+        &.p1 {
+            height: 34px;
+        }
+        &.p2 {
+            height: 39px;
+            font-size: 2rem;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+    }
+}

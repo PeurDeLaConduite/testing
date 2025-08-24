@@ -1,0 +1,45 @@
+/* Utils */
+@import "./00_utils/variables";
+@import "./00_utils/_functions";
+@import "./00_utils/_mixins";
+@import "./00_utils/_fonts";
+
+@import "./01_base/general";
+@import "./03_pages/page";
+@import "./01_base/media-query";
+@import "./01_base/navToggler";
+
+@import "../../components/header/header";
+@import "../../components/button/button";
+@import "../../components/checkbox/input-checkbox";
+
+@import "../../home/slider/slider";
+@import "../../home/about/about";
+@import "../../home/service/services";
+@import "../../home/contact-section/contact";
+
+@import "../../home/contact-section/contactForm/form";
+
+// @import "../../../app/tarifs/tarifs";
+
+@import "../../components/footer/footer";
+@import "../../components/loader/loader";
+
+@import "../../../app/services/tarifs";
+@import "../../../app/blog/blog";
+// // @import "./03_responsive/03_tablet";
+// @import "./03_responsive/test";
+// @import "./03_responsive/04_mobile";
+
+// @import "./04_modal/00_modal";
+
+// @import "./05_no_critical/no_critical";
+
+// @import "./responsive/4k-1440p";
+// @import "./responsive/4k-1440p-no-critical";
+// @import "./responsive/1440p-1080p";
+// @import "./responsive/1440p-1080p-no-critical";
+// @import "./responsive/1080p-620p";
+// @import "./responsive/1080p-620p-no-critical";
+// @import "./responsive/620p-320p";
+// @import "./responsive/620p-320p-no-critical";

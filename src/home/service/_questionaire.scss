@@ -1,0 +1,14 @@
+form.srv-form {
+    justify-content: flex-start;
+    input[type="checkbox"] {
+        margin: 0 9px 0 25px;
+    }
+    span {
+        position: relative;
+        left: -32px;
+    }
+    label {
+        @include paragraph;
+        height: 50px;
+    }
+}
