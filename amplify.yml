@@ -1,10 +1,9 @@
-version: 1
 backend:
     phases:
         build:
             commands:
-                - nvm install 22.14.0
-                - nvm use 22.14.0
+                - nvm install 20.18.0
+                - nvm use 20.18.0
                 - corepack enable
                 - corepack prepare yarn@4.9.2 --activate
                 - yarn cache clean
@@ -13,10 +12,18 @@ backend:
 
 frontend:
     phases:
+        preBuild:
+            commands:
+                - nvm install 20.18.0
+                - nvm use 20.18.0
+                - corepack enable
+                - corepack prepare yarn@4.9.2 --activate
+                - yarn install --immutable
         build:
             commands:
+                - export NODE_OPTIONS="--max-old-space-size=6144"
                 - export NEXT_TELEMETRY_DISABLED=1
-                - yarn run build
+                - yarn build
 
     artifacts:
         baseDirectory: .next
@@ -26,7 +33,7 @@ frontend:
     cache:
         paths:
             - .next/cache/**/*
-            - .npm/**/*
+            - .yarn/cache/**/*
             - node_modules/**/*
 
     customHeaders: # ← une seule fois sous frontend
@@ -38,7 +45,7 @@ frontend:
         - pattern: "/api/*"
           headers:
               - key: "Access-Control-Allow-Origin"
-                value: "https://mobile.peur-de-la-conduite.fr"
+                value: "https://peur-de-la-conduite.fr"
               - key: "Access-Control-Allow-Credentials"
                 value: "true"
               - key: "Access-Control-Allow-Methods"
