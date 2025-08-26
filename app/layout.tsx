@@ -11,6 +11,7 @@ import ScrollSectionsWrapper from "./ScrollSectionsWrapper";
 import Footer from "../src/components/footer/footer";
 import Loader from "@/src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
+import Providers from "./providers";
 
 export const RobotoFlex = localFont({
     src: "/fonts/RobotoFlex.woff2",
@@ -144,18 +145,18 @@ export default function RootLayout({
             <body
                 className={`${RobotoFlex.variable} ${Montserrat.variable} ${Nunito.variable}`}
                 id="top"
-            >
+            ><Providers>
                 <MobileRedirect />
                 <ScrollProvider>
                     <ScrollSectionsWrapper>
                         <SearchProvider>
                             <DrivingProvider>
                                 <Suspense fallback={<Loader />}>
-                                    <header>
+                                    {/* <header>
                                         <div className="content-wrapper">
                                             <HeaderProps />
                                         </div>
-                                    </header>
+                                    </header> */}
                                     <main>{children}</main>
                                     <Footer />
                                 </Suspense>
@@ -163,6 +164,7 @@ export default function RootLayout({
                         </SearchProvider>
                     </ScrollSectionsWrapper>
                 </ScrollProvider>
+                </Providers>
             </body>
         </html>
     );
