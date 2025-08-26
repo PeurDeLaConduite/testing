@@ -20,17 +20,17 @@ export default function EditField<T extends Record<string, unknown>>({
     const { field, value } = editModeField;
 
     return (
-        <fieldset className="my-6 p-4 border rounded-md bg-white shadow-sm max-w-md mx-auto">
+        <fieldset className="edit-field">
             <legend className="font-semibold text-lg mb-4">
                 Modifier mon {labels(field).toLowerCase()} :
             </legend>
 
-            <label htmlFor="edit-field" className="sr-only">
+            <label htmlFor="edit-field" className="visually-hidden">
                 {labels(field)}
             </label>
             <input
                 id="edit-field"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="edit-field_input"
                 value={value}
                 placeholder={labels(field)}
                 title={labels(field)}
@@ -39,12 +39,12 @@ export default function EditField<T extends Record<string, unknown>>({
                 }
             />
 
-            <div className="flex justify-between mt-5 gap-10">
-                <SaveButton onClick={saveSingleField} label="Sauvegarder" className="flex-1 mr-2" />
+            <div className="edit-field_actions">
+                <SaveButton onClick={saveSingleField} label="Sauvegarder" className="flex-1" />
                 <BackButton
                     onClick={() => setEditModeField(null)}
                     label="Retour"
-                    className="flex-1 ml-2"
+                    className="flex-1"
                 />
             </div>
         </fieldset>
