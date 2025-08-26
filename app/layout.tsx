@@ -5,7 +5,7 @@ import "../src/assets/styles/main.scss";
 import { DrivingProvider } from "../src/utils/context/DrivingContext";
 import { SearchProvider } from "../src/utils/context/SearchContext";
 import { Suspense } from "react";
-import HeaderProps from "./headerProps";
+// import HeaderProps from "./headerProps";
 import { ScrollProvider } from "../src/utils/context/ScrollContext";
 import ScrollSectionsWrapper from "./ScrollSectionsWrapper";
 import Footer from "../src/components/footer/footer";
