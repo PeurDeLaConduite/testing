@@ -1,6 +1,7 @@
 // src/components/SeoFields.tsx
 import React from "react";
 import EditableField from "./EditableField";
+import "./_SeoFields.scss";
 
 type SeoFieldsProps = {
     seo: {
@@ -14,8 +15,8 @@ type SeoFieldsProps = {
 
 export default function SeoFields({ seo, readOnly, onChange }: SeoFieldsProps) {
     return (
-        <fieldset className="border p-4 rounded-md mt-4">
-            <legend className="text-sm font-medium text-gray-700">SEO</legend>
+        <fieldset className="seo-fields">
+            <legend className="seo-fields_legend">SEO</legend>
 
             <EditableField
                 name="seo.title"
