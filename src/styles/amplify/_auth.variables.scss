@@ -1,0 +1,77 @@
+:root {
+    /* Authenticator */
+    --amplify-components-authenticator-max-width: 60rem;
+    --amplify-components-authenticator-modal-width: var(--amplify-space-relative-full);
+    --amplify-components-authenticator-modal-height: var(--amplify-space-relative-full);
+    --amplify-components-authenticator-modal-background-color: var(--amplify-colors-overlay-50);
+    --amplify-components-authenticator-modal-top: var(--amplify-space-zero);
+    --amplify-components-authenticator-modal-left: var(--amplify-space-zero);
+    --amplify-components-authenticator-container-width-max: 30rem;
+    --amplify-components-authenticator-router-border-width: var(--amplify-border-widths-small);
+    --amplify-components-authenticator-router-border-style: solid;
+    --amplify-components-authenticator-router-border-color: var(--amplify-colors-border-primary);
+
+    /* Field control */
+    --amplify-components-fieldcontrol-transition-duration: var(--amplify-time-medium);
+    --amplify-components-fieldcontrol-font-size: var(--amplify-font-sizes-medium);
+    --amplify-components-fieldcontrol-line-height: var(--amplify-line-heights-medium);
+    --amplify-components-fieldcontrol-padding-block-start: var(--amplify-space-xs);
+    --amplify-components-fieldcontrol-padding-block-end: var(--amplify-space-xs);
+    --amplify-components-fieldcontrol-padding-inline-start: var(--amplify-space-small);
+    --amplify-components-fieldcontrol-padding-inline-end: var(--amplify-space-small);
+    --amplify-components-fieldcontrol-border-color: var(--amplify-colors-border-primary);
+    --amplify-components-fieldcontrol-border-width: var(--amplify-border-widths-small);
+    --amplify-components-fieldcontrol-border-style: solid;
+    --amplify-components-fieldcontrol-border-radius: var(--amplify-radii-small);
+    --amplify-components-fieldcontrol-color: var(--amplify-colors-font-primary);
+    --amplify-components-fieldcontrol-focus-border-color: var(--amplify-colors-border-focus);
+    --amplify-components-fieldcontrol-focus-box-shadow: 0 0 0 2px var(--amplify-colors-border-focus);
+    --amplify-components-fieldcontrol-small-font-size: var(--amplify-font-sizes-small);
+    --amplify-components-fieldcontrol-small-padding-block-start: var(--amplify-space-xxs);
+    --amplify-components-fieldcontrol-small-padding-block-end: var(--amplify-space-xxs);
+    --amplify-components-fieldcontrol-small-padding-inline-start: var(--amplify-space-xs);
+    --amplify-components-fieldcontrol-small-padding-inline-end: var(--amplify-space-xs);
+    --amplify-components-fieldcontrol-large-font-size: var(--amplify-font-sizes-large);
+    --amplify-components-fieldcontrol-large-padding-block-start: var(--amplify-space-small);
+    --amplify-components-fieldcontrol-large-padding-block-end: var(--amplify-space-small);
+    --amplify-components-fieldcontrol-large-padding-inline-start: var(--amplify-space-medium);
+    --amplify-components-fieldcontrol-large-padding-inline-end: var(--amplify-space-medium);
+
+    /* Button */
+    --amplify-components-button-font-weight: var(--amplify-font-weights-bold);
+    --amplify-components-button-transition-duration: var(
+        --amplify-components-fieldcontrol-transition-duration
+    );
+    --amplify-components-button-font-size: var(--amplify-components-fieldcontrol-font-size);
+    --amplify-components-button-line-height: var(--amplify-components-fieldcontrol-line-height);
+    --amplify-components-button-padding-block-start: var(
+        --amplify-components-fieldcontrol-padding-block-start
+    );
+    --amplify-components-button-padding-block-end: var(
+        --amplify-components-fieldcontrol-padding-block-end
+    );
+    --amplify-components-button-padding-inline-start: var(
+        --amplify-components-fieldcontrol-padding-inline-start
+    );
+    --amplify-components-button-padding-inline-end: var(
+        --amplify-components-fieldcontrol-padding-inline-end
+    );
+    --amplify-components-button-background-color: transparent;
+    --amplify-components-button-border-color: var(--amplify-components-fieldcontrol-border-color);
+    --amplify-components-button-border-width: var(--amplify-components-fieldcontrol-border-width);
+    --amplify-components-button-border-style: var(--amplify-components-fieldcontrol-border-style);
+    --amplify-components-button-border-radius: var(--amplify-components-fieldcontrol-border-radius);
+    --amplify-components-button-color: var(--amplify-colors-font-primary);
+    --amplify-components-button-hover-color: var(--amplify-colors-font-focus);
+    --amplify-components-button-hover-background-color: var(--amplify-colors-primary-10);
+    --amplify-components-button-hover-border-color: var(--amplify-colors-primary-60);
+    --amplify-components-button-focus-color: var(--amplify-colors-font-focus);
+    --amplify-components-button-focus-background-color: var(--amplify-colors-primary-10);
+    --amplify-components-button-focus-border-color: var(--amplify-colors-border-focus);
+    --amplify-components-button-focus-box-shadow: var(
+        --amplify-components-fieldcontrol-focus-box-shadow
+    );
+    --amplify-components-button-active-color: var(--amplify-colors-font-active);
+    --amplify-components-button-active-background-color: var(--amplify-colors-primary-20);
+    --amplify-components-button-active-border-color: var(--amplify-colors-primary-100);
+}

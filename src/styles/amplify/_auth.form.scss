@@ -1,0 +1,16 @@
+/* Size variants */
+.amplify-input--small {
+    font-size: var(--amplify-components-fieldcontrol-small-font-size);
+    padding-block-start: var(--amplify-components-fieldcontrol-small-padding-block-start);
+    padding-block-end: var(--amplify-components-fieldcontrol-small-padding-block-end);
+    padding-inline-start: var(--amplify-components-fieldcontrol-small-padding-inline-start);
+    padding-inline-end: var(--amplify-components-fieldcontrol-small-padding-inline-end);
+}
+
+.amplify-input--large {
+    font-size: var(--amplify-components-fieldcontrol-large-font-size);
+    padding-block-start: var(--amplify-components-fieldcontrol-large-padding-block-start);
+    padding-block-end: var(--amplify-components-fieldcontrol-large-padding-block-end);
+    padding-inline-start: var(--amplify-components-fieldcontrol-large-padding-inline-start);
+    padding-inline-end: var(--amplify-components-fieldcontrol-large-padding-inline-end);
+}
