@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import clsx from "clsx";
 import type { FieldKey, FormMode } from "@entities/core/hooks";
 import ReadOnlyView from "./ReadOnlyView";
 import EditField from "./EditField";
 import EntityForm from "./EntityForm";
 import { DeleteButton } from "@components/buttons";
+import "./_EntityEditor.scss";
 
 export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Titre de la section */
@@ -92,12 +94,8 @@ export default function EntityEditor<T extends Record<string, unknown>>(
     };
 
     return (
-        <section
-            className={`w-full max-w-md mx-auto px-4 py-6 bg-white shadow rounded-lg mb-8 ${
-                className ?? ""
-            }`}
-        >
-            <h1 className="text-2xl font-bold text-center mb-6">{title}</h1>
+        <section className={clsx("entity-editor", className)}>
+            <h1 className="entity-editor_title">{title}</h1>
 
             {mode === "edit" && !editModeField && (
                 <ReadOnlyView<T>
@@ -142,7 +140,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
             )}
 
             {mode === "edit" && !editModeField && deleteLabel && (
-                <div className="flex items-center justify-center mt-8">
+                <div className="entity-editor_delete-container">
                     <DeleteButton
                         onClick={() => {
                             void deleteEntity?.();
