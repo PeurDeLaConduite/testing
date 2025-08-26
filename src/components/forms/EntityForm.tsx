@@ -3,6 +3,7 @@
 import React, { type FormEvent } from "react";
 import { SaveButton, AddButton, CancelButton } from "@components/buttons";
 import { type FieldKey } from "@entities/core/hooks";
+import "./_EntityForm.scss";
 
 type Props<T extends Record<string, unknown>> = {
     formData: Partial<T>;
@@ -31,26 +32,23 @@ export default function EntityForm<T extends Record<string, unknown>>({
                 e.preventDefault();
                 handleSubmit();
             }}
-            className="space-y-5 p-6 bg-white border rounded-md shadow-sm max-w-md mx-auto"
+            className="entity-form"
         >
             {fields.map((field) => (
-                <div key={String(field)}>
-                    <label htmlFor={String(field)} className="block mb-1 font-medium">
-                        {labels(field)}
-                    </label>
+                <div key={String(field)} className="entity-form_field">
+                    <label htmlFor={String(field)}>{labels(field)}</label>
                     <input
                         id={String(field)}
                         name={String(field)}
                         placeholder={labels(field)}
                         value={String(formData[field] ?? "")}
                         onChange={(e) => handleChange(field, e.target.value)}
-                        className="w-full p-2 border rounded"
                         required={requiredFields.includes(field)}
                     />
                 </div>
             ))}
 
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="entity-form_actions">
                 {isEdit ? (
                     <>
                         <SaveButton
