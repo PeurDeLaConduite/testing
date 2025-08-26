@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import metaData from "./metaData";
 import localFont from "next/font/local";
 import "../src/assets/styles/main.scss";
+import "../src/styles/amplify/authenticator.scss";
 import { DrivingProvider } from "../src/utils/context/DrivingContext";
 import { SearchProvider } from "../src/utils/context/SearchContext";
 import { Suspense } from "react";

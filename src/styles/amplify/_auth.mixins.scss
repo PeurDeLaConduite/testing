@@ -1,0 +1,41 @@
+@mixin auth-container {
+    display: grid;
+}
+
+@mixin auth-button {
+    font-weight: var(--amplify-components-button-font-weight);
+    font-size: var(--amplify-components-button-font-size);
+    line-height: var(--amplify-components-button-line-height);
+    padding-block-start: var(--amplify-components-button-padding-block-start);
+    padding-block-end: var(--amplify-components-button-padding-block-end);
+    padding-inline-start: var(--amplify-components-button-padding-inline-start);
+    padding-inline-end: var(--amplify-components-button-padding-inline-end);
+    border-width: var(--amplify-components-button-border-width);
+    border-style: var(--amplify-components-button-border-style);
+    border-color: var(--amplify-components-button-border-color);
+    border-radius: var(--amplify-components-button-border-radius);
+    background-color: var(--amplify-components-button-background-color);
+    color: var(--amplify-components-button-color);
+    transition: all var(--amplify-components-button-transition-duration);
+}
+
+@mixin auth-input {
+    box-sizing: border-box;
+    color: var(--amplify-components-fieldcontrol-color);
+    font-size: var(--amplify-components-fieldcontrol-font-size);
+    line-height: var(--amplify-components-fieldcontrol-line-height);
+    padding-block-start: var(--amplify-components-fieldcontrol-padding-block-start);
+    padding-block-end: var(--amplify-components-fieldcontrol-padding-block-end);
+    padding-inline-start: var(--amplify-components-fieldcontrol-padding-inline-start);
+    padding-inline-end: var(--amplify-components-fieldcontrol-padding-inline-end);
+    border-width: var(--amplify-components-fieldcontrol-border-width);
+    border-style: var(--amplify-components-fieldcontrol-border-style);
+    border-color: var(--amplify-components-fieldcontrol-border-color);
+    border-radius: var(--amplify-components-fieldcontrol-border-radius);
+    transition: all var(--amplify-components-fieldcontrol-transition-duration);
+    width: 100%;
+    outline-color: var(--amplify-components-fieldcontrol-outline-color);
+    outline-style: var(--amplify-components-fieldcontrol-outline-style);
+    outline-width: var(--amplify-components-fieldcontrol-outline-width);
+    outline-offset: var(--amplify-components-fieldcontrol-outline-offset);
+}

@@ -1,0 +1,119 @@
+@import "./auth.mixins";
+
+/* Authenticator container and modal */
+[data-amplify-authenticator] {
+    @include auth-container;
+}
+
+[data-amplify-authenticator][data-variation="modal"] {
+    overflow-y: auto;
+    width: var(--amplify-components-authenticator-modal-width);
+    height: var(--amplify-components-authenticator-modal-height);
+    background-color: var(--amplify-components-authenticator-modal-background-color);
+    position: fixed;
+    top: var(--amplify-components-authenticator-modal-top);
+    left: var(--amplify-components-authenticator-modal-left);
+    z-index: 1;
+}
+
+[data-amplify-authenticator] [data-amplify-container] {
+    place-self: center;
+}
+
+@media (min-width: 30rem) {
+    [data-amplify-authenticator] [data-amplify-container] {
+        width: var(--amplify-components-authenticator-container-width-max);
+    }
+}
+
+[data-amplify-authenticator] [data-amplify-router] {
+    background-color: var(--amplify-components-authenticator-router-background-color);
+    box-shadow: var(--amplify-components-authenticator-router-box-shadow);
+    border-color: var(--amplify-components-authenticator-router-border-color);
+    border-width: var(--amplify-components-authenticator-router-border-width);
+    border-style: var(--amplify-components-authenticator-router-border-style);
+}
+
+[data-amplify-authenticator] [data-amplify-footer] {
+    padding-bottom: var(--amplify-components-authenticator-footer-padding-bottom);
+    text-align: center;
+}
+
+[data-amplify-authenticator] [data-amplify-form] {
+    padding: var(--amplify-components-authenticator-form-padding);
+}
+
+[data-amplify-authenticator] [data-state="inactive"] {
+    background-color: var(--amplify-components-authenticator-state-inactive-background-color);
+}
+
+@media (max-width: 26rem) {
+    [data-amplify-authenticator] [data-amplify-sign-up-errors] {
+        font-size: 0.688rem;
+    }
+}
+
+/* Buttons */
+.amplify-button {
+    @include auth-button;
+    --amplify-internal-button-background-color: var(--amplify-components-button-background-color);
+    --amplify-internal-button-border-color: var(--amplify-components-button-border-color);
+    --amplify-internal-button-color: var(--amplify-components-button-color);
+    --amplify-internal-button-focus-box-shadow: var(--amplify-components-button-focus-box-shadow);
+    --amplify-internal-button-border-width: var(--amplify-components-button-border-width);
+}
+
+.amplify-button:hover {
+    --amplify-internal-button-background-color: var(
+        --amplify-components-button-hover-background-color
+    );
+    --amplify-internal-button-border-color: var(--amplify-components-button-hover-border-color);
+    --amplify-internal-button-color: var(--amplify-components-button-hover-color);
+}
+
+.amplify-button:focus {
+    --amplify-internal-button-background-color: var(
+        --amplify-components-button-hover-background-color
+    );
+    --amplify-internal-button-border-color: var(--amplify-components-button-focus-border-color);
+    --amplify-internal-button-color: var(--amplify-components-button-focus-color);
+    box-shadow: var(--amplify-internal-button-focus-box-shadow);
+}
+
+.amplify-button:active {
+    --amplify-internal-button-background-color: var(
+        --amplify-components-button-active-background-color
+    );
+    --amplify-internal-button-border-color: var(--amplify-components-button-active-border-color);
+    --amplify-internal-button-color: var(--amplify-components-button-active-color);
+}
+
+.amplify-button--fullwidth {
+    width: 100%;
+}
+
+/* Inputs */
+.amplify-input {
+    @include auth-input;
+}
+
+.amplify-input:focus {
+    border-color: var(--amplify-components-fieldcontrol-focus-border-color);
+    box-shadow: var(--amplify-components-fieldcontrol-focus-box-shadow);
+}
+
+.amplify-input--error {
+    border-color: var(--amplify-components-fieldcontrol-error-border-color);
+}
+
+.amplify-input--error:focus {
+    border-color: var(--amplify-components-fieldcontrol-error-border-color);
+    box-shadow: var(--amplify-components-fieldcontrol-error-focus-box-shadow);
+}
+
+.amplify-input[disabled] {
+    color: var(--amplify-components-fieldcontrol-disabled-color);
+    cursor: var(--amplify-components-fieldcontrol-disabled-cursor);
+    border-color: var(--amplify-components-fieldcontrol-disabled-border-color);
+    background-color: var(--amplify-components-fieldcontrol-disabled-background-color);
+}
