@@ -15,6 +15,7 @@ const Beginner = () => {
                     alt="Logo background"
                     width={1706}
                     height={2957}
+                    style={{ height: "auto" }}
                     loading="lazy"
                     priority={false}
                 />

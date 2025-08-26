@@ -1,5 +1,3 @@
-"use client";
-
 import "@aws-amplify/ui-react/styles.css";
 import ProfileForm from "@/src/components/Profile/UserProfileManager";
 import UserNameManager from "@components/Profile/UserNameManager";

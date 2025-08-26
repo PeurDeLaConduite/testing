@@ -21,7 +21,7 @@ export default function EditField<T extends Record<string, unknown>>({
 
     return (
         <fieldset className="edit-field">
-            <legend className="font-semibold text-lg mb-4">
+            <legend className="edit-field_legend">
                 Modifier mon {labels(field).toLowerCase()} :
             </legend>
 

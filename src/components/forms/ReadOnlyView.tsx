@@ -2,25 +2,16 @@ import React from "react";
 import { EditButton, DeleteButton } from "@components/buttons";
 import { type FieldKey } from "@entities/core/hooks";
 
-export type ReadOnlyViewProps<T extends Record<string, unknown>> = {
-    /** Données partiellement définies */
-    data: Partial<T>;
-    /** Champs à afficher */
+export type ReadOnlyViewProps<T> = {
+    titleHeading?: string;
     fields: FieldKey<T>[];
-    /** Libellé affiché pour chaque champ */
+    data: T;
     labels: (field: FieldKey<T>) => string;
-    /** Callback sur le bouton d'édition */
-    onEditField: (edit: { field: FieldKey<T>; value: string }) => void;
-    /** Callback sur le bouton de suppression */
-    onClearField?: (field: FieldKey<T>) => void;
-    /** Titre de la section */
-    title2?: string;
-    /** Permet d'injecter des icônes spécifiques */
     renderIcon?: (field: FieldKey<T>) => React.ReactNode;
-    /** Permet d'injecter des boutons supplémentaires */
-    extraButtons?: (field: FieldKey<T>, value: string) => React.ReactNode;
-    /** Rendu personnalisé de la valeur */
     renderValue?: (field: FieldKey<T>, value: string) => React.ReactNode;
+    extraButtons?: (field: FieldKey<T>, value: string) => React.ReactNode;
+    onEditField: (p: { field: FieldKey<T>; value: string }) => void;
+    onClearField: (field: FieldKey<T>) => void;
 };
 
 export default function ReadOnlyView<T extends Record<string, unknown>>({
@@ -29,14 +20,14 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
     labels,
     onEditField,
     onClearField,
-    title2,
+    titleHeading,
     renderIcon,
     extraButtons,
     renderValue,
 }: ReadOnlyViewProps<T>) {
     return (
         <div className="read-only-view">
-            <h2 className="read-only-view_title">{title2}</h2>
+            <h2 className="read-only-view_title">{titleHeading}</h2>
             <div className="read-only-view_list">
                 {fields.map((field) => {
                     const raw = data[field];
@@ -44,9 +35,9 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
                     return (
                         <div key={String(field)} className="read-only-view_item">
                             <div className="read-only-view_item-header">
-                                <label className="read-only-view_label" htmlFor={field}>
+                                <div className="read-only-view_label">
                                     {renderIcon?.(field)} <span>{labels(field)}</span>
-                                </label>
+                                </div>
                                 <div className="read-only-view_actions">
                                     {extraButtons?.(field, value)}
                                     <EditButton

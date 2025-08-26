@@ -51,13 +51,3 @@ export function getButtonVariant(type: "edit" | "delete" | "save"): SxProps<Them
             return {};
     }
 }
-
-// export function getEditButtonStyles(color?: string): SxProps<Theme> {
-//     return {
-//         filter: "brightness(1.1)",
-//         "&:hover": {
-//             filter: "brightness(1.25)",
-//         },
-//         ...(color ? { color } : {}),
-//     };
-// }

@@ -10,8 +10,8 @@ import { DeleteButton } from "@components/buttons";
 
 export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Titre de la section */
-    title: string;
-    title2: string;
+    title?: string;
+    titleHeading?: string;
     /** Champs requis pour le formulaire */
     requiredFields?: FieldKey<T>[];
     /** Rendu personnalisé des icônes */
@@ -57,7 +57,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
 ) {
     const {
         title,
-        title2,
+        titleHeading,
         requiredFields = [],
         renderIcon,
         renderValue,
@@ -101,8 +101,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
 
             {mode === "edit" && !editModeField && (
                 <ReadOnlyView<T>
-                    title={title}
-                    title2={title2}
+                    titleHeading={titleHeading}
                     fields={fields}
                     data={form}
                     labels={labels}

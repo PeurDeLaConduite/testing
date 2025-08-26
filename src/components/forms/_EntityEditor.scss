@@ -21,5 +21,12 @@
         align-items: center;
         justify-content: center;
         margin-top: 2rem;
+        button {
+            padding: 0 0.75rem;
+            border-radius: 1rem;
+            &:hover {
+                filter: drop-shadow(4px 4px 4px rgba(48, 46, 77, 0.3));
+            }
+        }
     }
 }

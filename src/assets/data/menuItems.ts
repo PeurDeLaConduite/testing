@@ -93,7 +93,7 @@ export const menuItems: MenuLinks = {
             class: "",
             path: "/profile",
             AnchorId: "#top",
-            svg: "Reservation",
+            svg: "reservation",
         },
     ],
     search: [

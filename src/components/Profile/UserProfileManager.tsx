@@ -40,9 +40,7 @@ export default function UserProfileManager() {
     const renderValue = (field: keyof UserProfileMinimalType, value: string) => {
         if (field === "phoneNumber") {
             return value ? (
-                <a href={`tel:${value}`} className="user-profile-link">
-                    {formatPhoneNumber(value)}
-                </a>
+                <p className="user-profile-value">{formatPhoneNumber(value)}</p>
             ) : (
                 <p className="user-profile-placeholder">Numéro non renseigné</p>
             );
@@ -65,6 +63,7 @@ export default function UserProfileManager() {
     return (
         <EntityEditor<UserProfileMinimalType>
             title="Mon profil"
+            titleHeading="Informations personnelles"
             requiredFields={["firstName", "familyName"]}
             renderIcon={getIcon}
             renderValue={renderValue}

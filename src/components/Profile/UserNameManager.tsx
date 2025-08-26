@@ -30,7 +30,7 @@ export default function UserNameManager() {
     return (
         <EntityEditor<UserNameFormType>
             title="Identité publique"
-            title2="Mon pseudo public"
+            titleHeading="Mon pseudo public"
             requiredFields={["userName"]}
             deleteLabel="Supprimer le pseudo"
             renderIcon={() => <PersonIcon fontSize="small" className="user-name-manager_icon" />}
