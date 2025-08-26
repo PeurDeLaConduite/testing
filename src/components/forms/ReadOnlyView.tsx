@@ -35,22 +35,19 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
     renderValue,
 }: ReadOnlyViewProps<T>) {
     return (
-        <div className="max-w-3xl mx-auto px-4 py-6 bg-violet-100 rounded-xl shadow-lg">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">{title}</h2>
-            <div className="space-y-6">
+        <div className="read-only-view">
+            <h2 className="read-only-view_title">{title}</h2>
+            <div className="read-only-view_list">
                 {fields.map((field) => {
                     const raw = data[field];
                     const value = raw === undefined || raw === null ? "" : String(raw);
                     return (
-                        <div
-                            key={String(field)}
-                            className="bg-white rounded-lg shadow-md px-4 py-5"
-                        >
-                            <div className="flex items-center justify-between mb-2">
-                                <label className="text-gray-800 font-semibold flex items-center gap-2 select-none">
+                        <div key={String(field)} className="read-only-view_item">
+                            <div className="read-only-view_item-header">
+                                <label className="read-only-view_label">
                                     {renderIcon?.(field)} <span>{labels(field)}</span>
                                 </label>
-                                <div className="flex gap-2">
+                                <div className="read-only-view_actions">
                                     {extraButtons?.(field, value)}
                                     <EditButton
                                         onClick={() => onEditField({ field, value })}
@@ -69,9 +66,9 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
                                 {renderValue ? (
                                     renderValue(field, value)
                                 ) : value ? (
-                                    <p className="text-base text-gray-900 break-words">{value}</p>
+                                    <p className="read-only-view_value">{value}</p>
                                 ) : (
-                                    <p className="text-sm text-gray-400 italic">
+                                    <p className="read-only-view_value read-only-view_value--empty">
                                         Information non disponible
                                     </p>
                                 )}
