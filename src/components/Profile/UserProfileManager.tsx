@@ -9,6 +9,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import { useUserProfileForm } from "@entities/models/userProfile/hooks";
 import { type UserProfileMinimalType } from "@entities/models/userProfile/types";
+import "./_UserProfileManager.scss";
 
 export default function UserProfileManager() {
     const { user } = useAuthenticator();
@@ -17,15 +18,15 @@ export default function UserProfileManager() {
     const getIcon = (field: keyof UserProfileMinimalType) => {
         switch (field) {
             case "phoneNumber":
-                return <PhoneIcon fontSize="small" className="text-gray-800" />;
+                return <PhoneIcon fontSize="small" className="user-profile-icon" />;
             case "firstName":
             case "familyName":
-                return <PersonIcon fontSize="small" className="text-gray-800" />;
+                return <PersonIcon fontSize="small" className="user-profile-icon" />;
             case "address":
             case "postalCode":
             case "city":
             case "country":
-                return <HomeIcon fontSize="small" className="text-gray-800" />;
+                return <HomeIcon fontSize="small" className="user-profile-icon" />;
             default:
                 return null;
         }
@@ -39,17 +40,17 @@ export default function UserProfileManager() {
     const renderValue = (field: keyof UserProfileMinimalType, value: string) => {
         if (field === "phoneNumber") {
             return value ? (
-                <a href={`tel:${value}`} className="text-base text-gray-900 hover:underline">
+                <a href={`tel:${value}`} className="user-profile-link">
                     {formatPhoneNumber(value)}
                 </a>
             ) : (
-                <p className="text-sm text-gray-400 italic">Numéro non renseigné</p>
+                <p className="user-profile-placeholder">Numéro non renseigné</p>
             );
         }
         return value ? (
-            <p className="text-base text-gray-900 break-words">{value}</p>
+            <p className="user-profile-value">{value}</p>
         ) : (
-            <p className="text-sm text-gray-400 italic">Information non disponible</p>
+            <p className="user-profile-placeholder">Information non disponible</p>
         );
     };
     useEffect(() => {
