@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import { type Metadata } from "next";
 import metaData from "./metaData";
 import localFont from "next/font/local";
 import "../src/assets/styles/main.scss";
 import { DrivingProvider } from "../src/utils/context/DrivingContext";
 import { SearchProvider } from "../src/utils/context/SearchContext";
 import { Suspense } from "react";
-// import HeaderProps from "./headerProps";
+import HeaderProps from "./headerProps";
 import { ScrollProvider } from "../src/utils/context/ScrollContext";
 import ScrollSectionsWrapper from "./ScrollSectionsWrapper";
 import Footer from "../src/components/footer/footer";
@@ -55,11 +55,7 @@ export default function RootLayout({
                 />
                 <link rel="preload" href="/css/desktopDefer.css" as="style" />
 
-                <link
-                    rel="stylesheet"
-                    href="/css/desktopDefer.css"
-                    fetchPriority="low"
-                />
+                <link rel="stylesheet" href="/css/desktopDefer.css" fetchPriority="low" />
                 <link
                     rel="preload"
                     href="https://assets.peur-de-la-conduite.fr/img/retroviseur.svg"
@@ -73,9 +69,7 @@ export default function RootLayout({
                             "@type": "ProfessionalService",
                             "@id": "https://www.peur-de-la-conduite.fr/",
                             name: "Peur de la conduite - Coaching Auto",
-                            image: [
-                                "https://assets.peur-de-la-conduite.fr/img/about/avatar.webp",
-                            ],
+                            image: ["https://assets.peur-de-la-conduite.fr/img/about/avatar.webp"],
                             url: "https://www.peur-de-la-conduite.fr/",
                             telephone: "+33 6 74 25 91 81",
                             email: "contact.peurdelaconduite@gmail.com",
@@ -120,8 +114,7 @@ export default function RootLayout({
                                 },
                                 {
                                     "@type": "Offer",
-                                    name:
-                                        "Coaching Conducteurs Confirmés (Amaxophobie)",
+                                    name: "Coaching Conducteurs Confirmés (Amaxophobie)",
                                     price: "49.99",
                                     priceCurrency: "EUR",
                                 },
@@ -145,25 +138,26 @@ export default function RootLayout({
             <body
                 className={`${RobotoFlex.variable} ${Montserrat.variable} ${Nunito.variable}`}
                 id="top"
-            ><Providers>
-                <MobileRedirect />
-                <ScrollProvider>
-                    <ScrollSectionsWrapper>
-                        <SearchProvider>
-                            <DrivingProvider>
-                                <Suspense fallback={<Loader />}>
-                                    {/* <header>
-                                        <div className="content-wrapper">
-                                            <HeaderProps />
-                                        </div>
-                                    </header> */}
-                                    <main>{children}</main>
-                                    <Footer />
-                                </Suspense>
-                            </DrivingProvider>
-                        </SearchProvider>
-                    </ScrollSectionsWrapper>
-                </ScrollProvider>
+            >
+                <Providers>
+                    <MobileRedirect />
+                    <ScrollProvider>
+                        <ScrollSectionsWrapper>
+                            <SearchProvider>
+                                <DrivingProvider>
+                                    <Suspense fallback={<Loader />}>
+                                        <header>
+                                            <div className="content-wrapper">
+                                                <HeaderProps />
+                                            </div>
+                                        </header>
+                                        <main>{children}</main>
+                                        <Footer />
+                                    </Suspense>
+                                </DrivingProvider>
+                            </SearchProvider>
+                        </ScrollSectionsWrapper>
+                    </ScrollProvider>
                 </Providers>
             </body>
         </html>

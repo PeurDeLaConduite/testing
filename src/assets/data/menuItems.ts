@@ -111,7 +111,7 @@ export const menuItems: MenuLinks = {
             id: "connection",
             title: "Se connecter",
             class: "",
-            path: "/reservation",
+            path: "/connection",
             AnchorId: "#top",
             svg: "Connection",
         },

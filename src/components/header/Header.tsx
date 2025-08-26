@@ -51,44 +51,6 @@ const Header: React.FC<NavProps> = () => {
         currentRoute
     );
 
-    // Gestion des changements de largeur d'écran
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         const width = window.innerWidth;
-
-    //         if (width < 1024) {
-    //             setTabletMain(false);
-    //             setOpenMainButton(false);
-    //             setOpenButton(false);
-    //             setBigMenu(false);
-    //         } else if (width < 1170) {
-    //             setBigMenu(false);
-    //             setTabletMain(true);
-    //             setOpenMainButton(true);
-    //             setOpenButton(false);
-    //         } else if (width < 1440) {
-    //             setTabletMain(true);
-    //             setOpenMainButton(true);
-    //             setOpenButton(false);
-    //             setBigMenu(true);
-    //         } else {
-    //             setTabletMain(true);
-    //             setTabletMain(true);
-    //             setOpenMainButton(true);
-    //             setOpenButton(true);
-    //         }
-    //     };
-
-    //     // Initialisation lors du montage
-    //     handleResize();
-
-    //     // Ajout d'un écouteur sur les changements de taille d'écran
-    //     window.addEventListener("resize", handleResize);
-
-    //     // Nettoyage lors du démontage
-    //     return () => window.removeEventListener("resize", handleResize);
-    // }, [setBigMenu, setOpenButton, setOpenMainButton, setTabletMain]);
-
     return (
         <div className="header">
             <Link

@@ -23,7 +23,10 @@
             "@hooks/*": ["src/hooks/*"],
             "@context/*": ["src/context/*"],
             "@utils/*": ["src/utils/*"],
-            "@types/*": ["src/types/*"],
+            // "@types/*": ["src/types/*"],
+            "@services/*": ["src/services/*"],
+            "@myTypes/*": ["src/types/*"],
+            "@entities/*": ["src/entities/*"],
             "@public/*": ["public/*"]
         },
         "plugins": [
@@ -33,18 +36,20 @@
         ],
         "strictNullChecks": true
     },
+
     "include": [
         "next-env.d.ts",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "public/**/*.json",
         ".next/types/**/*.ts",
-        "**/*.ts",
-        "**/*.tsx",
-        "src/utils/context/NavigationContext.tsx",
-        "src/components/header/utils/HiddenDelayComponent.tsx",
+        "amplify/**/*.ts",
+
         "src/components/svg_Icon/utils/Arrow.jsx",
-        "src/components/slider/Slider.tsx",
         "src/components/slider/SliderArrow.jsx",
         "src/components/slider/SunBG.tsx",
-        "src/utils/context/utils/createUseContext.tsx",
         "src/components/header/HeaderGhost.jsx",
         "src/home/service/Component/servicesData.ts",
         "src/utils/setT.js",
@@ -53,7 +58,8 @@
         "src/home/about/LoadMoreButton.jsx",
         "src/home/contact-section/contactForm/form.jsx",
         "src/home/contact-section/contactForm/formSuite.jsx",
-        "src/home/slider/sliderItem/SldTitle.jsx"
+        "src/home/slider/sliderItem/SldTitle.jsx",
+        "app/layout.tsx"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", ".next", "dist", "build", ".amplify"]
 }
