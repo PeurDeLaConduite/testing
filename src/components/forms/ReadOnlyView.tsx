@@ -14,7 +14,7 @@ export type ReadOnlyViewProps<T extends Record<string, unknown>> = {
     /** Callback sur le bouton de suppression */
     onClearField?: (field: FieldKey<T>) => void;
     /** Titre de la section */
-    title?: string;
+    title2?: string;
     /** Permet d'injecter des icônes spécifiques */
     renderIcon?: (field: FieldKey<T>) => React.ReactNode;
     /** Permet d'injecter des boutons supplémentaires */
@@ -29,14 +29,14 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
     labels,
     onEditField,
     onClearField,
-    title = "Gestion",
+    title2,
     renderIcon,
     extraButtons,
     renderValue,
 }: ReadOnlyViewProps<T>) {
     return (
         <div className="read-only-view">
-            <h2 className="read-only-view_title">{title}</h2>
+            <h2 className="read-only-view_title">{title2}</h2>
             <div className="read-only-view_list">
                 {fields.map((field) => {
                     const raw = data[field];
@@ -44,7 +44,7 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
                     return (
                         <div key={String(field)} className="read-only-view_item">
                             <div className="read-only-view_item-header">
-                                <label className="read-only-view_label">
+                                <label className="read-only-view_label" htmlFor={field}>
                                     {renderIcon?.(field)} <span>{labels(field)}</span>
                                 </label>
                                 <div className="read-only-view_actions">

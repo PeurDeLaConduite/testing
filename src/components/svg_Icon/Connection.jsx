@@ -3,13 +3,7 @@ import React from "react";
 const Connection = () => {
     return (
         <div className="nav-icon">
-            <svg
-                width="18"
-                height="18"
-                fill="none"
-                aria-hidden="true"
-                viewBox="0 0 18 18"
-            >
+            <svg fill="none" aria-hidden="true" viewBox="0 0 18 18">
                 <path
                     d="M8.94406 9.71053C11.6314 9.71053 13.81 7.53675 13.81 4.85526C13.81 2.17378 11.6314 0 8.94406 0C6.25668 0 4.07812 2.17378 4.07812 4.85526C4.07812 7.53675 6.25668 9.71053 8.94406 9.71053Z"
                     className="icon-color"

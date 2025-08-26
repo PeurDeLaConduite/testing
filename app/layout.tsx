@@ -53,9 +53,10 @@ export default function RootLayout({
                     media="only screen and (max-width: 640px)"
                     href="https://mobile.peur-de-la-conduite.fr/"
                 />
+                {/* 
                 <link rel="preload" href="/css/desktopDefer.css" as="style" />
-
                 <link rel="stylesheet" href="/css/desktopDefer.css" fetchPriority="low" />
+                 */}
                 <link
                     rel="preload"
                     href="https://assets.peur-de-la-conduite.fr/img/retroviseur.svg"

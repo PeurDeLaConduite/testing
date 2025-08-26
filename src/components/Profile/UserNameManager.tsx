@@ -6,7 +6,7 @@ import "@aws-amplify/ui-react/styles.css";
 import EntityEditor from "@components/forms/EntityEditor";
 import { label as fieldLabel } from "./utilsUserName";
 import PersonIcon from "@mui/icons-material/Person";
-import "./_UserNameManager.scss";
+// import "./_UserNameManager.scss";
 import { useUserNameForm } from "@entities/models/userName/hooks";
 import {
     type UserNameFormType,
@@ -29,7 +29,8 @@ export default function UserNameManager() {
 
     return (
         <EntityEditor<UserNameFormType>
-            title="Mon pseudo public"
+            title="Identité publique"
+            title2="Mon pseudo public"
             requiredFields={["userName"]}
             deleteLabel="Supprimer le pseudo"
             renderIcon={() => <PersonIcon fontSize="small" className="user-name-manager_icon" />}

@@ -9,7 +9,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import { useUserProfileForm } from "@entities/models/userProfile/hooks";
 import { type UserProfileMinimalType } from "@entities/models/userProfile/types";
-import "./_UserProfileManager.scss";
+// import "./_UserProfileManager.scss";
 
 export default function UserProfileManager() {
     const { user } = useAuthenticator();

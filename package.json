@@ -16,6 +16,8 @@
         "@aws-amplify/ui-react": "^6.11.1",
         "@aws-sdk/client-cognito-identity-provider": "^3.806.0",
         "@aws-sdk/types": "^3.821.0",
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
         "@formspree/react": "^2.5.1",
         "@mui/icons-material": "^7.1.0",
         "@mui/material": "^7.1.0",

@@ -1,4 +1,5 @@
 //ROUTE=>   http://localhost:3000/auth/callback
+
 "use client";
 
 import AuthProvider from "@app/auth-provider";

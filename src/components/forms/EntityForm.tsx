@@ -3,7 +3,7 @@
 import React, { type FormEvent } from "react";
 import { SaveButton, AddButton, CancelButton } from "@components/buttons";
 import { type FieldKey } from "@entities/core/hooks";
-import "./_EntityForm.scss";
+// import "./_EntityForm.scss";
 
 type Props<T extends Record<string, unknown>> = {
     formData: Partial<T>;

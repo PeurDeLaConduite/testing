@@ -91,7 +91,7 @@ export const menuItems: MenuLinks = {
             id: "reservationId",
             title: "Réservation",
             class: "",
-            path: "/reservation",
+            path: "/profile",
             AnchorId: "#top",
             svg: "Reservation",
         },
