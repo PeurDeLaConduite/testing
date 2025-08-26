@@ -1,5 +1,6 @@
 // src/components/SelectField.tsx
 import React from "react";
+import "./_SelectField.scss";
 
 interface Option {
     value: string;
@@ -29,8 +30,11 @@ export default function SelectField({
     const id = `select-${name}`;
 
     return (
-        <div className="mb-2">
-            <label htmlFor={id} className={hideLabel ? "sr-only" : "block font-medium mb-1"}>
+        <div className="select-field">
+            <label
+                htmlFor={id}
+                className={hideLabel ? "sr-only select-field_label" : "select-field_label"}
+            >
                 {label}
             </label>
             <select
@@ -39,7 +43,7 @@ export default function SelectField({
                 value={value}
                 onChange={onChange}
                 required={required}
-                className="border p-2 w-full rounded bg-white"
+                className="select-field_input"
                 {...rest}
             >
                 {options.map((opt) => (
