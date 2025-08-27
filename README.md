@@ -52,9 +52,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Tests
 
 Le projet utilise [Vitest](https://vitest.dev) et [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) pour les tests unitaires.
+Un script `yarn test` a été ajouté afin d’exécuter l’ensemble de la suite de tests :
 
 ```bash
 yarn test
 ```
 
-La commande ci-dessus exécute l’ensemble de la suite de tests.
+La commande ci-dessus lance tous les tests.
