@@ -5,9 +5,9 @@
 - Toujours commencer par `yarn install` pour installer toutes les dépendances.
 - Si vous utilisez Yarn v4.x (Berry/PnP), ajoutez ou vérifiez dans `.yarnrc.yml` :
 
-        ```yaml
-        nodeLinker: node-modules
-        ```
+          ```yaml
+          nodeLinker: node-modules
+          ```
 
     !! PS Jamais crée de fichier binaire
 
@@ -44,11 +44,10 @@ Utilisez les scripts définis dans le `package.json` :
 
 ## Tests
 
-
-- Si vous ajoutez des tests, créez un script `yarn test` et assurez-vous qu’il passe avant chaque PR.
-- Script disponible : `yarn test` exécute la suite Vitest.
-- Assurez-vous qu’il passe avant chaque PR.
-
+- La suite s'appuie sur **Vitest** et **Testing Library**.
+- `yarn test` exécute les tests en mode non interactif (`vitest run`).
+- `yarn test:watch` lance les tests en mode surveillance.
+- Exécutez `yarn test` avant chaque PR et corrigez les éventuelles erreurs.
 
 ## Pull Request
 
