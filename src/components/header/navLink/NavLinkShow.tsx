@@ -56,8 +56,11 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
     ) : (
         <div
             className={getShowGroupClass(menuItem.id, showNavLinks)}
-            role="menubar"
+            role="button"
             aria-label={`ouvrir le menu ${menuItem.title}`}
+            aria-haspopup="menu"
+            aria-expanded={isOpen}
+            aria-controls={`sub-${menuItem.id}`}
             tabIndex={0}
             onClick={handleInteraction}
             onKeyDown={(e) => {

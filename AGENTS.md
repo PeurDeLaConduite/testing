@@ -44,8 +44,11 @@ Utilisez les scripts définis dans le `package.json` :
 
 ## Tests
 
-- Actuellement, il n’y a pas de script de test défini.
+
 - Si vous ajoutez des tests, créez un script `yarn test` et assurez-vous qu’il passe avant chaque PR.
+- Script disponible : `yarn test` exécute la suite Vitest.
+- Assurez-vous qu’il passe avant chaque PR.
+
 
 ## Pull Request
 
