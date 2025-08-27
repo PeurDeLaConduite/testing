@@ -34,7 +34,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick }) =
     return (
         // isOpen && (
         <div className={`submenu ${isOpen ? "open" : ""}`}>
-            <div className="submenu_group">
+            <div className="submenu_group" role="menu" id={`sub-${menuItem.id}`}>
                 {menuItem.subItems.map((subItem) => {
                     const fullPath = `${menuItem.path}${subItem.AnchorId}`;
                     return (
