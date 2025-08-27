@@ -9,7 +9,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!configured) {
             Amplify.configure(amplifyConfig);
-            console.log("[Amplify] configured =", Amplify.getConfig()); // <- DOIT montrer Auth.Cognito.oauth
+            // console.log("[Amplify] configured =", Amplify.getConfig()); 
             configured = true;
         }
     }, []);

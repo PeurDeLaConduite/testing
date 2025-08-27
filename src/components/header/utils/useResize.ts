@@ -33,7 +33,7 @@ const useResize = (
             }
         };
 
-        // Initialisation lors du montage
+        // Initialisation lors du montage des composants
         handleResize();
 
         // Ajout d'un écouteur sur les changements de taille d'écran
