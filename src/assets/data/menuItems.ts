@@ -16,14 +16,14 @@ export const menuItems: MenuLinks = {
                     title: "Slider",
                     AnchorId: "#slider",
                     class: "",
-                    content: contentIndex["#slider"], 
+                    content: contentIndex["#slider"],
                 },
                 {
                     id: "menu-about",
                     title: "À propos",
                     AnchorId: "#about",
                     class: "",
-                    content: contentIndex["#about"], 
+                    content: contentIndex["#about"],
                 },
                 {
                     id: "menu-services",
@@ -91,9 +91,9 @@ export const menuItems: MenuLinks = {
             id: "reservationId",
             title: "Réservation",
             class: "",
-            path: "/profile",
+            path: "/reservation",
             AnchorId: "#top",
-            svg: "reservation",
+            svg: "Reservation",
         },
     ],
     search: [
@@ -118,7 +118,7 @@ export const menuItems: MenuLinks = {
     ],
 };
 
-export type { MenuItem } from "./interfaces/menu"; 
+export type { MenuItem } from "./interfaces/menu";
 
 /*
 src/

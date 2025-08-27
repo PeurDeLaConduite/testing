@@ -1,4 +1,6 @@
 import "@aws-amplify/ui-react/styles.css";
+import "@src/styles/amplify/authenticator.scss";
+
 import ProfileForm from "@/src/components/Profile/UserProfileManager";
 import UserNameManager from "@components/Profile/UserNameManager";
 import AuthProvider from "../auth-provider";
@@ -7,7 +9,7 @@ import ConnectionIcon from "../../src/components/svg_Icon/Connection";
 export default function ConnectionPage() {
     return (
         <AuthProvider>
-            <SectionContainer id="profile" title="Espace personnel" icon={<ConnectionIcon />}>
+            <SectionContainer id="profile s1" title="Espace personnel" icon={<ConnectionIcon />}>
                 <div className="post-content__content">
                     <UserNameManager />
                     <ProfileForm />

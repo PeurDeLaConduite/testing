@@ -1,4 +1,4 @@
-// app/providers.tsx
+// app/amplifyConfig.ts
 "use client";
 
 // src/amplifyConfig.ts

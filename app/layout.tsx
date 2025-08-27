@@ -2,7 +2,6 @@ import { type Metadata } from "next";
 import metaData from "./metaData";
 import localFont from "next/font/local";
 import "../src/assets/styles/main.scss";
-import "../src/styles/amplify/authenticator.scss";
 import { DrivingProvider } from "../src/utils/context/DrivingContext";
 import { SearchProvider } from "../src/utils/context/SearchContext";
 import { Suspense } from "react";
@@ -13,6 +12,7 @@ import Footer from "../src/components/footer/footer";
 import Loader from "@/src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
 import Providers from "./providers";
+// import "@aws-amplify/ui-react/styles.css";
 
 export const RobotoFlex = localFont({
     src: "/fonts/RobotoFlex.woff2",
