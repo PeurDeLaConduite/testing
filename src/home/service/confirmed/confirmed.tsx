@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Space from "../../../utils/Space";
-import { servicesData } from "../../../assets/data/servicesData";
+import { servicesData } from "@assets/data/servicesData";
 import Link from "next/link";
 const Confirmed = () => {
     const { title, subtitle, intro, services } = servicesData.confirmed;

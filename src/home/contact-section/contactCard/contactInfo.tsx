@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import SocialLinks from "./SocialLinks";
-import { contactDetails } from "../../../assets/data/content/contact";
+import { contactDetails } from "@assets/data/content/contact";
 import Link from "next/link";
 const ContactInfo = () => {
     return (

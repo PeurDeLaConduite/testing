@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { MenuItem } from "../../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import { svgComponents } from "../svgComponents";
 import HiddenDelayComponent from "../utils/HiddenDelayComponent";
 import { getShowClass } from "../utils/menuUtils";
@@ -25,9 +25,7 @@ const RenderLink: React.FC<NavLinkShowProps> = ({
     const SvgIcon = svgComponents[menuItem.svg as SvgComponentKey];
 
     const { setOpenSubMenu } = useNavigation();
-    const handleInteraction = (
-        event: React.MouseEvent | React.KeyboardEvent
-    ) => {
+    const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.preventDefault();
         onNavigationClick(menuItem.path + menuItem.AnchorId);
         handleMenuClick(menuItem.id);

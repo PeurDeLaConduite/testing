@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import metaData from "./metaData";
 import localFont from "next/font/local";
-import "../src/assets/styles/main.scss";
+import "@assets/styles/main.scss";
 import { DrivingProvider } from "../src/utils/context/DrivingContext";
 import { SearchProvider } from "../src/utils/context/SearchContext";
 import { Suspense } from "react";
@@ -12,6 +12,8 @@ import Footer from "../src/components/footer/footer";
 import Loader from "@/src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
 import Providers from "./providers";
+import AuthProvider from "@src/app/Authentication/auth-provider";
+
 // import "@aws-amplify/ui-react/styles.css";
 
 export const RobotoFlex = localFont({
@@ -36,6 +38,7 @@ const Nunito = localFont({
 });
 
 export const metadata: Metadata = metaData;
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -142,24 +145,26 @@ export default function RootLayout({
                 id="top"
             >
                 <Providers>
-                    <MobileRedirect />
-                    <ScrollProvider>
-                        <ScrollSectionsWrapper>
-                            <SearchProvider>
-                                <DrivingProvider>
-                                    <Suspense fallback={<Loader />}>
-                                        <header>
-                                            <div className="content-wrapper">
-                                                <HeaderProps />
-                                            </div>
-                                        </header>
-                                        <main>{children}</main>
-                                        <Footer />
-                                    </Suspense>
-                                </DrivingProvider>
-                            </SearchProvider>
-                        </ScrollSectionsWrapper>
-                    </ScrollProvider>
+                    <AuthProvider>
+                        <MobileRedirect />
+                        <ScrollProvider>
+                            <ScrollSectionsWrapper>
+                                <SearchProvider>
+                                    <DrivingProvider>
+                                        <Suspense fallback={<Loader />}>
+                                            <header>
+                                                <div className="content-wrapper">
+                                                    <HeaderProps />
+                                                </div>
+                                            </header>
+                                            <main>{children}</main>
+                                            <Footer />
+                                        </Suspense>
+                                    </DrivingProvider>
+                                </SearchProvider>
+                            </ScrollSectionsWrapper>
+                        </ScrollProvider>
+                    </AuthProvider>
                 </Providers>
             </body>
         </html>

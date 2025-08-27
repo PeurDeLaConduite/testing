@@ -1,4 +1,4 @@
-import { MenuItem } from "../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 
 export const getSectionIds = (menuItems: MenuItem[]): string[] => {
     const sectionIds: string[] = [];
@@ -10,7 +10,7 @@ export const getSectionIds = (menuItems: MenuItem[]): string[] => {
             sectionIds.push(item.id);
 
             if (item.subItems && item.subItems.length > 0) {
-                const subItemsAsMenuItems = (item.subItems as unknown) as MenuItem[];
+                const subItemsAsMenuItems = item.subItems as unknown as MenuItem[];
 
                 subItemsAsMenuItems.forEach((subItem) => {
                     if (subItem.AnchorId) {

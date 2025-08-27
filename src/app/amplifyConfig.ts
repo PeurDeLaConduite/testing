@@ -1,15 +1,12 @@
 // app/amplifyConfig.ts
-"use client";
-
-// src/amplifyConfig.ts
 export const amplifyConfig = {
     Auth: {
         Cognito: {
             userPoolId: "eu-west-3_cVrLIne9H",
             userPoolClientId: "5i8l89k5muqtfpb3v2l53h2noe",
-            loginWith: { email: true, username: false, phone: false },
+            loginWith: { email: true, username: false, phone: false, formFields: true },
             oauth: {
-                domain: "auth.peur-de-la-conduite.fr", 
+                domain: "auth.peur-de-la-conduite.fr",
                 // redirectSignIn: [
                 //     "http://localhost:3000/", // dev
                 //     "https://connexion.peur-de-la-conduite.fr/",

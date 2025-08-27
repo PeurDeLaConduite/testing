@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator, View, Heading, useTheme } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-// import "@src/styles/amplify/authenticator.scss";
+import "@assets/styles/amplify/authenticator.scss";
 import { signUp } from "aws-amplify/auth";
-// import { configureI18n, formFields } from "@entities/core";
-import { formFields } from "@entities/core";
+import { configureI18n, formFields } from "@entities/core";
 import { userNameService } from "@src/entities/models/userName";
 
-// Configure i18n uniquement
-// configureI18n();
+configureI18n();
 
 export default function Authentication() {
     const services = {
@@ -27,5 +25,45 @@ export default function Authentication() {
             return result;
         },
     };
-    return <Authenticator formFields={formFields} services={services} />;
+
+    const components = {
+        SignIn: {
+            Header() {
+                const { tokens } = useTheme();
+                return (
+                    <View textAlign="center" paddingTop={tokens.space.large}>
+                        <Heading level={3}>
+                            <img
+                                alt="Peur de la Conduite — logo"
+                                src="/img/brand/Brand-Logo.svg"
+                                // width="140px"
+                                height="auto"
+                                className="auth-logo"
+                            />
+                        </Heading>
+                    </View>
+                );
+            },
+        },
+        SignUp: {
+            Header() {
+                const { tokens } = useTheme();
+                return (
+                    <View textAlign="center" paddingTop={tokens.space.large}>
+                        <Heading level={3}>
+                            <img
+                                alt="Peur de la Conduite — logo"
+                                src="/img/brand/Brand-Logo.svg" // chemin de ton logo
+                                // width="140px"
+                                height="auto"
+                                className="auth-logo"
+                            />
+                        </Heading>
+                    </View>
+                );
+            },
+        },
+    };
+
+    return <Authenticator components={components} formFields={formFields} services={services} />;
 }

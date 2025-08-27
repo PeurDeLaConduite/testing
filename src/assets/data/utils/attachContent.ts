@@ -1,4 +1,4 @@
-// src/assets/data/utils/attachContent.ts
+// @assets/data/utils/attachContent.ts
 import { MenuLinks } from "../interfaces/menu";
 import { Content } from "../interfaces/content"; // Assurez-vous d'importer Content
 

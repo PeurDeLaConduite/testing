@@ -2,10 +2,9 @@
 "use client";
 import { useEffect } from "react";
 import { Amplify } from "aws-amplify";
-import { amplifyConfig } from "@/src/app/amplifyConfig"; // <- voir patch #2
-import { configureI18n } from "@entities/core";
+import { amplifyConfig } from "@src/app/amplifyConfig"; // <- voir patch #2
+
 let configured = false;
-configureI18n();
 export default function Providers({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!configured) {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MenuItem } from "../../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import { useNavigation } from "../../../utils/context/NavigationContext";
 
 interface SubMenuProps {
@@ -10,25 +10,15 @@ interface SubMenuProps {
     onSubItemClick: (path: string) => void;
 }
 
-const SubMenu: React.FC<SubMenuProps> = ({
-    menuItem,
-    isOpen,
-    onSubItemClick,
-}) => {
+const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick }) => {
     const { setOpenSubMenu } = useNavigation();
-    const handleSubItemClick = (
-        path: string,
-        e: React.MouseEvent | React.KeyboardEvent
-    ) => {
+    const handleSubItemClick = (path: string, e: React.MouseEvent | React.KeyboardEvent) => {
         e.preventDefault(); // Empêche la navigation par défaut
         onSubItemClick(path); // Appelle la fonction pour gérer le clic
         setOpenSubMenu(null);
     };
 
-    const handleKeyDown = (
-        path: string,
-        e: React.KeyboardEvent<HTMLElement>
-    ) => {
+    const handleKeyDown = (path: string, e: React.KeyboardEvent<HTMLElement>) => {
         if (["Enter", " "].includes(e.key)) {
             e.preventDefault(); // Empêche l'action par défaut de la touche
             onSubItemClick(path); // Ouvre ou effectue une action pour le sous-menu

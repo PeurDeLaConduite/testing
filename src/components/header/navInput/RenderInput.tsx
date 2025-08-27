@@ -2,7 +2,7 @@ import React from "react";
 import RenderInputButton from "./RenderInputButton";
 import HiddenDelayComponent from "../utils/HiddenDelayComponent";
 import { getShowClass } from "../utils/menuUtils";
-import { MenuItem } from "../../../assets/data/interfaces/menu";
+import { MenuItem } from "@assets/data/interfaces/menu";
 import { svgComponents } from "../svgComponents";
 interface RenderInputProps {
     isSubmitted: boolean;
@@ -54,11 +54,7 @@ const RenderInput: React.FC<RenderInputProps> = ({
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     e.preventDefault();
-                                    handleSubmit(
-                                        e as React.KeyboardEvent<
-                                            HTMLInputElement
-                                        >
-                                    );
+                                    handleSubmit(e as React.KeyboardEvent<HTMLInputElement>);
                                 }
                             }}
                             className={`nav-link ${getShowClass(

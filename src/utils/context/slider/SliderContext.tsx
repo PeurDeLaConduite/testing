@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, ReactNode, useMemo } from "react";
-import { sliderContent } from "../../../assets/data/content/slider";
+import { sliderContent } from "@assets/data/content/slider";
 import { useSlides } from "./useSlides";
 import { useSessionSlideRef } from "./useSessionSlideRef";
 import { useSlideRefParam } from "./useSlideRefParam";
@@ -15,9 +15,7 @@ interface SliderContextType {
     getClass: (index: number) => string;
 }
 
-export const SliderContext = createContext<SliderContextType | undefined>(
-    undefined
-);
+export const SliderContext = createContext<SliderContextType | undefined>(undefined);
 
 export const SliderProvider = ({ children }: { children: ReactNode }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -32,12 +30,7 @@ export const SliderProvider = ({ children }: { children: ReactNode }) => {
     useSessionSlideRef(setCurrentSlide);
     useSlideRefParam(setStopTimerButton, sliderContent, setCurrentSlide);
     useScrollListener(setStopTimerButton, stopTimerButton);
-    useAutoSlide(
-        stopTimerButton,
-        setStopTimerButton,
-        setCurrentSlide,
-        sliderContent.length
-    );
+    useAutoSlide(stopTimerButton, setStopTimerButton, setCurrentSlide, sliderContent.length);
 
     const contextValue = useMemo(
         () => ({
@@ -48,17 +41,12 @@ export const SliderProvider = ({ children }: { children: ReactNode }) => {
                 classGetter(
                     index,
                     currentSlide,
-                    (currentSlide - 1 + sliderContent.length) %
-                        sliderContent.length,
+                    (currentSlide - 1 + sliderContent.length) % sliderContent.length,
                     (currentSlide + 1) % sliderContent.length
                 ),
         }),
         [currentSlide, nextSlide, prevSlide]
     );
 
-    return (
-        <SliderContext.Provider value={contextValue}>
-            {children}
-        </SliderContext.Provider>
-    );
+    return <SliderContext.Provider value={contextValue}>{children}</SliderContext.Provider>;
 };

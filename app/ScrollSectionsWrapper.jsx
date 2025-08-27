@@ -3,7 +3,7 @@
 
 import React from "react";
 import { useScrollAnchors } from "../src/utils/scrollUtils";
-import { sections } from "../src/assets/data/sections";
+import { sections } from "@assets/data/sections";
 
 const ScrollSectionsWrapper = ({ children }) => {
     useScrollAnchors(sections);

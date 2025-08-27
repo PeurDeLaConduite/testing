@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import Logo from "../svg_Icon/Logo";
 import { useScrollContext } from "../../utils/context/ScrollContext";
 import { useNavigation } from "../../utils/context/NavigationContext";
-import { MenuItem, menuItems } from "../../assets/data/menuItems";
+import { MenuItem, menuItems } from "@assets/data/menuItems";
 import { updateMenuClasses } from "../../utils/updateMenuUtils";
 import { handleScrollClick, handleNavClick } from "../../utils/fnScrollUtils";
 import { useInitialScroll } from "../../utils/scrollUtils";

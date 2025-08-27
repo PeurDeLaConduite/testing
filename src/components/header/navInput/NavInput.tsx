@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "../../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import SubResult from "./SubResult";
 import useSearchHandler from "./useSearchHandler";
 import { useRouter } from "next/navigation";
@@ -11,10 +11,7 @@ interface NavInputProps {
     placeholder?: string;
     isOpen: boolean;
     showNavLinks: boolean;
-    onMenuToggle: (
-        menuItemId: string,
-        event?: React.MouseEvent | React.KeyboardEvent
-    ) => void;
+    onMenuToggle: (menuItemId: string, event?: React.MouseEvent | React.KeyboardEvent) => void;
     onMouseEnter: () => void;
     onFocus: () => void;
 }

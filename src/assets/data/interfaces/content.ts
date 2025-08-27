@@ -1,4 +1,4 @@
-// src/assets/data/interfaces/content.ts
+// @assets/data/interfaces/content.ts
 import { socialSvgComponents } from "../../../home/contact-section/socialSvgComponents";
 // Interface pour le contenu "About"
 export interface AboutCardIdentity {

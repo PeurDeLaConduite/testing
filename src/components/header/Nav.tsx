@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MenuItem } from "../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import { useMenuBehavior } from "../../utils/updateMenuUtils";
 import NavLinkShow from "./navLink/NavLinkShow";
 import NavInput from "./navInput/NavInput";
@@ -60,8 +60,7 @@ const Nav: React.FC<NavProps> = ({
         setOpenMainButton(true);
     };
 
-    const shouldShowNavLinks = (menuId: string): boolean =>
-        openButton || openMenu === menuId;
+    const shouldShowNavLinks = (menuId: string): boolean => openButton || openMenu === menuId;
 
     const handleInteraction = (menuId: string): void => {
         if (!(openMainButton && openButton)) {
@@ -89,12 +88,8 @@ const Nav: React.FC<NavProps> = ({
             <nav
                 ref={navRef}
                 className={`main-nav`}
-                onMouseEnter={() =>
-                    !tabletMain ? null : handleMainMouseOrFocus("")
-                }
-                onFocus={() =>
-                    !tabletMain ? null : handleMainMouseOrFocus("")
-                }
+                onMouseEnter={() => (!tabletMain ? null : handleMainMouseOrFocus(""))}
+                onFocus={() => (!tabletMain ? null : handleMainMouseOrFocus(""))}
             >
                 {menuItems.mainLink?.map((menuItem) => (
                     <NavLinkShow
@@ -105,9 +100,7 @@ const Nav: React.FC<NavProps> = ({
                         onNavigationClick={onNavigationClick}
                         isOpen={openSubMenu === menuItem.id}
                         handleMenuClick={handleMenuClick}
-                        showNavLinks={
-                            openMainButton || openMenu === menuItem.id
-                        }
+                        showNavLinks={openMainButton || openMenu === menuItem.id}
                         onMouseEnter={() => handleMouseOrFocus(menuItem.id)}
                         onFocus={() => handleMouseOrFocus(menuItem.id)}
                         onMenuToggle={(id) => showLink(id)}

@@ -9,6 +9,8 @@
 @import "./01_base/media-query";
 @import "./01_base/navToggler";
 
+@import "./amplify/auth.overrides";
+
 @import "../../components/header/header";
 @import "../../components/button/button";
 @import "../../components/checkbox/input-checkbox";
@@ -38,6 +40,9 @@
 
 @import "../../../app/services/tarifs";
 @import "../../../app/blog/blog";
+
+
+
 // // @import "./03_responsive/03_tablet";
 // @import "./03_responsive/test";
 // @import "./03_responsive/04_mobile";

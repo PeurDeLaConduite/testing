@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { socialLinks } from "../../../assets/data/content/contact";
+import { socialLinks } from "@assets/data/content/contact";
 import { socialSvgComponents } from "../socialSvgComponents";
 
 export default function SocialLinks() {

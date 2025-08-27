@@ -1,7 +1,7 @@
 import React from "react";
 import ContactInfo from "./contactInfo";
 import ContactAnnouncement from "./contactAnnouncement";
-import { contactAnnouncements } from "../../../assets/data/content/contact";
+import { contactAnnouncements } from "@assets/data/content/contact";
 
 const ContactCard = () => {
     return (

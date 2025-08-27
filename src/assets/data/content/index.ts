@@ -1,4 +1,4 @@
-// src/assets/data/content/index.ts
+// @assets/data/content/index.ts
 import { sliderContent } from "./slider";
 import { sliderInfo } from "./info";
 import { aboutContent } from "./about";

@@ -1,12 +1,9 @@
-import { MenuItem } from "../assets/data/menuItems";
-import { SubItem } from "../assets/data/interfaces/menu";
+import { MenuItem } from "@assets/data/menuItems";
+import { SubItem } from "@assets/data/interfaces/menu";
 import { useEffect, useRef } from "react";
 import { useNavigation } from "./context/NavigationContext";
 
-export const isMainItemActive = (
-    itemPath: string,
-    currentRoute: string
-): boolean => {
+export const isMainItemActive = (itemPath: string, currentRoute: string): boolean => {
     if (itemPath === "/") {
         return currentRoute === "/" || currentRoute.startsWith("/#");
     }
@@ -16,13 +13,8 @@ export const isMainItemActive = (
 
 /*-------------------------------------------------------*/
 
-const updateSubItems = (
-    subItems: SubItem[],
-    activeSection: string
-): SubItem[] => {
-    const activeSubItem = subItems.find(
-        (sub) => sub.AnchorId === `#${activeSection}`
-    );
+const updateSubItems = (subItems: SubItem[], activeSection: string): SubItem[] => {
+    const activeSubItem = subItems.find((sub) => sub.AnchorId === `#${activeSection}`);
     return subItems.map((sub) => ({
         ...sub,
         class: activeSubItem?.id === sub.id ? "active" : "",
@@ -36,9 +28,7 @@ export const updateMenuItems = (
     return items.map((item) => ({
         ...item,
         class: isMainItemActive(item.path, currentRoute) ? "active" : "",
-        subItems: item.subItems
-            ? updateSubItems(item.subItems, activeSection)
-            : undefined,
+        subItems: item.subItems ? updateSubItems(item.subItems, activeSection) : undefined,
     }));
 };
 
@@ -53,11 +43,7 @@ export const updateMenuClasses = (
     currentRoute = ""
 ) => ({
     mainLink: updateMenuItems(mainLink || [], activeSection, currentRoute),
-    reservation: updateMenuItems(
-        reservation || [],
-        activeSection,
-        currentRoute
-    ),
+    reservation: updateMenuItems(reservation || [], activeSection, currentRoute),
     search: updateMenuItems(search || [], activeSection, currentRoute),
     connection: updateMenuItems(connection || [], activeSection, currentRoute),
 });
@@ -105,14 +91,10 @@ const handleKeyDown = (
 export const useMenuBehavior = () => {
     const navRef = useRef<HTMLElement | null>(null);
     const { openSubMenu, setOpenSubMenu } = useNavigation();
-    const setOpenSubMenuBridge: React.Dispatch<React.SetStateAction<
-        string | null
-    >> = (value) => {
+    const setOpenSubMenuBridge: React.Dispatch<React.SetStateAction<string | null>> = (value) => {
         if (typeof value === "function") {
             // Appelle la fonction avec la valeur courante
-            setOpenSubMenu(
-                (value as (prev: string | null) => string | null)(openSubMenu)
-            );
+            setOpenSubMenu((value as (prev: string | null) => string | null)(openSubMenu));
         } else {
             setOpenSubMenu(value);
         }
@@ -120,8 +102,7 @@ export const useMenuBehavior = () => {
     useEffect(() => {
         const onClickOutside = (e: MouseEvent) =>
             handleClickOutside(e, navRef, setOpenSubMenuBridge);
-        const onKeyDown = (e: KeyboardEvent) =>
-            handleKeyDown(e, setOpenSubMenuBridge);
+        const onKeyDown = (e: KeyboardEvent) => handleKeyDown(e, setOpenSubMenuBridge);
 
         document.addEventListener("mousedown", onClickOutside);
         document.addEventListener("keydown", onKeyDown);

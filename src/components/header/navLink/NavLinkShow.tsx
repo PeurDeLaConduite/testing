@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MenuItem } from "../../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import SubMenu from "./SubMenu";
 import RenderLink from "./RenderLink";
 import { getShowGroupClass } from "../utils/menuUtils";
@@ -11,10 +11,7 @@ interface NavLinkShowProps {
     isOpen: boolean;
     showNavLinks: boolean;
     handleMenuClick: (menuItemId: string) => void;
-    onMenuToggle: (
-        menuItemId: string,
-        event?: React.MouseEvent | React.KeyboardEvent
-    ) => void;
+    onMenuToggle: (menuItemId: string, event?: React.MouseEvent | React.KeyboardEvent) => void;
     openButton: boolean;
     openMainButton: boolean;
     onMouseEnter: () => void;
@@ -36,25 +33,17 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
     const mainNav = !openMainButton && showNavLinks && !openButton;
     const renderSubMenu = () => {
         return menuItem.subItems && menuItem.subItems.length > 0 ? (
-            <SubMenu
-                menuItem={menuItem}
-                isOpen={isOpen}
-                onSubItemClick={onNavigationClick}
-            />
+            <SubMenu menuItem={menuItem} isOpen={isOpen} onSubItemClick={onNavigationClick} />
         ) : null;
     };
-    const handleInteraction = (
-        event: React.MouseEvent | React.KeyboardEvent
-    ) => {
+    const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.preventDefault();
         onMenuToggle(menuItem.id, event);
     };
 
     return openMainButton || mainNav || (openButton && showNavLinks) ? (
         <div
-            className={`group_link-submenu ${menuItem.id} ${
-                !openMainButton ? "nav-padding" : ""
-            }`}
+            className={`group_link-submenu ${menuItem.id} ${!openMainButton ? "nav-padding" : ""}`}
         >
             <RenderLink
                 menuItem={menuItem}

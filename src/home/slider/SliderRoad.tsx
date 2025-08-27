@@ -1,5 +1,5 @@
 import React from "react";
-import { sliderContent } from "../../assets/data/content/slider";
+import { sliderContent } from "@assets/data/content/slider";
 import SliderNumber from "./svg/SliderNumber";
 
 interface SliderRoadProps {

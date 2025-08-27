@@ -2,7 +2,7 @@
 
 "use client";
 
-import AuthProvider from "@app/auth-provider";
+import AuthProvider from "@src/app/Authentication/auth-provider";
 import Test from "./testY";
 
 // route auth/callback

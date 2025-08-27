@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         ],
     },
 };
-import { servicesData } from "../../src/assets/data/servicesData";
+import { servicesData } from "@assets/data/servicesData";
 
 import React from "react";
 import ServicesIcon from "../../src/components/svg_Icon/Services";

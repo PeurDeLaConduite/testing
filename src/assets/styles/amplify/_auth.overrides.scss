@@ -1,1 +1,186 @@
 /* Extensions et surcharges spécifiques au projet */
+:root {
+    --amplify-components-button-background-color: rgb(13, 132, 227);
+    [data-amplify-theme] {
+        /* Couleur du texte quand le bouton est en état loading */
+        --amplify-components-button-loading-color: #ffffff;
+        --amplify-components-button-loading-background-color: #1a6de5; /* bleu par ex */
+    }
+}
+
+.amplify-field__show-password,
+.amplify-button--primary {
+    color: white;
+    &:hover {
+        background: rgba(26, 109, 229, 1);
+    }
+}
+.amplify-button {
+    border: 1px solid rgba(26, 109, 229, 0);
+    border-top: 1px solid rgba(0, 158, 226, 1);
+    border-left: 1px solid rgba(0, 158, 226, 1);
+    padding: 8px 12px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 21px;
+    position: relative;
+    z-index: 1;
+    transition:
+        background 300ms ease,
+        box-shadow 300ms ease;
+    will-change: transform, box-shadow;
+
+    &:hover {
+        border-top: 1px solid rgba(0, 158, 226, 1);
+        border-left: 1px solid rgb(13, 132, 227);
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    &:active {
+        transform: scale(0.98);
+        color: white;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0;
+        border-radius: 21px;
+        transition: opacity 225ms ease;
+        background: linear-gradient(
+            145deg,
+            rgb(13, 132, 227),
+            rgba(0, 158, 226, 0.8),
+            rgb(1, 82, 195),
+            rgba(0, 158, 226, 0.8),
+            rgb(13, 132, 227)
+        );
+        background-size: 300% 300%;
+        background-repeat: repeat-x;
+        will-change: transform, opacity;
+        animation: slideRepeat 6s linear 1 forwards;
+    }
+
+    &:hover::after {
+        opacity: 1;
+        animation: slideRepeat 6s linear infinite;
+    }
+}
+@keyframes slideRepeat {
+    0% {
+        background-position-x: 0%;
+        opacity: 0;
+    }
+    25% {
+        background-position-x: -75%;
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        background-position-x: -285%;
+    }
+    100% {
+        opacity: 0;
+        background-position-x: -300%;
+    }
+}
+
+.amplify-button.amplify-button--small {
+    color: rgba(26, 109, 229, 1);
+    border: 2.5px solid rgba(26, 109, 229, 1);
+    background: transparent !important; // remplace tout (BG color gradient)
+    box-shadow: none !important;
+
+    &::after {
+        background: none !important; // supprime le linear-gradient
+    }
+
+    &:hover {
+        border: 2.5px solid rgba(26, 109, 229, 1);
+        box-shadow: inherit;
+        color: rgb(1, 82, 195);
+        background: transparent !important;
+        filter: drop-shadow(2px 2px 1.5px rgba(0, 0, 0, 0.25));
+        &::after {
+            background: none !important; // ✅ évite de remettre un dégradé
+        }
+    }
+}
+.amplify-field__show-password {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    left: -1px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    margin-top: 0;
+
+    &::after {
+        border-radius: 0 !important;
+        border-top-right-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
+        animation: none;
+    }
+
+    &:hover::after {
+        opacity: 1;
+        animation: none;
+    }
+}
+.amplify-icon path {
+    fill: rgba(26, 109, 229, 1) !important;
+    fill: white !important;
+}
+.amplify-label,
+.amplify-input,
+.amplify-tabs__list,
+.amplify-tabs__item {
+    color: #000;
+    font-family: "Inter", "system-ui", "Avenir", "Helvetica", "Arial", sans-serif;
+}
+.amplify-tabs__item {
+    color: #4a4a4a;
+    background: white;
+
+    &:hover {
+        background: white;
+        color: rgb(1, 82, 195);
+    }
+}
+
+.amplify-tabs__item--active {
+    color: rgba(26, 109, 229, 1);
+    &:hover {
+        background: white;
+        color: rgb(1, 82, 195);
+    }
+}
+
+// Quand on survole un onglet => l’actif change de couleur
+.amplify-tabs:hover .amplify-tabs__item--active {
+    color: rgb(13, 132, 227);
+}
+.amplify-input:focus-visible {
+    border: none !important;
+    outline: none !important;
+}
+.amplify-field-group:has(input[name="password"]:focus) .amplify-field__show-password,
+.amplify-field-group:has(input[name="confirm_password"]:focus) .amplify-field__show-password {
+    border-left: 1px solid transparent;
+    position: relative;
+    top: 0.25px;
+    left: 0;
+    padding: 1.75px 12px;
+    box-sizing: content-box;
+    outline: #000;
+}
+
+input[name="password"]:focus {
+    border: none !important;
+    outline: none !important;
+}
+
+.auth-logo {
+    display: inline-block;
+    width: 280px;
+    filter: drop-shadow(1px 2px 1.5px rgba(0, 0, 0, 0.35));
+}

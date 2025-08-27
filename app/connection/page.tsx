@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import Loader from "../../src/components/loader/Loader";
+import Authentication from "@src/app/Authentication/Authentication";
+
 export const metadata: Metadata = {
     title: "Réservation",
     alternates: {
@@ -17,7 +18,8 @@ export default async function Page() {
     return (
         <section className="section" id="s1">
             <div className="fixed-menu"></div>
-            <Loader />
+            <div className="fixed-menu"></div>
+            <Authentication />;
         </section>
     );
 }

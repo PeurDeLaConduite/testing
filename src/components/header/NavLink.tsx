@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "../../assets/data/menuItems";
+import { MenuItem } from "@assets/data/menuItems";
 import SubMenu from "./navLink/SubMenu";
 import { svgComponents } from "./svgComponents";
 
@@ -37,11 +37,7 @@ const NavLink: React.FC<NavLinkProps> = ({
             </a>
 
             {menuItem.subItems && menuItem.subItems.length > 0 && (
-                <SubMenu
-                    menuItem={menuItem}
-                    isOpen={isOpen}
-                    onSubItemClick={onNavigationClick}
-                />
+                <SubMenu menuItem={menuItem} isOpen={isOpen} onSubItemClick={onNavigationClick} />
             )}
         </div>
     );

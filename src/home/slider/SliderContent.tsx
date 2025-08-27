@@ -1,5 +1,5 @@
 import React from "react";
-import { sliderContent } from "../../assets/data/content/slider";
+import { sliderContent } from "@assets/data/content/slider";
 import Space from "../../utils/Space";
 import SliderCTA from "./SliderCTA";
 import SliderArrow from "./SliderArrow";
@@ -9,19 +9,12 @@ interface SliderContentProps {
     nextSlide: (event?: React.MouseEvent | React.KeyboardEvent) => void;
     prevSlide: () => void;
 }
-const SliderContent: React.FC<SliderContentProps> = ({
-    nextSlide,
-    prevSlide,
-    getClass,
-}) => {
+const SliderContent: React.FC<SliderContentProps> = ({ nextSlide, prevSlide, getClass }) => {
     return (
         <div className="slider">
             <div className="content-wrapper">
                 {sliderContent.map((slide, index) => (
-                    <div
-                        key={index + "C"}
-                        className={`slide ${getClass(index)}`}
-                    >
+                    <div key={index + "C"} className={`slide ${getClass(index)}`}>
                         <div className="slider-content">
                             <div className="sld-card_title flx-c">
                                 <h2>
