@@ -64,6 +64,10 @@ yarn install
 - `yarn test:api` : exécute les tests d’API.
 - `yarn test:e2e` : lance les tests end-to-end.
 
+### Formatage
+
+- `yarn format` : formate l’ensemble du projet avec Prettier.
+
 ### Mocks Amplify
 
 Pour éviter les appels réseau lors des tests, vous pouvez simuler les services AWS Amplify :
