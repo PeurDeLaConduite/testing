@@ -1,6 +1,6 @@
 .contact {
     margin-bottom: 136px;
-    margin-top: 50px;
+    margin-top: 0px;
     width: calc(100% - 96px);
     .contact-bg {
         position: relative;
@@ -106,7 +106,9 @@
                         position: absolute;
                         inset: 0;
                         border-radius: inherit;
-                        transition: transform 0.3s ease, opacity 0.3s ease;
+                        transition:
+                            transform 0.3s ease,
+                            opacity 0.3s ease;
                         z-index: -1;
                     }
 
@@ -177,18 +179,14 @@
 
                                 .icon-color {
                                     fill: $white;
-                                    filter: drop-shadow(
-                                        0px 4px 4px rgba(0, 0, 0, 0.35)
-                                    );
+                                    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
                                 }
                             }
 
                             &:hover,
                             &:active {
                                 svg {
-                                    filter: drop-shadow(
-                                        0px 4px 2px rgba(0, 0, 0, 0.35)
-                                    );
+                                    filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.35));
 
                                     .bg-color {
                                         fill: $secondary-orange;
@@ -444,10 +442,7 @@
                 position: relative;
                 width: calc(100% - 90px);
                 .ctc-info {
-                    grid-template-columns: repeat(
-                        auto-fit,
-                        minmax(calc(50% - 45px), 1fr)
-                    );
+                    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 45px), 1fr));
                     width: calc(100% + 90px);
                 }
             }

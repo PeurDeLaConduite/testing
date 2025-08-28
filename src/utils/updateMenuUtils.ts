@@ -1,6 +1,6 @@
 import { MenuItem } from "@assets/data/menuItems";
 import { SubItem } from "@assets/data/interfaces/menu";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useNavigation } from "./context/NavigationContext";
 
 export const isMainItemActive = (itemPath: string | undefined, currentRoute: string): boolean => {
@@ -94,14 +94,27 @@ const handleKeyDown = (
 export const useMenuBehavior = () => {
     const navRef = useRef<HTMLElement | null>(null);
     const { openSubMenu, setOpenSubMenu } = useNavigation();
-    const setOpenSubMenuBridge: React.Dispatch<React.SetStateAction<string | null>> = (value) => {
-        if (typeof value === "function") {
-            // Appelle la fonction avec la valeur courante
-            setOpenSubMenu((value as (prev: string | null) => string | null)(openSubMenu));
-        } else {
-            setOpenSubMenu(value);
-        }
-    };
+
+    // 🔄 Ref pour garder la valeur courante sans recréer les callbacks
+    const latestOpenRef = useRef<string | null>(openSubMenu);
+    useEffect(() => {
+        latestOpenRef.current = openSubMenu;
+    }, [openSubMenu]);
+
+    // ✅ Bridge stable qui accepte valeur OU fonction
+    const setOpenSubMenuBridge = useCallback<React.Dispatch<React.SetStateAction<string | null>>>(
+        (value) => {
+            if (typeof value === "function") {
+                const compute = value as (prev: string | null) => string | null;
+                const next = compute(latestOpenRef.current ?? null);
+                setOpenSubMenu(next); // <- le setter réel n'accepte qu'une valeur
+            } else {
+                setOpenSubMenu(value);
+            }
+        },
+        [setOpenSubMenu]
+    );
+
     useEffect(() => {
         const onClickOutside = (e: MouseEvent) =>
             handleClickOutside(e, navRef, setOpenSubMenuBridge);
@@ -113,7 +126,7 @@ export const useMenuBehavior = () => {
             document.removeEventListener("mousedown", onClickOutside);
             document.removeEventListener("keydown", onKeyDown);
         };
-    }, [openSubMenu, setOpenSubMenu, setOpenSubMenuBridge]);
+    }, [setOpenSubMenuBridge]);
 
     return { navRef, openSubMenu, setOpenSubMenu: setOpenSubMenuBridge };
 };
