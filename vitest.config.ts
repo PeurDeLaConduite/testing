@@ -17,6 +17,7 @@ export default defineConfig({
             "@myTypes": path.resolve(__dirname, "src/types"),
             "@entities": path.resolve(__dirname, "src/entities"),
             "@public": path.resolve(__dirname, "public"),
+            "@test": path.resolve(__dirname, "tests"),
             tests: path.resolve(__dirname, "tests"),
         },
     },
