@@ -1,5 +1,5 @@
 // ⚠️ Exemple Playwright — à adapter à votre app (URL de base, sélecteurs, hash).
-import { test, expect } from "@playwright/test";
+import { test, expect } from "playwright/test";
 
 test.describe("Menu — parcours hash", () => {
     test("ouvre /services#avec-permis et atteint la section", async ({ page }) => {
