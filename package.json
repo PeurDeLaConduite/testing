@@ -12,8 +12,8 @@
         "gen:entities": "tsx scripts/generator/entry.ts",
         "gen:entities:debug": "tsx scripts/generator/entry.ts --debug",
         "test": "yarn test:unit && yarn test:api && yarn test:e2e",
-        "test:unit": "vitest run tests/unit --coverage",
-        "test:api": "vitest run tests/api --coverage",
+        "test:unit": "vitest run ./tests/unit --coverage",
+        "test:api": "vitest run ./tests/api --coverage",
         "test:e2e": "playwright test",
         "generate:sitemap": "node scripts/generate-sitemap.js"
     },

@@ -59,7 +59,7 @@ yarn install
 
 ### Exécution
 
-- `yarn test` – lance l'ensemble de la suite de tests.
+- `yarn test` – exécute successivement `yarn test:unit`, `yarn test:api` puis `yarn test:e2e`.
 - `yarn test:unit` – exécute les tests unitaires (`tests/unit`).
 - `yarn test:api` – exécute les tests d'API (`tests/api`).
 - `yarn test:e2e` – exécute les tests end-to-end avec Playwright (`tests/e2e`).
