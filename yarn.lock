@@ -13876,15 +13876,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-internal@file:eslint-plugin-internal.tgz::locator=peur-de-la-conduite%40workspace%3A.":
-  version: 0.0.0
-  resolution: "eslint-plugin-internal@file:eslint-plugin-internal.tgz#eslint-plugin-internal.tgz::hash=f53f28&locator=peur-de-la-conduite%40workspace%3A."
-  peerDependencies:
-    eslint: ">=9.0.0"
-  checksum: 10c0/897bfe7b07ee571d40cf1b8a6fa70377c8e95e5c0f291871d18abec3ab32be87488cc0fae0303818be3207498ce5c0b67afcc9ac95a50e364023c8843e45592c
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-jsx-a11y@npm:^6.10.0":
   version: 6.10.2
   resolution: "eslint-plugin-jsx-a11y@npm:6.10.2"
@@ -18420,7 +18411,6 @@ __metadata:
     eslint: "npm:^9.15.0"
     eslint-config-next: "npm:15.3.1"
     eslint-plugin-import: "npm:^2.32.0"
-    eslint-plugin-internal: "file:eslint-plugin-internal.tgz"
     eslint-plugin-unused-imports: "npm:^4.2.0"
     execa: "npm:^9.5.2"
     file-saver: "npm:^2.0.5"

@@ -136,8 +136,12 @@ export function useUserNameForm(userName: UserNameType | null = null) {
         async (field: keyof UserNameFormType, value: string) => {
             const id = userNameId ?? sub;
             if (!id) return;
-            await userNameService.update({ id, [field]: value } as any);
-            patchForm({ [field]: value } as Partial<UserNameFormType>); // optimiste
+
+            // Objet partiel du formulaire + id requis
+            type UpdatePayload = { id: string } & Partial<UserNameFormType>;
+
+            await userNameService.update({ id, [field]: value } as UpdatePayload);
+            patchForm({ [field]: value } as Partial<UserNameFormType>); // update optimiste
             await refresh();
             emitUserNameUpdated();
         },

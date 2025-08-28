@@ -1,11 +1,11 @@
 ﻿{
-  "name": "eslint-plugin-internal",
-  "version": "0.0.0",
-  "main": "index.js",
-  "peerDependencies": {
-    "eslint": ">=9.0.0"
-  },
-  "files": [
-    "index.js"
-  ]
+    "name": "eslint-plugin-internal",
+    "version": "0.0.0",
+    "main": "index.js",
+    "peerDependencies": {
+        "eslint": ">=9.0.0"
+    },
+    "files": [
+        "index.js"
+    ]
 }
