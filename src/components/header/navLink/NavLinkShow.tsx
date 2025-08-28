@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { MenuItem } from "@assets/data/menuItems";
 import SubMenu from "./SubMenu";
 import RenderLink from "./RenderLink";
@@ -30,10 +30,16 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
     onMouseEnter,
     onFocus,
 }) => {
+    const triggerRef = useRef<HTMLDivElement>(null);
     const mainNav = !openMainButton && showNavLinks && !openButton;
     const renderSubMenu = () => {
         return menuItem.subItems && menuItem.subItems.length > 0 ? (
-            <SubMenu menuItem={menuItem} isOpen={isOpen} onSubItemClick={onNavigationClick} />
+            <SubMenu
+                menuItem={menuItem}
+                isOpen={isOpen}
+                onSubItemClick={onNavigationClick}
+                triggerRef={triggerRef}
+            />
         ) : null;
     };
     const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
@@ -55,12 +61,13 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
         </div>
     ) : (
         <div
+            ref={triggerRef}
             className={getShowGroupClass(menuItem.id, showNavLinks)}
             role="button"
             aria-label={`ouvrir le menu ${menuItem.title}`}
             aria-haspopup="menu"
-            aria-expanded={isOpen}
-            aria-controls={`sub-${menuItem.id}`}
+            aria-expanded={menuItem.subItems ? isOpen : undefined}
+            aria-controls={menuItem.subItems ? `sub-${menuItem.id}` : undefined}
             tabIndex={0}
             onClick={handleInteraction}
             onKeyDown={(e) => {
