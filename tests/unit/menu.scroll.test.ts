@@ -77,7 +77,7 @@ describe("scrollToId", () => {
         expect(window.scrollTo).toHaveBeenCalledWith({ top: 300 + 100, behavior: "auto" });
     });
 
-    it("réessaie jusqu’à trouver l’élément", () => {
+    it("réessaie jusqu’à trouver l’élément (offset inclus)", () => {
         document.body.innerHTML = ""; // élément absent initialement
         const callbacks: FrameRequestCallback[] = [];
         window.requestAnimationFrame = vi.fn((cb: FrameRequestCallback) => {
@@ -85,7 +85,7 @@ describe("scrollToId", () => {
             return 0;
         });
 
-        scrollToId("target", 0);
+        scrollToId("target", 64);
         expect(window.scrollTo).not.toHaveBeenCalled();
 
         // première frame: l'élément n'existe pas, on simule le retry
@@ -110,6 +110,6 @@ describe("scrollToId", () => {
         });
         callbacks[1](0);
 
-        expect(window.scrollTo).toHaveBeenCalledWith({ top: 300 + 100, behavior: "smooth" });
+        expect(window.scrollTo).toHaveBeenCalledWith({ top: 300 + 100 - 64, behavior: "smooth" });
     });
 });
