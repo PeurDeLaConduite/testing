@@ -3,13 +3,13 @@
 "use client";
 
 import AuthProvider from "@src/app/Authentication/auth-provider";
-import Test from "./testY";
+import Comp from "./Comp";
 
 // route auth/callback
 export default function Page() {
     return (
         <AuthProvider>
-            <Test />
+            <Comp />
         </AuthProvider>
     );
 }

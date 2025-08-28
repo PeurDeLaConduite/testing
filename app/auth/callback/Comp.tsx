@@ -5,7 +5,7 @@ import ConnectItem from "./ConnectItem";
 const client = generateClient();
 
 // route auth/callback
-export default function Test() {
+export default function Comp() {
     async function load() {
         try {
             const res = await client.graphql({
