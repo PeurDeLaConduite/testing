@@ -2,9 +2,9 @@ import { describe, it, expect, vi } from "vitest";
 import { syncManyToMany } from "@entities/core/utils/syncManyToMany";
 import { relationService } from "@entities/core/services";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/setupTests";
+import { server } from "@test/_legacy/setupTests";
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/mocks/amplifyClient"));
+vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 describe("syncManyToMany", () => {
     it("appelle createFn et deleteFn avec les ID corrects", async () => {

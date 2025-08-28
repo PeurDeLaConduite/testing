@@ -17,13 +17,13 @@ export default defineConfig({
             "@myTypes": path.resolve(__dirname, "src/types"),
             "@entities": path.resolve(__dirname, "src/entities"),
             "@public": path.resolve(__dirname, "public"),
-            "@test/setup": path.resolve(__dirname, "setupTests.ts"),
-            "@test": path.resolve(__dirname, "test"),
+            "@test": path.resolve(__dirname, "tests"),
         },
     },
     test: {
         environment: "jsdom",
-        setupFiles: ["./setupTests.ts"],
-        exclude: ["**/node_modules/**", "e2e/**", "test/e2e/**"],
+        setupFiles: ["./tests/_legacy/setupTests.ts"],
+        exclude: ["**/node_modules/**", "tests/e2e/**"],
     },
 });
+

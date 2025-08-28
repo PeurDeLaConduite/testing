@@ -1,15 +1,15 @@
 import { describe, it, expect, vi } from "vitest";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/setupTests";
+import { server } from "@test/_legacy/setupTests";
 import { postTagService } from "@entities/relations/postTag/service";
-import type { ListRequest, CreateRequest, DeleteRequest } from "@test/fixtures/relations";
+import type { ListRequest, CreateRequest, DeleteRequest } from "@test/_legacy/fixtures/relations";
 
 interface PostTagIds {
     postId: string;
     tagId: string;
 }
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/mocks/amplifyClient"));
+vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 describe("postTagService", () => {
     it("listByParent retourne les IDs tag", async () => {
