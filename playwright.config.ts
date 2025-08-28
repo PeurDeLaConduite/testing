@@ -4,7 +4,7 @@ import { defineConfig, devices } from "playwright/test";
 export default defineConfig({
     // Spécifie le répertoire contenant les tests end-to-end
     testDir: "./tests/e2e",
-    reporter: [["html", { open: "never" }]],
+    reporter: "html",
     use: {
         baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
