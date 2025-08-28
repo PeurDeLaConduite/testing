@@ -61,9 +61,9 @@ describe("menu legacy", () => {
     it("navigue vers une ancre via handleNavClick", () => {
         const updateRoute = vi.fn();
         const scroll = vi.fn();
-        handleNavClick("/page#ancre", "/page", updateRoute, scroll);
+        handleNavClick("/page#ancre", "/page", updateRoute, scroll, 0);
         expect(updateRoute).toHaveBeenCalledWith("/page");
         expect(updateRoute).toHaveBeenCalledWith("/page#ancre");
-        expect(scroll).toHaveBeenCalledWith("ancre");
+        expect(scroll).toHaveBeenCalledWith("ancre", 0);
     });
 });

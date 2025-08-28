@@ -3,7 +3,10 @@ import { SubItem } from "@assets/data/interfaces/menu";
 import { useEffect, useRef } from "react";
 import { useNavigation } from "./context/NavigationContext";
 
-export const isMainItemActive = (itemPath: string, currentRoute: string): boolean => {
+export const isMainItemActive = (itemPath: string | undefined, currentRoute: string): boolean => {
+    if (!itemPath) {
+        return false;
+    }
     if (itemPath === "/") {
         return currentRoute === "/" || currentRoute.startsWith("/#");
     }

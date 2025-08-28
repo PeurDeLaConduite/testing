@@ -18,7 +18,11 @@ export function toAction(item: MenuItem, external: ExternalActionMap): MenuActio
     }
 
     if (item.AnchorId) {
-        return { kind: "hash", targetId: item.AnchorId.replace(/^#/, "") };
+        return {
+            kind: "hash",
+            targetId: item.AnchorId.replace(/^#/, ""),
+            offset: item.scrollOffset,
+        };
     }
 
     if (item.path) {

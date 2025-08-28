@@ -5,7 +5,7 @@ import { svgComponents } from "./svgComponents";
 
 interface NavLinkProps {
     menuItem: MenuItem;
-    onNavigationClick: (path: string) => void;
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
     isOpen: boolean;
     handleMenuClick: (menuItemId: string) => void;
     svg: SvgComponentKey;
@@ -24,10 +24,10 @@ const NavLink: React.FC<NavLinkProps> = ({
             <a
                 aria-label={`Page ${menuItem.title}`}
                 className={`head-link ${menuItem.class}`}
-                href={menuItem.path + menuItem.AnchorId}
+                href={`${menuItem.path ?? ""}${menuItem.AnchorId ?? ""}`}
                 onClick={(e) => {
                     e.preventDefault();
-                    onNavigationClick(menuItem.path);
+                    onNavigationClick(menuItem.path ?? "", menuItem.scrollOffset);
                     handleMenuClick(menuItem.id);
                 }}
                 tabIndex={0}

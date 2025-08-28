@@ -10,7 +10,7 @@ export function dispatch(action: MenuAction, external: ExternalActionMap): void 
             window.location.assign(action.href);
             break;
         case "hash":
-            scrollToId(action.targetId);
+            scrollToId(action.targetId, action.offset);
             break;
         case "externalClick":
             external[action.handlerId]?.();

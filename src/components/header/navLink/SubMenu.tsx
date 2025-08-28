@@ -7,7 +7,7 @@ import { useNavigation } from "../../../utils/context/NavigationContext";
 interface SubMenuProps {
     menuItem: MenuItem;
     isOpen: boolean;
-    onSubItemClick: (path: string) => void;
+    onSubItemClick: (path: string, scrollOffset?: number) => void;
     triggerRef: React.RefObject<HTMLElement>;
 }
 
@@ -21,7 +21,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
 
     const handleSubItemClick = (path: string, e: React.MouseEvent | React.KeyboardEvent) => {
         e.preventDefault(); // Empêche la navigation par défaut
-        onSubItemClick(path); // Appelle la fonction pour gérer le clic
+        onSubItemClick(path, menuItem.scrollOffset); // Appelle la fonction pour gérer le clic
         closeSubMenu();
     };
 
@@ -45,7 +45,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                 onKeyDown={(e) => handleKeyDown(null, e)}
             >
                 {menuItem.subItems.map((subItem) => {
-                    const fullPath = `${menuItem.path}${subItem.AnchorId}`;
+                    const fullPath = `${menuItem.path ?? ""}${subItem.AnchorId ?? ""}`;
                     return (
                         <a
                             key={subItem.id}

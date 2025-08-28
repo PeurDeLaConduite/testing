@@ -9,7 +9,7 @@ import { getShowClass } from "../utils/menuUtils";
 import { useNavigation } from "../../../utils/context/NavigationContext";
 interface NavLinkShowProps {
     menuItem: MenuItem;
-    onNavigationClick: (path: string) => void;
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
     showNavLinks: boolean;
     handleMenuClick: (menuItemId: string) => void;
     openMenuId?: string | null;
@@ -27,7 +27,10 @@ const RenderLink: React.FC<NavLinkShowProps> = ({
     const { setOpenSubMenu } = useNavigation();
     const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.preventDefault();
-        onNavigationClick(menuItem.path + menuItem.AnchorId);
+        onNavigationClick(
+            `${menuItem.path ?? ""}${menuItem.AnchorId ?? ""}`,
+            menuItem.scrollOffset
+        );
         handleMenuClick(menuItem.id);
     };
     const hoverInteraction = (
@@ -45,7 +48,7 @@ const RenderLink: React.FC<NavLinkShowProps> = ({
             role={!showNavLinks ? "menuitem" : "link"}
             aria-label={`Page ${menuItem.title}`}
             className={`head-link ${menuItem.class}`}
-            href={menuItem.path}
+            href={menuItem.path ?? "#"}
             onClick={handleInteraction}
             onKeyDown={(e) => {
                 if (["Enter", " "].includes(e.key)) {

@@ -11,6 +11,7 @@ export type HrefAction = {
 export type HashAction = {
     kind: "hash";
     targetId: string;
+    offset?: number;
 };
 
 export type ExternalClickAction = {

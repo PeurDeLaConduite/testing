@@ -13,7 +13,7 @@ import useResize from "./utils/useResize";
 
 interface NavProps {
     menuItems: MenuItem[];
-    onNavigationClick: (path: string) => void;
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
     openButton: boolean;
     openMainButton: boolean;
     tabletMain: boolean;
@@ -38,8 +38,8 @@ const Header: React.FC<NavProps> = () => {
     useResize(setTabletMain, setOpenMainButton, setOpenButton, setBigMenu);
 
     // Wrapper pour adapter `handleNavClick`
-    const handleNavigationClick = (path: string) => {
-        handleNavClick(path, currentRoute, updateRoute, handleScrollClick);
+    const handleNavigationClick = (path: string, scrollOffset = 0) => {
+        handleNavClick(path, currentRoute, updateRoute, handleScrollClick, scrollOffset);
     };
 
     const updatedMenuItems = updateMenuClasses(

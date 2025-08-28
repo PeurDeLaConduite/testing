@@ -13,10 +13,11 @@ export interface MenuItem {
     id: string;
     title: string;
     class: string;
-    path: string;
+    path?: string;
     svg: string;
     subItems?: SubItem[];
     AnchorId?: string;
+    scrollOffset?: number;
     content?: string | React.ReactNode; // Même chose pour le menu, si c'est du texte ou JSX
 }
 

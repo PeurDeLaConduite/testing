@@ -7,7 +7,7 @@ import RenderLink from "./RenderLink";
 import { getShowGroupClass } from "../utils/menuUtils";
 interface NavLinkShowProps {
     menuItem: MenuItem;
-    onNavigationClick: (path: string) => void;
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
     isOpen: boolean;
     showNavLinks: boolean;
     handleMenuClick: (menuItemId: string) => void;
