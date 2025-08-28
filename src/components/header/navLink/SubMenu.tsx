@@ -8,7 +8,8 @@ interface SubMenuProps {
     menuItem: MenuItem;
     isOpen: boolean;
     onSubItemClick: (path: string, scrollOffset?: number) => void;
-    triggerRef?: React.RefObject<HTMLElement | null>;
+    triggerRef?: React.RefObject<HTMLDivElement | HTMLElement | null>;
+
 }
 
 const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, triggerRef }) => {

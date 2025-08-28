@@ -8,14 +8,24 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import { useUserProfileForm } from "@entities/models/userProfile/hooks";
-import { type UserProfileMinimalType } from "@entities/models/userProfile/types";
+import { type UserProfileFormType } from "@entities/models/userProfile/types";
 // import "./_UserProfileManager.scss";
 
 export default function UserProfileManager() {
     const { user } = useAuthenticator();
-    const profile = useUserProfileForm();
+    const profile = useUserProfileForm(null);
 
-    const getIcon = (field: keyof UserProfileMinimalType) => {
+    const fields: (keyof UserProfileFormType)[] = [
+        "firstName",
+        "familyName",
+        "address",
+        "postalCode",
+        "city",
+        "country",
+        "phoneNumber",
+    ];
+
+    const getIcon = (field: keyof UserProfileFormType) => {
         switch (field) {
             case "phoneNumber":
                 return <PhoneIcon fontSize="small" className="user-profile-icon" />;
@@ -37,7 +47,7 @@ export default function UserProfileManager() {
         return number.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
     }
 
-    const renderValue = (field: keyof UserProfileMinimalType, value: string) => {
+    const renderValue = (field: keyof UserProfileFormType, value: string) => {
         if (field === "phoneNumber") {
             return value ? (
                 <p className="user-profile-value">{formatPhoneNumber(value)}</p>
@@ -53,15 +63,22 @@ export default function UserProfileManager() {
     };
     useEffect(() => {
         if (user) {
-            void profile.fetchProfile();
+            void profile.refresh();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
+    const deleteProfile = () => {
+        if (profile.profileId) {
+            return profile.deleteEntity(profile.profileId);
+        }
+        return Promise.resolve();
+    };
+
     if (!user) return null;
 
     return (
-        <EntityEditor<UserProfileMinimalType>
+        <EntityEditor<UserProfileFormType>
             title="Mon profil"
             titleHeading="Informations personnelles"
             requiredFields={["firstName", "familyName"]}
@@ -77,19 +94,16 @@ export default function UserProfileManager() {
             mode={profile.mode}
             dirty={profile.dirty}
             handleChange={
-                profile.handleChange as (
-                    field: keyof UserProfileMinimalType,
-                    value: unknown
-                ) => void
+                profile.setFieldValue as (field: keyof UserProfileFormType, value: unknown) => void
             }
-            submit={profile.submit}
+            submit={() => profile.submit().then(() => void 0)}
             reset={profile.reset}
             setForm={profile.setForm}
-            fields={profile.fields}
+            fields={fields}
             labels={profile.labels}
-            saveField={profile.saveField}
+            saveField={profile.updateEntity}
             clearField={profile.clearField}
-            deleteEntity={profile.deleteProfile}
+            deleteEntity={profile.profileId ? deleteProfile : undefined}
         />
     );
 }

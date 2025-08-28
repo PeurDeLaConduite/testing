@@ -6,7 +6,7 @@ import { useUserNameForm } from "@entities/models/userName/hooks";
 // route auth/callback
 export default function ConnectForm() {
     const { user } = useAuthenticator();
-    const manager = useUserNameForm();
+    const manager = useUserNameForm(null);
 
     useEffect(() => {
         if (user) {
