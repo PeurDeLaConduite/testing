@@ -35,6 +35,8 @@ frontend:
             - .next/cache/**/*
             - .yarn/cache/**/*
             - node_modules/**/*
+            - .pnp.cjs
+            - .pnp.loader.mjs
 
     customHeaders: # ← une seule fois sous frontend
         - pattern: "/img/**"
