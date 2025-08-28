@@ -1,19 +1,29 @@
 import { defineConfig } from "vitest/config";
-import { fileURLToPath, URL } from "node:url";
+import path from "path";
 
 export default defineConfig({
     resolve: {
         alias: {
-            "@/": fileURLToPath(new URL("./", import.meta.url)),
+            "@": path.resolve(__dirname, "./"),
+            "@app": path.resolve(__dirname, "app"),
+            "@src": path.resolve(__dirname, "src"),
+            "@amplify": path.resolve(__dirname, "amplify"),
+            "@components": path.resolve(__dirname, "src/components"),
+            "@hooks": path.resolve(__dirname, "src/hooks"),
+            "@context": path.resolve(__dirname, "src/context"),
+            "@utils": path.resolve(__dirname, "src/utils"),
+            "@assets": path.resolve(__dirname, "src/assets"),
+            "@services": path.resolve(__dirname, "src/services"),
+            "@myTypes": path.resolve(__dirname, "src/types"),
+            "@entities": path.resolve(__dirname, "src/entities"),
+            "@public": path.resolve(__dirname, "public"),
+            "@test/setup": path.resolve(__dirname, "setupTests.ts"),
+            "@test": path.resolve(__dirname, "test"),
         },
-        extensions: [".ts", ".tsx"],
     },
     test: {
-        globals: true,
         environment: "jsdom",
-        setupFiles: "./setupTests.ts",
-        coverage: {
-            reporter: ["text", "html"],
-        },
+        setupFiles: ["./setupTests.ts"],
+        exclude: ["**/node_modules/**", "e2e/**", "test/e2e/**"],
     },
 });
