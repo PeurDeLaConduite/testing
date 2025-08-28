@@ -1,6 +1,6 @@
 "use client";
 import { generateClient } from "aws-amplify/data";
-import ConnectItem from "./ConnectItem";
+import ConnectItem from "@app/auth/callback/ConnectItem";
 
 const client = generateClient();
 
@@ -36,7 +36,7 @@ export default function Test() {
 
                 <div className="post-content__content">
                     {/* Bouton qui requiert la connexion */}
-                    <ConnectItem >
+                    <ConnectItem>
                         <nav className="connect">
                             <div className="group_link-submenu connection nav-padding">
                                 <button
