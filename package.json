@@ -11,10 +11,10 @@
         "audit:summarize": "node scripts/summarize-audit.mjs",
         "gen:entities": "tsx scripts/generator/entry.ts",
         "gen:entities:debug": "tsx scripts/generator/entry.ts --debug",
-        "test": "vitest run",
-        "test:watch": "vitest",
-        "test:coverage": "vitest run --coverage",
-        "e2e": "playwright test",
+        "test": "yarn test:unit && yarn test:api && yarn test:e2e",
+        "test:unit": "vitest run test/unit --coverage",
+        "test:api": "vitest run test/api --coverage",
+        "test:e2e": "playwright test",
         "generate:sitemap": "node scripts/generate-sitemap.js"
     },
     "dependencies": {

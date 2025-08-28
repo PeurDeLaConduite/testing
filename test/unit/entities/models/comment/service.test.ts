@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { commentService } from "@entities/models/comment";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/setup";
+import { server } from "@test/setupTests";
 
 vi.mock("@entities/core/services/amplifyClient", () => import("@test/mocks/amplifyClient"));
 
