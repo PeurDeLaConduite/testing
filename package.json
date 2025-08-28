@@ -9,8 +9,8 @@
         "lint": "next lint",
         "generate:sitemap": "node scripts/generate-sitemap.js",
         "test": "vitest run",
-        "vitest:watch": "vitest --watch",
-        "vitest": "vitest"
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage"
     },
     "dependencies": {
         "@aws-amplify/auth": "^6.13.0",
@@ -43,6 +43,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "@vitest/coverage-v8": "^2.1.4",
         "aws-cdk": "^2",
         "aws-cdk-lib": "^2",
         "constructs": "^10.3.0",
