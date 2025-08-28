@@ -17,7 +17,7 @@ const fields: (keyof UserNameFormType)[] = ["userName"];
 
 export default function UserNameManager() {
     const { user } = useAuthenticator();
-    const manager = useUserNameForm();
+    const manager = useUserNameForm(null);
 
     useEffect(() => {
         if (user) {
@@ -48,17 +48,17 @@ export default function UserNameManager() {
             form={manager.form}
             mode={manager.mode}
             dirty={manager.dirty}
-            handleChange={
-                manager.handleChange as (field: keyof UserNameFormType, value: unknown) => void
-            }
-            submit={manager.submit} // ⬅️ version qui refetch
+            handleChange={(field, value) => manager.setFieldValue(field, value as string)}
+            submit={() => manager.submit().then(() => void 0)}
             reset={manager.reset}
             setForm={manager.setForm}
             fields={fields}
             labels={fieldLabel as (field: keyof UserNameFormType) => string}
-            saveField={manager.saveField} // ⬅️ refetch inclus
+            saveField={manager.updateEntity}
             clearField={manager.clearField}
-            deleteEntity={manager.remove} // ⬅️ refetch inclus
+            deleteEntity={() =>
+                manager.userNameId ? manager.deleteEntity(manager.userNameId) : Promise.resolve()
+            }
         />
     );
 }
