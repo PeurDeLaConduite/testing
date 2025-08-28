@@ -1,4 +1,3 @@
-import "tsconfig-paths/register";
 import { Amplify } from "aws-amplify";
 import { beforeAll, afterEach, afterAll } from "vitest";
 import { setupServer } from "msw/node";
