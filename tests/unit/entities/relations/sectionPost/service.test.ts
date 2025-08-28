@@ -1,15 +1,15 @@
 import { describe, it, expect, vi } from "vitest";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/setupTests";
+import { server } from "@test/_legacy/setupTests";
 import { sectionPostService } from "@entities/relations/sectionPost/service";
-import type { ListRequest, CreateRequest, DeleteRequest } from "@test/fixtures/relations";
+import type { ListRequest, CreateRequest, DeleteRequest } from "@test/_legacy/fixtures/relations";
 
 interface SectionPostIds {
     sectionId: string;
     postId: string;
 }
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/mocks/amplifyClient"));
+vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 describe("sectionPostService", () => {
     it("listByParent retourne les IDs post", async () => {

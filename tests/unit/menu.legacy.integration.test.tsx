@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import * as React from "react";
-import { handleNavClick } from "../src/utils/fnScrollUtils";
+import { handleNavClick } from "../../src/utils/fnScrollUtils";
 
 // Composant de menu simplifié pour tester les comportements legacy
 function LegacyMenu({ tabletMain, openButton }: { tabletMain: boolean; openButton: boolean }) {

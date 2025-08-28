@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { commentService } from "@entities/models/comment";
+import { todoService } from "@entities/models/todo";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/setupTests";
+import { server } from "@test/_legacy/setupTests";
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/mocks/amplifyClient"));
+vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 vi.mock("@entities/core/auth", () => ({ canAccess: () => true }));
 
@@ -32,55 +32,40 @@ beforeEach(() => {
     );
 });
 
-describe("commentService", () => {
+describe("todoService", () => {
     it("get utilise le fallback d'authentification", async () => {
         const fetchSpy = vi.spyOn(global, "fetch");
-        const res = await commentService.get({ id: "1" });
+        const res = await todoService.get({ id: "1" } as any);
         expect(fetchSpy).toHaveBeenCalledTimes(2);
-        const headers0 = (fetchSpy.mock.calls[0][1]?.headers as Record<string, string>)[
-            "x-auth-mode"
-        ];
-        const headers1 = (fetchSpy.mock.calls[1][1]?.headers as Record<string, string>)[
-            "x-auth-mode"
-        ];
-        expect(headers0).toBe("apiKey");
-        expect(headers1).toBe("userPool");
+        expect((fetchSpy.mock.calls[0][1] as any).headers["x-auth-mode"]).toBe("apiKey");
+        expect((fetchSpy.mock.calls[1][1] as any).headers["x-auth-mode"]).toBe("userPool");
         expect(res.data).toEqual({ id: 1 });
         fetchSpy.mockRestore();
     });
 
     it("create utilise userPool", async () => {
         const fetchSpy = vi.spyOn(global, "fetch");
-        const res = await commentService.create({ content: "", userNameId: "" });
+        const res = await todoService.create({} as any);
         expect(fetchSpy).toHaveBeenCalledTimes(1);
-        const headers = (fetchSpy.mock.calls[0][1]?.headers as Record<string, string>)[
-            "x-auth-mode"
-        ];
-        expect(headers).toBe("userPool");
+        expect((fetchSpy.mock.calls[0][1] as any).headers["x-auth-mode"]).toBe("userPool");
         expect(res.data).toEqual({ id: 1 });
         fetchSpy.mockRestore();
     });
 
     it("update utilise userPool", async () => {
         const fetchSpy = vi.spyOn(global, "fetch");
-        const res = await commentService.update({ id: "1", content: "" });
+        const res = await todoService.update({ id: "1" } as any);
         expect(fetchSpy).toHaveBeenCalledTimes(1);
-        const headers = (fetchSpy.mock.calls[0][1]?.headers as Record<string, string>)[
-            "x-auth-mode"
-        ];
-        expect(headers).toBe("userPool");
+        expect((fetchSpy.mock.calls[0][1] as any).headers["x-auth-mode"]).toBe("userPool");
         expect(res.data).toEqual({ id: 1 });
         fetchSpy.mockRestore();
     });
 
     it("delete utilise userPool", async () => {
         const fetchSpy = vi.spyOn(global, "fetch");
-        const res = await commentService.delete({ id: "1" });
+        const res = await todoService.delete({ id: "1" } as any);
         expect(fetchSpy).toHaveBeenCalledTimes(1);
-        const headers = (fetchSpy.mock.calls[0][1]?.headers as Record<string, string>)[
-            "x-auth-mode"
-        ];
-        expect(headers).toBe("userPool");
+        expect((fetchSpy.mock.calls[0][1] as any).headers["x-auth-mode"]).toBe("userPool");
         expect(res.data).toEqual({ id: 1 });
         fetchSpy.mockRestore();
     });

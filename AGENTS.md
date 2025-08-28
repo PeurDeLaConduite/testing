@@ -42,12 +42,12 @@ Utilisez les scripts définis dans le `package.json` :
 
 ## Tests
 
-- Tous les tests (unitaires, API, E2E) doivent être placés dans le dossier racine `./test`.
+- Tous les tests (unitaires, API, E2E) doivent être placés dans le dossier racine `./tests`.
 - Structure recommandée :
-    - `test/unit` : tests unitaires
-    - `test/api` : tests des API
-    - `test/e2e` : tests end-to-end
-    - `test/_legacy` : tests historiques à migrer ou supprimer
+    - `tests/unit` : tests unitaires
+    - `tests/api` : tests des API
+    - `tests/e2e` : tests end-to-end
+    - `tests/_legacy` : tests historiques à migrer ou supprimer
 - Actuellement, il n’y a pas de script de test défini.
 - Si vous ajoutez des tests, créez un script `yarn test` et assurez-vous qu’il passe avant chaque PR.
 
