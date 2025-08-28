@@ -35,6 +35,14 @@ const Nav: React.FC<NavProps> = ({
     const [openMenu, setOpenMenu] = useState<string | null>(null);
     const [lastClickedMenu, setLastClickedMenu] = useState<string | null>(null);
 
+    const dataReduced = openButton
+        ? "desktop"
+        : bigMenu
+          ? "desktopReduced"
+          : tabletMain
+            ? "tablet"
+            : "mobile";
+
     const handleMenuClick = (menuItemId: string) => {
         setOpenSubMenu(openSubMenu === menuItemId ? null : menuItemId);
     };
@@ -88,6 +96,7 @@ const Nav: React.FC<NavProps> = ({
             <nav
                 ref={navRef}
                 className={`main-nav`}
+                data-reduced={dataReduced}
                 onMouseEnter={() => (!tabletMain ? null : handleMainMouseOrFocus(""))}
                 onFocus={() => (!tabletMain ? null : handleMainMouseOrFocus(""))}
             >
@@ -110,9 +119,9 @@ const Nav: React.FC<NavProps> = ({
 
             {openButton ? null : <div className="head-space"></div>}
 
-            <nav>{renderMenu(menuItems.reservation)}</nav>
+            <nav data-reduced={dataReduced}>{renderMenu(menuItems.reservation)}</nav>
 
-            <nav className={`research`} role="menubar">
+            <nav className={`research`} role="menubar" data-reduced={dataReduced}>
                 {menuItems.search?.map((menuItem) => (
                     <NavInput
                         key={menuItem.id}
@@ -126,7 +135,9 @@ const Nav: React.FC<NavProps> = ({
                 ))}
             </nav>
 
-            <nav className={`connect`}>{renderMenu(menuItems.connection)}</nav>
+            <nav className={`connect`} data-reduced={dataReduced}>
+                {renderMenu(menuItems.connection)}
+            </nav>
         </div>
     );
 };

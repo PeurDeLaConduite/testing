@@ -11,10 +11,11 @@ function LegacyMenu({ tabletMain, openButton }: { tabletMain: boolean; openButto
         if (e.key === "Enter") toggle();
     };
 
-    const reduced = tabletMain || openButton;
+    const dataReduced = openButton ? "desktop" : tabletMain ? "tablet" : "mobile";
+    const showLabel = dataReduced === "desktop";
 
     return (
-        <nav data-reduced={reduced ? "reduced" : "expanded"}>
+        <nav data-reduced={dataReduced}>
             <ul>
                 <li>
                     <button
@@ -24,7 +25,7 @@ function LegacyMenu({ tabletMain, openButton }: { tabletMain: boolean; openButto
                         onClick={toggle}
                         onKeyDown={onKeyDown}
                     >
-                        {reduced ? null : <span>Parent</span>}
+                        {showLabel ? <span>Parent</span> : null}
                     </button>
                     {open && (
                         <ul data-testid="submenu">
@@ -40,12 +41,12 @@ function LegacyMenu({ tabletMain, openButton }: { tabletMain: boolean; openButto
 }
 
 describe("menu legacy", () => {
-    it("rend le menu étendu puis réduit selon tabletMain/openButton", () => {
+    it("rend le menu réduit puis étendu selon tabletMain/openButton", () => {
         const { rerender } = render(<LegacyMenu tabletMain={false} openButton={false} />);
-        expect(screen.getByText("Parent")).toBeVisible();
+        expect(screen.queryByText("Parent")).toBeNull();
 
         rerender(<LegacyMenu tabletMain={true} openButton={true} />);
-        expect(screen.queryByText("Parent")).toBeNull();
+        expect(screen.getByText("Parent")).toBeVisible();
         expect(screen.getByLabelText("Parent")).toBeVisible();
     });
 
