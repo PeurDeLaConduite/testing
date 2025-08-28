@@ -5,6 +5,7 @@ export interface SubItem {
     title: string;
     AnchorId: string;
     class: string;
+    scrollOffset?: number;
     content?: Content[]; // Changez ReactNode à Content[]
 }
 
