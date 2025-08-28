@@ -1,12 +1,18 @@
+import type { MenuItem, SubItem } from "@assets/data/interfaces/menu";
+
 /**
- * Résout l'offset de défilement à appliquer.
- * Si un offset est fourni, il est retourné directement.
- * Sinon, la hauteur de l'en-tête (classe `.header`) est utilisée si disponible.
+ * Détermine l'offset de défilement à appliquer.
+ * Priorité : MenuItem > SubItem > 0.
  */
-export function resolveScrollOffset(offset?: number): number {
-    if (typeof offset === "number") {
-        return offset;
+export function resolveScrollOffset(
+    menuItem?: Pick<MenuItem, "scrollOffset">,
+    subItem?: Pick<SubItem, "scrollOffset">
+): number {
+    if (typeof menuItem?.scrollOffset === "number") {
+        return menuItem.scrollOffset;
     }
-    const header = document.querySelector<HTMLElement>(".header");
-    return header ? header.offsetHeight : 0;
+    if (typeof subItem?.scrollOffset === "number") {
+        return subItem.scrollOffset;
+    }
+    return 0;
 }
