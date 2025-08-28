@@ -2,8 +2,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type FormMode = "create" | "edit";
-
-export interface UseModelFormOptions<F, E = Record<string, unknown>> {
+// export type FieldKey<T> = keyof T & string;
+export type FieldKey<T> = Extract<keyof T, string>;
+export interface UseModelFormOptions<F extends object, E = Record<string, unknown>> {
     initialForm: F;
     initialExtras?: E;
     mode?: FormMode;
@@ -22,6 +23,11 @@ export interface UseModelFormOptions<F, E = Record<string, unknown>> {
     autoLoad?: boolean;
     /** Auto-exécuter loadExtras() au mount */
     autoLoadExtras?: boolean;
+    /** Réinitialiser le formulaire si load() renvoie null */
+    resetOnNull?: boolean;
+
+    /** ⚙️ Comparateur optionnel pour calculer `dirty` (sinon deepEqual JSON) */
+    isEqual?: (a: F, b: F) => boolean;
 }
 
 export interface UseModelFormResult<F, E> {
@@ -35,17 +41,18 @@ export interface UseModelFormResult<F, E> {
     loadingExtras: boolean; // ← pour différencier si besoin
 
     error: unknown;
+    setError: React.Dispatch<React.SetStateAction<unknown>>;
     message: string | null;
 
-    handleChange: <K extends keyof F>(field: K, value: F[K]) => void;
-    patch: (partial: Partial<F>) => void;
+    setFieldValue: <K extends keyof F>(field: K, value: F[K]) => void;
+    patchForm: (partial: Partial<F>) => void;
 
     /** Helpers de mode */
     setCreate: (next?: F) => void;
     setEdit: (next?: F) => void;
 
     /** Enchaîne create/update (+ syncRelations) puis refresh/load */
-    submit: () => Promise<void>;
+    submit: () => Promise<boolean>;
     reset: () => void;
 
     setForm: React.Dispatch<React.SetStateAction<F>>;
@@ -77,7 +84,7 @@ function deepEqual(a: unknown, b: unknown) {
 }
 
 export default function useModelForm<
-    F extends Record<string, unknown>,
+    F extends object,
     E extends Record<string, unknown> = Record<string, unknown>,
 >(options: UseModelFormOptions<F, E>): UseModelFormResult<F, E> {
     const {
@@ -92,6 +99,8 @@ export default function useModelForm<
         loadExtras,
         autoLoad = true,
         autoLoadExtras = true,
+        resetOnNull = false,
+        isEqual, // ← 🔸 nouveau
     } = options;
 
     const initialRef = useRef(initialForm);
@@ -104,18 +113,45 @@ export default function useModelForm<
     const [error, setError] = useState<unknown>(null);
     const [message, setMessage] = useState<string | null>(null);
 
-    const dirty = useMemo(() => !deepEqual(form, initialRef.current), [form]);
+    /*//*  🔎 1. C’est quoi dirty ?
 
-    const handleChange = useCallback(<K extends keyof F>(field: K, value: F[K]) => {
+            dirty est un booléen qui dit si ton formulaire diffère de sa baseline (initialRef.current).
+
+            La baseline est mise à jour quand tu appelles adoptInitial(...)
+            (ex : après un load() réussi, ou après avoir validé une création/édition).
+
+            Calcul : dirty = !isEqual(form, initialRef.current)
+
+            Utilité :
+
+            Activer/Désactiver un bouton "Enregistrer" → disabled={!dirty}.
+
+            Alerter si l’utilisateur quitte la page sans sauvegarder.
+
+            Savoir si un reset est possible (dirty=true).
+
+            👉 En clair :
+            dirty = "le form actuel contient des changements non sauvegardés".
+
+    */
+    const dirty = useMemo(() => {
+        const equals = isEqual ?? deepEqual;
+        return !equals(form, initialRef.current);
+    }, [form, isEqual]);
+
+    const setFieldValue = useCallback(<K extends keyof F>(field: K, value: F[K]) => {
         setForm((f) => ({ ...f, [field]: value }));
+        setMessage("Le champ a été mis à jour.");
     }, []);
 
-    const patch = useCallback((partial: Partial<F>) => {
+    const patchForm = useCallback((partial: Partial<F>) => {
         setForm((prev) => ({ ...prev, ...partial }));
+        setMessage("Les données ont été mises à jour.");
     }, []);
 
     const reset = useCallback(() => {
         setForm(initialRef.current);
+        setMessage("Les données ont été réinitialisées.");
         setMode(initialMode);
         setError(null);
     }, [initialMode]);
@@ -135,7 +171,7 @@ export default function useModelForm<
             const next = await load();
             if (next) {
                 adoptInitial(next, "edit");
-            } else {
+            } else if (resetOnNull) {
                 adoptInitial(initialForm, "create");
             }
         } catch (e) {
@@ -143,7 +179,7 @@ export default function useModelForm<
         } finally {
             setLoading(false);
         }
-    }, [load, adoptInitial, initialForm]);
+    }, [load, adoptInitial, initialForm, resetOnNull]);
 
     const refreshExtras = useCallback(async () => {
         if (!loadExtras) return;
@@ -163,14 +199,12 @@ export default function useModelForm<
     // auto-load au mount
     useEffect(() => {
         if (autoLoad && load) void refresh();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [autoLoad, load]);
+    }, [autoLoad, load, refresh]);
 
     // auto-loadExtras au mount
     useEffect(() => {
         if (autoLoadExtras && loadExtras) void refreshExtras();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [autoLoadExtras, loadExtras]);
+    }, [autoLoadExtras, loadExtras, refreshExtras]);
 
     const setCreate = useCallback(
         (next?: F) => {
@@ -186,29 +220,28 @@ export default function useModelForm<
         [adoptInitial, form]
     );
 
-    const submit = useCallback(async () => {
+    // useModelForm
+    const submit = useCallback(async (): Promise<boolean> => {
         setSaving(true);
         setError(null);
         try {
             if (validate) {
                 const valid = await validate(form);
                 if (!valid) {
-                    setSaving(false);
-                    return;
+                    return false; // stop ici
                 }
             }
             const id = mode === "create" ? await create(form) : await update(form);
-            if (syncRelations) {
-                await syncRelations(id, form);
-            }
-            if (load) {
-                await refresh(); // vérité serveur
-            } else {
+            if (syncRelations) await syncRelations(id, form);
+            if (load) await refresh();
+            else {
                 setMode("edit");
                 initialRef.current = form;
             }
+            return true;
         } catch (e) {
             setError(e);
+            return false;
         } finally {
             setSaving(false);
         }
@@ -218,9 +251,9 @@ export default function useModelForm<
         <K extends keyof F>(field: K) => ({
             value: String(form[field] ?? ""),
             onChange: (e: { target: { value: string } }) =>
-                handleChange(field, e.target.value as F[K]),
+                setFieldValue(field, e.target.value as F[K]),
         }),
-        [form, handleChange]
+        [form, setFieldValue]
     );
 
     return {
@@ -232,9 +265,10 @@ export default function useModelForm<
         loading,
         loadingExtras,
         error,
+        setError,
         message,
-        handleChange,
-        patch,
+        setFieldValue,
+        patchForm,
         setCreate,
         setEdit,
         submit,

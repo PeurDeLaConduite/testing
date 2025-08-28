@@ -1,137 +1,128 @@
 // src/entities/models/userProfile/hooks.tsx
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useModelForm, type UseModelFormResult } from "@entities/core/hooks";
-import { label as fieldLabel } from "@/src/components/Profile/utilsUserProfile";
+import { useModelForm } from "@entities/core/hooks";
 import { userProfileService } from "@entities/models/userProfile/service";
-import { type UserProfileMinimalType } from "@entities/models/userProfile/types";
+import { initialUserProfileForm, toUserProfileForm } from "@entities/models/userProfile/form";
+import type { UserProfileFormType, UserProfileType } from "@entities/models/userProfile/types";
+import { label as fieldLabel } from "@/src/components/Profile/utilsUserProfile";
 
-export interface UserProfileFormResult
-    extends UseModelFormResult<UserProfileMinimalType, Record<string, unknown>> {
-    fetchProfile: () => Promise<UserProfileMinimalType | null>;
-    saveField: (field: keyof UserProfileMinimalType, value: string) => Promise<void>;
-    clearField: (field: keyof UserProfileMinimalType) => Promise<void>;
-    deleteProfile: () => Promise<void>;
-    fields: (keyof UserProfileMinimalType)[];
-    labels: (field: keyof UserProfileMinimalType) => string;
-    error: Error | null;
-}
+type Extras = Record<string, never>;
 
-export function useUserProfileForm(): UserProfileFormResult {
+export function useUserProfileForm(profile: UserProfileType | null) {
     const { user } = useAuthenticator();
-    const sub = user?.userId ?? user?.username;
-    const [error, setError] = useState<Error | null>(null);
+    const sub = user?.userId ?? user?.username ?? null;
 
-    const initialForm: UserProfileMinimalType = {
-        firstName: "",
-        familyName: "",
-        phoneNumber: "",
-        address: "",
-        postalCode: "",
-        city: "",
-        country: "",
-    };
+    const [profileId, setProfileId] = useState<string | null>(profile?.id ?? sub ?? null);
 
-    const create = async (form: UserProfileMinimalType) => {
-        if (!sub) throw new Error("id manquant");
-        try {
-            setError(null);
-            await userProfileService.create({ id: sub, ...form } as unknown as Parameters<
-                typeof userProfileService.create
-            >[0]);
-        } catch (e) {
-            setError(e as Error);
-        }
-        return sub ?? "";
-    };
-
-    const update = async (form: UserProfileMinimalType) => {
-        if (!sub) throw new Error("id manquant");
-        try {
-            setError(null);
-            await userProfileService.update({ id: sub, ...form });
-        } catch (e) {
-            setError(e as Error);
-        }
-        return sub ?? "";
-    };
-
-    const formManager = useModelForm<UserProfileMinimalType>({
-        initialForm,
-        mode: "create",
-        create,
-        update,
+    const modelForm = useModelForm<UserProfileFormType, Extras>({
+        initialForm: initialUserProfileForm,
+        initialExtras: {},
+        create: async (form) => {
+            const id = sub;
+            if (!id) throw new Error("ID utilisateur introuvable");
+            const { data } = await userProfileService.create({ id, ...form });
+            if (!data) throw new Error("Erreur lors de la création du profil");
+            setProfileId(data.id);
+            return data.id;
+        },
+        update: async (form) => {
+            const id = profileId ?? sub;
+            if (!id) throw new Error("ID utilisateur introuvable");
+            const { data } = await userProfileService.update({ id, ...form });
+            if (!data) throw new Error("Erreur lors de la mise à jour du profil");
+            setProfileId(data.id);
+            return data.id;
+        },
+        autoLoad: false,
+        autoLoadExtras: false,
     });
 
-    const { setForm, adoptInitial, reset } = formManager;
+    const { setForm, setMode, patchForm, reset } = modelForm;
 
-    const fetchProfile = async (): Promise<UserProfileMinimalType | null> => {
-        if (!sub) return null;
-        try {
-            const { data } = await userProfileService.get({ id: sub });
-            if (!data) return null;
-            const loaded: UserProfileMinimalType = {
-                firstName: data.firstName ?? "",
-                familyName: data.familyName ?? "",
-                phoneNumber: data.phoneNumber ?? "",
-                address: data.address ?? "",
-                postalCode: data.postalCode ?? "",
-                city: data.city ?? "",
-                country: data.country ?? "",
-            };
-            adoptInitial(loaded, "edit");
-            return loaded;
-        } catch (e) {
-            setError(e as Error);
-            return null;
-        }
-    };
+    // Hydrate depuis la prop ou l’utilisateur courant (sub)
+    useEffect(() => {
+        void (async () => {
+            if (profile) {
+                setForm(toUserProfileForm(profile));
+                setMode("edit");
+                setProfileId(profile.id);
+                return;
+            }
+            const id = sub ?? null;
+            if (!id) {
+                setForm(initialUserProfileForm);
+                setMode("create");
+                setProfileId(null);
+                return;
+            }
+            const { data } = await userProfileService.get({ id });
+            if (data) {
+                setForm(toUserProfileForm(data));
+                setMode("edit");
+                setProfileId(data.id);
+            } else {
+                setForm(initialUserProfileForm);
+                setMode("create");
+                setProfileId(id);
+            }
+        })();
+    }, [profile, sub, setForm, setMode]);
 
-    const saveField = async (field: keyof UserProfileMinimalType, value: string): Promise<void> => {
-        if (!sub) return;
-        try {
-            setError(null);
-            await userProfileService.update({ id: sub, [field]: value });
-            setForm((f) => ({ ...f, [field]: value }));
-        } catch (e) {
-            setError(e as Error);
-        }
-    };
+    // Cohérence avec les autres hooks : sélection/suppression par ID
+    const selectById = useCallback(
+        async (id: string) => {
+            const { data } = await userProfileService.get({ id });
+            if (data) {
+                setForm(toUserProfileForm(data));
+                setMode("edit");
+                setProfileId(data.id);
+            }
+            return data ?? null;
+        },
+        [setForm, setMode]
+    );
 
-    const clearField = async (field: keyof UserProfileMinimalType): Promise<void> => {
-        await saveField(field, "");
-    };
+    const deleteEntity = useCallback(
+        async (id: string) => {
+            if (!window.confirm("Supprimer ce profil ?")) return;
+            await userProfileService.delete({ id });
+            if (profileId === id) {
+                setProfileId(null);
+                reset();
+            }
+        },
+        [profileId, reset]
+    );
 
-    const deleteProfile = async (): Promise<void> => {
-        if (!sub) return;
-        try {
-            setError(null);
-            await userProfileService.delete({ id: sub });
-            adoptInitial(initialForm, "create");
-            reset();
-        } catch (e) {
-            setError(e as Error);
-        }
-    };
+    // Helpers champ par champ (même esprit que toggle/updateEntity ailleurs)
+    const updateEntity = useCallback(
+        async (field: keyof UserProfileFormType, value: string) => {
+            const id = profileId ?? sub;
+            if (!id) return;
+            await userProfileService.update({ id, [field]: value } as any);
+            patchForm({ [field]: value } as Partial<UserProfileFormType>);
+        },
+        [profileId, sub, patchForm]
+    );
 
-    const fields: (keyof UserProfileMinimalType)[] = [
-        "firstName",
-        "familyName",
-        "phoneNumber",
-        "address",
-        "postalCode",
-        "city",
-        "country",
-    ];
+    const clearField = useCallback(
+        async (field: keyof UserProfileFormType) => {
+            await updateEntity(field, "");
+        },
+        [updateEntity]
+    );
+
+    // Petit utilitaire conservé pour compat UI existante
+    const labels = useCallback((field: keyof UserProfileFormType) => fieldLabel(field as any), []);
 
     return {
-        ...formManager,
-        fetchProfile,
-        saveField,
+        ...modelForm,
+        profileId,
+        selectById,
+        deleteEntity,
+        updateEntity,
         clearField,
-        deleteProfile,
-        fields,
-        labels: fieldLabel,
-        error,
+        labels,
     };
 }

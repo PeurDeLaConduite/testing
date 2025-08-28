@@ -1,5 +1,5 @@
 // src/entities/models/userName/hooks.tsx
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useModelForm } from "@entities/core/hooks";
 import { userNameService } from "@entities/models/userName/service";
@@ -9,99 +9,155 @@ import {
     toUserNameCreate,
     toUserNameUpdate,
 } from "@entities/models/userName/form";
-import { type UserNameFormType } from "@entities/models/userName/types";
+import type { UserNameFormType, UserNameType } from "@entities/models/userName/types";
+import { emitUserNameUpdated } from "./bus";
 
-export function useUserNameForm() {
+type Extras = { userNames: UserNameType[] };
+
+export function useUserNameForm(userName: UserNameType | null) {
     const { user } = useAuthenticator();
-    const sub = user?.userId ?? user?.username;
+    const sub = user?.userId ?? user?.username ?? null;
 
-    const modelForm = useModelForm<UserNameFormType>({
+    const [userNameId, setUserNameId] = useState<string | null>(userName?.id ?? sub ?? null);
+
+    // Comparateur pour un dirty "propre"
+    const isEqual = useCallback(
+        (a: UserNameFormType, b: UserNameFormType) =>
+            (a.userName ?? "").trim() === (b.userName ?? "").trim(),
+        []
+    );
+
+    // Fournir load() pour que refresh() refonctionne partout
+    const load = useCallback(async () => {
+        const id = userNameId ?? sub;
+        if (!id) return null;
+        const { data } = await userNameService.get({ id });
+        return data ? toUserNameForm(data, [], []) : null;
+    }, [userNameId, sub]);
+
+    const modelForm = useModelForm<UserNameFormType, Extras>({
         initialForm: initialUserNameForm,
-        // 🔄 Charge la vérité serveur (ou null si inexistant)
-        load: async () => {
-            if (!sub) return null;
-            const { data } = await userNameService.get({ id: sub });
-            if (!data) return null;
-            return toUserNameForm(data, [], []);
-        },
+        initialExtras: { userNames: [] },
+        load, // ✅ permet refresh()
         create: async (form) => {
-            if (!sub) throw new Error("id manquant");
+            const id = sub;
+            if (!id) throw new Error("ID utilisateur introuvable");
             const { data, errors } = await userNameService.create({
-                id: sub,
+                id,
                 ...toUserNameCreate(form),
-            } as unknown as Parameters<typeof userNameService.create>[0]);
-            if (!data) throw new Error(errors?.[0]?.message ?? "Erreur création pseudo");
+            });
+            if (!data)
+                throw new Error(errors?.[0]?.message ?? "Erreur lors de la création du pseudo");
+            setUserNameId(data.id);
+            emitUserNameUpdated();
             return data.id;
         },
         update: async (form) => {
-            if (!sub) throw new Error("id manquant");
+            const id = userNameId ?? sub;
+            if (!id) throw new Error("ID utilisateur introuvable");
             const { data, errors } = await userNameService.update({
-                id: sub,
+                id,
                 ...toUserNameUpdate(form),
             });
-            if (!data) throw new Error(errors?.[0]?.message ?? "Erreur mise à jour pseudo");
+            if (!data)
+                throw new Error(errors?.[0]?.message ?? "Erreur lors de la mise à jour du pseudo");
+            setUserNameId(data.id);
+            emitUserNameUpdated();
             return data.id;
         },
+        autoLoad: true, // ✅ hydrate si id dispo
+        autoLoadExtras: false,
+        isEqual, // ✅ dirty stable
     });
 
-    const { adoptInitial, setMessage, setForm, refresh, submit } = modelForm;
+    const { setForm, setMode, setExtras, reset, patchForm, extras, refresh, adoptInitial } =
+        modelForm;
 
-    // Au montage (ou changement d'utilisateur), on essaie de charger l'état
+    // Liste (cohérence avec author/tag/section)
+    const fetchUserNames = useCallback(async () => {
+        const { data } = await userNameService.list();
+        setExtras((e) => ({ ...e, userNames: data ?? [] }));
+    }, [setExtras]);
+
     useEffect(() => {
-        if (!sub) return;
-        (async () => {
-            const form = await (async () => {
-                const { data } = await userNameService.get({ id: sub });
-                return data ? toUserNameForm(data, [], []) : null;
-            })();
-            if (form) adoptInitial(form, "edit");
-            else adoptInitial(initialUserNameForm, "create");
+        void fetchUserNames();
+    }, [fetchUserNames]);
+
+    // Hydrate depuis la prop ou l’utilisateur courant (sub)
+    useEffect(() => {
+        void (async () => {
+            if (userName) {
+                setUserNameId(userName.id);
+                adoptInitial(toUserNameForm(userName, [], []), "edit");
+                return;
+            }
+            if (!sub) {
+                setForm(initialUserNameForm);
+                setMode("create");
+                setUserNameId(null);
+                return;
+            }
+            // autoLoad + load() s'occuperont de l’hydratation
+            setUserNameId(sub);
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sub]);
+    }, [userName?.id, sub]);
 
-    // On wrap submit pour s'assurer du refresh après l'opération
-    const submitAndRefresh = useCallback(async () => {
-        await submit();
-        await refresh();
-    }, [submit, refresh]);
+    const selectById = useCallback(
+        (id: string) => {
+            const item = extras.userNames.find((u) => u.id === id) ?? null;
+            if (item) {
+                setUserNameId(item.id);
+                adoptInitial(toUserNameForm(item, [], []), "edit");
+            }
+            return item;
+        },
+        [extras.userNames, adoptInitial]
+    );
 
-    const saveField = async (field: keyof UserNameFormType, value: string): Promise<void> => {
-        if (!sub) return;
-        try {
-            setMessage(null);
-            const { errors } = await userNameService.update({ id: sub, [field]: value } as never);
-            if (errors?.length) throw new Error(errors[0].message);
-            // Optimiste + re-fetch pour la vérité serveur
-            setForm((f) => ({ ...f, [field]: value as never }));
+    const deleteEntity = useCallback(
+        async (id: string) => {
+            if (!window.confirm("Supprimer ce pseudo ?")) return;
+            await userNameService.delete({ id });
+            await fetchUserNames();
+            if (userNameId === id) {
+                setUserNameId(null);
+                adoptInitial(initialUserNameForm, "create");
+                reset();
+            }
+            await refresh(); // 🔄 maintenant effectif
+            emitUserNameUpdated();
+        },
+        [userNameId, reset, fetchUserNames, refresh, adoptInitial]
+    );
+
+    // Helpers “champ par champ”
+    const updateEntity = useCallback(
+        async (field: keyof UserNameFormType, value: string) => {
+            const id = userNameId ?? sub;
+            if (!id) return;
+            await userNameService.update({ id, [field]: value } as any);
+            patchForm({ [field]: value } as Partial<UserNameFormType>); // optimiste
             await refresh();
-        } catch (err) {
-            setMessage(err instanceof Error ? err.message : String(err));
-        }
-    };
+            emitUserNameUpdated();
+        },
+        [userNameId, sub, patchForm, refresh]
+    );
 
-    const clearField = async (field: keyof UserNameFormType): Promise<void> => {
-        await saveField(field, "");
-    };
-
-    const remove = async () => {
-        if (!sub) return;
-        try {
-            const { errors } = await userNameService.delete({ id: sub });
-            if (errors?.length) throw new Error(errors[0].message);
-            adoptInitial(initialUserNameForm, "create");
-            await refresh(); // par sécurité
-        } catch (err) {
-            setMessage(err instanceof Error ? err.message : String(err));
-        }
-    };
+    const clearField = useCallback(
+        async (field: keyof UserNameFormType) => {
+            await updateEntity(field, "");
+        },
+        [updateEntity]
+    );
 
     return {
         ...modelForm,
-        submit: submitAndRefresh, // ⬅️ expose la version qui refetch
-        refresh,
-        saveField,
+        userNameId,
+        fetchUserNames,
+        selectById,
+        deleteEntity,
+        updateEntity,
         clearField,
-        remove,
     };
 }

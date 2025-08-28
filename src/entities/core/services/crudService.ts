@@ -3,25 +3,46 @@ import { client, Schema } from "./amplifyClient";
 import { canAccess } from "../auth";
 import type { AuthRule } from "../types";
 
-// 🧠 Utiliser les signatures réelles du client Amplify
+// ── Clés & base model ───────────────────────────────────────────────────────────
 type ClientModels = typeof client.models;
-type ClientModelKey = keyof ClientModels;
 
-type BaseModel<K extends ClientModelKey> = Schema[K]["type"];
-// @ts-expect-error no explain
-type CreateArg<K extends ClientModelKey> = Parameters<ClientModels[K]["create"]>[0];
-// @ts-expect-error no explain
-type UpdateArg<K extends ClientModelKey> = Parameters<ClientModels[K]["update"]>[0];
-// @ts-expect-error no explain
-type GetArg<K extends ClientModelKey> = Parameters<ClientModels[K]["get"]>[0];
-// @ts-expect-error no explain
-type DeleteArg<K extends ClientModelKey> = Parameters<ClientModels[K]["delete"]>[0];
+// ⚠️ Ici Schema n'a pas "types", donc on utilise ses clés top-level
+type SchemaModelName = keyof Schema; // ex: "Post" | "Tag" | ...
+type ModelKey = Extract<keyof ClientModels, SchemaModelName>; // intersection stricte
 
+type BaseModel<K extends ModelKey> = Schema[K]["type"];
+
+// ── Extraction des args par opération (sans indexer par un M générique) ─────────
+type CreateArg<K extends ModelKey> = ClientModels[K] extends {
+    create: (arg: infer A, ...r: unknown[]) => unknown;
+}
+    ? A
+    : never;
+
+type UpdateArg<K extends ModelKey> = ClientModels[K] extends {
+    update: (arg: infer A, ...r: unknown[]) => unknown;
+}
+    ? A
+    : never;
+
+type GetArg<K extends ModelKey> = ClientModels[K] extends {
+    get: (arg: infer A, ...r: unknown[]) => unknown;
+}
+    ? A
+    : never;
+
+type DeleteArg<K extends ModelKey> = ClientModels[K] extends {
+    delete: (arg: infer A, ...r: unknown[]) => unknown;
+}
+    ? A
+    : never;
+
+// ── Options & façade CRUD ───────────────────────────────────────────────────────
 export type AuthMode = "apiKey" | "userPool" | "identityPool" | "iam" | "lambda";
 type CrudAuth = { read?: AuthMode | AuthMode[]; write?: AuthMode | AuthMode[] };
 type AmplifyOpOptions = { authMode?: AuthMode } & Record<string, unknown>;
 
-interface CrudModel<K extends ClientModelKey> {
+interface CrudModel<K extends ModelKey> {
     list: (opts?: AmplifyOpOptions) => Promise<{ data: BaseModel<K>[] }>;
     get: (args: GetArg<K>, opts?: AmplifyOpOptions) => Promise<{ data?: BaseModel<K> }>;
     create: (
@@ -38,7 +59,7 @@ interface CrudModel<K extends ClientModelKey> {
     ) => Promise<{ data: BaseModel<K>; errors?: { message: string }[] }>;
 }
 
-function getModelClient<K extends ClientModelKey>(key: K): CrudModel<K> {
+function getModelClient<K extends ModelKey>(key: K): CrudModel<K> {
     return client.models[key] as unknown as CrudModel<K>;
 }
 
@@ -61,10 +82,13 @@ async function tryModes<T>(
     throw lastErr;
 }
 
-export function crudService<K extends ClientModelKey>(
-    key: K,
-    opts?: { auth?: CrudAuth; rules?: AuthRule[] }
-) {
+export function crudService<
+    K extends ModelKey,
+    C = CreateArg<K>,
+    U = UpdateArg<K>,
+    G = GetArg<K>,
+    D = DeleteArg<K>,
+>(key: K, opts?: { auth?: CrudAuth; rules?: AuthRule[] }) {
     const model = getModelClient(key);
     const rules = opts?.rules ?? [{ allow: "public" }];
     const readModes = toArray(opts?.auth?.read);
@@ -81,10 +105,10 @@ export function crudService<K extends ClientModelKey>(
             return { data: data.filter((item) => canAccess(null, item, rules)) };
         },
 
-        async get(args: GetArg<K>) {
+        async get(args: G) {
             const res = await tryModes(readModes, (authMode) =>
                 model.get(
-                    args,
+                    args as GetArg<K>,
                     (authMode ? { authMode } : undefined) as AmplifyOpOptions | undefined
                 )
             );
@@ -92,28 +116,28 @@ export function crudService<K extends ClientModelKey>(
             return res;
         },
 
-        async create(data: CreateArg<K>) {
+        async create(data: C) {
             return tryModes(writeModes, (authMode) =>
                 model.create(
-                    data,
+                    data as CreateArg<K>,
                     (authMode ? { authMode } : undefined) as AmplifyOpOptions | undefined
                 )
             );
         },
 
-        async update(data: UpdateArg<K>) {
+        async update(data: U) {
             return tryModes(writeModes, (authMode) =>
                 model.update(
-                    data,
+                    data as UpdateArg<K>,
                     (authMode ? { authMode } : undefined) as AmplifyOpOptions | undefined
                 )
             );
         },
 
-        async delete(args: DeleteArg<K>) {
+        async delete(args: D) {
             return tryModes(writeModes, (authMode) =>
                 model.delete(
-                    args,
+                    args as DeleteArg<K>,
                     (authMode ? { authMode } : undefined) as AmplifyOpOptions | undefined
                 )
             );

@@ -1,5 +1,4 @@
-// src/entities/models/post/hooks.tsx
-import { useEffect } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useModelForm } from "@entities/core/hooks";
 import { postService } from "@entities/models/post/service";
 import { postTagService } from "@entities/relations/postTag/service";
@@ -11,68 +10,84 @@ import { initialPostForm, toPostForm } from "@entities/models/post/form";
 import { type PostFormType, type PostType } from "@entities/models/post/types";
 import { type AuthorType } from "@entities/models/author/types";
 import { type TagType } from "@entities/models/tag/types";
-import { type SectionTypes } from "@entities/models/section/types";
-import { syncManyToMany } from "@entities/core/utils/syncManyToMany";
+import { type SectionType } from "@entities/models/section/types";
+import { syncPostToTags } from "@entities/relations/postTag";
+import { syncPostToSections } from "@entities/relations/sectionPost";
+import { toggleId } from "@entities/core/utils";
 
 interface Extras extends Record<string, unknown> {
     authors: AuthorType[];
     tags: TagType[];
-    sections: SectionTypes[];
+    sections: SectionType[];
+    posts: PostType[];
 }
 
 export function usePostForm(post: PostType | null) {
+    const [postId, setPostId] = useState<string | null>(post?.id ?? null);
+
     const modelForm = useModelForm<PostFormType, Extras>({
         initialForm: initialPostForm,
-        initialExtras: { authors: [], tags: [], sections: [] },
+        initialExtras: { authors: [], tags: [], sections: [], posts: [] },
+
+        validate: (form) => {
+            if (!form.authorId) {
+                alert("Veuillez sélectionner un auteur.");
+                return false;
+            }
+            return true;
+        },
+
         create: async (form) => {
             const { tagIds, sectionIds, ...postInput } = form;
-            void tagIds;
-            void sectionIds;
             const { data } = await postService.create({
                 ...postInput,
                 seo: form.seo,
             });
             if (!data) throw new Error("Erreur lors de la création de l'article");
+            setPostId(data.id);
+            setMessage("Nouvel article créé avec succès.");
             return data.id;
         },
+
         update: async (form) => {
-            if (!post?.id) {
+            if (!postId) {
                 throw new Error("ID du post manquant pour la mise à jour");
             }
             const { tagIds, sectionIds, ...postInput } = form;
-            void tagIds;
-            void sectionIds;
             const { data } = await postService.update({
-                id: post.id,
+                id: postId,
                 ...postInput,
                 seo: form.seo,
             });
             if (!data) throw new Error("Erreur lors de la mise à jour de l'article");
+            setPostId(data.id);
+            setMessage("Article mis à jour avec succès.");
             return data.id;
         },
+
         syncRelations: async (id, form) => {
-            const [currentTagIds, currentSectionIds] = await Promise.all([
-                postTagService.listByParent(id),
-                sectionPostService.listByChild(id),
-            ]);
             await Promise.all([
-                syncManyToMany(
-                    currentTagIds,
-                    form.tagIds,
-                    (tagId) => postTagService.create(id, tagId),
-                    (tagId) => postTagService.delete(id, tagId)
-                ),
-                syncManyToMany(
-                    currentSectionIds,
-                    form.sectionIds,
-                    (sectionId) => sectionPostService.create(sectionId, id),
-                    (sectionId) => sectionPostService.delete(sectionId, id)
-                ),
+                syncPostToTags(id, form.tagIds),
+                syncPostToSections(id, form.sectionIds),
             ]);
         },
     });
 
-    const { setForm, setExtras, setMode } = modelForm;
+    const {
+        setForm,
+        setExtras,
+        setMode,
+        extras,
+        refresh,
+        setMessage,
+        setError,
+        exitEditMode: baseExitEditMode,
+    } = modelForm;
+
+    const listPosts = useCallback(async () => {
+        const { data } = await postService.list();
+        setExtras((e) => ({ ...e, posts: data ?? [] }));
+    }, [setExtras]);
 
     useEffect(() => {
         void (async () => {
@@ -81,13 +96,15 @@ export function usePostForm(post: PostType | null) {
                 tagService.list(),
                 sectionService.list(),
             ]);
-            setExtras({
+            setExtras((e) => ({
+                ...e,
                 authors: a.data ?? [],
                 tags: t.data ?? [],
                 sections: s.data ?? [],
-            });
+            }));
         })();
-    }, [setExtras]);
+        void listPosts();
+    }, [setExtras, listPosts]);
 
     useEffect(() => {
         void (async () => {
@@ -98,9 +115,11 @@ export function usePostForm(post: PostType | null) {
                 ]);
                 setForm(toPostForm(post, tagIds, sectionIds));
                 setMode("edit");
+                setPostId(post.id);
             } else {
                 setForm(initialPostForm);
                 setMode("create");
+                setPostId(null);
             }
         })();
     }, [post, setForm, setMode]);
@@ -108,20 +127,73 @@ export function usePostForm(post: PostType | null) {
     function toggleTag(tagId: string) {
         setForm((prev) => ({
             ...prev,
-            tagIds: prev.tagIds.includes(tagId)
-                ? prev.tagIds.filter((id) => id !== tagId)
-                : [...prev.tagIds, tagId],
+            tagIds: toggleId(prev.tagIds ?? [], tagId),
         }));
     }
 
     function toggleSection(sectionId: string) {
         setForm((prev) => ({
             ...prev,
-            sectionIds: prev.sectionIds.includes(sectionId)
-                ? prev.sectionIds.filter((id) => id !== sectionId)
-                : [...prev.sectionIds, sectionId],
+            sectionIds: toggleId(prev.sectionIds ?? [], sectionId),
         }));
     }
 
-    return { ...modelForm, toggleTag, toggleSection };
+    const selectById = useCallback(
+        (id: string) => {
+            const postItem = extras.posts.find((p) => p.id === id) ?? null;
+            if (postItem) {
+                setPostId(id);
+                void (async () => {
+                    const [tagIds, sectionIds] = await Promise.all([
+                        postTagService.listByParent(id),
+                        sectionPostService.listByChild(id),
+                    ]);
+                    setForm(toPostForm(postItem, tagIds, sectionIds));
+                    setMode("edit");
+                })();
+            }
+            return postItem;
+        },
+        [extras.posts, setForm, setMode]
+    );
+
+    const deleteEntity = useCallback(
+        async (id: string) => {
+            if (!window.confirm("Supprimer cet article ?")) return;
+
+            try {
+                setMessage("Suppression des données relationnelles...");
+                await postService.deleteCascade({ id });
+                await listPosts();
+
+                if (postId === id) {
+                    setPostId(null);
+                }
+
+                setMessage("Article supprimé avec succès.");
+                refresh();
+            } catch (e: unknown) {
+                setError(e);
+                setMessage("Erreur lors de la suppression de l’article.");
+            }
+        },
+        [listPosts, postId, refresh, setError, setMessage]
+    );
+
+    /** Sortie d’édition spécifique au Post : nettoie postId et repasse en create */
+    const exitEditMode = useCallback(() => {
+        setPostId(null);
+        baseExitEditMode(initialPostForm);
+    }, [baseExitEditMode]);
+
+    return {
+        ...modelForm,
+        postId,
+        listPosts,
+        selectById,
+        deleteEntity,
+        toggleTag,
+        toggleSection,
+        exitEditMode,
+    };
 }
