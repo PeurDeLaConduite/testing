@@ -9,7 +9,9 @@
     border-radius: 100px;
     background: $white;
     @include menuShadow(rgba(0, 0, 0, 0.5));
-    transition: all 0.45s ease, color 0.3s ease;
+    transition:
+        all 0.45s ease,
+        color 0.3s ease;
 
     &:hover,
     &:focus {
@@ -111,7 +113,9 @@ nav {
         color: $white;
         text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.35);
         filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.25));
-        transition: fill 0.3s ease, color 0.3s ease;
+        transition:
+            fill 0.3s ease,
+            color 0.3s ease;
     }
     &:hover,
     &:focus {
@@ -146,7 +150,9 @@ nav {
     width: auto;
     .nav-link,
     .icon-color {
-        transition: fill 0.3s ease, color 0.3s ease;
+        transition:
+            fill 0.3s ease,
+            color 0.3s ease;
     }
     &:hover,
     &:focus {
@@ -200,7 +206,9 @@ nav {
 .connection,
 .head-link,
 .nav-link {
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
 }
 
 nav .group_link-submenu {
@@ -258,6 +266,11 @@ input.show-link {
 .nav-link {
     @include navLink;
     margin-left: 10px;
+}
+nav[data-reduced="mobile"] .nav-link,
+nav[data-reduced="tablet"] .nav-link,
+nav[data-reduced="desktopReduced"] .nav-link {
+    display: none;
 }
 nav .group_link-submenu:last-of-type .nav-link:last-of-type {
     margin-right: 0.25rem;
@@ -486,19 +499,13 @@ nav .nav-padding .submenu:not(.open) {
     }
     @keyframes eyeAnimation {
         0% {
-            d: path(
-                "M64.2 47.8c.2 4.4 6.8 3.5 9.3 3.2 4.9-.9 4.7-8.4-.2-8s-9.1 1.4-9.1 4.8z"
-            );
+            d: path("M64.2 47.8c.2 4.4 6.8 3.5 9.3 3.2 4.9-.9 4.7-8.4-.2-8s-9.1 1.4-9.1 4.8z");
         }
         50% {
-            d: path(
-                "M64.2 47.8c.2 1.4 6.8 1.5 9.3 1.2 4.9-.3 4.7-1.4-.2-1s-9.1 1.4-9.1 0.8z"
-            );
+            d: path("M64.2 47.8c.2 1.4 6.8 1.5 9.3 1.2 4.9-.3 4.7-1.4-.2-1s-9.1 1.4-9.1 0.8z");
         }
         100% {
-            d: path(
-                "M64.2 47.8c.2 4.4 6.8 3.5 9.3 3.2 4.9-.9 4.7-8.4-.2-8s-9.1 1.4-9.1 4.8z"
-            );
+            d: path("M64.2 47.8c.2 4.4 6.8 3.5 9.3 3.2 4.9-.9 4.7-8.4-.2-8s-9.1 1.4-9.1 4.8z");
         }
     }
 }
