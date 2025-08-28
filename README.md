@@ -51,6 +51,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Tests
 
+La suite de tests est organisée par type :
+
+- `tests/unit` : tests unitaires
+- `tests/api` : tests des API
+- `tests/e2e` : tests end‑to‑end (Playwright)
+- `tests/_legacy` : anciens tests conservés à titre de référence
+
 ### Installation
 
 ```bash
@@ -75,5 +82,5 @@ yarn install
 
 ### Mock d'AWS Amplify
 
-Le mock d'AWS Amplify et la configuration partagée se trouvent dans `tests/_legacy/setupTests.ts`.
+Le mock d'AWS Amplify et la configuration partagée se trouvent dans `tests/setupTests.ts`.
 Ce fichier configure Amplify et le serveur MSW avant chaque test.
