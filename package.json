@@ -9,7 +9,8 @@
         "lint": "next lint",
         "generate:sitemap": "node scripts/generate-sitemap.js",
         "test": "vitest run",
-        "test:watch": "vitest --watch"
+        "vitest:watch": "vitest --watch",
+        "vitest": "vitest"
     },
     "dependencies": {
         "@aws-amplify/auth": "^6.13.0",
