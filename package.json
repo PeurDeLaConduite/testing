@@ -8,6 +8,7 @@
         "start": "next start",
         "lint": "next lint",
         "generate:sitemap": "node scripts/generate-sitemap.js",
+        "type-check": "tsc --noEmit",
         "test:unit": "vitest",
         "test:e2e": "playwright test",
         "test": "vitest run",
