@@ -5,6 +5,9 @@ import { MenuItem } from "@assets/data/menuItems";
 import SubMenu from "./SubMenu";
 import RenderLink from "./RenderLink";
 import { getShowGroupClass } from "../utils/menuUtils";
+import { toAction } from "../../../menu/actions/adapter";
+import { dispatch } from "../../../menu/actions/dispatch";
+import { externalActions } from "../../../menu/actions/externalActions";
 interface NavLinkShowProps {
     menuItem: MenuItem;
     onNavigationClick: (path: string, scrollOffset?: number) => void;
@@ -32,6 +35,7 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
 }) => {
     const triggerRef = useRef<HTMLDivElement>(null);
     const mainNav = !openMainButton && showNavLinks && !openButton;
+    const useActions = process.env.NEXT_PUBLIC_MENU_ACTIONS_V2 === "true";
     const renderSubMenu = () => {
         return menuItem.subItems && menuItem.subItems.length > 0 ? (
             <SubMenu
@@ -44,7 +48,15 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
     };
     const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.preventDefault();
-        onMenuToggle(menuItem.id, event);
+        if (useActions) {
+            const action = toAction(menuItem, externalActions);
+            dispatch(action, externalActions);
+            if (action.kind === "toggle") {
+                onMenuToggle(menuItem.id, event);
+            }
+        } else {
+            onMenuToggle(menuItem.id, event);
+        }
     };
 
     return openMainButton || mainNav || (openButton && showNavLinks) ? (

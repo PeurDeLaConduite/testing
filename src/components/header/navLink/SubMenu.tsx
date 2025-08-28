@@ -3,6 +3,9 @@
 import React from "react";
 import { MenuItem } from "@assets/data/menuItems";
 import { useNavigation } from "../../../utils/context/NavigationContext";
+import { toAction } from "../../../menu/actions/adapter";
+import { dispatch } from "../../../menu/actions/dispatch";
+import { externalActions } from "../../../menu/actions/externalActions";
 
 interface SubMenuProps {
     menuItem: MenuItem;
@@ -13,6 +16,7 @@ interface SubMenuProps {
 
 const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, triggerRef }) => {
     const { setOpenSubMenu } = useNavigation();
+    const useActions = process.env.NEXT_PUBLIC_MENU_ACTIONS_V2 === "true";
 
     const closeSubMenu = () => {
         setOpenSubMenu(null);
@@ -21,27 +25,42 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
         }
     };
 
-    const handleSubItemClick = (
-        path: string,
+    const handleAction = (
+        subItem: MenuItem,
+        fullPath: string,
         subItemScrollOffset: number | undefined,
         e: React.MouseEvent | React.KeyboardEvent
     ) => {
-        e.preventDefault(); // Empêche la navigation par défaut
-        const offset = menuItem.scrollOffset ?? subItemScrollOffset;
-        onSubItemClick(path, offset); // Appelle la fonction pour gérer le clic
+        e.preventDefault();
+        if (useActions) {
+            const actionItem = { ...subItem, path: menuItem.path } as MenuItem;
+            const action = toAction(actionItem, externalActions);
+            dispatch(action, externalActions);
+        } else {
+            const offset = menuItem.scrollOffset ?? subItemScrollOffset;
+            onSubItemClick(fullPath, offset);
+        }
         closeSubMenu();
     };
 
     const handleKeyDown = (
-        path: string | null,
+        subItem: MenuItem,
+        fullPath: string,
         subItemScrollOffset: number | undefined,
         e: React.KeyboardEvent<HTMLElement>
     ) => {
-        if (["Enter", " "].includes(e.key) && path) {
-            handleSubItemClick(path, subItemScrollOffset, e);
+        if (["Enter", " "].includes(e.key)) {
+            handleAction(subItem, fullPath, subItemScrollOffset, e);
         } else if (e.key === "Escape") {
-            e.preventDefault(); // Empêcher le comportement par défaut
-            closeSubMenu(); // Fermer le menu si Escape est pressé
+            e.preventDefault();
+            closeSubMenu();
+        }
+    };
+
+    const handleGroupKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+        if (e.key === "Escape") {
+            e.preventDefault();
+            closeSubMenu();
         }
     };
 
@@ -53,19 +72,32 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                 className="submenu_group"
                 role="menu"
                 id={`sub-${menuItem.id}`}
-                onKeyDown={(e) => handleKeyDown(null, undefined, e)}
+                onKeyDown={handleGroupKeyDown}
             >
                 {menuItem.subItems.map((subItem) => {
                     const fullPath = `${menuItem.path ?? ""}${subItem.AnchorId ?? ""}`;
+                    const action = useActions
+                        ? toAction({ ...subItem, path: menuItem.path } as MenuItem, externalActions)
+                        : null;
+                    const href = useActions && action?.kind === "href" ? action.href : fullPath;
                     return (
                         <a
                             key={subItem.id}
                             aria-label={`Section ${subItem.title}`}
-                            href={fullPath}
+                            href={href}
                             className={`nav-link ${subItem.class}`}
                             tabIndex={0}
-                            onClick={(e) => handleSubItemClick(fullPath, subItem.scrollOffset, e)}
-                            onKeyDown={(e) => handleKeyDown(fullPath, subItem.scrollOffset, e)}
+                            onClick={(e) =>
+                                handleAction(subItem as MenuItem, fullPath, subItem.scrollOffset, e)
+                            }
+                            onKeyDown={(e) =>
+                                handleKeyDown(
+                                    subItem as MenuItem,
+                                    fullPath,
+                                    subItem.scrollOffset,
+                                    e
+                                )
+                            }
                         >
                             {subItem.title}
                         </a>
