@@ -8,33 +8,42 @@ interface SubMenuProps {
     menuItem: MenuItem;
     isOpen: boolean;
     onSubItemClick: (path: string) => void;
+    triggerRef: React.RefObject<HTMLElement>;
 }
 
-const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick }) => {
+const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, triggerRef }) => {
     const { setOpenSubMenu } = useNavigation();
+
+    const closeSubMenu = () => {
+        setOpenSubMenu(null);
+        triggerRef.current?.focus();
+    };
+
     const handleSubItemClick = (path: string, e: React.MouseEvent | React.KeyboardEvent) => {
         e.preventDefault(); // Empêche la navigation par défaut
         onSubItemClick(path); // Appelle la fonction pour gérer le clic
-        setOpenSubMenu(null);
+        closeSubMenu();
     };
 
-    const handleKeyDown = (path: string, e: React.KeyboardEvent<HTMLElement>) => {
-        if (["Enter", " "].includes(e.key)) {
-            e.preventDefault(); // Empêche l'action par défaut de la touche
-            onSubItemClick(path); // Ouvre ou effectue une action pour le sous-menu
+    const handleKeyDown = (path: string | null, e: React.KeyboardEvent<HTMLElement>) => {
+        if (["Enter", " "].includes(e.key) && path) {
+            handleSubItemClick(path, e);
+        } else if (e.key === "Escape") {
+            e.preventDefault(); // Empêcher le comportement par défaut
+            closeSubMenu(); // Fermer le menu si Escape est pressé
         }
-        // else if (e.key === "Escape") {
-        //     e.preventDefault(); // Empêcher le comportement par défaut
-        //     setOpenSubMenu(null); // Fermer le menu si Escape est pressé
-        // }
     };
 
     if (!menuItem.subItems || menuItem.subItems.length === 0) return null;
 
     return (
-        // isOpen && (
         <div className={`submenu ${isOpen ? "open" : ""}`}>
-            <div className="submenu_group" role="menu" id={`sub-${menuItem.id}`}>
+            <div
+                className="submenu_group"
+                role="menu"
+                id={`sub-${menuItem.id}`}
+                onKeyDown={(e) => handleKeyDown(null, e)}
+            >
                 {menuItem.subItems.map((subItem) => {
                     const fullPath = `${menuItem.path}${subItem.AnchorId}`;
                     return (
@@ -53,7 +62,6 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick }) =
                 })}
             </div>
         </div>
-        // )
     );
 };
 
