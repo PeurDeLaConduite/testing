@@ -14,7 +14,7 @@ import { emitUserNameUpdated } from "./bus";
 
 type Extras = { userNames: UserNameType[] };
 
-export function useUserNameForm(userName: UserNameType | null) {
+export function useUserNameForm(userName: UserNameType | null = null) {
     const { user } = useAuthenticator();
     const sub = user?.userId ?? user?.username ?? null;
 
