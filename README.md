@@ -51,11 +51,22 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Tests
 
-Le projet utilise [Vitest](https://vitest.dev) et [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) pour les tests unitaires.
-Un script `yarn test` a été ajouté afin d’exécuter l’ensemble de la suite de tests :
+### Installation
 
 ```bash
-yarn test
+yarn install
 ```
 
-La commande ci-dessus lance tous les tests.
+### Exécution
+
+- `yarn test` : exécute l’ensemble des tests.
+- `yarn test:unit` : lance uniquement les tests unitaires.
+- `yarn test:api` : exécute les tests d’API.
+- `yarn test:e2e` : lance les tests end-to-end.
+
+### Mocks Amplify
+
+Pour éviter les appels réseau lors des tests, vous pouvez simuler les services AWS Amplify :
+
+1. Créez un dossier `__mocks__` et un fichier `aws-amplify.ts` exportant des versions factices des modules utilisés (`Auth`, `API`, etc.).
+2. Dans vos fichiers de test, appelez `vi.mock('aws-amplify')` pour activer ces mocks.
