@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/_legacy/setupTests";
+import { server } from "tests/setupTests.ts";
 import { sectionPostService } from "@entities/relations/sectionPost/service";
 import type { ListRequest, CreateRequest, DeleteRequest } from "@test/_legacy/fixtures/relations";
 

@@ -75,5 +75,5 @@ yarn install
 
 ### Mock d'AWS Amplify
 
-Le mock d'AWS Amplify et la configuration partagée se trouvent dans `tests/_legacy/setupTests.ts`.
+Le mock d'AWS Amplify et la configuration partagée se trouvent dans `tests/setupTests.ts`.
 Ce fichier configure Amplify et le serveur MSW avant chaque test.

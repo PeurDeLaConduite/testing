@@ -18,12 +18,12 @@ export default defineConfig({
             "@entities": path.resolve(__dirname, "src/entities"),
             "@public": path.resolve(__dirname, "public"),
             "@test": path.resolve(__dirname, "tests"),
+            tests: path.resolve(__dirname, "tests"),
         },
     },
     test: {
         environment: "jsdom",
-        setupFiles: ["./tests/_legacy/setupTests.ts"],
+        setupFiles: ["./tests/setupTests.ts"],
         exclude: ["**/node_modules/**", "tests/e2e/**"],
     },
 });
-

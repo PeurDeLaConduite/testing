@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { crudService } from "@entities/core/services";
 import { http, HttpResponse } from "msw";
-import { server } from "@test/_legacy/setupTests";
+import { server } from "tests/setupTests.ts";
 
 vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
