@@ -600,6 +600,65 @@ Scénario: Ancre inconnue
 * **Offsets par ID** : inchangés (tu gardes ta logique).
 * **Robustesse** : RAF, replaceState, warn si ID inconnu, hash handler global en option.
 
-Si tu veux, je te génère maintenant la **version Gherkin complète** + **checklist de tests Playwright** basée sur ces scénarios.
 
+# ❓ Questions ouvertes — Menu
+
+Document temporaire consignant les zones d'ombre sur le fonctionnement du menu.
+Mettre à jour au fil des clarifications.
+
+## États du menu
+
+* [x] **Quelles sont les valeurs exactes des états possibles (`closed`, `opening`, `open`, etc.) ?**
+  `openSubMenu: string | null`, `showNavLinks: boolean`, `currentRoute: string`, `openMainButton: boolean`, `openButton: boolean`, `bigMenu: boolean`, `tabletMain: boolean`, `openMenu: string | null`.
+
+* [x] **Comment ces états sont-ils stockés ou exposés (booléen, énumération, machine à états...) ?**
+  Booléens et chaînes via `useState`, exposés soit par le **NavigationContext** (route, sous-menu, visibilités), soit comme **états locaux** dans `Header` / `Nav`.
+
+### Transitions (résumé)
+
+* Clic sur un item → `setOpenSubMenu(openSubMenu === id ? null : id)`.
+* Clic/survol extérieur → fermeture via logique `useMenuBehavior` (ou équivalent).
+* Clic sur un sous-lien → `setOpenSubMenu(null)`.
+* Toggle labels → `setShowNavLinks(true|false)`.
+* Redimensionnement → ajuste `tabletMain`, `openMainButton`, `openButton`, `bigMenu`.
+* Survol/hors-survol principal → `handleMainMouseOrFocus` modifie `openMainButton`.
+
+### Props / sélecteurs exposés
+
+* `showNavLinks` propagé à `NavLinkShow` et `NavInput`.
+* `openMainButton` / `openButton` pilotent les rendus conditionnels dans `NavLinkShow`.
+* Calcul local `shouldShowNavLinks(menuId)` pour l’affichage par entrée.
+
+---
+
+## Source de l’offset
+
+* [x] **Quelle est l'origine de l'offset appliqué au scroll (`ref` du header, variable CSS `--header-h`, calcul dynamique...) ?**
+  **Paramètre `offset`** transmis à `scrollToId` (par défaut **`0`**). Pas de variable CSS dédiée détectée.
+
+* [x] **L'offset est-il unifié entre desktop et mobile ?**
+  **Oui (dans l’état actuel)** : aucune branche spécifique, l’offset reste **0** quel que soit l’appareil.
+
+### Calcul & application
+
+* Calcul : `const top = el.getBoundingClientRect().top + window.scrollY - offset`.
+* Application : navigation par hash → `scrollToId(targetId)` ; `useHashScroll(offset)` délègue à `scrollToId`.
+
+### Spécificités ancres / navigation
+
+* `handleNavClick` gère `path#hash` et déclenche `handleScrollClick` si on reste sur la même page.
+* Les `menuItems` utilisent `AnchorId: "#top"` pour forcer un scroll depuis le haut.
+
+---
+
+## Comportements non confirmés
+
+* [x] **Interaction de l'offset avec la navigation par hash.**
+  **Confirmé** : si `useHashScroll(offset)` est actif, l’offset est pris en compte (soustrait lors du scroll). Sans ce hook, le comportement d’ancre natif ne compense **pas** l’offset.
+
+* [x] **Défilement lors de l'ouverture simultanée de sous-menus.**
+  **Non concerné** : l’ouverture/fermeture des sous-menus **ne déclenche pas** de scroll programmatique (décorrélé du système de scroll).
+
+* [x] **Priorité entre plusieurs sources d'offset lorsqu'elles sont définies.**
+  **Sans objet** : une **seule source** d’offset (paramètre de `scrollToId`). Aucune surcharge CSS (`scroll-margin-top`, `--header-h`) détectée à ce stade. Si d’autres sources sont ajoutées, définir un ordre de priorité (ex. `param` > CSS var > fallback 0).
 
