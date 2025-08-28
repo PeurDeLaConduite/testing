@@ -55,6 +55,7 @@ La suite de tests est organisée par type :
 
 - `tests/unit` : tests unitaires
 - `tests/api` : tests des API
+- `tests/integration` : tests d’intégration
 - `tests/e2e` : tests end‑to‑end (Playwright)
 - `tests/_legacy` : anciens tests conservés à titre de référence
 
@@ -66,9 +67,10 @@ yarn install
 
 ### Exécution
 
-- `yarn test` – exécute successivement `yarn test:unit`, `yarn test:api` puis `yarn test:e2e`.
+- `yarn test` – exécute successivement `yarn test:unit`, `yarn test:api`, `yarn test:integration` puis `yarn test:e2e`.
 - `yarn test:unit` – exécute les tests unitaires (`tests/unit`).
 - `yarn test:api` – exécute les tests d'API (`tests/api`).
+- `yarn test:integration` – exécute les tests d’intégration (`tests/integration`).
 - `yarn test:e2e` – exécute les tests end-to-end avec Playwright (`tests/e2e`).
 
 ### Ajouter un test
@@ -76,6 +78,7 @@ yarn install
 1. Créer le fichier dans le dossier approprié :
     - `tests/unit` pour les tests unitaires,
     - `tests/api` pour les tests d'API,
+    - `tests/integration` pour les tests d’intégration,
     - `tests/e2e` pour les tests end-to-end.
 2. Nommer les fichiers selon la convention `*.test.ts`.
 3. Les anciens tests sont sauvegardés dans `tests/_legacy`.
