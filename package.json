@@ -10,8 +10,9 @@
         "generate:sitemap": "node scripts/generate-sitemap.js",
         "test:unit": "vitest run --coverage",
         "test:e2e": "playwright test",
-        "test": "npm run test:unit && npm run test:e2e",
-        "test:watch": "vitest"
+        "test": "npm run test:unit && npm run test:api && npm run test:e2e",
+        "test:watch": "vitest",
+        "test:api": "vitest run tests/api --coverage"
     },
     "dependencies": {
         "@aws-amplify/auth": "^6.13.0",
