@@ -1,6 +1,4 @@
-⚠️ **Note** — Tableau fourni à titre d’exemple. Complétez-le selon votre `menuItems.ts` réel.
-
-# 🗺️ Mapping des actions (MenuItem → MenuAction)
+# 🗺️ Mapping définitif des actions (MenuItem → MenuAction)
 
 | subItems | handler externe | path | AnchorId | Action attendue                  | Remarques |
 |---------:|----------------:|-----:|---------:|----------------------------------|----------|
