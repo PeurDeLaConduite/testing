@@ -12,7 +12,7 @@ interface NavProps {
         search?: MenuItem[];
         connection?: MenuItem[];
     };
-    onNavigationClick: (path: string) => void;
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
     openButton: boolean;
     openMainButton: boolean;
     tabletMain: boolean;

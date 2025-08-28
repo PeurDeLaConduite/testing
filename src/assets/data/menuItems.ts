@@ -46,6 +46,7 @@ export const menuItems: MenuLinks = {
             path: "/services",
             AnchorId: "#top",
             svg: "Services",
+            scrollOffset: 102,
             subItems: [
                 {
                     id: "menu-without-license",
@@ -114,24 +115,22 @@ export const menuItems: MenuLinks = {
             path: "/connection",
             AnchorId: "#top",
             svg: "Connection",
+            subItems: [
+                {
+                    id: "menu-without-license",
+                    title: "Sans Permis",
+                    AnchorId: "#sans-permis",
+                    class: "",
+                },
+                {
+                    id: "menu-with-license",
+                    title: "Avec Permis",
+                    AnchorId: "#avec-permis",
+                    class: "",
+                },
+            ],
         },
     ],
 };
 
 export type { MenuItem } from "./interfaces/menu";
-
-/*
-src/
-├── interfaces/
-│   ├── menu.ts         # Définition des interfaces pour le menu
-│   ├── content.ts      # Définition des interfaces pour les contenus
-├── data/
-│   ├── menuItems.ts    # Données liées au menu
-│   ├── sections.ts     # Liste des sections
-│   ├── content/
-│       ├── slider.ts   # Contenu pour la section slider
-│       ├── about.ts    # Contenu pour la section about
-│       ├── index.ts    # Index pour associer les sections et leurs contenus
-├── utils/
-│   ├── attachContent.ts # Fonction utilitaire pour attacher les con
-*/
