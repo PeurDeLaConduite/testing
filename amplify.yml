@@ -1,8 +1,8 @@
 version: 1
 appRoot: .
 env:
-  variables:
-    AMPLIFY_MONOREPO_APP_ROOT: .
+    variables:
+        AMPLIFY_MONOREPO_APP_ROOT: .
 backend:
     phases:
         build:
