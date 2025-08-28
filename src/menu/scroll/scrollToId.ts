@@ -1,8 +1,16 @@
 /**
- * Fait défiler la page jusqu'à l'élément correspondant à l'ID fourni.
- * Applique le focus sur l'élément une fois le scroll effectué.
+ * Calcule la hauteur du header pour définir l'offset par défaut.
  */
-export function scrollToId(id: string, offset = 0): void {
+export function getHeaderOffset(): number {
+    const header = document.querySelector("header");
+    return header instanceof HTMLElement ? header.offsetHeight : 0;
+}
+
+/**
+ * Fait défiler la page jusqu'à l'élément correspondant à l'ID fourni.
+ * Soustrait la hauteur du header (offset) puis applique le focus.
+ */
+export function scrollToId(id: string, offset: number = getHeaderOffset()): void {
     const el = document.getElementById(id);
     if (!el) return;
 
