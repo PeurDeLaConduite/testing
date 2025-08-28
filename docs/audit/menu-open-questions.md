@@ -1,37 +1,8 @@
-⚠️ **Note** — Le code est fourni à titre d’exemple. Complétez-le selon besoins réel.
-
-# ❓ Audit — Menu : questions ouvertes
-
-## 1) États finaux du réducteur
-
-| état             | largeur (px) | déclencheur cible               |
-| ---------------- | -----------: | ------------------------------- |
-| `mobile`         |        <1024 | navigation réduite              |
-| `tablet`         |    1024–1169 | apparition du bouton principal  |
-| `desktopReduced` |    1170–1439 | menu élargi sans tous les liens |
-| `desktop`        |        ≥1440 | menu complet                    |
-
-> Confirmer les valeurs exactes et les seuils de transition.
-
-## 2) Source de l’offset
-
-- `headerRef.current?.offsetHeight` (valeur runtime).
-- variable CSS `--header-h` synchronisée.
-- Besoin d’une fonction unique `getOffset()` pour le service de scroll.
-
-## 3) Items sans `path` / `AnchorId` / `subItems`
-
-- Traitement par défaut : `toggle` (aucune navigation).
-- Envisager un log d’avertissement pour audit.
-- Vérifier que ces items sont documentés dans `menuItems.ts`.
-
-#  Audit — Réponses claires
-
 # 🔒 Spécification unifiée — Menu (réducteur & comportements)
 
 ## 1) États finaux du réducteur (modes d’affichage)
+Seuils et comportements confirmés (redirection <768px vers l'URL mobile).
 
-> 📌 À valider : seuils exacts & redirection `<768px`.
 
 | état             | largeur (px) | déclencheur cible               | comportement (résumé)                                                                                                                                                                                                                                                          |
 | ---------------- | -----------: | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -601,7 +572,7 @@ Scénario: Ancre inconnue
 * **Robustesse** : RAF, replaceState, warn si ID inconnu, hash handler global en option.
 
 
-# ❓ Questions ouvertes — Menu
+# Notes complémentaires — Menu
 
 Document temporaire consignant les zones d'ombre sur le fonctionnement du menu.
 Mettre à jour au fil des clarifications.

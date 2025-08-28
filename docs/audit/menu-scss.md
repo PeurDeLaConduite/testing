@@ -14,13 +14,10 @@
 
 ## Data-attributes recommandés
 
-## Data-attributes
-
 - `data-reduced="mobile|tablet|desktopReduced|desktop"` sur `<nav>`.
 - `data-open-main`, `data-open-button`, `data-big-menu` sur `<header>`.
 - `data-submenu="id"` sur `.submenu` pour cibler un sous-menu sans cascade.
-- Sur le conteneur nav : `data-reduced="mobile|tablet|desktopReduced|desktop"`.
-- Sur un item : synchroniser `aria-expanded` + `data-open="true|false"` si utile.
+- Sur un item : synchroniser `aria-expanded` et `data-open="true|false"` si utile.
 
 ```scss
 nav[data-reduced="desktopReduced"] .menu__label {

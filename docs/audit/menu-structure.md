@@ -1,6 +1,4 @@
-⚠️ **Note** — Ce document est fourni **à titre d’exemple**. Adaptez-le à votre projet réel.
-
-# 📘 Audit — Structure actuelle du menu (synthèse initiale)
+# 📘 Audit — Structure définitive du menu
 
 ## 1) Données source
 
@@ -54,11 +52,15 @@
 - **Réducteur**: appliquer `data-reduced="mobile|tablet|desktopReduced|desktop"` sur `<nav>`.
 - **A11y**: `aria-*` & clavier complet.
 
-## Points ouverts (à compléter en audit)
+### Paramètres confirmés
 
-- Valeurs **réelles** du réducteur (labels + déclencheurs).
-- Source unique de l’offset (`ref` header vs CSS var `--header-h`).
-- Cas MenuItem sans `path|AnchorId|subItems`.
+- **Réducteur** :
+    - `<1024` → `mobile`
+    - `1024–1169` → `tablet`
+    - `1170–1439` → `desktopReduced`
+    - `≥1440` → `desktop`
+- **Offset de scroll** : fonction `getOffset()` centralisée (`headerRef.current?.offsetHeight` synchronisée avec `--header-h`).
+- **Items sans `path`, `AnchorId` ou `subItems`** : action par défaut `toggle` avec log `warn`.
 
 # Audit — Structure actuelle du menu
 

@@ -1,18 +1,58 @@
 graph TD
-  Header --> Nav
-  Header --> useResize
-  Header --> NavigationContext
-  Header --> ScrollContext
-  Header --> fnScrollUtils
-  Nav --> NavLinkShow
-  Nav --> NavInput
-  Nav --> NavigationContext
-  NavLinkShow --> RenderLink
-  NavLinkShow --> SubMenu
-  NavLinkShow --> NavigationContext
-  RenderLink --> NavigationContext
-  SubMenu --> NavigationContext
-  updateMenuUtils --> NavigationContext
-  scrollUtils --> ScrollContext
-  scrollUtils --> fnScrollUtils
-EOF
+  %% Registre des occurrences pour MenuLinks, MenuItem, subItems, AnchorId et path
+  subgraph docs
+    docs_menu_actions_map["audit/menu-actions-map.md"] --> MenuItem
+    docs_menu_actions_map --> subItems
+    docs_menu_actions_map --> path
+    docs_menu_actions_map --> AnchorId
+    docs_user_stories["audit/User stories.md"] --> path
+    docs_user_stories --> AnchorId
+    docs_menu_open_questions["audit/menu-open-questions.md"] --> path
+    docs_menu_open_questions --> AnchorId
+    docs_menu_open_questions --> subItems
+    docs_menu_structure["audit/menu-structure.md"] --> MenuLinks
+    docs_menu_structure --> MenuItem
+    docs_menu_structure --> path
+    docs_menu_structure --> AnchorId
+    docs_menu_structure --> subItems
+  end
+  subgraph tests
+    tests_menu_integration["integration/menu.integration.test.tsx"] --> MenuItem
+    tests_menu_integration --> subItems
+    tests_menu_integration --> path
+    tests_menu_integration --> AnchorId
+  end
+  subgraph src
+    src_menu_actions_adapter["menu/actions/adapter.ts"] --> MenuItem
+    src_menu_actions_adapter --> subItems
+    src_menu_actions_adapter --> path
+    src_menu_actions_adapter --> AnchorId
+    src_home_slider_SliderCTA["home/slider/SliderCTA.tsx"] --> path
+    src_menu_scroll_resolveScrollOffset["menu/scroll/resolveScrollOffset.ts"] --> MenuItem
+    src_utils_searchMenu["utils/searchMenu.js"] --> AnchorId
+    src_utils_searchMenu --> path
+    src_utils_searchMenu --> subItems
+    src_utils_context_SearchContext["utils/context/SearchContext.tsx"] --> MenuLinks
+    src_utils_context_SearchContext --> path
+    src_utils_context_NavigationContext["utils/context/NavigationContext.tsx"] --> path
+    src_utils_scrollUtils["utils/scrollUtils.ts"] --> path
+    src_utils_scrollUtils --> subItems
+    src_utils_getSectionIds["utils/getSectionIds.ts"] --> MenuItem
+    src_utils_getSectionIds --> subItems
+    src_utils_getSectionIds --> AnchorId
+    src_components_header_NavLink["components/header/NavLink.tsx"] --> MenuItem
+    src_components_header_NavLink --> path
+    src_components_header_NavLink --> AnchorId
+    src_components_header_NavLink --> subItems
+    src_components_header_navLink_SubMenu["components/header/navLink/SubMenu.tsx"] --> MenuItem
+    src_components_header_navLink_SubMenu --> subItems
+    src_components_header_navLink_SubMenu --> path
+    src_components_header_navLink_SubMenu --> AnchorId
+    src_components_header_navLink_RenderLink["components/header/navLink/RenderLink.tsx"] --> MenuItem
+    src_components_header_navLink_RenderLink --> path
+    src_components_header_navLink_RenderLink --> AnchorId
+    src_components_header_navLink_NavLinkShow["components/header/navLink/NavLinkShow.tsx"] --> MenuItem
+    src_components_header_navLink_NavLinkShow --> subItems
+    src_components_header_navInput_RenderInput["components/header/navInput/RenderInput.tsx"] --> MenuItem
+    src_components_header_navInput_NavInput["components/header/navInput/NavInput.tsx"] --> MenuItem
+  end
