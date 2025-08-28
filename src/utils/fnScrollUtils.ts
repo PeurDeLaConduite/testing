@@ -73,13 +73,7 @@ export const handleNavClick = (
     });
 };
 
-function ifNav({
-    currentPath,
-    targetPath,
-    targetHash,
-    currentHash,
-    updateRoute,
-}: NavParams): void {
+function ifNav({ currentPath, targetPath, targetHash, currentHash, updateRoute }: NavParams): void {
     if (currentPath !== targetPath) {
         updateRoute(targetPath);
 
@@ -105,7 +99,7 @@ function elseNav({
         updateRoute(targetPath);
 
         if (targetHash === undefined) {
-            handleScrollClick?.(`scroll-start`);
+            handleScrollClick?.("top");
         } else if (targetHash !== currentHash) {
             handleScrollClick?.(targetHash);
             updateRoute(`${targetPath}#${targetHash}`);
@@ -126,8 +120,7 @@ export function scrollInView(sections: { id: string }[]) {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const isInView =
-                scrollPosition >= sectionTop - 100 &&
-                scrollPosition < sectionTop + sectionHeight;
+                scrollPosition >= sectionTop - 100 && scrollPosition < sectionTop + sectionHeight;
             if (isInView) {
                 currentSectionId = id;
             }
