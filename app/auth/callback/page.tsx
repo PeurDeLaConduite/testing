@@ -4,7 +4,10 @@
 
 import AuthProvider from "@src/app/Authentication/auth-provider";
 
-// route auth/callback
 export default function Page() {
-    return <AuthProvider />;
+    return (
+        <AuthProvider>
+            <></>
+        </AuthProvider>
+    );
 }
