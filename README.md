@@ -87,3 +87,8 @@ yarn install
 
 Le mock d'AWS Amplify et la configuration partagée se trouvent dans `tests/setupTests.ts`.
 Ce fichier configure Amplify et le serveur MSW avant chaque test.
+
+### Configuration
+
+- [vitest.config.ts](./vitest.config.ts) – configuration de Vitest.
+- [playwright.config.ts](./playwright.config.ts) – configuration de Playwright.
