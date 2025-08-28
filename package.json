@@ -12,7 +12,9 @@
         "test:e2e": "playwright test",
         "test": "vitest run",
         "test:watch": "vitest",
-        "test:api": "vitest run tests/api --coverage"
+        "test:api": "vitest run tests/api --coverage",
+        "type-check": "tsc --noEmit",
+        "test:all": "yarn test && yarn test:e2e"
     },
     "dependencies": {
         "@aws-amplify/auth": "^6.13.0",
