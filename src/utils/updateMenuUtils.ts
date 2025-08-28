@@ -75,10 +75,14 @@ export const resetActiveMenuClasses = () => {
 
 const handleClickOutside = (
     e: MouseEvent,
-    navRef: React.RefObject<HTMLElement>,
+    navRef: React.RefObject<HTMLElement | null>,
     setOpenSubMenu: React.Dispatch<React.SetStateAction<string | null>>
 ) => {
-    if (navRef.current && !navRef.current.contains(e.target as Node)) {
+    if (!navRef.current) {
+        return;
+    }
+
+    if (!navRef.current.contains(e.target as Node)) {
         setOpenSubMenu(null);
     }
 };
