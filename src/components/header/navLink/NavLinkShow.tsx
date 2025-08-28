@@ -50,6 +50,10 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
     return openMainButton || mainNav || (openButton && showNavLinks) ? (
         <div
             className={`group_link-submenu ${menuItem.id} ${!openMainButton ? "nav-padding" : ""}`}
+            role="menuitem"
+            aria-haspopup={menuItem.subItems ? "true" : undefined}
+            aria-expanded={menuItem.subItems ? isOpen : undefined}
+            aria-controls={menuItem.subItems ? `sub-${menuItem.id}` : undefined}
         >
             <RenderLink
                 menuItem={menuItem}
@@ -63,9 +67,9 @@ const NavLinkShow: React.FC<NavLinkShowProps> = ({
         <div
             ref={triggerRef}
             className={getShowGroupClass(menuItem.id, showNavLinks)}
-            role="button"
+            role="menuitem"
             aria-label={`ouvrir le menu ${menuItem.title}`}
-            aria-haspopup="menu"
+            aria-haspopup={menuItem.subItems ? "true" : undefined}
             aria-expanded={menuItem.subItems ? isOpen : undefined}
             aria-controls={menuItem.subItems ? `sub-${menuItem.id}` : undefined}
             tabIndex={0}

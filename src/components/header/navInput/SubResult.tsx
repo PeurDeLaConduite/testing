@@ -4,18 +4,15 @@ interface SubResultProps {
     suggestions: string[];
     isOpen: boolean;
     onSuggestionClick: (suggestion: string) => void;
+    id: string;
 }
 
-const SubResult: React.FC<SubResultProps> = ({
-    suggestions,
-    isOpen,
-    onSuggestionClick,
-}) => {
+const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestionClick, id }) => {
     if (!suggestions || suggestions.length === 0) return null;
 
     return (
         <div className={`submenu ${isOpen ? "open" : ""}`}>
-            <div className="submenu_group">
+            <div className="submenu_group" role="menu" id={id}>
                 {suggestions.map((suggestion) => (
                     <option
                         key={suggestion}

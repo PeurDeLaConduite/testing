@@ -44,6 +44,7 @@ const NavInput: React.FC<NavInputProps> = ({
         }
     };
 
+    const submenuId = `sub-${menuItem.id}`;
     const renderSubResult = () =>
         showNavLinks &&
         isSubResultOpen &&
@@ -52,6 +53,7 @@ const NavInput: React.FC<NavInputProps> = ({
                 suggestions={suggestions}
                 isOpen={isOpen}
                 onSuggestionClick={handleSuggestionClick}
+                id={submenuId}
             />
         );
 
@@ -60,6 +62,9 @@ const NavInput: React.FC<NavInputProps> = ({
             className={getShowGroupClass(menuItem.id, showNavLinks)}
             role="menuitem"
             aria-label={`ouvrir le menu ${menuItem.title}`}
+            aria-haspopup="true"
+            aria-expanded={isOpen}
+            aria-controls={submenuId}
             tabIndex={0}
             onClick={(e) => onMenuToggle(menuItem.id, e)}
             onKeyDown={handleKeyDown}
