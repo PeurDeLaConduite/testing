@@ -249,7 +249,7 @@ export function DeleteButton(props: DeleteButtonProps) {
 export type CancelButtonProps = ButtonWrapperProps & { onCancel: () => void; editColor?: string };
 
 export function CancelButton(props: CancelButtonProps) {
-    const { onCancel, label = ("Annuler" = "black"), ...rest } = props;
+    const { onCancel, label = "Annuler", ...rest } = props;
     return renderByMode({
         ...rest,
         variantType: rest.variantType ?? "button",
