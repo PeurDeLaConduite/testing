@@ -14,7 +14,7 @@ import { emitUserNameUpdated } from "./bus";
 
 type Extras = { userNames: UserNameType[] };
 
-export function useUserNameForm(userName: UserNameType | null = null) {
+export function useUserNameForm(userName: UserNameType | null) {
     const { user } = useAuthenticator();
     const sub = user?.userId ?? user?.username ?? null;
 
@@ -136,12 +136,8 @@ export function useUserNameForm(userName: UserNameType | null = null) {
         async (field: keyof UserNameFormType, value: string) => {
             const id = userNameId ?? sub;
             if (!id) return;
-
-            // Objet partiel du formulaire + id requis
-            type UpdatePayload = { id: string } & Partial<UserNameFormType>;
-
-            await userNameService.update({ id, [field]: value } as UpdatePayload);
-            patchForm({ [field]: value } as Partial<UserNameFormType>); // update optimiste
+            await userNameService.update({ id, [field]: value } as any);
+            patchForm({ [field]: value } as Partial<UserNameFormType>); // optimiste
             await refresh();
             emitUserNameUpdated();
         },

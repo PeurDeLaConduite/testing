@@ -147,6 +147,17 @@ export default function useModelForm<
         setError(null);
     }, []);
 
+    /** Quitte le mode édition → repasse en create avec un form neuf (ou fourni) */
+    const exitEditMode = useCallback(
+        (next?: F) => {
+            adoptInitial(next ?? initialForm, "create");
+            setMessage("Retour au mode création.");
+        },
+        [
+            /* eslint-disable-line react-hooks/exhaustive-deps */
+        ]
+    );
+
     const adoptInitial = useCallback((next: F, nextMode: FormMode = "edit") => {
         initialRef.current = next;
         setForm(next);
@@ -154,15 +165,6 @@ export default function useModelForm<
         setError(null);
         setMessage(null);
     }, []);
-
-    /** Quitte le mode édition → repasse en create avec un form neuf (ou fourni) */
-    const exitEditMode = useCallback(
-        (next?: F) => {
-            adoptInitial(next ?? initialForm, "create");
-            setMessage("Retour au mode création.");
-        },
-        [adoptInitial, initialForm]
-    );
 
     const refresh = useCallback(async () => {
         if (!load) return;

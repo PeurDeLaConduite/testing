@@ -98,7 +98,7 @@ export function EditField<T extends Record<string, unknown>>({
 }: EditFieldProps<T>) {
     const { update } = useEntityManager<T>();
 
-    async function saveField() {
+    async function updateEntity() {
         if (!editModeField) return;
         await update(entityId, { [editModeField.field]: editModeField.value } as Partial<T>);
         setEditModeField(null);
@@ -123,7 +123,7 @@ export function EditField<T extends Record<string, unknown>>({
             />
 
             <div className="flex justify-between mt-5 gap-10">
-                <UpdateButton onUpdate={saveField} label="Sauvegarder" className="flex-1 mr-2" />
+                <UpdateButton onUpdate={updateEntity} label="Sauvegarder" className="flex-1 mr-2" />
                 <BackButton
                     onBack={() => setEditModeField(null)}
                     label="Retour"

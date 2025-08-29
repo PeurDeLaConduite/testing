@@ -165,7 +165,7 @@ import { UpdateButton, BackButton } from "@components/ui/Button";
     />
 
     <div className="flex gap-4">
-        <UpdateButton onUpdate={saveField} label="Sauvegarder" />
+        <UpdateButton onUpdate={updateEntity} label="Sauvegarder" />
         <BackButton onBack={() => setEditModeField(null)} label="Retour" />
     </div>
 </fieldset>;

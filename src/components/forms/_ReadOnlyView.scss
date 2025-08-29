@@ -63,14 +63,15 @@
         gap: 0.5rem;
     }
 
-    &_value {
+    &_value,
+    .user-profile-value {
         font-size: 1rem;
         color: $primary-black;
         word-break: break-word;
         font-family: $profile;
-        line-height: 1.5rem; /* line-height associé à text-base (24px) */
-        overflow-wrap: break-word; /* break-words */
-        word-break: break-word; /* pour compatibilité */
+        line-height: 1.5rem; 
+        overflow-wrap: break-word; 
+        letter-spacing: 0.2px;
 
         &--empty {
             font-size: 0.875rem;

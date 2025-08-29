@@ -10,20 +10,26 @@
     max-width: 28rem; // max-w-md
     margin-left: auto; // mx-auto
     margin-right: auto; // mx-auto
-}
-
-.entity-form_field {
-    label {
-        display: block; // block
-        margin-bottom: 0.25rem; // mb-1
-        font-weight: 500; // font-medium
-    }
-
-    input {
-        width: 100%; // w-full
-        padding: 0.5rem; // p-2
-        border: 1px solid $grey; // border
-        @include border-radius(4px); // rounded
+    &_field {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        // gap: 1.25rem;
+        font-family: $profile;
+        .entity-form_label {
+            display: block; // block
+            margin-bottom: 0.25rem; // mb-1
+            font-weight: 500;
+            // font-weight: 600;
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        .entity-form_input {
+            width: 100%; // w-full
+            padding: 0.5rem; // p-2
+            border: 1px solid $grey; // border
+            @include border-radius(4px); // rounded
+        }
     }
 }
 

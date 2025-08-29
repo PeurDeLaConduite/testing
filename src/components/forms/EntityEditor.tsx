@@ -15,7 +15,7 @@ export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Champs requis pour le formulaire */
     requiredFields?: FieldKey<T>[];
     /** Rendu personnalisé des icônes */
-    renderIcon?: (field: FieldKey<T>) => React.ReactNode;
+    labelIcon?: (field: FieldKey<T>) => React.ReactNode;
     /** Rendu personnalisé des valeurs */
     renderValue?: (field: FieldKey<T>, value: string) => React.ReactNode;
     /** Boutons supplémentaires pour chaque champ */
@@ -33,9 +33,9 @@ export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Indicateur de modification */
     dirty: boolean;
     /** Gestion des changements */
-    handleChange: (field: FieldKey<T>, value: unknown) => void;
+    setFieldValue: (field: FieldKey<T>, value: unknown) => void;
     /** Soumission du formulaire */
-    submit: () => Promise<void>;
+    submit: () => Promise<boolean>;
     /** Réinitialisation du formulaire */
     reset: () => void;
     /** Permet de remplacer le formulaire */
@@ -45,7 +45,7 @@ export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Libellés des champs */
     labels: (field: FieldKey<T>) => string;
     /** Sauvegarde d'un champ individuel */
-    saveField?: (field: FieldKey<T>, value: string) => Promise<void>;
+    updateEntity?: (field: FieldKey<T>, value: string) => Promise<void>;
     /** Effacement d'un champ individuel */
     clearField?: (field: FieldKey<T>) => Promise<void>;
     /** Suppression de l'entité */
@@ -59,7 +59,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
         title,
         titleHeading,
         requiredFields = [],
-        renderIcon,
+        labelIcon,
         renderValue,
         extraButtons,
         deleteLabel,
@@ -67,12 +67,12 @@ export default function EntityEditor<T extends Record<string, unknown>>(
         onClearField,
         form,
         mode,
-        handleChange,
+        setFieldValue,
         submit,
         reset,
         fields,
         labels,
-        saveField,
+        updateEntity,
         clearField,
         deleteEntity,
     } = props;
@@ -105,7 +105,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
                     fields={fields}
                     data={form}
                     labels={labels}
-                    renderIcon={renderIcon}
+                    labelIcon={labelIcon}
                     renderValue={renderValue}
                     extraButtons={extraButtons}
                     onEditField={setEditModeField}
@@ -117,9 +117,9 @@ export default function EntityEditor<T extends Record<string, unknown>>(
                 <EditField<T>
                     editModeField={editModeField}
                     setEditModeField={setEditModeField}
-                    saveSingleField={() =>
-                        saveField
-                            ? saveField(editModeField.field, editModeField.value).then(() =>
+                    updateEntity={() =>
+                        updateEntity
+                            ? updateEntity(editModeField.field, editModeField.value).then(() =>
                                   setEditModeField(null)
                               )
                             : Promise.resolve()
@@ -133,7 +133,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
                     formData={form}
                     fields={fields}
                     labels={labels}
-                    handleChange={handleChange}
+                    setFieldValue={setFieldValue}
                     handleSubmit={() => submit().then(() => void 0)}
                     isEdit={false}
                     onCancel={handleCancel}
@@ -144,7 +144,7 @@ export default function EntityEditor<T extends Record<string, unknown>>(
             {mode === "edit" && !editModeField && deleteLabel && (
                 <div className="entity-editor_delete-container">
                     <DeleteButton
-                        onClick={() => {
+                        onDelete={() => {
                             void deleteEntity?.();
                         }}
                         label={deleteLabel}

@@ -1,4 +1,4 @@
-import { SaveButton, BackButton } from "@components/buttons";
+import { UpdateButton, BackButton } from "@components/buttons";
 import React from "react";
 import type { FieldKey } from "@entities/core/hooks";
 
@@ -7,14 +7,14 @@ export type EditFieldProps<T extends Record<string, unknown>> = {
     setEditModeField: React.Dispatch<
         React.SetStateAction<{ field: FieldKey<T>; value: string } | null>
     >;
-    saveSingleField: () => void;
+    updateEntity: () => void;
     labels: (field: FieldKey<T>) => string;
 };
 
 export default function EditField<T extends Record<string, unknown>>({
     editModeField,
     setEditModeField,
-    saveSingleField,
+    updateEntity,
     labels,
 }: EditFieldProps<T>) {
     const { field, value } = editModeField;
@@ -40,11 +40,20 @@ export default function EditField<T extends Record<string, unknown>>({
             />
 
             <div className="edit-field_actions">
-                <SaveButton onClick={saveSingleField} label="Sauvegarder" className="flex-1" />
+                <UpdateButton
+                    onUpdate={updateEntity}
+                    label="Sauvegarder"
+                    className="flex-1 mr-2"
+                    size="medium"
+                />
+                {/* //? BackButton => appelle setEditModeField(null) 
+                    //* Sort du mode **édition** sans sans sauvegarder  
+                */}
                 <BackButton
-                    onClick={() => setEditModeField(null)}
+                    onBack={() => setEditModeField(null)}
                     label="Retour"
-                    className="flex-1"
+                    className="flex-1 ml-2"
+                    size="medium"
                 />
             </div>
         </fieldset>
