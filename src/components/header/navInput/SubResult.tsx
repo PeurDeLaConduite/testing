@@ -3,10 +3,10 @@ import React from "react";
 interface SubResultProps {
     suggestions: string[];
     isOpen: boolean;
-    onSuggestionClick: (suggestion: string) => void;
+    onSuggestionSelect: (suggestion: string) => void;
 }
 
-const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestionClick }) => {
+const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestionSelect }) => {
     if (!suggestions || suggestions.length === 0) return null;
 
     return (
@@ -20,7 +20,7 @@ const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestion
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            onSuggestionClick(suggestion); // Appelle la méthode depuis NavInput
+                            onSuggestionSelect(suggestion); // Appelle la méthode depuis NavInput
                         }}
                     >
                         {suggestion}
