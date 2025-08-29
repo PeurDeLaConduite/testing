@@ -249,7 +249,7 @@ export function DeleteButton(props: DeleteButtonProps) {
 export type CancelButtonProps = ButtonWrapperProps & { onCancel: () => void; editColor?: string };
 
 export function CancelButton(props: CancelButtonProps) {
-    const { onCancel, label = "Annuler", editColor = "black", ...rest } = props;
+    const { onCancel, label = ("Annuler" = "black"), ...rest } = props;
     return renderByMode({
         ...rest,
         variantType: rest.variantType ?? "button",
@@ -281,7 +281,7 @@ export function AddButton(props: AddButtonProps) {
 export type SubmitButtonProps = ButtonWrapperProps & { onSubmit: () => void; editColor?: string };
 
 export function SubmitButton(props: SubmitButtonProps) {
-    const { onSubmit, label = "Créer", editColor = "#9e9e9e", ...rest } = props;
+    const { onSubmit, label = "Créer", ...rest } = props;
     return renderByMode({
         ...rest,
         variantType: rest.variantType ?? "button",
@@ -289,7 +289,6 @@ export function SubmitButton(props: SubmitButtonProps) {
         icon: <SaveIcon />,
         intent: "primary",
         onClick: onSubmit,
-        // editColor,
     });
 }
 
@@ -368,7 +367,7 @@ export type BackButtonProps = ButtonWrapperProps &
     };
 
 export function BackButton(props: BackButtonProps) {
-    const { label = "Retour", editColor = "#1976d2", ...rest } = props; // bleu primary par défaut
+    const { label = "Retour", ...rest } = props; // bleu primary par défaut
     const common = {
         ...rest,
         variantType: rest.variantType ?? "button",
