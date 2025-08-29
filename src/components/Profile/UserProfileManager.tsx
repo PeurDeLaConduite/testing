@@ -12,6 +12,7 @@ import { useUserProfileForm } from "@entities/models/userProfile/hooks";
 import {
     type UserProfileFormType,
     type UserProfileType,
+    type UserProfileTypeUpdateInput,
     initialUserProfileForm,
 } from "@entities/models/userProfile";
 
@@ -108,7 +109,7 @@ export default function UserProfileManager() {
             reset={manager.reset}
             setForm={manager.setForm}
             fields={fields}
-            labels={(f) => fieldLabel(f as any)}
+            labels={(f) => fieldLabel(f as keyof UserProfileTypeUpdateInput)}
             updateEntity={manager.updateEntity}
             clearField={manager.clearField}
             // Wrapper “à la AuthorList.onDeleteById”
