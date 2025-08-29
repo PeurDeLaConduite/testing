@@ -10,7 +10,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 npx create-next-app@latest
 ```
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+//! eslint-disable-next-line @typescript-eslint/no-unused-vars DON'T DELETE
 
 ## Getting Started
 
