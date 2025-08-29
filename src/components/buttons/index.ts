@@ -1,3 +1,4 @@
-export { default as ButtonBase } from "./ButtonBase";
+export { UiButton } from "./UiButton";
+export type { UiButtonProps } from "./UiButton";
 export * from "./Buttons";
-export * from "./buttonStyles";
+export { default as ActionButtons } from "./ActionButtons";

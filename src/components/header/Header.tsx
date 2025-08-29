@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,7 +12,8 @@ import { updateMenuClasses } from "../../utils/updateMenuUtils";
 import { handleScrollClick, handleNavClick } from "../../utils/fnScrollUtils";
 import { useInitialScroll } from "../../utils/scrollUtils";
 import useResize from "./utils/useResize";
-
+import { useAuthenticator } from "@aws-amplify/ui-react";
+// import { PowerButton } from "../buttons";
 interface NavProps {
     menuItems: MenuItem[];
     onNavigationClick: (path: string, scrollOffset?: number) => void;
@@ -23,10 +26,13 @@ interface NavProps {
     setTabletMain: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<NavProps> = () => {
+const SIGN_OUT_SENTINEL = "__SIGNOUT__";
+
+const Header: React.FC = () => {
     const pathname = usePathname();
     const { currentRoute, updateRoute } = useNavigation();
     const { activeSection } = useScrollContext();
+    const { user, signOut } = useAuthenticator();
 
     useInitialScroll(pathname);
 
@@ -37,11 +43,17 @@ const Header: React.FC<NavProps> = () => {
 
     useResize(setTabletMain, setOpenMainButton, setOpenButton, setBigMenu);
 
-    // Wrapper pour adapter `handleNavClick`
+    // Wrapper pour adapter `handleNavClick` + gérer la déconnexion
     const handleNavigationClick = (path: string, scrollOffset = 0) => {
+        if (path === SIGN_OUT_SENTINEL) {
+            // Appel Amplify
+            signOut();
+            return;
+        }
         handleNavClick(path, currentRoute, updateRoute, handleScrollClick, scrollOffset);
     };
 
+    // Classes actives habituelles
     const updatedMenuItems = updateMenuClasses(
         menuItems.mainLink,
         menuItems.reservation,
@@ -50,6 +62,26 @@ const Header: React.FC<NavProps> = () => {
         activeSection,
         currentRoute
     );
+
+    // Adapter dynamiquement l’item "connection" si l’utilisateur est connecté
+    const adaptedMenuItems = {
+        ...updatedMenuItems,
+        connection: updatedMenuItems.connection?.map((item) => {
+            if (!user) return item; // laissé "Se connecter"
+            return {
+                ...item,
+                title: "Déconnexion",
+                // on remplace la navigation par un "pseudo-lien" capté plus haut
+                path: SIGN_OUT_SENTINEL,
+                AnchorId: undefined,
+                subItems: [], // pas de sous-menu en mode déconnexion
+                // Tu peux remplacer par "Power" si tu ajoutes l’icône (section 3)
+                svg: item.svg ?? "Connection",
+                // petite classe utile si tu veux du style rouge (section 4)
+                class: `${item.class ?? ""} signout`.trim(),
+            };
+        }),
+    };
 
     return (
         <div className="header">
@@ -60,14 +92,15 @@ const Header: React.FC<NavProps> = () => {
             >
                 <Logo />
             </Link>
+
             <Nav
-                menuItems={updatedMenuItems}
+                menuItems={adaptedMenuItems}
                 onNavigationClick={handleNavigationClick}
-                tabletMain={tabletMain} // Gestion de la vue tablette
-                openMainButton={openMainButton} // Gestion de la vue Desktop
+                tabletMain={tabletMain}
+                openMainButton={openMainButton}
                 setOpenMainButton={setOpenMainButton}
                 openButton={openButton}
-                bigMenu={bigMenu} // Gestion de la vue Desktop large
+                bigMenu={bigMenu}
             />
         </div>
     );

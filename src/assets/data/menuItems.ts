@@ -128,17 +128,17 @@ export const menuItems: MenuLinks = {
     ],
     connection: [
         {
-            id: "connection",
-            title: "Se connecter",
+            id: "connexion",
+            title: "Connexion",
             class: "",
-            path: "/connection",
+            path: "/connexion", // au lieu de /connection
             AnchorId: "#top",
-            svg: "Connection",
+            svg: "Connection", // tu peux laisser, ou renommer plus tard
             subItems: [
                 {
-                    id: "menu-without-license",
-                    title: "Sans Permis",
-                    AnchorId: "#sans-permis",
+                    id: "profil",
+                    title: "Mon profil", // <- le lien vers la section profil
+                    AnchorId: "#profile", // ou "#profil" si tu FR-ises l’ID
                     class: "",
                     scrollOffset: 102,
                 },

@@ -71,7 +71,7 @@ nav {
 .main-nav,
 .reservationId,
 .search,
-.connection {
+.connexion {
     @extend %interactive-link;
     // ? @media
     // gap: 2rem;
@@ -145,7 +145,7 @@ nav {
     }
 }
 .research,
-.connection {
+.connexion {
     cursor: pointer;
     width: auto;
     .nav-link,
@@ -192,7 +192,7 @@ nav {
     }
 }
 
-.connection {
+.connexion {
     .nav-link {
         width: 114px;
     }
@@ -212,7 +212,7 @@ nav {
 }
 .reservationId,
 .search,
-.connection,
+.connexion,
 .head-link,
 .nav-link {
     transition:
@@ -421,7 +421,7 @@ nav .nav-padding .submenu:not(.open) {
     color: $primary-black;
     @include smoothTransition(fill, color);
 }
-.connection.group_link-submenu:hover .head-link .nav-link,
+.connexion.group_link-submenu:hover .head-link .nav-link,
 .group_link-submenu:hover .submenu.open,
 .group_link-submenu:hover .head-link .nav-link,
 .group_link-submenu:hover .head-link .icon-color,
