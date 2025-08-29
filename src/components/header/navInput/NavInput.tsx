@@ -82,8 +82,8 @@ const NavInput: React.FC<NavInputProps> = ({
                     onFocus={onFocus}
                     handleSearch={handleSearch}
                     handleSubmit={handleSubmit}
-                    isSubmitted={isSubmitted} // Ajouter cette prop
-                    handleReset={handleReset} // Ajouter cette prop
+                    isSubmitted={isSubmitted}
+                    handleReset={handleReset}
                 />
             </form>
             {renderSubResult()}

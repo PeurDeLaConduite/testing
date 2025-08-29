@@ -35,6 +35,7 @@ const RenderInput: React.FC<RenderInputProps> = ({
     return (
         <>
             <RenderInputButton
+                hasQuery={query.length > 0}
                 isSubmitted={isSubmitted}
                 showNavLinks={showNavLinks}
                 menuItem={{ svg: menuItem.svg as keyof typeof svgComponents }}
