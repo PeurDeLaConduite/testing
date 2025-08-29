@@ -6,11 +6,7 @@ interface SubResultProps {
     onSuggestionClick: (suggestion: string) => void;
 }
 
-const SubResult: React.FC<SubResultProps> = ({
-    suggestions,
-    isOpen,
-    onSuggestionClick,
-}) => {
+const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestionClick }) => {
     if (!suggestions || suggestions.length === 0) return null;
 
     return (
@@ -23,6 +19,7 @@ const SubResult: React.FC<SubResultProps> = ({
                         className="nav-link"
                         onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             onSuggestionClick(suggestion); // Appelle la méthode depuis NavInput
                         }}
                     >
