@@ -1,17 +1,10 @@
 // src/context/DataBlogContext.tsx
 "use client";
-import React, {
-    createContext,
-    useContext,
-    useState,
-    useEffect,
-    ReactNode,
-    useMemo,
-} from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react";
 import type { BlogData } from "@src/types/blog";
 
-const PUBLIC_DATA_URL =
-    "https://amplify-d2jefuxcjjakai-ma-publiquestoragebucketac0-tjlluvtci6g6.s3.eu-west-3.amazonaws.com/publique-storage/data.json";
+// prettier-ignore
+const PUBLIC_DATA_URL = "https://amplify-d2jefuxcjjakai-ma-publiquestoragebucketac0-tjlluvtci6g6.s3.eu-west-3.amazonaws.com/publique-storage/data.json";
 
 interface DataBlogContextProps {
     data: BlogData | null;
@@ -35,9 +28,12 @@ export function DataBlogProvider({ children }: { children: ReactNode }) {
             const json = (await res.json()) as BlogData;
             setData(json);
             setError(null);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            setError(err);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err);
+            } else {
+                setError(new Error(String(err)));
+            }
         } finally {
             setLoading(false);
         }
@@ -47,17 +43,9 @@ export function DataBlogProvider({ children }: { children: ReactNode }) {
         fetchData();
     }, []);
 
+    const value = useMemo(() => ({ data, loading, error }), [data, loading, error]);
 
-    const value = useMemo(
-        () => ({ data, loading, error }),
-        [data, loading, error]
-    );
-
-    return (
-        <DataBlogContext.Provider value={value}>
-            {children}
-        </DataBlogContext.Provider>
-    );
+    return <DataBlogContext.Provider value={value}>{children}</DataBlogContext.Provider>;
 }
 
 export function useDataBlog() {
