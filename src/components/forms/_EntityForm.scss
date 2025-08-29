@@ -14,13 +14,11 @@
         text-align: left;
         display: flex;
         flex-direction: column;
-        // gap: 1.25rem;
         font-family: $profile;
         .entity-form_label {
             display: block; // block
             margin-bottom: 0.25rem; // mb-1
             font-weight: 500;
-            // font-weight: 600;
             font-size: 1.125rem;
             line-height: 1.75rem;
         }

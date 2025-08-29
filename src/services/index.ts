@@ -1,1 +1,1 @@
-// export { fetchBlogData } from "./blogDataService";
+export { fetchBlogData } from "./blogDataService";

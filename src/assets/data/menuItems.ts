@@ -131,14 +131,14 @@ export const menuItems: MenuLinks = {
             id: "connexion",
             title: "Connexion",
             class: "",
-            path: "/connexion", // au lieu de /connection
+            path: "/connexion",
             AnchorId: "#top",
-            svg: "Connection", // tu peux laisser, ou renommer plus tard
+            svg: "Connection",
             subItems: [
                 {
                     id: "profil",
-                    title: "Mon profil", // <- le lien vers la section profil
-                    AnchorId: "#profile", // ou "#profil" si tu FR-ises l’ID
+                    title: "Mon profil",
+                    AnchorId: "#profile",
                     class: "",
                     scrollOffset: 102,
                 },

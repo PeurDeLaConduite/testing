@@ -71,14 +71,19 @@ const Header: React.FC = () => {
             return {
                 ...item,
                 title: "Déconnexion",
-                // on remplace la navigation par un "pseudo-lien" capté plus haut
                 path: SIGN_OUT_SENTINEL,
                 AnchorId: undefined,
-                subItems: [], // pas de sous-menu en mode déconnexion
-                // Tu peux remplacer par "Power" si tu ajoutes l’icône (section 3)
                 svg: item.svg ?? "Connection",
-                // petite classe utile si tu veux du style rouge (section 4)
                 class: `${item.class ?? ""} signout`.trim(),
+                subItems: [
+                    {
+                        id: "profil",
+                        title: "Mon profil",
+                        AnchorId: "#profile",
+                        class: "",
+                        scrollOffset: 102,
+                    },
+                ],
             };
         }),
     };

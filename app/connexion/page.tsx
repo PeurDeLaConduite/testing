@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Authentication from "@src/app/Authentication/Authentication";
-import ProfileForm from "@components/Profile/UserProfileManager";
+import UserProfileManager from "@/src/components/Profile/UserProfileManager";
 import UserNameManager from "@components/Profile/UserNameManager";
 import AuthProvider from "@src/app/Authentication/auth-provider";
 import SectionContainer from "../blog/SectionContainer";
@@ -30,7 +30,7 @@ export default async function Page() {
                 <SectionContainer id="profile" title="Espace personnel" icon={<ConnectionIcon />}>
                     <div className="post-content__content">
                         <UserNameManager />
-                        <ProfileForm />
+                        <UserProfileManager />
                     </div>
                 </SectionContainer>
             </AuthProvider>

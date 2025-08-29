@@ -7,7 +7,7 @@ export type ReadOnlyViewProps<T> = {
     fields: FieldKey<T>[];
     data: T;
     labels: (field: FieldKey<T>) => string;
-    labelIcon?: (field: FieldKey<T>) => React.ReactNode;
+    renderIcon?: (field: FieldKey<T>) => React.ReactNode;
     renderValue?: (field: FieldKey<T>, value: string) => React.ReactNode;
     extraButtons?: (field: FieldKey<T>, value: string) => React.ReactNode;
     onEditField: (p: { field: FieldKey<T>; value: string }) => void;
@@ -21,7 +21,7 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
     onEditField,
     onClearField,
     titleHeading,
-    labelIcon,
+    renderIcon,
     extraButtons,
     renderValue,
 }: ReadOnlyViewProps<T>) {
@@ -36,7 +36,7 @@ export default function ReadOnlyView<T extends Record<string, unknown>>({
                         <div key={String(field)} className="read-only-view_item">
                             <div className="read-only-view_item-header">
                                 <div className="read-only-view_label">
-                                    {labelIcon?.(field)} <span>{labels(field)}</span>
+                                    {renderIcon?.(field)} <span>{labels(field)}</span>
                                 </div>
                                 <div className="read-only-view_actions">
                                     {extraButtons?.(field, value)}
