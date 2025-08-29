@@ -1,0 +1,1 @@
+export { fetchBlogData } from "./blogDataService";

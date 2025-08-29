@@ -161,8 +161,8 @@ nav {
         @include menuShadow(rgba(0, 0, 0, 0.2));
         .nav-link,
         .icon-color {
-            fill: $primary-blue !important;
-            color: $primary-black !important;
+            fill: $primary-blue;
+            color: $primary-black;
         }
         button {
             .nav-link,
@@ -172,7 +172,13 @@ nav {
             }
         }
     }
-
+    .submenu {
+        padding-top: 1rem;
+        .nav-link {
+            width: 100%;
+            margin: 0 !important;
+        }
+    }
     .head-link.active .icon-color,
     .head-link.active .nav-link {
         fill: $primary-black !important;
@@ -190,15 +196,18 @@ nav {
     .nav-link {
         width: 114px;
     }
-    &:hover,
+    a.head-link {
+        // display: flex;
+        // gap: 0.5rem;
+        // flex-direction: row-reverse !important;
+        .nav-link {
+            // margin-right: 0 !important;
+        }
+    }
+
+    .head-link &:hover,
     &:focus {
         transform: scale(1.05);
-        // @include menuShadow(rgba(0, 0, 0, 0.2));
-        .nav-link,
-        .icon-color {
-            fill: $primary-blue !important;
-            color: $primary-blue !important;
-        }
     }
 }
 .reservationId,
@@ -329,14 +338,16 @@ option.nav-link {
     top: 100%;
     height: auto;
     margin-left: 0.5rem;
-    width: calc(100% + 3.5rem);
+    width: calc(100%);
     padding-top: 2rem;
     box-sizing: border-box;
     z-index: 10;
     transition: all 0.35s ease;
     opacity: 0;
 }
-
+.main-nav > .group_link-submenu .submenu {
+    width: calc(100% + 3.5rem);
+}
 nav .group_link-submenu:hover .submenu,
 nav .group_link-submenu:focus .submenu,
 .submenu.open {
@@ -410,6 +421,7 @@ nav .nav-padding .submenu:not(.open) {
     color: $primary-black;
     @include smoothTransition(fill, color);
 }
+.connection.group_link-submenu:hover .head-link .nav-link,
 .group_link-submenu:hover .submenu.open,
 .group_link-submenu:hover .head-link .nav-link,
 .group_link-submenu:hover .head-link .icon-color,

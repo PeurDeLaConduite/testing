@@ -82,10 +82,10 @@ const Nav: React.FC<NavProps> = ({
                 key={menuItem.id}
                 menuItem={menuItem}
                 onNavigationClick={onNavigationClick}
-                isOpen={false}
+                isOpen={openSubMenu === menuItem.id}
                 handleMenuClick={handleMenuClick}
                 showNavLinks={shouldShowNavLinks(menuItem.id)}
-                openButton={true}
+                openButton={false}
                 onMouseEnter={() => handleInteraction(menuItem.id)}
                 onFocus={() => handleInteraction(menuItem.id)}
                 onMenuToggle={(id) => showLink(id)}
