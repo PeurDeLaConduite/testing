@@ -91,8 +91,8 @@ function withIconFontSize(
     icon: React.ReactNode,
     fontSize: "inherit" | "small" | "medium" | "large"
 ) {
-    return React.isValidElement(icon)
-        ? React.cloneElement(icon as React.ReactElement<any>, { fontSize })
+    return React.isValidElement<{ fontSize?: typeof fontSize }>(icon)
+        ? React.cloneElement(icon, { fontSize })
         : icon;
 }
 
@@ -102,7 +102,7 @@ function mergeSx(...parts: Array<SxProps<Theme> | undefined>): SxProps<Theme> | 
     const out: Array<NonNullable<SxProps<Theme>>> = [];
     for (const p of parts) {
         if (!p) continue;
-        if (Array.isArray(p)) out.push(...(p as any));
+        if (Array.isArray(p)) out.push(...(p as Array<NonNullable<SxProps<Theme>>>));
         else out.push(p);
     }
     return out.length ? (out as SxProps<Theme>) : undefined;
@@ -172,7 +172,7 @@ function renderByMode(opts: {
         return (
             <UiButton
                 variantType="icon"
-                href={href as any}
+                {...(href ? { href } : undefined)}
                 icon={iconNode}
                 ariaLabel={ariaLabel ?? label ?? "Action"}
                 intent={intent}
@@ -189,7 +189,7 @@ function renderByMode(opts: {
     return (
         <UiButton
             variantType="button"
-            href={href as any}
+            {...(href ? { href } : undefined)}
             label={label ?? ""}
             icon={iconNode}
             intent={intent}

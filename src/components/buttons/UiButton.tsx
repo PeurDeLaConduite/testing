@@ -59,7 +59,7 @@ export type UiButtonProps = (ButtonMode | IconMode) & (AsLink | AsButton);
 
 function intentStyles(
     intent: UiButtonIntent | undefined
-): Pick<MuiButtonProps, "color"> & { sx?: SxProps<Theme> } {
+): Required<Pick<MuiButtonProps, "color">> & { sx?: SxProps<Theme> } {
     switch (intent) {
         case "success":
             return { color: "success" };
@@ -77,76 +77,78 @@ function intentStyles(
     }
 }
 
-export const UiButton = forwardRef<HTMLButtonElement, UiButtonProps>(function UiButton(props, ref) {
-    const {
-        variantType,
-        // discriminants nav/action
-        href,
-        // communs
-        intent = "primary",
-        variant,
-        size = "medium",
-        loading = false,
-        tooltip,
-        title,
-        className,
-        sx,
-        disabled,
-        type = "button",
-        buttonProps,
-        iconButtonProps,
-    } = props as UiButtonProps;
+export const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps>(
+    function UiButton(props, ref) {
+        const {
+            variantType,
+            // discriminants nav/action
+            href,
+            // communs
+            intent = "primary",
+            variant,
+            size = "medium",
+            loading = false,
+            tooltip,
+            title,
+            className,
+            sx,
+            disabled,
+            type = "button",
+            buttonProps,
+            iconButtonProps,
+        } = props;
 
-    const { onClick: buttonOnClick, ...restButtonProps } = buttonProps ?? {};
-    const { onClick: iconButtonOnClick, ...restIconButtonProps } = iconButtonProps ?? {};
+        const { onClick: buttonOnClick, ...restButtonProps } = buttonProps ?? {};
+        const { onClick: iconButtonOnClick, ...restIconButtonProps } = iconButtonProps ?? {};
 
-    const iv = intentStyles(intent);
-    const mergedSx = (
-        Array.isArray(sx) ? [{}, iv.sx, ...sx] : { ...iv.sx, ...sx }
-    ) as SxProps<Theme>;
-    const isDisabled = disabled || loading;
+        const iv: { color: MuiButtonProps["color"]; sx?: SxProps<Theme> } = intentStyles(intent);
+        const mergedSx: SxProps<Theme> = Array.isArray(sx)
+            ? ([{}, iv.sx, ...sx] as SxProps<Theme>)
+            : ({ ...iv.sx, ...sx } as SxProps<Theme>);
+        const isDisabled = disabled || loading;
 
-    // Rendu discriminé
-    const content =
-        variantType === "button" ? (
-            <MuiButton
-                ref={ref}
-                component={href ? NextLink : undefined}
-                href={href}
-                onClick={buttonOnClick}
-                size={size}
-                color={iv.color}
-                variant={variant ?? (intent === "ghost" ? "outlined" : "contained")}
-                className={className}
-                sx={mergedSx}
-                disabled={isDisabled}
-                startIcon={props.icon}
-                type={type}
-                title={title}
-                {...restButtonProps}
-            >
-                {loading ? <CircularProgress size={18} /> : props.label}
-            </MuiButton>
-        ) : (
-            <MuiIconButton
-                ref={ref as any}
-                component={href ? NextLink : undefined}
-                {...((href ? { href } : {}) as any)}
-                onClick={iconButtonOnClick}
-                size={size}
-                color={iv.color as any}
-                className={className}
-                sx={mergedSx}
-                disabled={isDisabled}
-                title={title}
-                aria-label={props.ariaLabel}
-                {...restIconButtonProps}
-            >
-                {loading ? <CircularProgress size={18} /> : props.icon}
-            </MuiIconButton>
-        );
+        // Rendu discriminé
+        const content =
+            variantType === "button" ? (
+                <MuiButton
+                    ref={ref as React.Ref<HTMLButtonElement>}
+                    component={href ? NextLink : undefined}
+                    href={href}
+                    onClick={buttonOnClick}
+                    size={size}
+                    color={iv.color}
+                    variant={variant ?? (intent === "ghost" ? "outlined" : "contained")}
+                    className={className}
+                    sx={mergedSx}
+                    disabled={isDisabled}
+                    startIcon={props.icon}
+                    type={type}
+                    title={title}
+                    {...restButtonProps}
+                >
+                    {loading ? <CircularProgress size={18} /> : props.label}
+                </MuiButton>
+            ) : (
+                <MuiIconButton
+                    ref={ref as unknown as React.Ref<HTMLButtonElement>}
+                    component={href ? NextLink : undefined}
+                    {...(href ? { href } : undefined)}
+                    onClick={iconButtonOnClick}
+                    size={size}
+                    color={iv.color}
+                    className={className}
+                    sx={mergedSx}
+                    disabled={isDisabled}
+                    title={title}
+                    aria-label={props.ariaLabel}
+                    {...restIconButtonProps}
+                >
+                    {loading ? <CircularProgress size={18} /> : props.icon}
+                </MuiIconButton>
+            );
 
-    return tooltip ? <Tooltip title={tooltip}>{content}</Tooltip> : content;
-});
+        return tooltip ? <Tooltip title={tooltip}>{content}</Tooltip> : content;
+    }
+);
 
 export default UiButton;
