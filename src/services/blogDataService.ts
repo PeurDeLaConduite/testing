@@ -32,14 +32,14 @@ export async function fetchBlogData(): Promise<BlogData> {
         });
 
         const posts: Post[] = postData.map((p) => ({
-            postJsonId: p.id,
+            id: p.id,
             title: p.title ?? "",
             slug: p.slug ?? "",
             excerpt: p.excerpt ?? "",
             content: p.content ?? "",
-            authorJsonId: p.authorId,
-            sectionJsonIds: [],
-            relatedPostJsonIds: [],
+            authorId: p.authorId,
+            sectionIds: [],
+            relatedPostIds: [],
             videoUrl: p.videoUrl ?? null,
             tags: [],
             type: p.type ?? "",
@@ -55,16 +55,16 @@ export async function fetchBlogData(): Promise<BlogData> {
 
         const postsById: Record<string, Post> = {};
         posts.forEach((p) => {
-            postsById[p.postJsonId] = p;
+            postsById[p.id] = p;
         });
 
         const sections: Section[] = sectionData.map((s) => ({
-            sectionJsonId: s.id,
+            id: s.id,
             title: s.title ?? "",
             slug: s.slug ?? "",
             description: s.description ?? "",
             order: s.order ?? 0,
-            postJsonIds: [],
+            postIds: [],
             seo: s.seo
                 ? {
                       title: s.seo.title ?? "",
@@ -76,18 +76,18 @@ export async function fetchBlogData(): Promise<BlogData> {
 
         const sectionsById: Record<string, Section> = {};
         sections.forEach((s) => {
-            sectionsById[s.sectionJsonId] = s;
+            sectionsById[s.id] = s;
         });
 
         // Map SectionPost relationships
         sectionPostsRes.data.forEach((sp) => {
             const post = postsById[sp.postId];
             if (post) {
-                post.sectionJsonIds.push(sp.sectionId);
+                post.sectionIds.push(sp.sectionId);
             }
             const section = sectionsById[sp.sectionId];
             if (section) {
-                section.postJsonIds.push(sp.postId);
+                section.postIds.push(sp.postId);
             }
         });
 
@@ -101,8 +101,8 @@ export async function fetchBlogData(): Promise<BlogData> {
         });
 
         const authors: Author[] = authorData.map((a) => ({
-            authorJsonId: a.id,
-            authorName: a.authorName ?? "",
+            id: a.id,
+            name: a.authorName ?? "",
             avatar: a.avatar ?? "",
         }));
 
