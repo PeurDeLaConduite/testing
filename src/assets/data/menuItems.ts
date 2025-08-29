@@ -76,14 +76,14 @@ export const menuItems: MenuLinks = {
                 {
                     id: "menu-without-license",
                     title: "Débutant",
-                    AnchorId: "#sans-permis",
+                    AnchorId: "#novice",
                     class: "",
                     scrollOffset: 102,
                 },
                 {
                     id: "menu-with-license",
                     title: "Confirmé",
-                    AnchorId: "#avec-permis",
+                    AnchorId: "#expert",
                     class: "",
                     scrollOffset: 102,
                 },
@@ -129,7 +129,7 @@ export const menuItems: MenuLinks = {
     connection: [
         {
             id: "connection",
-            title: "Connection",
+            title: "Se connecter",
             class: "",
             path: "/connection",
             AnchorId: "#top",

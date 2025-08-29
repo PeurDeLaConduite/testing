@@ -4,7 +4,8 @@ export const sections = [
     { id: "about" },
     { id: "services" },
     { id: "contact" },
-    // { id: "s1" },
+    { id: "novice" },
+    { id: "expert" },
     { id: "sans-permis" },
     { id: "avec-permis" },
 ];
