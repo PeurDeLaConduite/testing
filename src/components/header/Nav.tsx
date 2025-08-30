@@ -126,7 +126,9 @@ const Nav: React.FC<NavProps> = ({
                 ))}
             </nav>
 
-            <nav className={`connect`}>{renderMenu(menuItems.connection)}</nav>
+            <nav ref={navRef} className={`connect`}>
+                {renderMenu(menuItems.connection)}
+            </nav>
         </div>
     );
 };

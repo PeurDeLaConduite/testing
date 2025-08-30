@@ -1,4 +1,4 @@
-// src/entities/models/tag/hooks.tsx
+/* // src/entities/models/tag/hooks.tsx
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useModelForm } from "@entities/core/hooks";
 import { postService } from "@entities/models/post/service";
@@ -261,3 +261,4 @@ export function useTagForm(tag: TagType | null) {
         isTagLinked,
     };
 }
+ */

@@ -12,7 +12,7 @@ interface SubMenuProps {
 }
 
 const isModifiedClick = (e: React.MouseEvent) =>
-  e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+    e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
 
 const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, triggerRef }) => {
     const { setOpenSubMenu } = useNavigation();
@@ -29,7 +29,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
         subItemScrollOffset: number | undefined,
         e: React.MouseEvent | React.KeyboardEvent
     ) => {
-        if ('button' in e && isModifiedClick(e as React.MouseEvent)) return;
+        if ("button" in e && isModifiedClick(e as React.MouseEvent)) return;
 
         e.preventDefault();
         e.stopPropagation();
@@ -65,16 +65,17 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                     const basePath = subItem.path ?? menuItem.path ?? "";
                     const href = `${basePath}${subItem.AnchorId ?? ""}`;
                     const offset = subItem.scrollOffset ?? menuItem.scrollOffset;
+                    const fullPath = `${subItem.path ?? menuItem.path ?? ""}${subItem.AnchorId ?? ""}`;
 
                     return (
                         <a
                             key={subItem.id}
                             aria-label={`Section ${subItem.title}`}
                             href={href}
-                            className={`nav-link ${subItem.class || ""}`}
+                            className={`nav-link ${subItem.class || null}`}
                             tabIndex={0}
-                            onClick={(e) => handleSubItemClick(href, offset, e)}
-                            onKeyDown={(e) => handleKeyDown(href, offset, e)}
+                            onClick={(e) => handleSubItemClick(fullPath, offset, e)}
+                            onKeyDown={(e) => handleKeyDown(fullPath, offset, e)}
                         >
                             {subItem.title}
                         </a>

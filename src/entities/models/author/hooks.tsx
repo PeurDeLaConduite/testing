@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+/* import { useCallback, useEffect, useState } from "react";
 import { useModelForm } from "@entities/core/hooks";
 import { authorService } from "@entities/models/author/service";
 import { initialAuthorForm, toAuthorForm } from "@entities/models/author/form";
@@ -99,3 +99,4 @@ export function useAuthorForm(author: AuthorType | null) {
 
     return { ...modelForm, authorId, listAuthors, selectById, deleteEntity };
 }
+ */

@@ -1,4 +1,4 @@
-// src/entities/models/section/hooks.tsx
+/* // src/entities/models/section/hooks.tsx
 import { useEffect, useCallback, useState } from "react";
 import { useModelForm } from "@entities/core/hooks";
 import { postService } from "@entities/models/post/service";
@@ -137,3 +137,4 @@ export function useSectionForm(section: SectionType | null) {
         togglePost,
     };
 }
+ */

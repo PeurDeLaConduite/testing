@@ -1,6 +1,26 @@
-import { MenuLinks } from "./interfaces/menu";
-import { contentIndex } from "./content/index";
+/**
+ *! ⚠️ NOTE IMPORTANTE SUR LA NAVIGATION DES SOUS-MENUS
+ *
+ ** Pour que les sous-menus fonctionnent correctement (clic et navigation),
+ ** il faut ajouter `ref={navRef}` provenant du hook `useMenuBehavior`
+ ** dans le bloc de navigation <nav.. <nav ref={navRef} className="main-nav">.
+ *
+ * Exemple (Nav.tsx) :
+ *
+ *   <div className="head-flex" >
+ *     <nav ref={navRef} className="main-nav"> ... </nav>
+ *     <nav className="reservationId"> ... </nav>
+ *     <nav className="research"> ... </nav>
+ *     <nav ref={navRef} className="connection"> ... </nav>
+ *   </div>
+ *
+ *? 👉 Sans ça : les clics dans <nav class="connection"> ou dans un <SubMenu>
+ *? sont considérés comme des "clics extérieurs" et ferment le menu avant la navigation.
+ *
+ */
 
+ import { MenuLinks } from "./interfaces/menu";
+ import { contentIndex } from "./content/index";
 export const menuItems: MenuLinks = {
     mainLink: [
         {
@@ -53,14 +73,14 @@ export const menuItems: MenuLinks = {
                     title: "Sans Permis",
                     AnchorId: "#sans-permis",
                     class: "",
-                    scrollOffset: 102,
+                    // scrollOffset: 102,
                 },
                 {
                     id: "menu-with-license",
                     title: "Avec Permis",
                     AnchorId: "#avec-permis",
                     class: "",
-                    scrollOffset: 102,
+                    // scrollOffset: 102,
                 },
             ],
         },
@@ -78,14 +98,14 @@ export const menuItems: MenuLinks = {
                     title: "Débutant",
                     AnchorId: "#novice",
                     class: "",
-                    scrollOffset: 102,
+                    // scrollOffset: 102,
                 },
                 {
                     id: "menu-with-license",
                     title: "Confirmé",
                     AnchorId: "#expert",
                     class: "",
-                    scrollOffset: 102,
+                    // scrollOffset: 102,
                 },
             ],
         },

@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+/* import { useEffect, useCallback, useState } from "react";
 import { useModelForm } from "@entities/core/hooks";
 import { postService } from "@entities/models/post/service";
 import { postTagService } from "@entities/relations/postTag/service";
@@ -184,7 +184,7 @@ export function usePostForm(post: PostType | null) {
         [listPosts, postId, refresh, setError, setMessage]
     );
 
-    /** Sortie d’édition spécifique au Post : nettoie postId et repasse en create */
+    //* Sortie d’édition spécifique au Post : nettoie postId et repasse en create 
     const exitEditMode = useCallback(() => {
         setPostId(null);
         baseExitEditMode(initialPostForm);
@@ -201,3 +201,4 @@ export function usePostForm(post: PostType | null) {
         exitEditMode,
     };
 }
+ */
