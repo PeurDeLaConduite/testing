@@ -85,7 +85,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                             key={subItem.id}
                             aria-label={`Section ${subItem.title}`}
                             href={href}
-                            className={`nav-link ${subItem.class}`}
+                            className={`nav-link ${subItem.class || null}`}
                             tabIndex={0}
                             onClick={(e) =>
                                 handleAction(subItem as MenuItem, fullPath, subItem.scrollOffset, e)
