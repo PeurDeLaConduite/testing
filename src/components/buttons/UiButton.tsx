@@ -99,7 +99,9 @@ export const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButt
         } = props;
 
         const { onClick: buttonOnClick, ...restButtonProps } = buttonProps ?? {};
-        const { onClick: iconButtonOnClick, ...restIconButtonProps } = iconButtonProps ?? {};
+        const { onClick: iconButtonOnClick, ...restIconButtonProps } = (iconButtonProps ?? {}) as {
+            onClick?: MuiIconButtonProps["onClick"];
+        } & Omit<MuiIconButtonProps, "onClick">;
 
         const iv: { color: MuiButtonProps["color"]; sx?: SxProps<Theme> } = intentStyles(intent);
         const mergedSx: SxProps<Theme> = Array.isArray(sx)
