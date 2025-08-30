@@ -1,10 +1,8 @@
+// src/app/connexion/page.tsx
 import { Metadata } from "next";
-import Authentication from "@src/app/Authentication/Authentication";
-import UserProfileManager from "@/src/components/Profile/UserProfileManager";
-import UserNameManager from "@components/Profile/UserNameManager";
-import AuthProvider from "@src/app/Authentication/auth-provider";
-import SectionContainer from "../blog/SectionContainer";
-import ConnectionIcon from "@components/svg_Icon/Connection";
+import AuthProvider from "@src/auth/Authentication/auth-provider";
+import Authentication from "@src/auth/Authentication/Authentication";
+import PostLoginUserNameGate from "@src/auth/Authentication/PostLoginUserNameGate";
 
 export const metadata: Metadata = {
     title: "Connexion",
@@ -18,22 +16,21 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function Page() {
+export default function Page() {
     return (
-        <>
+        <AuthProvider>
             <section className="section" id="connexion">
                 <div className="fixed-menu"></div>
                 <div className="fixed-menu"></div>
-                <Authentication />;
+
+                {/* Formulaire/amplify authenticator */}
+                <Authentication />
+
+                {/* Après login :
+            - si userName manquant => ouvre UserNameModal
+            - sinon => redirige vers ?redirect= ou /profile */}
+                <PostLoginUserNameGate />
             </section>
-            <AuthProvider>
-                <SectionContainer id="profile" title="Espace personnel" icon={<ConnectionIcon />}>
-                    <div className="post-content__content">
-                        <UserNameManager />
-                        <UserProfileManager />
-                    </div>
-                </SectionContainer>
-            </AuthProvider>
-        </>
+        </AuthProvider>
     );
 }

@@ -2,7 +2,7 @@
 "use client";
 import { useEffect } from "react";
 import { Amplify } from "aws-amplify";
-import { amplifyConfig } from "@src/app/amplifyConfig"; // <- voir patch #2
+import { amplifyConfig } from "@/src/auth/amplifyConfig"; // <- voir patch #2
 
 let configured = false;
 export default function Providers({ children }: { children: React.ReactNode }) {

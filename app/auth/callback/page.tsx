@@ -2,7 +2,7 @@
 
 "use client";
 
-import AuthProvider from "@src/app/Authentication/auth-provider";
+import AuthProvider from "@/src/auth/Authentication/auth-provider";
 
 export default function Page() {
     return (

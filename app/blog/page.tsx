@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import type { Metadata } from "next";
-
+import { RequireLoginButton } from "@/src/auth/Authentication/RequireLoginButton";
 export const metadata: Metadata = {
     title: "Blog",
     description: "Découvrez des articles dédiés à la peur de conduire : conseils pratiques, gestion du stress, dépassement des blocages et préparation à la conduite en toute confiance. Par Mounir Bouakkaz, coaching conduite et anti-amaxophobie au Havre.",
@@ -49,6 +49,7 @@ export default async function Page() {
     return (
         <SectionContainer id="blog" title="Blog" icon={<BlogIcon />}>
             <BlogClientWrapper />
+            <RequireLoginButton>Commenter</RequireLoginButton>
         </SectionContainer>
     );
 }

@@ -1,4 +1,4 @@
-// src/app/profile/UserNameManager.tsx
+// src/components/Profile/UserNameManager.tsx  (← même code que chez toi, juste nettoyé)
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
@@ -13,46 +13,31 @@ import {
     type UserNameType,
     initialUserNameForm,
 } from "@entities/models/userName";
-import { useRouter, usePathname } from "next/navigation";
 
 type IdLike = string | number;
 const fields: (keyof UserNameFormType)[] = ["userName"];
 
 export default function UserNameManager() {
-    // ⚡ Utiliser authStatus pour connaître l’état d’authentification
-    const { authStatus, user } = useAuthenticator((ctx) => [ctx.authStatus, ctx.user]);
-
-    const router = useRouter();
-    const pathname = usePathname();
-
+    // Ici on peut garder user si tu en as besoin pour l'id par défaut, mais on n’en déduit plus la redirection
+    const { user } = useAuthenticator();
     const [userNameToEdit, setUserNameToEdit] = useState<UserNameType | null>(null);
     const [userNameId, setUserNameId] = useState<string | null>(null);
 
     const manager = useUserNameForm(userNameToEdit);
     const { deleteEntity, setForm, setMode, refresh } = manager;
 
-    // 🔁 Rediriger vers /connexion si non connecté
+    // Charger/rafraîchir quand l’utilisateur est présent
     useEffect(() => {
-        if (authStatus === "unauthenticated") {
-            // Option : préserver la page de retour
-            const redirect = encodeURIComponent(pathname ?? "/profile");
-            router.replace(`/connexion?redirect=${redirect}`);
-        }
-    }, [authStatus, router, pathname]);
+        if (user) void refresh();
+    }, [user, refresh]);
 
-    // 🔄 Charger/rafraîchir quand l’utilisateur est connecté
+    // Resync si MAJ ailleurs
     useEffect(() => {
-        if (authStatus === "authenticated" && user) void refresh();
-    }, [authStatus, user, refresh]);
-
-    // 🔔 Se resynchroniser si un autre écran met à jour le pseudo
-    useEffect(() => {
-        if (authStatus !== "authenticated") return;
         const unsub = onUserNameUpdated(() => {
             void refresh();
         });
         return unsub;
-    }, [authStatus, refresh]);
+    }, [refresh]);
 
     const handleDeleteById = useCallback(
         async (id: IdLike) => {
@@ -64,9 +49,6 @@ export default function UserNameManager() {
         },
         [deleteEntity, setMode, setForm]
     );
-
-    // ⏳ Pendant la résolution de la session Amplify, on ne rend rien (ou un loader si tu préfères)
-    if (authStatus !== "authenticated") return null;
 
     return (
         <EntityEditor<UserNameFormType>
