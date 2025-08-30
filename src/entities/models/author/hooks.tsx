@@ -17,7 +17,7 @@ export function useAuthorForm(author: AuthorType | null) {
         initialExtras: { authors: [], loading: true },
         create: async (form) => {
             //! DON'T DELETE
-            //* eslint-disable-next-line @typescript-eslint/no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { postIds, ...authorInput } = form;
             const { data } = await authorService.create(authorInput);
             if (!data) throw new Error("Erreur lors de la création de l'auteur");
@@ -27,7 +27,7 @@ export function useAuthorForm(author: AuthorType | null) {
         update: async (form) => {
             if (!authorId) throw new Error("ID de l'auteur manquant pour la mise à jour");
             //! DON'T DELETE
-            //* eslint-disable-next-line @typescript-eslint/no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { postIds, ...authorInput } = form;
             const { data } = await authorService.update({
                 id: authorId,

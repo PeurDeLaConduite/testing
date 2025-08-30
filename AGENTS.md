@@ -15,11 +15,10 @@ Utilisez les scripts définis dans le `package.json` :
 
 - **`yarn install`** : installe l’application en mode développement (`next dev`).
 - **`yarn lint`** : exécute le lint via Next.js (`next lint`).
-- **`yarn tsc -noEmit`** 
-- **`yarn test`** 
+- **`yarn tsc -noEmit`**
+- **`yarn test`**
 - **`yarn build`** : construit la production (`next build`).
 - **`yarn start`** : démarre le serveur en production (`next start`).
-
 
 ## Style de code
 
@@ -60,5 +59,16 @@ Utilisez les scripts définis dans le `package.json` :
 - **Tests effectués** : listez les commandes exécutées (ex. `yarn dev`, `yarn lint`, `yarn build`).
 
 ---
+
+Quand tu génères du code, n’argumente pas sur la forme des imports ni sur l’utilisation des alias relatifs :
+
+Toujours utiliser un alias qui contient au minimum un /, jamais d’alias simple sans /.
+
+Si j’ai un dossier (par exemple services) qui contient un fichier index.ts pour regrouper les exports, alors j’utilise l’alias :
+@src/services
+(et pas @services ni @src/services)
+
+Si je n’utilise pas d’index pour centraliser les exports dans un dossier, alors importe directement le module voulu, ex :
+@example/monComposant
 
 > Ces instructions seront automatiquement suivies par Codex pour chaque tâche (lint, build, PR, etc.), garantissant un workflow cohérent et reproductible.

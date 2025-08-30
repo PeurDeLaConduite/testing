@@ -39,7 +39,7 @@ export function usePostForm(post: PostType | null) {
 
         create: async (form) => {
             //! DON'T DELETE no-unused-vars
-            //* eslint-disable-next-line @typescript-eslint/no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { tagIds, sectionIds, ...postInput } = form;
             const { data } = await postService.create({
                 ...postInput,
@@ -56,7 +56,7 @@ export function usePostForm(post: PostType | null) {
                 throw new Error("ID du post manquant pour la mise à jour");
             }
             //! DON'T DELETE no-unused-vars
-            //* eslint-disable-next-line @typescript-eslint/no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { tagIds, sectionIds, ...postInput } = form;
             const { data } = await postService.update({
                 id: postId,
