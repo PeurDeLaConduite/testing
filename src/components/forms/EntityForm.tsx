@@ -41,6 +41,7 @@ export default function EntityForm<T extends Record<string, unknown>>({
                     <input
                         id={String(field)}
                         name={String(field)}
+                        autoComplete={String(field)}
                         placeholder={labels(field)}
                         value={String(formData[field] ?? "")}
                         onChange={(e) => setFieldValue(field, e.target.value)}
