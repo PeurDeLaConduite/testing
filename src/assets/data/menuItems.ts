@@ -138,6 +138,7 @@ export const menuItems: MenuLinks = {
                 {
                     id: "profil",
                     title: "Mon profil",
+                    path: "/profile",
                     AnchorId: "#profile",
                     class: "",
                     scrollOffset: 102,

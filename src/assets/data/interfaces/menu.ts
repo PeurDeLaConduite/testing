@@ -3,6 +3,7 @@ import { Content } from "../interfaces/content"; // Assurez-vous que "Content" e
 export interface SubItem {
     id: string;
     title: string;
+    path?: string;
     AnchorId: string;
     class: string;
     scrollOffset?: number;
