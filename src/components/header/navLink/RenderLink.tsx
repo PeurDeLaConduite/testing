@@ -7,9 +7,6 @@ import { svgComponents } from "../svgComponents";
 import HiddenDelayComponent from "../utils/HiddenDelayComponent";
 import { getShowClass } from "../utils/menuUtils";
 import { useNavigation } from "../../../utils/context/NavigationContext";
-import { toAction } from "../../../menu/actions/adapter";
-import { dispatch } from "../../../menu/actions/dispatch";
-import { externalActions } from "../../../menu/actions/externalActions";
 interface NavLinkShowProps {
     menuItem: MenuItem;
     onNavigationClick: (path: string, scrollOffset?: number) => void;
@@ -26,20 +23,14 @@ const RenderLink: React.FC<NavLinkShowProps> = ({
     openMenuId,
 }) => {
     const SvgIcon = svgComponents[menuItem.svg as SvgComponentKey];
-    const useActions = process.env.NEXT_PUBLIC_MENU_ACTIONS_V2 === "true";
-    const action = useActions ? toAction(menuItem, externalActions) : null;
 
     const { setOpenSubMenu } = useNavigation();
     const handleInteraction = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.preventDefault();
-        if (useActions && action) {
-            dispatch(action, externalActions);
-        } else {
-            onNavigationClick(
-                `${menuItem.path ?? ""}${menuItem.AnchorId ?? ""}`,
-                menuItem.scrollOffset
-            );
-        }
+        onNavigationClick(
+            `${menuItem.path ?? ""}${menuItem.AnchorId ?? ""}`,
+            menuItem.scrollOffset
+        );
         handleMenuClick(menuItem.id);
     };
     const hoverInteraction = (
@@ -57,7 +48,7 @@ const RenderLink: React.FC<NavLinkShowProps> = ({
             role={!showNavLinks ? "menuitem" : "link"}
             aria-label={`Page ${menuItem.title}`}
             className={`head-link ${menuItem.class}`}
-            href={useActions && action?.kind === "href" ? action.href : (menuItem.path ?? "#")}
+            href={menuItem.path ?? "#"}
             onClick={handleInteraction}
             onKeyDown={(e) => {
                 if (["Enter", " "].includes(e.key)) {

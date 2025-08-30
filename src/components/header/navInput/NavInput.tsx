@@ -37,11 +37,6 @@ const NavInput: React.FC<NavInputProps> = ({
         handleSuggestionClick,
     } = useSearchHandler(router);
 
-    const onSuggestionSelect = (suggestion: string) => {
-        handleSuggestionClick(suggestion);
-        onMenuToggle(menuItem.id);
-    };
-
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (["Enter", " "].includes(e.key)) {
             e.preventDefault();
@@ -56,7 +51,7 @@ const NavInput: React.FC<NavInputProps> = ({
             <SubResult
                 suggestions={suggestions}
                 isOpen={isOpen}
-                onSuggestionSelect={onSuggestionSelect}
+                onSuggestionClick={handleSuggestionClick}
             />
         );
 
@@ -87,8 +82,8 @@ const NavInput: React.FC<NavInputProps> = ({
                     onFocus={onFocus}
                     handleSearch={handleSearch}
                     handleSubmit={handleSubmit}
-                    isSubmitted={isSubmitted}
-                    handleReset={handleReset}
+                    isSubmitted={isSubmitted} // Ajouter cette prop
+                    handleReset={handleReset} // Ajouter cette prop
                 />
             </form>
             {renderSubResult()}

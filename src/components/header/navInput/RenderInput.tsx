@@ -35,7 +35,6 @@ const RenderInput: React.FC<RenderInputProps> = ({
     return (
         <>
             <RenderInputButton
-                hasQuery={query.length > 0}
                 isSubmitted={isSubmitted}
                 showNavLinks={showNavLinks}
                 menuItem={{ svg: menuItem.svg as keyof typeof svgComponents }}
@@ -47,10 +46,7 @@ const RenderInput: React.FC<RenderInputProps> = ({
                     !isHidden && (
                         <input
                             id="search-input"
-                            type="search"
-                            name="search"
-                            autoComplete="off"
-                            aria-label="Recherche"
+                            type="text"
                             value={query}
                             placeholder={placeholder}
                             onChange={handleSearch}

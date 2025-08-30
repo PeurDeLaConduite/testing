@@ -33,7 +33,10 @@ const useSearchHandler = (
 
             if (menuData) {
                 const filteredMenu = searchQuery(menuData, newQuery);
-                const uniqueSuggestions = filterSuggestions(filteredMenu, newQuery);
+                const uniqueSuggestions = filterSuggestions(
+                    filteredMenu,
+                    newQuery
+                );
                 setSuggestions(uniqueSuggestions);
                 setSubResultOpen(uniqueSuggestions.length > 0);
             }
@@ -59,9 +62,13 @@ const useSearchHandler = (
 
             // Mise à jour de l'URL via setParam
             if (resultsForQuery.length === 0) {
-                router.push(`/search?badKeyWord=${encodeURIComponent(trimmedQuery)}`);
+                router.push(
+                    `/search?badKeyWord=${encodeURIComponent(trimmedQuery)}`
+                );
             } else {
-                router.push(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+                router.push(
+                    `/search?query=${encodeURIComponent(trimmedQuery)}`
+                );
             }
         }
 

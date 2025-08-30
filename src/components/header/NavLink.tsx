@@ -2,9 +2,6 @@ import React from "react";
 import { MenuItem } from "@assets/data/menuItems";
 import SubMenu from "./navLink/SubMenu";
 import { svgComponents } from "./svgComponents";
-import { toAction } from "../../menu/actions/adapter";
-import { dispatch } from "../../menu/actions/dispatch";
-import { externalActions } from "../../menu/actions/externalActions";
 
 interface NavLinkProps {
     menuItem: MenuItem;
@@ -21,7 +18,6 @@ const NavLink: React.FC<NavLinkProps> = ({
     handleMenuClick,
 }) => {
     const SvgIcon = svgComponents[menuItem.svg as SvgComponentKey];
-    const useActions = process.env.NEXT_PUBLIC_MENU_ACTIONS_V2 === "true";
 
     return (
         <div className={`group_link-submenu ${menuItem.id}`}>
@@ -31,12 +27,7 @@ const NavLink: React.FC<NavLinkProps> = ({
                 href={`${menuItem.path ?? ""}${menuItem.AnchorId ?? ""}`}
                 onClick={(e) => {
                     e.preventDefault();
-                    if (useActions) {
-                        const action = toAction(menuItem, externalActions);
-                        dispatch(action, externalActions);
-                    } else {
-                        onNavigationClick(menuItem.path ?? "", menuItem.scrollOffset);
-                    }
+                    onNavigationClick(menuItem.path ?? "", menuItem.scrollOffset);
                     handleMenuClick(menuItem.id);
                 }}
                 tabIndex={0}

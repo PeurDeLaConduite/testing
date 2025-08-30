@@ -3,7 +3,6 @@ import { svgComponents } from "../svgComponents";
 import SearchClose from "../../svg_Icon/SearchClose";
 
 interface RenderButtonProps {
-    hasQuery: boolean;
     isSubmitted: boolean;
     showNavLinks: boolean;
     menuItem: { svg: SvgComponentKey };
@@ -13,7 +12,6 @@ interface RenderButtonProps {
 
 type SvgComponentKey = keyof typeof svgComponents;
 const RenderInputButton: React.FC<RenderButtonProps> = ({
-    hasQuery,
     isSubmitted,
     showNavLinks,
     menuItem,
@@ -21,23 +19,22 @@ const RenderInputButton: React.FC<RenderButtonProps> = ({
     handleReset,
 }) => {
     const SvgIcon = svgComponents[menuItem.svg];
-    const shouldReset = hasQuery || isSubmitted;
-    const handleClick = shouldReset ? handleReset : handleSubmit;
+    const handleClick = isSubmitted ? handleReset : handleSubmit;
 
     if (!showNavLinks) return SvgIcon ? <SvgIcon /> : null;
 
     return (
         <button
-            type={shouldReset ? "button" : "submit"}
+            type={isSubmitted ? "button" : "submit"}
             className="nav-icon flx-c"
             onClick={handleClick}
             aria-label={
-                shouldReset
+                isSubmitted
                     ? "Réinitialiser la recherche"
                     : "Valider la recherche"
             }
         >
-            {shouldReset ? <SearchClose /> : SvgIcon && <SvgIcon />}
+            {isSubmitted ? <SearchClose /> : SvgIcon && <SvgIcon />}
         </button>
     );
 };

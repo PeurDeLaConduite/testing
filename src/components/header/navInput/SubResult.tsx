@@ -3,10 +3,14 @@ import React from "react";
 interface SubResultProps {
     suggestions: string[];
     isOpen: boolean;
-    onSuggestionSelect: (suggestion: string) => void;
+    onSuggestionClick: (suggestion: string) => void;
 }
 
-const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestionSelect }) => {
+const SubResult: React.FC<SubResultProps> = ({
+    suggestions,
+    isOpen,
+    onSuggestionClick,
+}) => {
     if (!suggestions || suggestions.length === 0) return null;
 
     return (
@@ -19,8 +23,7 @@ const SubResult: React.FC<SubResultProps> = ({ suggestions, isOpen, onSuggestion
                         className="nav-link"
                         onClick={(e) => {
                             e.preventDefault();
-                            e.stopPropagation();
-                            onSuggestionSelect(suggestion); // Appelle la méthode depuis NavInput
+                            onSuggestionClick(suggestion); // Appelle la méthode depuis NavInput
                         }}
                     >
                         {suggestion}

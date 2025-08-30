@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,32 +5,28 @@ import Nav from "./Nav";
 import Logo from "../svg_Icon/Logo";
 import { useScrollContext } from "../../utils/context/ScrollContext";
 import { useNavigation } from "../../utils/context/NavigationContext";
-import { menuItems } from "@assets/data/menuItems";
+import { MenuItem, menuItems } from "@assets/data/menuItems";
 import { updateMenuClasses } from "../../utils/updateMenuUtils";
 import { handleScrollClick, handleNavClick } from "../../utils/fnScrollUtils";
 import { useInitialScroll } from "../../utils/scrollUtils";
 import useResize from "./utils/useResize";
-import { useAuthenticator } from "@aws-amplify/ui-react";
-// import { PowerButton } from "../buttons";
-// interface NavProps {
-//     menuItems: MenuItem[];
-//     onNavigationClick: (path: string, scrollOffset?: number) => void;
-//     openButton: boolean;
-//     openMainButton: boolean;
-//     tabletMain: boolean;
-//     bigMenu: boolean;
-//     setBigMenu: React.Dispatch<React.SetStateAction<boolean>>;
-//     setOpenMainButton: React.Dispatch<React.SetStateAction<boolean>>;
-//     setTabletMain: React.Dispatch<React.SetStateAction<boolean>>;
-// }
 
-const SIGN_OUT_SENTINEL = "__SIGNOUT__";
+interface NavProps {
+    menuItems: MenuItem[];
+    onNavigationClick: (path: string, scrollOffset?: number) => void;
+    openButton: boolean;
+    openMainButton: boolean;
+    tabletMain: boolean;
+    bigMenu: boolean;
+    setBigMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenMainButton: React.Dispatch<React.SetStateAction<boolean>>;
+    setTabletMain: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Header: React.FC = () => {
+const Header: React.FC<NavProps> = () => {
     const pathname = usePathname();
     const { currentRoute, updateRoute } = useNavigation();
     const { activeSection } = useScrollContext();
-    const { user, signOut } = useAuthenticator();
 
     useInitialScroll(pathname);
 
@@ -43,17 +37,11 @@ const Header: React.FC = () => {
 
     useResize(setTabletMain, setOpenMainButton, setOpenButton, setBigMenu);
 
-    // Wrapper pour adapter `handleNavClick` + gérer la déconnexion
+    // Wrapper pour adapter `handleNavClick`
     const handleNavigationClick = (path: string, scrollOffset = 0) => {
-        if (path === SIGN_OUT_SENTINEL) {
-            // Appel Amplify
-            signOut();
-            return;
-        }
         handleNavClick(path, currentRoute, updateRoute, handleScrollClick, scrollOffset);
     };
 
-    // Classes actives habituelles
     const updatedMenuItems = updateMenuClasses(
         menuItems.mainLink,
         menuItems.reservation,
@@ -62,31 +50,6 @@ const Header: React.FC = () => {
         activeSection,
         currentRoute
     );
-
-    // Adapter dynamiquement l’item "connection" si l’utilisateur est connecté
-    const adaptedMenuItems = {
-        ...updatedMenuItems,
-        connection: updatedMenuItems.connection?.map((item) => {
-            if (!user) return item; // laissé "Se connecter"
-            return {
-                ...item,
-                title: "Déconnexion",
-                path: SIGN_OUT_SENTINEL,
-                AnchorId: undefined,
-                svg: item.svg ?? "Connection",
-                class: `${item.class ?? ""} signout`.trim(),
-                subItems: [
-                    {
-                        id: "profil",
-                        title: "Mon profil",
-                        AnchorId: "#profile",
-                        class: "",
-                        scrollOffset: 102,
-                    },
-                ],
-            };
-        }),
-    };
 
     return (
         <div className="header">
@@ -97,15 +60,14 @@ const Header: React.FC = () => {
             >
                 <Logo />
             </Link>
-
             <Nav
-                menuItems={adaptedMenuItems}
+                menuItems={updatedMenuItems}
                 onNavigationClick={handleNavigationClick}
-                tabletMain={tabletMain}
-                openMainButton={openMainButton}
+                tabletMain={tabletMain} // Gestion de la vue tablette
+                openMainButton={openMainButton} // Gestion de la vue Desktop
                 setOpenMainButton={setOpenMainButton}
                 openButton={openButton}
-                bigMenu={bigMenu}
+                bigMenu={bigMenu} // Gestion de la vue Desktop large
             />
         </div>
     );
