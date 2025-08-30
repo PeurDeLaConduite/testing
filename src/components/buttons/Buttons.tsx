@@ -246,7 +246,7 @@ export function DeleteButton(props: DeleteButtonProps) {
     });
 }
 /* -------------------------------- Cancel ---------------------------------- */
-export type CancelButtonProps = ButtonWrapperProps & { onCancel: () => void; editColor?: string };
+export type CancelButtonProps = ButtonWrapperProps & { onCancel: () => void };
 
 export function CancelButton(props: CancelButtonProps) {
     const { onCancel, label = "Annuler", ...rest } = props;
@@ -262,7 +262,7 @@ export function CancelButton(props: CancelButtonProps) {
 }
 
 /* ---------------------------------- Add ----------------------------------- */
-export type AddButtonProps = ButtonWrapperProps & { onAdd: () => void; editColor?: string };
+export type AddButtonProps = ButtonWrapperProps & { onAdd: () => void };
 
 export function AddButton(props: AddButtonProps) {
     const { onAdd, label = "Ajouter", ...rest } = props;
@@ -273,12 +273,11 @@ export function AddButton(props: AddButtonProps) {
         icon: <AddIcon />,
         intent: "success",
         onClick: onAdd,
-        // editColor,
     });
 }
 
 /* ------------------------------- Submit/Update ----------------------------- */
-export type SubmitButtonProps = ButtonWrapperProps & { onSubmit: () => void; editColor?: string };
+export type SubmitButtonProps = ButtonWrapperProps & { onSubmit: () => void };
 
 export function SubmitButton(props: SubmitButtonProps) {
     const { onSubmit, label = "Créer", ...rest } = props;
@@ -292,7 +291,7 @@ export function SubmitButton(props: SubmitButtonProps) {
     });
 }
 
-export type UpdateButtonProps = ButtonWrapperProps & { onUpdate: () => void; editColor?: string };
+export type UpdateButtonProps = ButtonWrapperProps & { onUpdate: () => void };
 
 export function UpdateButton(props: UpdateButtonProps) {
     const { onUpdate, label = "Enregistrer", ...rest } = props;
@@ -303,7 +302,6 @@ export function UpdateButton(props: UpdateButtonProps) {
         icon: <SaveIcon />,
         intent: "primary",
         onClick: onUpdate,
-        // editColor,
     });
 }
 
@@ -362,9 +360,7 @@ export function RefreshButton(props: RefreshButtonProps) {
 
 /* ---------------------------------- Back ---------------------------------- */
 export type BackButtonProps = ButtonWrapperProps &
-    ({ href: string; onBack?: never } | { onBack: () => void; href?: never }) & {
-        editColor?: string;
-    };
+    ({ href: string; onBack?: never } | { onBack: () => void; href?: never });
 
 export function BackButton(props: BackButtonProps) {
     const { label = "Retour", ...rest } = props; // bleu primary par défaut
@@ -374,7 +370,6 @@ export function BackButton(props: BackButtonProps) {
         label,
         icon: <ArrowBackIcon />,
         intent: "primary" as const,
-        // editColor,
     };
 
     if ("href" in rest) {
@@ -382,4 +377,3 @@ export function BackButton(props: BackButtonProps) {
     }
     return renderByMode({ ...common, onClick: rest.onBack });
 }
-//
