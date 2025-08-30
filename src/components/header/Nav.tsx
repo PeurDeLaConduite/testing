@@ -136,7 +136,21 @@ const Nav: React.FC<NavProps> = ({
             </nav>
 
             <nav className={`connect`} data-reduced={dataReduced}>
-                {renderMenu(menuItems.connection)}
+                {menuItems.connection?.map((menuItem) => (
+                    <NavLinkShow
+                        openMainButton={openMainButton}
+                        openButton={false}
+                        key={menuItem.id}
+                        menuItem={menuItem}
+                        onNavigationClick={onNavigationClick}
+                        isOpen={openSubMenu === menuItem.id}
+                        handleMenuClick={handleMenuClick}
+                        showNavLinks={openMainButton || openMenu === menuItem.id}
+                        onMouseEnter={() => handleMouseOrFocus(menuItem.id)}
+                        onFocus={() => handleMouseOrFocus(menuItem.id)}
+                        onMenuToggle={(id) => showLink(id)}
+                    />
+                ))}
             </nav>
         </div>
     );
