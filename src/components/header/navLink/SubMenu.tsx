@@ -11,13 +11,16 @@ interface SubMenuProps {
     triggerRef?: React.RefObject<HTMLDivElement | HTMLElement | null>;
 }
 
+const isModifiedClick = (e: React.MouseEvent) =>
+  e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+
 const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, triggerRef }) => {
     const { setOpenSubMenu } = useNavigation();
 
     const closeSubMenu = () => {
         setOpenSubMenu(null);
         if (triggerRef?.current) {
-            triggerRef.current.focus();
+            (triggerRef.current as HTMLElement).focus?.();
         }
     };
 
@@ -26,11 +29,13 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
         subItemScrollOffset: number | undefined,
         e: React.MouseEvent | React.KeyboardEvent
     ) => {
+        if ('button' in e && isModifiedClick(e as React.MouseEvent)) return;
+
         e.preventDefault();
-        // ✅ priorité au subItem
+        e.stopPropagation();
         const offset = subItemScrollOffset ?? menuItem.scrollOffset;
         onSubItemClick(path, offset);
-        closeSubMenu();
+        requestAnimationFrame(() => closeSubMenu());
     };
 
     const handleKeyDown = (
@@ -41,8 +46,8 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
         if (["Enter", " "].includes(e.key) && path) {
             handleSubItemClick(path, subItemScrollOffset, e);
         } else if (e.key === "Escape") {
-            e.preventDefault(); // Empêcher le comportement par défaut
-            closeSubMenu(); // Fermer le menu si Escape est pressé
+            e.preventDefault();
+            closeSubMenu();
         }
     };
 
@@ -57,9 +62,9 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                 onKeyDown={(e) => handleKeyDown(null, undefined, e)}
             >
                 {menuItem.subItems.map((subItem) => {
-                    // ✅ support d'un path spécifique au sous-item
                     const basePath = subItem.path ?? menuItem.path ?? "";
                     const href = `${basePath}${subItem.AnchorId ?? ""}`;
+                    const offset = subItem.scrollOffset ?? menuItem.scrollOffset;
 
                     return (
                         <a
@@ -68,8 +73,8 @@ const SubMenu: React.FC<SubMenuProps> = ({ menuItem, isOpen, onSubItemClick, tri
                             href={href}
                             className={`nav-link ${subItem.class || ""}`}
                             tabIndex={0}
-                            onClick={(e) => handleSubItemClick(href, subItem.scrollOffset, e)}
-                            onKeyDown={(e) => handleKeyDown(href, subItem.scrollOffset, e)}
+                            onClick={(e) => handleSubItemClick(href, offset, e)}
+                            onKeyDown={(e) => handleKeyDown(href, offset, e)}
                         >
                             {subItem.title}
                         </a>
