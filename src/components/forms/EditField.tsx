@@ -30,6 +30,8 @@ export default function EditField<T extends Record<string, unknown>>({
             </label>
             <input
                 id="edit-field"
+                name={String(field)}
+                autoComplete={String(field)}
                 className="edit-field_input"
                 value={value}
                 placeholder={labels(field)}
