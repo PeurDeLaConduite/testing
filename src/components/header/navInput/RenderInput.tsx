@@ -47,7 +47,10 @@ const RenderInput: React.FC<RenderInputProps> = ({
                     !isHidden && (
                         <input
                             id="search-input"
-                            type="text"
+                            type="search"
+                            name="search"
+                            autoComplete="off"
+                            aria-label="Recherche"
                             value={query}
                             placeholder={placeholder}
                             onChange={handleSearch}
