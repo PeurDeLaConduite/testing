@@ -367,14 +367,15 @@ export type BackButtonProps = ButtonWrapperProps &
     };
 
 export function BackButton(props: BackButtonProps) {
-    const { label = "Retour", ...rest } = props; // bleu primary par défaut
+    const { label = "Retour", className, editColor = "#9e9e9e", ...rest } = props; // bleu primary par défaut
     const common = {
         ...rest,
         variantType: rest.variantType ?? "button",
         label,
         icon: <ArrowBackIcon />,
         intent: "primary" as const,
-        // editColor,
+        className,
+        editColor,
     };
 
     if ("href" in rest) {
