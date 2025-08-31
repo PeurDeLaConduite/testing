@@ -1,6 +1,9 @@
 // app/amplifyConfig.ts
+import outputs from "@/amplify_outputs.json";
 export const amplifyConfig = {
+    ...outputs,
     Auth: {
+        ...outputs.auth,
         Cognito: {
             userPoolId: "eu-west-3_cVrLIne9H",
             userPoolClientId: "5i8l89k5muqtfpb3v2l53h2noe",
@@ -27,6 +30,9 @@ export const amplifyConfig = {
                 // scopes: ["openid", "email", "profile"],
             },
         },
+    },
+    data: {
+        ...outputs.data,
     },
     API: {
         GraphQL: {

@@ -12,7 +12,7 @@ import Footer from "../src/components/footer/footer";
 import Loader from "@/src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
 import Providers from "./providers";
-import AuthProvider from "@/src/auth/Authentication/auth-provider";
+// import AuthProvider from "@/src/auth/Authentication/auth-provider";
 
 // import "@aws-amplify/ui-react/styles.css";
 
@@ -145,7 +145,7 @@ export default function RootLayout({
                 id="top"
             >
                 <Providers>
-                    <AuthProvider>
+                    {/* <AuthProvider> */}
                         <MobileRedirect />
                         <ScrollProvider>
                             <ScrollSectionsWrapper>
@@ -164,7 +164,7 @@ export default function RootLayout({
                                 </SearchProvider>
                             </ScrollSectionsWrapper>
                         </ScrollProvider>
-                    </AuthProvider>
+                    {/* </AuthProvider> */}
                 </Providers>
             </body>
         </html>

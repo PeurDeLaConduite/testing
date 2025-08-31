@@ -1,10 +1,7 @@
 // src/entities/core/services/amplifyClient.ts
-
-import { Amplify } from "aws-amplify";
+import "@/src/amplify/setup"; // <-- configure() exécuté au load
 import { generateClient } from "aws-amplify/data";
-import outputs from "@/amplify_outputs.json";
 import type { Schema } from "@/amplify/data/resource";
 
-Amplify.configure(outputs);
-export const client = generateClient<Schema>();
+export const client = generateClient<Schema>(); // <-- PAS d’options ici
 export type { Schema } from "@/amplify/data/resource";

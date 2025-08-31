@@ -1,7 +1,21 @@
 // src/entities/core/services/crudService.ts
+// import "@/src/amplify/setup";
 import { client, Schema } from "./amplifyClient";
 import { canAccess } from "../auth";
 import type { AuthRule } from "../types";
+// src/entities/core/services/crudService.ts
+// import { client } from "./amplifyClient";
+
+function getModelClient<K extends ModelKey>(key: K) {
+    const model = (client as any)?.models?.[key];
+    if (!model) {
+        const available = Object.keys((client as any)?.models ?? {});
+        throw new Error(
+            `[Amplify/Data] Modèle introuvable: "${String(key)}". Modèles disponibles: ${available.join(", ")}`
+        );
+    }
+    return model as CrudModel<K>;
+}
 
 // ── Clés & base model ───────────────────────────────────────────────────────────
 type ClientModels = typeof client.models;
@@ -59,9 +73,9 @@ interface CrudModel<K extends ModelKey> {
     ) => Promise<{ data: BaseModel<K>; errors?: { message: string }[] }>;
 }
 
-function getModelClient<K extends ModelKey>(key: K): CrudModel<K> {
-    return client.models[key] as unknown as CrudModel<K>;
-}
+// function getModelClient<K extends ModelKey>(key: K): CrudModel<K> {
+//     return client.models[key] as unknown as CrudModel<K>;
+// }
 
 function toArray<T>(v?: T | T[]): T[] {
     return v === undefined ? [] : Array.isArray(v) ? v : [v];
