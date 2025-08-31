@@ -6,13 +6,14 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useUserNameForm } from "@entities/models/userName/hooks";
 import { onUserNameUpdated } from "@entities/models/userName/bus";
 import type { UserNameType } from "@entities/models/userName";
-import UserNameModal from "@/src/Profile/UserNameModal";
+import UserNameModal from "@src/Profile/UserNameModal";
 import { useRouter } from "next/navigation";
 
 export default function PostLoginUserNameGate() {
     const { authStatus, user } = useAuthenticator((ctx) => [ctx.authStatus, ctx.user]);
     const router = useRouter();
 
+    // pas obligatoire d’avoir un editingProfile ici, on peut passer null
     const [editingProfile] = useState<UserNameType | null>(null);
     const {
         form: { userName },
@@ -40,15 +41,17 @@ export default function PostLoginUserNameGate() {
         return unsub;
     }, [authStatus, refresh]);
 
-    // Ouvrir/fermer le modal selon la présence du pseudo
+    // Ouvrir/fermer le modal selon la présence du pseudo, puis rediriger si OK
     useEffect(() => {
         if (authStatus !== "authenticated") return;
 
+        // pas de pseudo → on force l’ouverture du modal
         if (!userName) {
             setShowModal(true);
             return;
         }
 
+        // pseudo présent → fermer modal et rediriger une seule fois
         setShowModal(false);
 
         if (!redirectedRef.current) {
@@ -61,9 +64,10 @@ export default function PostLoginUserNameGate() {
             let to = "/profile";
             try {
                 const dec = decodeURIComponent(raw);
-                to = /^\/(?!\/)/.test(dec) ? dec : "/profile"; // ← only same-origin path
+                // garde anti open-redirect : n'autoriser que les chemins internes
+                to = /^\/(?!\/)/.test(dec) ? dec : "/profile";
             } catch {
-                /* ignore */
+                // ignore
             }
 
             router.replace(to);
@@ -73,5 +77,6 @@ export default function PostLoginUserNameGate() {
     // Tant qu'on n'est pas authentifié, on ne rend rien (la page /connexion gère le login)
     if (authStatus !== "authenticated") return null;
 
+    // ⚠️ On suppose que UserNameModal empêche sa fermeture tant que userName est vide
     return <UserNameModal isOpen={showModal} onClose={() => setShowModal(false)} />;
 }

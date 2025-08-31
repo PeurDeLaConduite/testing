@@ -1,6 +1,6 @@
 // src/app/connexion/page.tsx
 import { Metadata } from "next";
-import AuthProvider from "@src/auth/Authentication/auth-provider";
+// import AuthProvider from "@src/auth/Authentication/auth-provider";
 import Authentication from "@src/auth/Authentication/Authentication";
 import PostLoginUserNameGate from "@src/auth/Authentication/PostLoginUserNameGate";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <AuthProvider>
+        // <AuthProvider>
             <section className="section" id="connexion">
                 <div className="fixed-menu"></div>
                 <div className="fixed-menu"></div>
@@ -31,6 +31,6 @@ export default function Page() {
             - sinon => redirige vers ?redirect= ou /profile */}
                 <PostLoginUserNameGate />
             </section>
-        </AuthProvider>
+        // </AuthProvider>
     );
 }

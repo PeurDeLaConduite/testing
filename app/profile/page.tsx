@@ -5,14 +5,14 @@ import Loader from "../../src/components/loader/Loader";
 
 import UserProfileManager from "@/src/Profile/UserProfileManager";
 import UserNameManager from "@/src/Profile/UserNameManager";
-import AuthProvider from "@src/auth/Authentication/auth-provider";
+// import AuthProvider from "@src/auth/Authentication/auth-provider";
 import SectionContainer from "../blog/SectionContainer";
 import ConnectionIcon from "@components/svg_Icon/Connection";
 import AuthGuard from "@/src/auth/Authentication/AuthGuard";
 
 export default function ConnectionPage() {
     return (
-        <AuthProvider>
+        // <AuthProvider>
             <AuthGuard fallback={<Loader />}>
                 <SectionContainer id="profile" title="Espace personnel" icon={<ConnectionIcon />}>
                     <div className="post-content__content">
@@ -21,6 +21,6 @@ export default function ConnectionPage() {
                     </div>
                 </SectionContainer>
             </AuthGuard>
-        </AuthProvider>
+        // </AuthProvider>
     );
 }

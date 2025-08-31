@@ -12,7 +12,7 @@ import Footer from "../src/components/footer/footer";
 import Loader from "@/src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
 import Providers from "./providers";
-// import AuthProvider from "@/src/auth/Authentication/auth-provider";
+import AuthProvider from "@/src/auth/Authentication/auth-provider";
 
 // import "@aws-amplify/ui-react/styles.css";
 
@@ -144,28 +144,26 @@ export default function RootLayout({
                 className={`${RobotoFlex.variable} ${Montserrat.variable} ${Nunito.variable}`}
                 id="top"
             >
-                <Providers>
-                    {/* <AuthProvider> */}
-                        <MobileRedirect />
-                        <ScrollProvider>
-                            <ScrollSectionsWrapper>
-                                <SearchProvider>
-                                    <DrivingProvider>
-                                        <Suspense fallback={<Loader />}>
-                                            <header>
-                                                <div className="content-wrapper">
-                                                    <HeaderProps />
-                                                </div>
-                                            </header>
-                                            <main>{children}</main>
-                                            <Footer />
-                                        </Suspense>
-                                    </DrivingProvider>
-                                </SearchProvider>
-                            </ScrollSectionsWrapper>
-                        </ScrollProvider>
-                    {/* </AuthProvider> */}
-                </Providers>
+                <AuthProvider>
+                    <MobileRedirect />
+                    <ScrollProvider>
+                        <ScrollSectionsWrapper>
+                            <SearchProvider>
+                                <DrivingProvider>
+                                    <Suspense fallback={<Loader />}>
+                                        <header>
+                                            <div className="content-wrapper">
+                                                <HeaderProps />
+                                            </div>
+                                        </header>
+                                        <main>{children}</main>
+                                        <Footer />
+                                    </Suspense>
+                                </DrivingProvider>
+                            </SearchProvider>
+                        </ScrollSectionsWrapper>
+                    </ScrollProvider>
+                </AuthProvider>
             </body>
         </html>
     );
