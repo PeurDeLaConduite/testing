@@ -37,7 +37,10 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
     const canClose = useMemo(() => !!userName && userName.trim().length > 0, [userName]);
 
     const handleClose = () => {
-        if (!canClose) return; // on bloque la fermeture si pseudo vide
+        if (!canClose) {
+            // Tu peux afficher un toast/erreur ici si tu veux
+            return;
+        }
         onClose();
     };
 
@@ -46,7 +49,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
             isOpen={isOpen}
             onClose={handleClose}
             title="Mon pseudo public"
-            type="info" // "info" est plus cohérent que "success" ici
+            type="info"
             closeOnEsc={false}
             closeOnOverlayClick={false}
             hideCloseButton={!canClose}
@@ -55,11 +58,12 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                 <div className="content-info">
                     <p className="error-message">
                         <span>
-                            * <b>Veuillez choisir un pseudo</b> avant de continuer.
+                            *<b>Veuillez choisir un pseudo</b> avant de continuer.
                         </span>
                     </p>
                     <p className="info-message">
-                        <b>🚧 Route barrée</b> : impossible d’avancer tant que ce champ reste vide.
+                        <b>🚧 Route barrée</b> : il vous sera impossible d’avancer tant que ce champ
+                        restera vide.
                     </p>
                     <p className="info-message">
                         Cette fenêtre restera ouverte jusqu’à ce que vous ayez trouvé{" "}
@@ -67,20 +71,17 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                     </p>
                 </div>
             )}
-
             <UserNameManager />
-
-            {/* ⬇️ On n’affiche les sorties que lorsque c’est autorisé */}
-            {canClose && (
+            {!canClose && (
                 <span className="flx-x">
                     <BackButton
-                        href="/"
+                        href="./"
                         label="EXIT"
                         className="bck-ico"
                         size="medium"
                         variantType="icon"
                     />
-                    <Link href="/" className="info-message">
+                    <Link href="./" className="info-message">
                         Menu principal
                     </Link>
                 </span>
