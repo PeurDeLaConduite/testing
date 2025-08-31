@@ -11,7 +11,7 @@ type Options = {
 export function goToLoginWithReturn(router: AppRouterInstance, opts: Options = {}) {
     const { replace = false, skipIfAlreadyOnLogin = true, loginPath = "/connexion" } = opts;
 
-    const { pathname, search, hash, hostname } = window.location;
+    const { pathname, search, hash } = window.location;
 
     if (skipIfAlreadyOnLogin && pathname.startsWith(loginPath)) {
         return; // déjà sur /connexion → rien à faire
