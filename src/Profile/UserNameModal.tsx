@@ -56,7 +56,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
             isOpen={isOpen}
             onClose={handleClose}
             title="Zone d’échange partagée"
-            type="info"
+            type="warning"
             // Si ton Modal supporte ces options, tu peux renforcer le blocage :
             // closeOnEsc={false}
             // closeOnOverlayClick={false}
