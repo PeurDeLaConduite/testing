@@ -21,7 +21,6 @@ export default function EditField<T extends Record<string, unknown>>({
     autoComplete,
 }: EditFieldProps<T>) {
     const { field, value } = editModeField;
-    const inputId = React.useId();
 
     const ac = autocompleteFor<T>(field, autoComplete);
     return (
