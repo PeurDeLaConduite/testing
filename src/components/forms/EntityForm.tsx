@@ -13,6 +13,11 @@ type Props<T extends Record<string, unknown>> = {
     isEdit: boolean;
     onCancel: () => void;
     requiredFields: FieldKey<T>[];
+
+    // ✅ NOUVEAU :
+    fieldPropsByKey?: Partial<Record<FieldKey<T>, React.InputHTMLAttributes<HTMLInputElement>>>;
+    submitButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+    fieldAutoComplete?: Partial<Record<FieldKey<T>, string>>;
 };
 
 export default function EntityForm<T extends Record<string, unknown>>({
@@ -21,9 +26,12 @@ export default function EntityForm<T extends Record<string, unknown>>({
     labels,
     setFieldValue,
     handleSubmit,
+    fieldAutoComplete = {},
     isEdit,
     onCancel,
     requiredFields,
+    fieldPropsByKey, // ✅
+    submitButtonProps, // ✅
 }: Props<T>) {
     return (
         <form
@@ -33,46 +41,63 @@ export default function EntityForm<T extends Record<string, unknown>>({
             }}
             className="entity-form"
         >
-            {fields.map((field) => (
-                <div key={String(field)} className="entity-form_field">
-                    <label htmlFor={String(field)} className="entity-form_label">
-                        {labels(field)}
-                    </label>
-                    <input
-                        id={String(field)}
-                        name={String(field)}
-                        autoComplete={String(field)}
-                        placeholder={labels(field)}
-                        value={String(formData[field] ?? "")}
-                        onChange={(e) => setFieldValue(field, e.target.value)}
-                        required={requiredFields.includes(field)}
-                        className="entity-form_input"
-                    />
-                </div>
-            ))}
+            {fields.map((field) => {
+                const extra = fieldPropsByKey?.[field] ?? {};
+                const htmlId = (extra.id as string) ?? String(field);
+
+                return (
+                    <div key={String(field)} className="entity-form_field">
+                        <label htmlFor={htmlId} className="entity-form_label">
+                            {labels(field)}
+                        </label>
+                        <input
+                            id={htmlId}
+                            name={String(field)}
+                            autoComplete={fieldAutoComplete[field] ?? "off"}
+                            placeholder={String(extra.placeholder ?? labels(field))}
+                            aria-describedby={extra["aria-describedby"] as string | undefined}
+                            value={String(formData[field] ?? "")}
+                            onChange={(e) => setFieldValue(field, e.target.value)}
+                            required={requiredFields.includes(field)}
+                            className="entity-form_input"
+                            {...extra} // ⚠️ en dernier pour permettre la surcharge
+                        />
+                    </div>
+                );
+            })}
 
             <div className="entity-form_actions">
                 {isEdit ? (
                     <>
                         <UpdateButton
                             onUpdate={handleSubmit}
-                            label="Enregistrer"
-                            className="min-w-[120px]"
+                            label={
+                                submitButtonProps?.children
+                                    ? String(submitButtonProps.children)
+                                    : "Enregistrer"
+                            }
+                            // className="min-w-[120px]"
                             size="medium"
+                            aria-label={submitButtonProps?.["aria-label"]}
                         />
                         <CancelButton
                             onCancel={onCancel}
                             label="Annuler"
-                            className="min-w-[120px]"
+                            // className="min-w-[120px]"
                             size="medium"
                         />
                     </>
                 ) : (
                     <AddButton
                         onAdd={handleSubmit}
-                        label="Créer"
-                        className="min-w-[120px]"
+                        label={
+                            submitButtonProps?.children
+                                ? String(submitButtonProps.children)
+                                : "Créer"
+                        }
+                        // className="min-w-[120px]"
                         size="medium"
+                        aria-label={submitButtonProps?.["aria-label"]}
                     />
                 )}
             </div>

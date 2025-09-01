@@ -194,7 +194,7 @@ function renderByMode(opts: {
             icon={iconNode}
             intent={intent}
             variant={variant}
-            className={className}
+            className={`adjustIco ${className}`}
             sx={sxMerged}
             size={size}
             buttonProps={onClick ? { onClick } : undefined}

@@ -1,6 +1,7 @@
 import { UpdateButton, BackButton } from "@components/buttons";
 import React from "react";
 import type { FieldKey } from "@entities/core/hooks";
+import { autocompleteFor } from "@utils/autocomplete";
 
 export type EditFieldProps<T extends Record<string, unknown>> = {
     editModeField: { field: FieldKey<T>; value: string };
@@ -9,6 +10,7 @@ export type EditFieldProps<T extends Record<string, unknown>> = {
     >;
     updateEntity: () => void;
     labels: (field: FieldKey<T>) => string;
+    autoComplete?: string;
 };
 
 export default function EditField<T extends Record<string, unknown>>({
@@ -16,9 +18,12 @@ export default function EditField<T extends Record<string, unknown>>({
     setEditModeField,
     updateEntity,
     labels,
+    autoComplete,
 }: EditFieldProps<T>) {
     const { field, value } = editModeField;
+    const inputId = React.useId();
 
+    const ac = autocompleteFor<T>(field, autoComplete);
     return (
         <fieldset className="edit-field">
             <legend className="edit-field_legend">
@@ -31,7 +36,7 @@ export default function EditField<T extends Record<string, unknown>>({
             <input
                 id="edit-field"
                 name={String(field)}
-                autoComplete={String(field)}
+                autoComplete={ac}
                 className="edit-field_input"
                 value={value}
                 placeholder={labels(field)}
@@ -42,19 +47,16 @@ export default function EditField<T extends Record<string, unknown>>({
             />
 
             <div className="edit-field_actions">
-                <UpdateButton
-                    onUpdate={updateEntity}
-                    label="Sauvegarder"
-                    className="flex-1 mr-2"
-                    size="medium"
-                />
-                {/* //? BackButton => appelle setEditModeField(null) 
-                    //* Sort du mode **édition** sans sans sauvegarder  
-                */}
                 <BackButton
                     onBack={() => setEditModeField(null)}
                     label="Retour"
                     className="flex-1 ml-2"
+                    size="medium"
+                />
+                <UpdateButton
+                    onUpdate={updateEntity}
+                    label="Sauvegarder"
+                    className="flex-1 mr-2"
                     size="medium"
                 />
             </div>

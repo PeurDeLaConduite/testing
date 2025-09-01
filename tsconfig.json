@@ -5,6 +5,7 @@
         "allowJs": true,
         "skipLibCheck": true,
         "strict": true,
+        "strictNullChecks": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noEmit": true,
@@ -36,8 +37,7 @@
             {
                 "name": "next"
             }
-        ],
-        "strictNullChecks": true
+        ]
     },
     "include": [
         "next-env.d.ts",

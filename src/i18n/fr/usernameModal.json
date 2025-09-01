@@ -1,0 +1,30 @@
+{
+    "usernameModal": {
+        "common": {
+            "goal": "Pour accéder à toutes les fonctionnalités et être reconnu par la communauté, choisissez un pseudo public. C’est le seul champ requis.",
+            "fieldLabel": "Pseudo public",
+            "placeholder": "Ex. : Alex_Drive, RoueLibre, ConduiteCool",
+            "helper": "Visible par tous les utilisateurs. Évitez les infos personnelles.",
+            "privacyNote": "Votre pseudo est public ; il ne remplace pas vos données de compte privées.",
+            "privacyLink": "En savoir plus sur la confidentialité",
+            "primaryCta": "Enregistrer mon pseudo",
+            "secondaryCta": "Plus tard",
+            "returnLink": "Retour au menu principal",
+            "aria": {
+                "alertRole": "alert",
+                "submitAria": "Enregistrer mon pseudo public",
+                "inputDescribedBy": "username-help privacy-note"
+            }
+        },
+        "phase1": {
+            "title": "Bienvenue",
+            "intro": "Pour utiliser le site et être identifié par les autres, veuillez choisir un pseudo public. C’est le seul champ requis et il sera visible de tous.",
+            "tip": "Astuce : simple, mémorable, sans informations personnelles."
+        },
+        "phase2": {
+            "title": "Zone d’échange partagée",
+            "error": "Veuillez choisir un pseudo avant de continuer.",
+            "humor": "🚧 Petite pause sur la route : sans pseudo, on ne peut pas démarrer. Dès que vous avez trouvé le bon pseudo, on passe la première !"
+        }
+    }
+}

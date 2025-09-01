@@ -6,50 +6,36 @@ import ReadOnlyView from "./ReadOnlyView";
 import EditField from "./EditField";
 import EntityForm from "./EntityForm";
 import { DeleteButton } from "@components/buttons";
-// import "./_EntityEditor.scss";
 
 export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Titre de la section */
     title?: string;
     titleHeading?: string;
-    /** Champs requis pour le formulaire */
     requiredFields?: FieldKey<T>[];
-    /** Rendu personnalisé des icônes */
     labelIcon?: (field: FieldKey<T>) => React.ReactNode;
-    /** Rendu personnalisé des valeurs */
     renderValue?: (field: FieldKey<T>, value: string) => React.ReactNode;
-    /** Boutons supplémentaires pour chaque champ */
     extraButtons?: (field: FieldKey<T>, value: string) => React.ReactNode;
-    /** Libellé du bouton de suppression de l'entité */
     deleteLabel?: string;
-    /** Classe optionnelle pour la section */
     className?: string;
-    /** Personnalisation de l'effacement d'un champ */
     onClearField?: (field: FieldKey<T>, clear: (field: FieldKey<T>) => Promise<void>) => void;
-    /** Données du formulaire */
     form: T;
-    /** Mode du formulaire (création/édition) */
     mode: FormMode;
-    /** Indicateur de modification */
     dirty: boolean;
-    /** Gestion des changements */
     setFieldValue: (field: FieldKey<T>, value: unknown) => void;
-    /** Soumission du formulaire */
     submit: () => Promise<boolean>;
-    /** Réinitialisation du formulaire */
     reset: () => void;
-    /** Permet de remplacer le formulaire */
     setForm: React.Dispatch<React.SetStateAction<T>>;
-    /** Champs gérés */
     fields: FieldKey<T>[];
-    /** Libellés des champs */
     labels: (field: FieldKey<T>) => string;
-    /** Sauvegarde d'un champ individuel */
     updateEntity?: (field: FieldKey<T>, value: string) => Promise<void>;
-    /** Effacement d'un champ individuel */
     clearField?: (field: FieldKey<T>) => Promise<void>;
-    /** Suppression de l'entité */
     deleteEntity?: () => Promise<void>;
+    fieldAutoComplete?: Partial<Record<FieldKey<T>, string>>;
+    // ✅ NOUVEAU :
+    /** Attributs HTML à appliquer champ par champ (ex: id, placeholder, aria-*) */
+    fieldPropsByKey?: Partial<Record<FieldKey<T>, React.InputHTMLAttributes<HTMLInputElement>>>;
+    /** Attributs HTML pour le bouton de soumission (ex: aria-label, children pour le libellé) */
+    submitButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 };
 
 export default function EntityEditor<T extends Record<string, unknown>>(
@@ -74,7 +60,10 @@ export default function EntityEditor<T extends Record<string, unknown>>(
         labels,
         updateEntity,
         clearField,
+        fieldAutoComplete,
         deleteEntity,
+        fieldPropsByKey,
+        submitButtonProps,
     } = props;
     const [editModeField, setEditModeField] = useState<{
         field: FieldKey<T>;
@@ -138,6 +127,9 @@ export default function EntityEditor<T extends Record<string, unknown>>(
                     isEdit={false}
                     onCancel={handleCancel}
                     requiredFields={requiredFields}
+                    fieldPropsByKey={fieldPropsByKey}
+                    submitButtonProps={submitButtonProps}
+                    fieldAutoComplete={fieldAutoComplete}
                 />
             )}
 
