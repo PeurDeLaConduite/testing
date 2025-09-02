@@ -17,5 +17,5 @@
         "*.config.ts",
         "*.*config.ts"
     ],
-    "exclude": ["node_modules", "amplify", ".Help/examples", ".next", "dist"]
+    "exclude": ["node_modules", "amplify", ".Help", ".next", "dist"]
 }

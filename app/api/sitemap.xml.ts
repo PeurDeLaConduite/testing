@@ -1,13 +1,8 @@
 import { SitemapStream, streamToPromise } from "sitemap";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-    const siteUrl =
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        "https://desktop.peur-de-la-conduite.fr";
+export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://desktop.peur-de-la-conduite.fr";
 
     const links = [
         { url: "/", changefreq: "daily", priority: 1.0 },

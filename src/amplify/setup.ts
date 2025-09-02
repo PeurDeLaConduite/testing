@@ -5,7 +5,7 @@ import outputs from "@/amplify_outputs.json";
 const overrides = {
     auth: {
         ...outputs.auth,
-        oauth: { domain: "auth.peur-de-la-conduite.fr" },
+        // oauth: { domain: "auth.peur-de-la-conduite.fr" },
     },
     data: {
         ...outputs.data,

@@ -2,7 +2,6 @@
     "usernameModal": {
         "common": {
             "goal": "Pour accéder à toutes les fonctionnalités du site et être reconnu par la communauté, choisissez un <b>pseudo public</b>.",
-            "fieldLabel": "Pseudo public",
             "placeholder": "Ex. : Alex_Drive, RoueLibre, ConduiteCool",
             "helper": "Visible par tous les utilisateurs. <b>Évitez les infos personnelles.</b>",
             "privacyNote": "Votre pseudo est public : <br/><b>Évitez les infos personnelles</b>.<br/>Il ne remplace pas vos données de compte privées.<br/><br/><a href=\"/informations-legales#top\" class=\"info-message\"><i>En savoir plus sur la confidentialité<i/><a/>",

@@ -107,17 +107,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
           👉 On passe au UserNameManager des props i18n. 
           Si ton UserNameManager n'accepte pas encore ces props, ajoute-les (facultatives).
         */}
-                <UserNameManager
-                    inputId="userName-input"
-                    label={t("usernameModal.common.fieldLabel")}
-                    placeholder={t("usernameModal.common.placeholder")}
-                    ariaDescribedBy={t("usernameModal.common.aria.inputDescribedBy")} // "username-help privacy-note"
-                    submitLabel={t("usernameModal.common.primaryCta")}
-                    submitAriaLabel={t("usernameModal.common.aria.submitAria")}
-                    // Bouton secondaire "Plus tard" : déclenche l'état Phase 2 si aucun pseudo
-                    secondaryLabel={t("usernameModal.common.secondaryCta")}
-                    onSecondaryClick={handleClose}
-                />
+                <UserNameManager />
                 {!canClose && !triedClose && (
                     <div className="content-info_footer">
                         <p
