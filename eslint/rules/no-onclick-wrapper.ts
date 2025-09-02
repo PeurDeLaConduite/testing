@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree";
+import { JSXOpeningElement, JSXMemberExpression, JSXIdentifier } from "estree";
 
 const rule: Rule.RuleModule = {
     meta: {
@@ -25,11 +25,13 @@ const rule: Rule.RuleModule = {
                     elementName = node.name.name;
                 } else if (node.name.type === "JSXMemberExpression") {
                     // handle cases like <UI.PowerButton>
-                    let current: any = node.name;
+                    let current: JSXMemberExpression | JSXIdentifier = node.name;
                     while (current.type === "JSXMemberExpression") {
                         current = current.property;
                     }
-                    elementName = current.name;
+                    if (current.type === "JSXIdentifier") {
+                        elementName = current.name;
+                    }
                 }
                 if (
                     elementName &&
