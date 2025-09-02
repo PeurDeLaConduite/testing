@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 export function useAmplifyReady() {
-    const [ready, setReady] = useState<boolean>(!!(globalThis as any).__AMPLIFY_CONFIGURED__);
+    const [ready, setReady] = useState<boolean>(!!globalThis.__AMPLIFY_CONFIGURED__);
 
     useEffect(() => {
         if (ready) return;
@@ -13,7 +13,7 @@ export function useAmplifyReady() {
         let canceled = false;
         import("@/src/amplify/setup")
             .then(() => {
-                if (!canceled) setReady(!!(globalThis as any).__AMPLIFY_CONFIGURED__);
+                if (!canceled) setReady(!!globalThis.__AMPLIFY_CONFIGURED__);
             })
             .catch((e) => {
                 console.error("[Amplify] setup import failed:", e);

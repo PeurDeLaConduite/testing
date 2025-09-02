@@ -15,17 +15,36 @@ import {
 } from "@entities/models/userName";
 
 // ⚠️ importe ton JSON i18n réel (ex. le fichier que tu as préparé)
-import messages from "@/src/i18n/fr/usernameModal.json";
+import type { Messages } from "@/src/i18n/types";
+import messagesJson from "@/src/i18n/fr/usernameModal.json";
 
 type IdLike = string | number;
 const fields: (keyof UserNameFormType)[] = ["userName"];
 const fieldAutoComplete: Partial<Record<keyof UserNameFormType, string>> = {
     userName: "username",
 };
-const t = (path: string) =>
-    path.split(".").reduce((acc: any, key) => (acc ? acc[key] : undefined), messages);
+const messages: Messages = messagesJson as Messages;
+const t = (path: string): unknown =>
+    path.split(".").reduce<unknown>((acc, key) => {
+        if (acc && typeof acc === "object") {
+            return (acc as Record<string, unknown>)[key];
+        }
+        return undefined;
+    }, messages as unknown);
 
-export default function UserNameManager() {
+interface UserNameManagerProps {
+    inputId?: string;
+    label?: string;
+    placeholder?: string;
+    ariaDescribedBy?: string;
+    submitLabel?: string;
+    submitAriaLabel?: string;
+    secondaryLabel?: string;
+    onSecondaryClick?: () => void;
+}
+
+export default function UserNameManager(props: UserNameManagerProps) {
+    void props;
     const { user } = useAuthenticator();
     const [userNameToEdit, setUserNameToEdit] = useState<UserNameType | null>(null);
     const [userNameId, setUserNameId] = useState<string | null>(null);
@@ -57,10 +76,10 @@ export default function UserNameManager() {
 
     // i18n/ARIA pour le champ + bouton
     const fieldId = "userName-input"; // DOIT matcher le focus du modal
-    const placeholder = t("usernameModal.common.placeholder");
-    const ariaDescribedBy = t("usernameModal.common.aria.inputDescribedBy");
-    const submitAria = t("usernameModal.common.aria.submitAria");
-    const primaryCta = t("usernameModal.common.primaryCta");
+    const placeholder = t("usernameModal.common.placeholder") as string;
+    const ariaDescribedBy = t("usernameModal.common.aria.inputDescribedBy") as string;
+    const submitAria = t("usernameModal.common.aria.submitAria") as string;
+    const primaryCta = t("usernameModal.common.primaryCta") as string;
 
     return (
         <EntityEditor<UserNameFormType>

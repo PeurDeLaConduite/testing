@@ -12,7 +12,8 @@ import { BackButton } from "@components/buttons";
 import Link from "next/link";
 
 // 👇 i18n
-import messages from "@/src/i18n/fr/usernameModal.json";
+import type { Messages } from "@/src/i18n/types";
+import messagesJson from "@/src/i18n/fr/usernameModal.json";
 
 interface UserNameModalProps {
     isOpen: boolean;
@@ -20,8 +21,16 @@ interface UserNameModalProps {
 }
 
 /** Utils i18n */
-const t = (path: string): string => {
-    return path.split(".").reduce<any>((acc, key) => (acc ? acc[key] : undefined), messages) ?? "";
+const messages: Messages = messagesJson as Messages;
+const t = (path: string): unknown => {
+    return (
+        path.split(".").reduce<unknown>((acc, key) => {
+            if (acc && typeof acc === "object") {
+                return (acc as Record<string, unknown>)[key];
+            }
+            return undefined;
+        }, messages as unknown) ?? ""
+    );
 };
 
 const html = (s: string) => ({ __html: s });
@@ -65,8 +74,9 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
     };
 
     // Titres selon la phase
-    const title =
-        !canClose && triedClose ? t("usernameModal.phase2.title") : t("usernameModal.phase1.title");
+    const title = (
+        !canClose && triedClose ? t("usernameModal.phase2.title") : t("usernameModal.phase1.title")
+    ) as string;
 
     return (
         <Modal
@@ -83,7 +93,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                 <div className="content-info_head" role="alert" aria-live="assertive">
                     <p
                         className="info-message"
-                        dangerouslySetInnerHTML={html(t("usernameModal.common.goal"))}
+                        dangerouslySetInnerHTML={html(t("usernameModal.common.goal") as string)}
                     />
                 </div>
             )}
@@ -92,11 +102,11 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                 <div className="content-info_head" role="alert" aria-live="assertive">
                     <p
                         className="error-message"
-                        dangerouslySetInnerHTML={html(t("usernameModal.phase2.error"))}
+                        dangerouslySetInnerHTML={html(t("usernameModal.phase2.error") as string)}
                     />
                     <p
                         className="info-message"
-                        dangerouslySetInnerHTML={html(t("usernameModal.phase2.humor"))}
+                        dangerouslySetInnerHTML={html(t("usernameModal.phase2.humor") as string)}
                     />
                 </div>
             )}
@@ -107,13 +117,25 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
           👉 On passe au UserNameManager des props i18n. 
           Si ton UserNameManager n'accepte pas encore ces props, ajoute-les (facultatives).
         */}
-                <UserNameManager />
+                <UserNameManager
+                    inputId="userName-input"
+                    label={t("usernameModal.common.fieldLabel") as string}
+                    placeholder={t("usernameModal.common.placeholder") as string}
+                    ariaDescribedBy={t("usernameModal.common.aria.inputDescribedBy") as string} // "username-help privacy-note"
+                    submitLabel={t("usernameModal.common.primaryCta") as string}
+                    submitAriaLabel={t("usernameModal.common.aria.submitAria") as string}
+                    // Bouton secondaire "Plus tard" : déclenche l'état Phase 2 si aucun pseudo
+                    secondaryLabel={t("usernameModal.common.secondaryCta") as string}
+                    onSecondaryClick={handleClose}
+                />
                 {!canClose && !triedClose && (
                     <div className="content-info_footer">
                         <p
                             id="privacy-note"
                             className="info-message"
-                            dangerouslySetInnerHTML={html(t("usernameModal.common.privacyNote"))}
+                            dangerouslySetInnerHTML={html(
+                                t("usernameModal.common.privacyNote") as string
+                            )}
                         />
                     </div>
                 )}
@@ -121,12 +143,16 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                     <div className="content-info_footer" role="alert" aria-live="assertive">
                         <p
                             className="info-message"
-                            dangerouslySetInnerHTML={html(t("usernameModal.phase2.humor2"))}
+                            dangerouslySetInnerHTML={html(
+                                t("usernameModal.phase2.humor2") as string
+                            )}
                         />
                         <p
                             id="privacy-note"
                             className="info-message"
-                            dangerouslySetInnerHTML={html(t("usernameModal.common.privacyLink"))}
+                            dangerouslySetInnerHTML={html(
+                                t("usernameModal.common.privacyLink") as string
+                            )}
                         />
                     </div>
                 )}
@@ -143,7 +169,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                         variantType="icon"
                     />
                     <Link href="./" className="info-message flx-c">
-                        <span>{t("usernameModal.common.returnLink")}</span>
+                        <span>{t("usernameModal.common.returnLink") as string}</span>
                     </Link>
                 </span>
             )}

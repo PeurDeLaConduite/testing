@@ -16,8 +16,7 @@ const overrides = {
 const cfg = { ...outputs, ...overrides };
 
 // Idempotence globale (dev + HMR + client/serveur)
-const g = globalThis as any;
-if (!g.__AMPLIFY_CONFIGURED__) {
+if (!globalThis.__AMPLIFY_CONFIGURED__) {
     Amplify.configure(cfg, { ssr: true }); // <-- ici on balance bien cfg
-    g.__AMPLIFY_CONFIGURED__ = true;
+    globalThis.__AMPLIFY_CONFIGURED__ = true;
 }
