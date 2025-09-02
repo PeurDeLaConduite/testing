@@ -5,8 +5,8 @@
             "fieldLabel": "Pseudo public",
             "placeholder": "Ex. : Alex_Drive, RoueLibre, ConduiteCool",
             "helper": "Visible par tous les utilisateurs. <b>Évitez les infos personnelles.</b>",
-            "privacyNote": "Votre pseudo est public : <br/><b>Évitez les infos personnelles</b>.<br/>Il ne remplace pas vos données de compte privées.<br/><br/><a href=\"/informations-legales#top\" class=\"info-message\"><i>En savoir plus sur la confidentialité<i/><a/>",
-            "privacyLink": "<a href=\"/informations-legales#top\" class=\"\"><i>En savoir plus sur la confidentialité<i/><a/>",
+            "privacyNote": "Votre pseudo est public : <br/><b>Évitez les infos personnelles</b>.<br/>Il ne remplace pas vos données de compte privées.<br/><br/><a href=\"/confidentialite\" class=\"info-message\"><i>En savoir plus sur la confidentialité<i/><a/>",
+            "privacyLink": "<a href=\"/confidentialite\" class=\"\"><i>En savoir plus sur la confidentialité<i/><a/>",
             "primaryCta": "Enregistrer mon pseudo",
             "secondaryCta": "Plus tard",
             "returnLink": "Retour au menu principal",
@@ -23,8 +23,7 @@
         "phase2": {
             "title": "Zone d’échange partagée",
             "error": "<b>Veuillez choisir un pseudo</b> avant de continuer.",
-            "humor": "<b>🚧 Route barrée</b> : il vous sera impossible d’avancer tant que ce champ restera vide.",
-            "humor2": "Cette fenêtre restera ouverte jusqu’à ce que vous ayez trouvé <b>le bon pseudo</b> !"
+            "humor": "🚧 <b>Petite pause sur la route</b> : sans pseudo, on ne peut pas démarrer. Dès que vous avez trouvé <b> le bon pseudo</b>, on passe la première !"
         }
     }
 }

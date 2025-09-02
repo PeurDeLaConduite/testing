@@ -1,6 +1,9 @@
 .modal-inner_content {
     max-width: 26rem;
-
+    .entity-editor {
+        padding: 1rem 1.5rem 0.5rem;
+        // background: #000;
+    }
     .modal-description {
     }
     .content-info {
@@ -38,7 +41,7 @@
         // font-family: $profile;
     }
     .info-message {
-        color: $primary-blue;
+        color: $primary-black;
         // border: 1px solid #000;
     }
 
@@ -118,6 +121,14 @@
         &:has(.bck-ico:focus),
         &:focus-within .bck-ico {
             transform: translateX(0);
+        }
+    }
+    button.adjustIco {
+        background: #2e7d32 !important;
+        border: 10px solid #000;
+        &:hover,
+        &:focus {
+            background: $dark-blue;
         }
     }
 }

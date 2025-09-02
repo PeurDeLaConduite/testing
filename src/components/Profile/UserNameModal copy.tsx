@@ -90,6 +90,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
             {/* Bloc d'erreur + humour (Phase 2) */}
             {!canClose && triedClose && (
                 <div className="content-info_head" role="alert" aria-live="assertive">
+                    {/* messages.phase2.error contient un <b> */}
                     <p
                         className="error-message"
                         dangerouslySetInnerHTML={html(t("usernameModal.phase2.error"))}
@@ -100,7 +101,15 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                     />
                 </div>
             )}
-
+            {!canClose && triedClose && (
+                <div className="content-info_head" role="alert" aria-live="assertive">
+                    <p
+                        id="privacy-note"
+                        className="info-message"
+                        dangerouslySetInnerHTML={html(t("usernameModal.common.privacyLink"))}
+                    />
+                </div>
+            )}
             {/* Champ + aides + notes (le champ est rendu par UserNameManager) */}
             <div>
                 {/* 
@@ -127,21 +136,7 @@ export default function UserNameModal({ isOpen, onClose }: UserNameModalProps) {
                         />
                     </div>
                 )}
-                {!canClose && triedClose && (
-                    <div className="content-info_footer" role="alert" aria-live="assertive">
-                        <p
-                            className="info-message"
-                            dangerouslySetInnerHTML={html(t("usernameModal.phase2.humor2"))}
-                        />
-                        <p
-                            id="privacy-note"
-                            className="info-message"
-                            dangerouslySetInnerHTML={html(t("usernameModal.common.privacyLink"))}
-                        />
-                    </div>
-                )}
             </div>
-
             {/* Lien de sortie (optionnel) uniquement en Phase 2 */}
             {!canClose && triedClose && (
                 <span className="btnInLine">
