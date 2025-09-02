@@ -7,14 +7,14 @@ import type { AuthRule } from "../types";
 // import { client } from "./amplifyClient";
 
 function getModelClient<K extends ModelKey>(key: K) {
-    const model = (client as any)?.models?.[key];
-    if (!model) {
-        const available = Object.keys((client as any)?.models ?? {});
+    const models: ClientModels = client.models;
+    if (!models[key]) {
+        const available = Object.keys(models ?? {});
         throw new Error(
             `[Amplify/Data] Modèle introuvable: "${String(key)}". Modèles disponibles: ${available.join(", ")}`
         );
     }
-    return model as CrudModel<K>;
+    return models[key] as CrudModel<K>;
 }
 
 // ── Clés & base model ───────────────────────────────────────────────────────────

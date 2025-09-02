@@ -46,5 +46,7 @@ export function goToLoginWithReturn(router: AppRouterInstance, opts: GoToLoginOp
     if (url === currentUrl) return;
 
     // 6) Naviguer
+    //! DON'T DELETE no-unused-expressions
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     replace ? router.replace(url) : router.push(url);
 }
