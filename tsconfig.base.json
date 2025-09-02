@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ES2019",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "baseUrl": ".",
+        "paths": {
+            "@domain/*": ["packages/domain/src/*"],
+            "@services/*": ["packages/services/src/*"],
+            "@ui/*": ["packages/ui/src/*"],
+            "@types/*": ["packages/types/src/*"],
+            "@web/*": ["apps/web/src/*"]
+        }
+    }
+}
