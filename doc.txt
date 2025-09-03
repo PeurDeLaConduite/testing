@@ -2,731 +2,734 @@ Codex 2 — Annotation d’arborescence (UI / Services / Domain / Types / …)
 
 Objectif
 Analyse l’arborescence fournie et réimprime-la à l’identique, en ajoutant à droite de chaque fichier un commentaire indiquant sa catégorie parmi :
-- ui : composants React (JSX/TSX), hooks React d’UI, Contexts, styles .scss/.css, icônes SVG, i18n front.
-- services : accès données / IO / intégrations (Amplify, AppSync, Auth, S3, REST/GraphQL, fetch), clients CRUD, loaders. Aucun JSX.
-- domain : logique métier pure (schémas/validation/form logic sans React, normalisation, relations, utils métier). Aucun JSX ni accès réseau.
-- types : types/interfaces partagés, .d.ts, contrats TS sans logique.
-- infra : configuration/outillage (ESLint, tsconfig, vitest/playwright, build scripts, amplify.yml).
-- tests : répertoires/tests (__tests__, *.test.*, *.spec.*, tests/).
-- app : App Router Next.js (app/**, layout.tsx, page.tsx, middleware.ts, app/api/**).
-- public : assets statiques (public/**, robots.txt, sitemap.xml, fonts, images).
-- tooling : scripts utilitaires spécifiques aux tests/build/CI (si tu veux distinguer d’infra).
+
+* ui : composants React (JSX/TSX), hooks React d’UI, Contexts, styles .scss/.css, icônes SVG, i18n front.
+* services : accès données / IO / intégrations (Amplify, AppSync, Auth, S3, REST/GraphQL, fetch), clients CRUD, loaders. Aucun JSX.
+* domain : logique métier pure (schémas/validation/form logic sans React, normalisation, relations, utils métier). Aucun JSX ni accès réseau.
+* types : types/interfaces partagés, .d.ts, contrats TS sans logique.
+* infra : configuration/outillage (ESLint, tsconfig, vitest/playwright, build scripts, amplify.yml).
+* tests : répertoires/tests (**tests**, *.test.*, *.spec.*, tests/).
+* app : App Router Next.js (app/**, layout.tsx, page.tsx, middleware.ts, app/api/**).
+* public : assets statiques (public/\*\*, robots.txt, sitemap.xml, fonts, images).
+* tooling : scripts utilitaires spécifiques aux tests/build/CI (si tu veux distinguer d’infra).
 
 Heuristiques (décisives)
-- UI si : extension .tsx/.jsx, export d’un composant React, hook React d’affichage, contexte React, fichier .scss/.css, ou icône sous svg_Icon/**.
-- Services si : import aws-amplify / @aws-amplify/* / AppSync / Auth / S3, usage graphql / fetch, CRUD data ; chemins src/entities/core/services/**, src/services/**.
-- Domain si : logique métier sans React/IO — config.ts, form.ts (validation/shape), normalize.ts, relations, factories génériques (ex. createModelForm.ts) sans import react/aws-amplify.
-- Types si : uniquement type/interface/enum et exports ; pas de logique/IO.
-- Conflit ⇒ choisir la catégorie la plus restrictive : présence JSX ⇒ ui ; présence AppSync/Auth/IO ⇒ services.
+
+* UI si : extension .tsx/.jsx, export d’un composant React, hook React d’affichage, contexte React, fichier .scss/.css, ou icône sous svg\_Icon/\*\*.
+* Services si : import aws-amplify / @aws-amplify/\* / AppSync / Auth / S3, usage graphql / fetch, CRUD data ; chemins src/entities/core/services/**, src/services/**.
+* Domain si : logique métier sans React/IO — config.ts, form.ts (validation/shape), normalize.ts, relations, factories génériques (ex. createModelForm.ts) sans import react/aws-amplify.
+* Types si : uniquement type/interface/enum et exports ; pas de logique/IO.
+* Conflit ⇒ choisir la catégorie la plus restrictive : présence JSX ⇒ ui ; présence AppSync/Auth/IO ⇒ services.
 
 Garde-fous
-- domain ne doit pas importer react, @aws-amplify/*, fetch, graphql.
-- services ne doit pas contenir de JSX/TSX ni de SCSS/CSS.
-- types ne doit contenir que des déclarations de types (pas de logique).
+
+* domain ne doit pas importer react, @aws-amplify/\*, fetch, graphql.
+* services ne doit pas contenir de JSX/TSX ni de SCSS/CSS.
+* types ne doit contenir que des déclarations de types (pas de logique).
 
 Format de sortie (strict)
-- Réimprime exactement la même arborescence (mêmes traits/indentations).
-- Pour chaque fichier, ajoute : // <catégorie> — <raison courte> (2–7 mots, factuelle : ex. UI pure, Hook utilitaire, Service Amplify, Form logic métier, Types partagés).
-- Pour chaque dossier (optionnel) ajoute [catégorie] s’il est homogène, sinon [mixte].
-- Aucune autre sortie (pas de prose ni d’en-tête).
+
+* Réimprime exactement la même arborescence (mêmes traits/indentations).
+* Pour chaque fichier, ajoute : // \<catégorie> — <raison courte> (2–7 mots, factuelle : ex. UI pure, Hook utilitaire, Service Amplify, Form logic métier, Types partagés).
+* Pour chaque dossier (optionnel) ajoute \[catégorie] s’il est homogène, sinon \[mixte].
+* Aucune autre sortie (pas de prose ni d’en-tête).
 
 Mini-exemple de style attendu
-│   │   ├── Form/
-│   │   │   └── ReadOnlyView.tsx // ui — UI pure
-│   │   ├── forms/
-│   │   │   ├── EditField.tsx // ui — UI pure
-│   │   │   ├── EntityEditor.tsx // ui — UI pure
-│   │   │   ├── EntityForm.tsx // ui — UI pure
-│   │   │   ├── ItemSelector.tsx // ui — UI pure
-│   │   │   └── ReadOnlyView.tsx // ui — UI pure
-│   │   └── utils/
-│   │       ├── addScrollListener.ts // domain — util scroll
-│   │       ├── goToLoginWithReturn.ts // services — navigation/auth IO
-│   │       ├── HtmlRenderer.tsx // ui — composant React
-│   │       ├── useToggle.ts // ui — hook utilitaire
-│   └── tests/
-│       └── setupTests.ts // tooling — setup tests
+│ │ ├── Form/
+│ │ │ └── ReadOnlyView\.tsx // ui — UI pure
+│ │ ├── forms/
+│ │ │ ├── EditField.tsx // ui — UI pure
+│ │ │ ├── EntityEditor.tsx // ui — UI pure
+│ │ │ ├── EntityForm.tsx // ui — UI pure
+│ │ │ ├── ItemSelector.tsx // ui — UI pure
+│ │ │ └── ReadOnlyView\.tsx // ui — UI pure
+│ │ └── utils/
+│ │ ├── addScrollListener.ts // ui — util DOM scroll
+│ │ ├── goToLoginWithReturn.ts // services — redirection auth
+│ │ ├── HtmlRenderer.tsx // ui — composant React
+│ │ ├── useToggle.ts // ui — hook utilitaire
+│ └── tests/
+│ └── setupTests.ts // tooling — setup tests
 
 Entrée — Réimprime et annote chaque fichier ci-dessous :
 
 Directory structure:
-└── peurdelaconduite-testing/
-    ├── README.md
-    ├── AGENTS.md
-    ├── eslint.config.mjs
-    ├── next-env.d.ts
-    ├── package.json
-    ├── tsconfig.base.json
-    ├── .editorconfig
-    ├── .env.local.example
-    ├── .prettierrc
-    ├── .yarnrc.yml
-    ├── apps/
-    │   └── web/
-    │       ├── amplify.yml
-    │       ├── middleware.ts
-    │       ├── next-env.d.ts
-    │       ├── next.config.ts
-    │       ├── package.json
-    │       ├── tsconfig.json
-    │       ├── .eslintrc.json
-    │       ├── amplify/
-    │       │   ├── backend.ts
-    │       │   ├── env.d.ts
-    │       │   ├── package.json
-    │       │   ├── tsconfig.json
-    │       │   ├── auth/
-    │       │   │   └── resource.ts
-    │       │   ├── data/
-    │       │   │   └── resource.ts
-    │       │   └── storage/
-    │       │       └── resource.ts
-    │       ├── app/
-    │       │   ├── globals.css
-    │       │   ├── headerProps.jsx
-    │       │   ├── layout.tsx
-    │       │   ├── metaData.tsx
-    │       │   ├── MobileRedirect.tsx
-    │       │   ├── page.tsx
-    │       │   ├── ScrollSectionsWrapper.jsx
-    │       │   ├── api/
-    │       │   │   └── sitemap.xml.ts
-    │       │   ├── auth/
-    │       │   │   └── callback/
-    │       │   │       ├── ConnectForm.tsx
-    │       │   │       ├── ConnectItem.tsx
-    │       │   │       └── page.tsx
-    │       │   ├── blog/
-    │       │   │   ├── _blog.scss
-    │       │   │   ├── BlogClientWrapper.tsx
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   ├── page.tsx
-    │       │   │   ├── SectionContainer.tsx
-    │       │   │   ├── [slug]/
-    │       │   │   │   ├── page.tsx
-    │       │   │   │   └── PostClient.tsx
-    │       │   │   └── sections/
-    │       │   │       ├── [slug]/
-    │       │   │       │   ├── page.tsx
-    │       │   │       │   └── SectionClient.tsx
-    │       │   │       └── css/
-    │       │   │           └── desktopDefer.css
-    │       │   ├── connexion/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── contact/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── fonts/
-    │       │   │   ├── Montserrat.woff2
-    │       │   │   └── Nunito.woff2
-    │       │   ├── informations-legales/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── mentions-legales/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── profile/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── reservation/
-    │       │   │   ├── Cone.jsx
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   └── page.tsx
-    │       │   ├── search/
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   ├── page.tsx
-    │       │   │   └── SearchPageContent.tsx
-    │       │   ├── services/
-    │       │   │   ├── _tarifs.scss
-    │       │   │   ├── error.tsx
-    │       │   │   ├── loading.tsx
-    │       │   │   ├── page.tsx
-    │       │   │   └── tarifs.css
-    │       │   └── tarifs/
-    │       │       ├── error.tsx
-    │       │       ├── loading.tsx
-    │       │       └── page.tsx
-    │       ├── public/
-    │       │   ├── robots.txt
-    │       │   ├── sitemap.xml
-    │       │   ├── css/
-    │       │   │   └── desktopDefer.css
-    │       │   └── img/
-    │       │       ├── about/
-    │       │       │   └── avatar.webp
-    │       │       └── favicon/
-    │       │           └── site.webmanifest
-    │       ├── scripts/
-    │       │   └── generate-sitemap.js
-    │       ├── src/
-    │       │   ├── amplify/
-    │       │   │   ├── global.d.ts
-    │       │   │   ├── setup.ts
-    │       │   │   └── useAmplifyReady.ts
-    │       │   ├── assets/
-    │       │   │   ├── data/
-    │       │   │   │   ├── menuItems.ts
-    │       │   │   │   ├── sections.ts
-    │       │   │   │   ├── servicesData.js
-    │       │   │   │   ├── shemat.txt
-    │       │   │   │   ├── content/
-    │       │   │   │   │   ├── about.ts
-    │       │   │   │   │   ├── contact.ts
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── info.ts
-    │       │   │   │   │   ├── services.ts
-    │       │   │   │   │   └── slider.ts
-    │       │   │   │   ├── interfaces/
-    │       │   │   │   │   ├── content.ts
-    │       │   │   │   │   └── menu.ts
-    │       │   │   │   └── utils/
-    │       │   │   │       └── attachContent.ts
-    │       │   │   └── styles/
-    │       │   │       ├── main.scss
-    │       │   │       ├── 00_utils/
-    │       │   │       │   ├── _fonts.scss
-    │       │   │       │   ├── _functions.scss
-    │       │   │       │   ├── _mixins.scss
-    │       │   │       │   └── _variables.scss
-    │       │   │       ├── 01_base/
-    │       │   │       │   ├── _general.scss
-    │       │   │       │   ├── _media-query.scss
-    │       │   │       │   └── _navToggler.scss
-    │       │   │       ├── 03_pages/
-    │       │   │       │   └── _page.scss
-    │       │   │       ├── amplify/
-    │       │   │       │   ├── README.md
-    │       │   │       │   ├── _auth.core.scss
-    │       │   │       │   ├── _auth.form.scss
-    │       │   │       │   ├── _auth.mixins.scss
-    │       │   │       │   ├── _auth.overrides.scss
-    │       │   │       │   ├── _auth.variables.scss
-    │       │   │       │   └── authenticator.scss
-    │       │   │       └── components/
-    │       │   │           ├── _modal.scss
-    │       │   │           └── forms/
-    │       │   │               ├── _EditableField.scss
-    │       │   │               ├── _EditField.scss
-    │       │   │               ├── _EntityEditor.scss
-    │       │   │               ├── _EntityForm.scss
-    │       │   │               ├── _ItemSelector.scss
-    │       │   │               ├── _ReadOnlyView.scss
-    │       │   │               ├── _SelectField.scss
-    │       │   │               └── _SeoFields.scss
-    │       │   ├── auth/
-    │       │   │   ├── amplifyConfig.ts
-    │       │   │   └── Authentication/
-    │       │   │       ├── auth-provider.tsx
-    │       │   │       ├── Authentication.tsx
-    │       │   │       ├── AuthGuard.tsx
-    │       │   │       ├── PostLoginUserNameGate.tsx
-    │       │   │       └── RequireLoginButton.tsx
-    │       │   ├── components/
-    │       │   │   ├── PrivacyPolicy.tsx
-    │       │   │   ├── TermsOfUse.tsx
-    │       │   │   ├── Blog/
-    │       │   │   │   ├── AuthorSignature.tsx
-    │       │   │   │   ├── Blog.tsx
-    │       │   │   │   ├── BlogCard.tsx
-    │       │   │   │   ├── BlogList.tsx
-    │       │   │   │   ├── BlogSectionCard.tsx
-    │       │   │   │   ├── ButtonPage.tsx
-    │       │   │   │   ├── MarkdownRenderer.tsx
-    │       │   │   │   ├── PostContent.tsx
-    │       │   │   │   ├── VideoEmbed.tsx
-    │       │   │   │   ├── YouTubeIframe.tsx
-    │       │   │   │   └── YouTubePlaceholder.tsx
-    │       │   │   ├── button/
-    │       │   │   │   ├── _button.scss
-    │       │   │   │   ├── Button.tsx
-    │       │   │   │   └── ButtonLink.tsx
-    │       │   │   ├── buttons/
-    │       │   │   │   ├── ActionButtons.tsx
-    │       │   │   │   ├── Button.tsx
-    │       │   │   │   ├── Buttons.tsx
-    │       │   │   │   ├── buttonStyles.ts
-    │       │   │   │   ├── doc.md
-    │       │   │   │   ├── IconButton.tsx
-    │       │   │   │   ├── index.ts
-    │       │   │   │   ├── UiButton.tsx
-    │       │   │   │   └── docs/
-    │       │   │   │       ├── AddButton.md
-    │       │   │   │       ├── BackButton.md
-    │       │   │   │       ├── Buttons.md
-    │       │   │   │       ├── CancelButton.md
-    │       │   │   │       ├── ClearFieldButton.md
-    │       │   │   │       ├── DeleteButton.md
-    │       │   │   │       ├── EditButton.md
-    │       │   │   │       ├── Guide d’utilisation des Boutons @components.md
-    │       │   │   │       ├── index.md
-    │       │   │   │       ├── PowerButton.md
-    │       │   │   │       ├── RefreshButton.md
-    │       │   │   │       ├── SubmitButton.md
-    │       │   │   │       ├── UiButton.md
-    │       │   │   │       └── UpdateButton.md
-    │       │   │   ├── checkbox/
-    │       │   │   │   ├── _input-checkbox.scss
-    │       │   │   │   └── inputCheckbox.tsx
-    │       │   │   ├── footer/
-    │       │   │   │   ├── _footer.scss
-    │       │   │   │   └── footer.tsx
-    │       │   │   ├── Form/
-    │       │   │   │   └── ReadOnlyView.tsx
-    │       │   │   ├── forms/
-    │       │   │   │   ├── EditField.tsx
-    │       │   │   │   ├── EntityEditor.tsx
-    │       │   │   │   ├── EntityForm.tsx
-    │       │   │   │   ├── ItemSelector.tsx
-    │       │   │   │   └── ReadOnlyView.tsx
-    │       │   │   ├── header/
-    │       │   │   │   ├── _header.scss
-    │       │   │   │   ├── Header.tsx
-    │       │   │   │   ├── Nav.tsx
-    │       │   │   │   ├── NavLink.tsx
-    │       │   │   │   ├── svgComponents.ts
-    │       │   │   │   ├── navInput/
-    │       │   │   │   │   ├── NavInput.tsx
-    │       │   │   │   │   ├── RenderInput.tsx
-    │       │   │   │   │   ├── RenderInputButton.tsx
-    │       │   │   │   │   ├── SubResult.tsx
-    │       │   │   │   │   └── useSearchHandler.tsx
-    │       │   │   │   ├── navLink/
-    │       │   │   │   │   ├── NavLinkShow.tsx
-    │       │   │   │   │   ├── RenderLink.tsx
-    │       │   │   │   │   └── SubMenu.tsx
-    │       │   │   │   └── utils/
-    │       │   │   │       ├── HiddenDelayComponent.tsx
-    │       │   │   │       ├── menuUtils.ts
-    │       │   │   │       └── useResize.ts
-    │       │   │   ├── Legal/
-    │       │   │   │   ├── ApplicableLaw.tsx
-    │       │   │   │   ├── CompanyDetailsInfo.tsx
-    │       │   │   │   ├── Cookies.tsx
-    │       │   │   │   ├── DevLegalNotices.tsx
-    │       │   │   │   ├── LegalNotices.tsx
-    │       │   │   │   ├── PrivacyPolicy.tsx
-    │       │   │   │   ├── PublicationDirector.tsx
-    │       │   │   │   ├── RegistrationAndVAT.tsx
-    │       │   │   │   ├── Rgpd.tsx
-    │       │   │   │   ├── SiteEditorCreator.tsx
-    │       │   │   │   ├── SiteHost.tsx
-    │       │   │   │   └── TermsOfUse.tsx
-    │       │   │   ├── loader/
-    │       │   │   │   ├── _loader.scss
-    │       │   │   │   └── Loader.jsx
-    │       │   │   ├── Profile/
-    │       │   │   │   ├── _UserNameManager.scss
-    │       │   │   │   ├── _UserProfileManager.scss
-    │       │   │   │   ├── UserNameManager.tsx
-    │       │   │   │   ├── UserNameModal.tsx
-    │       │   │   │   ├── UserProfileManager.tsx
-    │       │   │   │   ├── utilsUserName.tsx
-    │       │   │   │   └── utilsUserProfile.tsx
-    │       │   │   └── svg_Icon/
-    │       │   │       ├── Blog.jsx
-    │       │   │       ├── Connection.jsx
-    │       │   │       ├── Contact.jsx
-    │       │   │       ├── Home.jsx
-    │       │   │       ├── Logo.jsx
-    │       │   │       ├── Reservation.jsx
-    │       │   │       ├── Search.jsx
-    │       │   │       ├── SearchClose.jsx
-    │       │   │       ├── Services.jsx
-    │       │   │       ├── Tarifs.jsx
-    │       │   │       ├── social/
-    │       │   │       │   ├── Facebook.jsx
-    │       │   │       │   ├── Instagram.jsx
-    │       │   │       │   ├── Linkedin.jsx
-    │       │   │       │   ├── TikTok.jsx
-    │       │   │       │   ├── Twitter.jsx
-    │       │   │       │   ├── WhatsApp.jsx
-    │       │   │       │   └── Youtube.jsx
-    │       │   │       └── utils/
-    │       │   │           ├── Arrow.jsx
-    │       │   │           └── CheckedIcon.jsx
-    │       │   ├── context/
-    │       │   │   └── DataBlogProvider.tsx
-    │       │   ├── entities/
-    │       │   │   ├── index.ts
-    │       │   │   ├── core/
-    │       │   │   │   ├── auth.ts
-    │       │   │   │   ├── doc.md
-    │       │   │   │   ├── index.ts
-    │       │   │   │   ├── hooks/
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── useModelForm.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       └── useModelForm.test.tsx
-    │       │   │   │   ├── services/
-    │       │   │   │   │   ├── amplifyClient.ts
-    │       │   │   │   │   ├── cascade.ts
-    │       │   │   │   │   ├── crudService.ts
-    │       │   │   │   │   ├── doc.md
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── relationService.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       ├── cascade.test.ts
-    │       │   │   │   │       └── crudService.test.ts
-    │       │   │   │   ├── types/
-    │       │   │   │   │   ├── amplifyBaseTypes.ts
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── doc.md
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   └── model.ts
-    │       │   │   │   └── utils/
-    │       │   │   │       ├── amplifyUiConfig.ts
-    │       │   │   │       ├── createM2MSync.ts
-    │       │   │   │       ├── createModelForm.ts
-    │       │   │   │       ├── doc.md
-    │       │   │   │       ├── index.ts
-    │       │   │   │       ├── normalize.ts
-    │       │   │   │       ├── syncManyToMany.ts
-    │       │   │   │       ├── toggleId.ts
-    │       │   │   │       └── __tests__/
-    │       │   │   │           └── syncManyToMany.test.ts
-    │       │   │   ├── customTypes/
-    │       │   │   │   └── seo/
-    │       │   │   │       ├── form.ts
-    │       │   │   │       ├── index.ts
-    │       │   │   │       └── types.ts
-    │       │   │   ├── models/
-    │       │   │   │   ├── author/
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── hooks.tsx
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   ├── types.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       ├── form.test.ts
-    │       │   │   │   │       └── useAuthorForm.test.ts
-    │       │   │   │   ├── comment/
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       └── service.test.ts
-    │       │   │   │   ├── post/
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── hooks.tsx
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   ├── types.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       ├── form.test.ts
-    │       │   │   │   │       └── usePostForm.test.ts
-    │       │   │   │   ├── section/
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── hooks.tsx
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   ├── types.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       └── form.test.ts
-    │       │   │   │   ├── tag/
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── hooks.tsx
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   ├── types.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       ├── form.test.ts
-    │       │   │   │   │       └── hooks.test.tsx
-    │       │   │   │   ├── todo/
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       └── service.test.ts
-    │       │   │   │   ├── userName/
-    │       │   │   │   │   ├── bus.ts
-    │       │   │   │   │   ├── config.ts
-    │       │   │   │   │   ├── form.ts
-    │       │   │   │   │   ├── hooks.tsx
-    │       │   │   │   │   ├── index.ts
-    │       │   │   │   │   ├── service.ts
-    │       │   │   │   │   ├── types.ts
-    │       │   │   │   │   └── __tests__/
-    │       │   │   │   │       └── form.test.ts
-    │       │   │   │   └── userProfile/
-    │       │   │   │       ├── config.ts
-    │       │   │   │       ├── form.ts
-    │       │   │   │       ├── hooks.tsx
-    │       │   │   │       ├── index.ts
-    │       │   │   │       ├── service.ts
-    │       │   │   │       ├── types.ts
-    │       │   │   │       └── __tests__/
-    │       │   │   │           └── form.test.ts
-    │       │   │   └── relations/
-    │       │   │       ├── postTag/
-    │       │   │       │   ├── index.ts
-    │       │   │       │   ├── service.ts
-    │       │   │       │   ├── sync.ts
-    │       │   │       │   ├── types.ts
-    │       │   │       │   └── __tests__/
-    │       │   │       │       └── service.test.ts
-    │       │   │       └── sectionPost/
-    │       │   │           ├── index.ts
-    │       │   │           ├── service.ts
-    │       │   │           ├── sync.ts
-    │       │   │           ├── types.ts
-    │       │   │           └── __tests__/
-    │       │   │               └── service.test.ts
-    │       │   ├── home/
-    │       │   │   ├── about/
-    │       │   │   │   ├── _about.scss
-    │       │   │   │   └── about.tsx
-    │       │   │   ├── contact-section/
-    │       │   │   │   ├── _contact.scss
-    │       │   │   │   ├── contactBackGround.tsx
-    │       │   │   │   ├── index.tsx
-    │       │   │   │   ├── socialSvgComponents.ts
-    │       │   │   │   ├── contactCard/
-    │       │   │   │   │   ├── contactAnnouncement.tsx
-    │       │   │   │   │   ├── contactInfo.tsx
-    │       │   │   │   │   ├── index.tsx
-    │       │   │   │   │   └── SocialLinks.tsx
-    │       │   │   │   └── contactForm/
-    │       │   │   │       ├── _form.scss
-    │       │   │   │       ├── contactCGU.tsx
-    │       │   │   │       ├── contactFormTitle.tsx
-    │       │   │   │       ├── contactQuestions.tsx
-    │       │   │   │       ├── form.jsx
-    │       │   │   │       ├── formSuite.jsx
-    │       │   │   │       ├── index.tsx
-    │       │   │   │       ├── mapCGU/
-    │       │   │   │       │   └── index.tsx
-    │       │   │   │       └── mapContactQuestions/
-    │       │   │   │           └── index.tsx
-    │       │   │   ├── service/
-    │       │   │   │   ├── _questionaire.scss
-    │       │   │   │   ├── _services.scss
-    │       │   │   │   ├── permitStatus.tsx
-    │       │   │   │   ├── services.tsx
-    │       │   │   │   ├── beginner/
-    │       │   │   │   │   ├── _beginner.scss
-    │       │   │   │   │   └── beginner.tsx
-    │       │   │   │   ├── confirmed/
-    │       │   │   │   │   ├── _confirmed.scss
-    │       │   │   │   │   └── confirmed.tsx
-    │       │   │   │   └── questions/
-    │       │   │   │       ├── accompanistQuestions.tsx
-    │       │   │   │       ├── driveQuestions.tsx
-    │       │   │   │       ├── dataQuestions/
-    │       │   │   │       │   ├── accompanistDataQuestions.tsx
-    │       │   │   │       │   └── drivingDataQuestions.tsx
-    │       │   │   │       └── mapQuestions/
-    │       │   │   │           └── index.tsx
-    │       │   │   └── slider/
-    │       │   │       ├── _slider.scss
-    │       │   │       ├── _sliderArrow.scss
-    │       │   │       ├── _sliderContent.scss
-    │       │   │       ├── _sliderCTA.scss
-    │       │   │       ├── _sliderInfo.scss
-    │       │   │       ├── _sliderRoad.scss
-    │       │   │       ├── _sunBG.scss
-    │       │   │       ├── Slider.tsx
-    │       │   │       ├── SliderArrow.tsx
-    │       │   │       ├── SliderContent.tsx
-    │       │   │       ├── SliderCTA.tsx
-    │       │   │       ├── SliderInfo.tsx
-    │       │   │       ├── SliderRoad.tsx
-    │       │   │       ├── SunBG.tsx
-    │       │   │       └── svg/
-    │       │   │           └── SliderNumber.jsx
-    │       │   ├── i18n/
-    │       │   │   ├── types.ts
-    │       │   │   └── fr/
-    │       │   │       └── usernameModal.json
-    │       │   ├── services/
-    │       │   │   ├── blogDataService.ts
-    │       │   │   └── index.ts
-    │       │   ├── types/
-    │       │   │   ├── blog.d.ts
-    │       │   │   ├── buttons.d.ts
-    │       │   │   ├── global.d.ts
-    │       │   │   ├── index.ts
-    │       │   │   └── models/
-    │       │   │       ├── comment.ts
-    │       │   │       ├── todo.ts
-    │       │   │       ├── userName.ts
-    │       │   │       └── userProfile.ts
-    │       │   └── utils/
-    │       │       ├── addScrollListener.ts
-    │       │       ├── autocomplete.ts
-    │       │       ├── cookiesUtils.ts
-    │       │       ├── fnScrollUtils.ts
-    │       │       ├── getSectionIds.ts
-    │       │       ├── goToLoginWithReturn.ts
-    │       │       ├── HtmlRenderer.tsx
-    │       │       ├── initializeMenu.ts
-    │       │       ├── scrollUtils.ts
-    │       │       ├── searchMenu.js
-    │       │       ├── searchUtils.ts
-    │       │       ├── Space.tsx
-    │       │       ├── Tabulation.tsx
-    │       │       ├── updateMenuUtils.ts
-    │       │       ├── useIsBrowser.ts
-    │       │       ├── useToggle.ts
-    │       │       ├── useURLParams.tsx
-    │       │       ├── validationForm.js
-    │       │       ├── blogData/
-    │       │       │   ├── fetchData.ts
-    │       │       │   └── loadData.ts
-    │       │       ├── context/
-    │       │       │   ├── DrivingContext.tsx
-    │       │       │   ├── NavigationContext.tsx
-    │       │       │   ├── ScrollContext.tsx
-    │       │       │   ├── SearchContext.tsx
-    │       │       │   └── slider/
-    │       │       │       ├── fnSliderContext.ts
-    │       │       │       ├── SliderContext.tsx
-    │       │       │       ├── slideRefParam.ts
-    │       │       │       ├── useAutoSlide.ts
-    │       │       │       ├── useScrollListener.ts
-    │       │       │       ├── useSessionSlideRef.ts
-    │       │       │       ├── useSlideRefParam.ts
-    │       │       │       └── useSlides.ts
-    │       │       ├── cookieStorage/
-    │       │       │   └── useCookie.tsx
-    │       │       ├── localStorage/
-    │       │       │   ├── useLocalStorage.tsx
-    │       │       │   └── boolean-convertor/
-    │       │       │       └── useLocalStorageBoolean.tsx
-    │       │       └── sessionStorage/
-    │       │           └── useSessionStorage.tsx
-    │       └── tests/
-    │           ├── setupTests.ts
-    │           ├── _legacy/
-    │           │   ├── setupTests.ts
-    │           │   ├── .gitkeep
-    │           │   ├── __tests__/
-    │           │   │   └── .gitkeep
-    │           │   ├── e2e/
-    │           │   │   └── .gitkeep
-    │           │   ├── fixtures/
-    │           │   │   └── relations.ts
-    │           │   └── mocks/
-    │           │       └── amplifyClient.ts
-    │           ├── api/
-    │           │   ├── example.api.test.ts
-    │           │   └── .gitkeep
-    │           ├── e2e/
-    │           │   ├── example.spec.ts
-    │           │   ├── hash-scroll.spec.ts
-    │           │   ├── menu.spec.ts
-    │           │   ├── section-management.spec.ts
-    │           │   ├── setupPaths.ts
-    │           │   ├── tag-post.spec.ts
-    │           │   ├── user-login.spec.ts
-    │           │   ├── app/
-    │           │   │   └── auth/
-    │           │   │       └── callback/
-    │           │   │           └── testY.tsx
-    │           │   └── utils/
-    │           │       └── auth.ts
-    │           ├── integration/
-    │           │   ├── menu.integration.test.tsx
-    │           │   ├── menu.legacy.integration.test.tsx
-    │           │   └── navInput.integration.test.tsx
-    │           └── unit/
-    │               ├── example.test.ts
-    │               ├── hash-scroll.integration.test.tsx
-    │               ├── menu.actions.test.ts
-    │               ├── menu.scroll.test.ts
-    │               ├── menu.update.test.ts
-    │               ├── renderInputButton.test.tsx
-    │               ├── resolveScrollOffset.test.ts
-    │               ├── .gitkeep
-    │               └── entities/
-    │                   ├── core/
-    │                   │   ├── hooks/
-    │                   │   │   └── useModelForm.test.tsx
-    │                   │   ├── services/
-    │                   │   │   ├── cascade.test.ts
-    │                   │   │   └── crudService.test.ts
-    │                   │   └── utils/
-    │                   │       └── syncManyToMany.test.ts
-    │                   ├── models/
-    │                   │   ├── author/
-    │                   │   │   ├── form.test.ts
-    │                   │   │   └── useAuthorForm.test.ts
-    │                   │   ├── comment/
-    │                   │   │   └── service.test.ts
-    │                   │   ├── post/
-    │                   │   │   ├── form.test.ts
-    │                   │   │   └── usePostForm.test.ts
-    │                   │   ├── section/
-    │                   │   │   └── form.test.ts
-    │                   │   ├── tag/
-    │                   │   │   ├── form.test.ts
-    │                   │   │   └── hooks.test.tsx
-    │                   │   ├── todo/
-    │                   │   │   └── service.test.ts
-    │                   │   ├── userName/
-    │                   │   │   └── form.test.ts
-    │                   │   └── userProfile/
-    │                   │       └── form.test.ts
-    │                   └── relations/
-    │                       ├── postTag/
-    │                       │   └── service.test.ts
-    │                       └── sectionPost/
-    │                           └── service.test.ts
-    ├── docs/
-    │   ├── menu-actions-v2.md
-    │   └── audit/
-    │       ├── menu-actions-map.md
-    │       ├── menu-deps.mmd
-    │       ├── menu-open-questions.md
-    │       ├── menu-scss.md
-    │       ├── menu-structure.md
-    │       └── User stories.md
-    ├── packages/
-    │   ├── domain/
-    │   │   ├── package.json
-    │   │   ├── tsconfig.json
-    │   │   └── src/
-    │   │       └── index.ts
-    │   ├── services/
-    │   │   ├── package.json
-    │   │   ├── tsconfig.json
-    │   │   └── src/
-    │   │       └── index.ts
-    │   ├── types/
-    │   │   ├── package.json
-    │   │   ├── tsconfig.json
-    │   │   └── src/
-    │   │       └── index.ts
-    │   └── ui/
-    │       ├── package.json
-    │       ├── tsconfig.json
-    │       └── src/
-    │           └── index.ts
-    ├── scripts/
-    │   └── .gitkeep
-    └── tooling/
-        ├── eslint/
-        │   └── eslint/
-        │       └── rules/
-        │           └── no-onclick-wrapper.ts
-        ├── eslint-plugin-internal/
-        │   ├── index.js
-        │   └── package.json
-        ├── playwright/
-        │   └── playwright.config.ts
-        ├── tsconfig/
-        │   ├── tsconfig.ci.json
-        │   └── tsconfig.eslint.json
-        └── vitest/
-            └── vitest.config.ts
+├── README.md // infra — documentation
+├── AGENTS.md // infra — instructions dev
+├── eslint.config.mjs // infra — config eslint
+├── next-env.d.ts // types — types partagés
+├── package.json // infra — dépendances projet
+├── tsconfig.base.json // infra — config typescript
+├── .editorconfig // infra — config éditeur
+├── .env.local.example // infra — exemple env
+├── .prettierrc // infra — config prettier
+├── .yarnrc.yml // infra — config yarn
+├── apps/
+│   └── web/
+│       ├── amplify.yml // infra — config ci
+│       ├── middleware.ts // app — routeur Next.js
+│       ├── next-env.d.ts // types — types partagés
+│       ├── next.config.ts // infra — config next
+│       ├── package.json // infra — dépendances projet
+│       ├── tsconfig.json // infra — config typescript
+│       ├── .eslintrc.json // infra — config eslint
+│       ├── amplify/
+│       │   ├── backend.ts // services — service io
+│       │   ├── env.d.ts // types — types partagés
+│       │   ├── package.json // infra — dépendances projet
+│       │   ├── tsconfig.json // infra — config typescript
+│       │   ├── auth/
+│       │   │   └── resource.ts // services — service io
+│       │   ├── data/
+│       │   │   └── resource.ts // services — service io
+│       │   └── storage/
+│       │       └── resource.ts // services — service io
+│       ├── app/
+│       │   ├── globals.css // app — routeur Next.js
+│       │   ├── headerProps.jsx // app — routeur Next.js
+│       │   ├── layout.tsx // app — routeur Next.js
+│       │   ├── metaData.tsx // app — routeur Next.js
+│       │   ├── MobileRedirect.tsx // app — routeur Next.js
+│       │   ├── page.tsx // app — routeur Next.js
+│       │   ├── ScrollSectionsWrapper.jsx // app — routeur Next.js
+│       │   ├── api/
+│       │   │   └── sitemap.xml.ts // app — routeur Next.js
+│       │   ├── auth/
+│       │   │   └── callback/
+│       │   │       ├── ConnectForm.tsx // app — routeur Next.js
+│       │   │       ├── ConnectItem.tsx // app — routeur Next.js
+│       │   │       └── page.tsx // app — routeur Next.js
+│       │   ├── blog/
+│       │   │   ├── \_blog.scss // app — routeur Next.js
+│       │   │   ├── BlogClientWrapper.tsx // app — routeur Next.js
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   ├── page.tsx // app — routeur Next.js
+│       │   │   ├── SectionContainer.tsx // app — routeur Next.js
+│       │   │   ├── \[slug]/
+│       │   │   │   ├── page.tsx // app — routeur Next.js
+│       │   │   │   └── PostClient.tsx // app — routeur Next.js
+│       │   │   └── sections/
+│       │   │       ├── \[slug]/
+│       │   │       │   ├── page.tsx // app — routeur Next.js
+│       │   │       │   └── SectionClient.tsx // app — routeur Next.js
+│       │   │       └── css/
+│       │   │           └── desktopDefer.css // app — routeur Next.js
+│       │   ├── connexion/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── contact/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── fonts/
+│       │   │   ├── Montserrat.woff2 // app — routeur Next.js
+│       │   │   └── Nunito.woff2 // app — routeur Next.js
+│       │   ├── informations-legales/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── mentions-legales/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── profile/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── reservation/
+│       │   │   ├── Cone.jsx // app — routeur Next.js
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   └── page.tsx // app — routeur Next.js
+│       │   ├── search/
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   ├── page.tsx // app — routeur Next.js
+│       │   │   └── SearchPageContent.tsx // app — routeur Next.js
+│       │   ├── services/
+│       │   │   ├── \_tarifs.scss // app — routeur Next.js
+│       │   │   ├── error.tsx // app — routeur Next.js
+│       │   │   ├── loading.tsx // app — routeur Next.js
+│       │   │   ├── page.tsx // app — routeur Next.js
+│       │   │   └── tarifs.css // app — routeur Next.js
+│       │   └── tarifs/
+│       │       ├── error.tsx // app — routeur Next.js
+│       │       ├── loading.tsx // app — routeur Next.js
+│       │       └── page.tsx // app — routeur Next.js
+│       ├── public/
+│       │   ├── robots.txt // public — asset statique
+│       │   ├── sitemap.xml // public — asset statique
+│       │   ├── css/
+│       │   │   └── desktopDefer.css // ui — styles
+│       │   └── img/
+│       │       ├── about/
+│       │       │   └── avatar.webp // public — asset statique
+│       │       └── favicon/
+│       │           └── site.webmanifest // public — asset statique
+│       ├── scripts/
+│       │   └── generate-sitemap.js // tooling — outillage tests/build
+│       ├── src/
+│       │   ├── amplify/
+│       │   │   ├── global.d.ts // types — types partagés
+│       │   │   ├── setup.ts // services — service io
+│       │   │   └── useAmplifyReady.ts // services — service io
+│       │   ├── assets/
+│       │   │   ├── data/
+│       │   │   │   ├── menuItems.ts // ui — utilitaire ui
+│       │   │   │   ├── sections.ts // ui — utilitaire ui
+│       │   │   │   ├── servicesData.js // ui — utilitaire ui
+│       │   │   │   ├── shemat.txt // infra — note de schema
+│       │   │   │   ├── content/
+│       │   │   │   │   ├── about.ts // ui — contenu statique
+│       │   │   │   │   ├── contact.ts // ui — contenu statique
+│       │   │   │   │   ├── index.ts // ui — index contenu
+│       │   │   │   │   ├── info.ts // ui — contenu statique
+│       │   │   │   │   ├── services.ts // ui — contenu statique
+│       │   │   │   │   └── slider.ts // ui — contenu statique
+│       │   │   │   ├── interfaces/
+│       │   │   │   │   ├── content.ts // types — types partagés
+│       │   │   │   │   └── menu.ts // types — types partagés
+│       │   │   │   └── utils/
+│       │   │   │       └── attachContent.ts // ui — attache contenu
+│       │   │   └── styles/
+│       │   │       ├── main.scss // ui — styles
+│       │   │       ├── 00\_utils/
+│       │   │       │   ├── \_fonts.scss // ui — styles
+│       │   │       │   ├── \_functions.scss // ui — styles
+│       │   │       │   ├── \_mixins.scss // ui — styles
+│       │   │       │   └── \_variables.scss // ui — styles
+│       │   │       ├── 01\_base/
+│       │   │       │   ├── \_general.scss // ui — styles
+│       │   │       │   ├── \_media-query.scss // ui — styles
+│       │   │       │   └── \_navToggler.scss // ui — styles
+│       │   │       ├── 03\_pages/
+│       │   │       │   └── \_page.scss // ui — styles
+│       │   │       ├── amplify/
+│       │   │       │   ├── README.md // infra — documentation
+│       │   │       │   ├── \_auth.core.scss // ui — styles (Amplify)
+│       │   │       │   ├── \_auth.form.scss // ui — styles (Amplify)
+│       │   │       │   ├── \_auth.mixins.scss // ui — styles (Amplify)
+│       │   │       │   ├── \_auth.overrides.scss // ui — styles (Amplify)
+│       │   │       │   ├── \_auth.variables.scss // ui — styles (Amplify)
+│       │   │       │   └── authenticator.scss // ui — styles (Amplify)
+│       │   │       └── components/
+│       │   │           ├── \_modal.scss // ui — styles
+│       │   │           └── forms/
+│       │   │               ├── \_EditableField.scss // ui — styles
+│       │   │               ├── \_EditField.scss // ui — styles
+│       │   │               ├── \_EntityEditor.scss // ui — styles
+│       │   │               ├── \_EntityForm.scss // ui — styles
+│       │   │               ├── \_ItemSelector.scss // ui — styles
+│       │   │               ├── \_ReadOnlyView\.scss // ui — styles
+│       │   │               ├── \_SelectField.scss // ui — styles
+│       │   │               └── \_SeoFields.scss // ui — styles
+│       │   ├── auth/
+│       │   │   ├── amplifyConfig.ts // services — config Amplify
+│       │   │   └── Authentication/
+│       │   │       ├── auth-provider.tsx // ui — composant React
+│       │   │       ├── Authentication.tsx // ui — composant React
+│       │   │       ├── AuthGuard.tsx // ui — composant React
+│       │   │       ├── PostLoginUserNameGate.tsx // ui — composant React
+│       │   │       └── RequireLoginButton.tsx // ui — composant React
+│       │   ├── components/
+│       │   │   ├── PrivacyPolicy.tsx // ui — composant React
+│       │   │   ├── TermsOfUse.tsx // ui — composant React
+│       │   │   ├── Blog/
+│       │   │   │   ├── AuthorSignature.tsx // ui — composant React
+│       │   │   │   ├── Blog.tsx // ui — composant React
+│       │   │   │   ├── BlogCard.tsx // ui — composant React
+│       │   │   │   ├── BlogList.tsx // ui — composant React
+│       │   │   │   ├── BlogSectionCard.tsx // ui — composant React
+│       │   │   │   ├── ButtonPage.tsx // ui — composant React
+│       │   │   │   ├── MarkdownRenderer.tsx // ui — composant React
+│       │   │   │   ├── PostContent.tsx // ui — composant React
+│       │   │   │   ├── VideoEmbed.tsx // ui — composant React
+│       │   │   │   ├── YouTubeIframe.tsx // ui — composant React
+│       │   │   │   └── YouTubePlaceholder.tsx // ui — composant React
+│       │   │   ├── button/
+│       │   │   │   ├── \_button.scss // ui — styles
+│       │   │   │   ├── Button.tsx // ui — composant React
+│       │   │   │   └── ButtonLink.tsx // ui — composant React
+│       │   │   ├── buttons/
+│       │   │   │   ├── ActionButtons.tsx // ui — composant React
+│       │   │   │   ├── Button.tsx // ui — composant React
+│       │   │   │   ├── Buttons.tsx // ui — composant React
+│       │   │   │   ├── buttonStyles.ts // ui — utilitaire ui
+│       │   │   │   ├── doc.md // infra — documentation
+│       │   │   │   ├── IconButton.tsx // ui — composant React
+│       │   │   │   ├── index.ts // ui — utilitaire ui
+│       │   │   │   ├── UiButton.tsx // ui — composant React
+│       │   │   │   └── docs/
+│       │   │   │       ├── AddButton.md // infra — documentation
+│       │   │   │       ├── BackButton.md // infra — documentation
+│       │   │   │       ├── Buttons.md // infra — documentation
+│       │   │   │       ├── CancelButton.md // infra — documentation
+│       │   │   │       ├── ClearFieldButton.md // infra — documentation
+│       │   │   │       ├── DeleteButton.md // infra — documentation
+│       │   │   │       ├── EditButton.md // infra — documentation
+│       │   │   │       ├── Guide d’utilisation des Boutons @components.md // infra — documentation
+│       │   │   │       ├── index.md // infra — documentation
+│       │   │   │       ├── PowerButton.md // infra — documentation
+│       │   │   │       ├── RefreshButton.md // infra — documentation
+│       │   │   │       ├── SubmitButton.md // infra — documentation
+│       │   │   │       ├── UiButton.md // infra — documentation
+│       │   │   │       └── UpdateButton.md // infra — documentation
+│       │   │   ├── checkbox/
+│       │   │   │   ├── \_input-checkbox.scss // ui — styles
+│       │   │   │   └── inputCheckbox.tsx // ui — composant React
+│       │   │   ├── footer/
+│       │   │   │   ├── \_footer.scss // ui — styles
+│       │   │   │   └── footer.tsx // ui — composant React
+│       │   │   ├── Form/
+│       │   │   │   └── ReadOnlyView\.tsx // ui — composant React
+│       │   │   ├── forms/
+│       │   │   │   ├── EditField.tsx // ui — composant React
+│       │   │   │   ├── EntityEditor.tsx // ui — composant React
+│       │   │   │   ├── EntityForm.tsx // ui — composant React
+│       │   │   │   ├── ItemSelector.tsx // ui — composant React
+│       │   │   │   └── ReadOnlyView\.tsx // ui — composant React
+│       │   │   ├── header/
+│       │   │   │   ├── \_header.scss // ui — styles
+│       │   │   │   ├── Header.tsx // ui — composant React
+│       │   │   │   ├── Nav.tsx // ui — composant React
+│       │   │   │   ├── NavLink.tsx // ui — composant React
+│       │   │   │   ├── svgComponents.ts // ui — utilitaire ui
+│       │   │   │   ├── navInput/
+│       │   │   │   │   ├── NavInput.tsx // ui — composant React
+│       │   │   │   │   ├── RenderInput.tsx // ui — composant React
+│       │   │   │   │   ├── RenderInputButton.tsx // ui — composant React
+│       │   │   │   │   ├── SubResult.tsx // ui — composant React
+│       │   │   │   │   └── useSearchHandler.tsx // ui — composant React
+│       │   │   │   ├── navLink/
+│       │   │   │   │   ├── NavLinkShow\.tsx // ui — composant React
+│       │   │   │   │   ├── RenderLink.tsx // ui — composant React
+│       │   │   │   │   └── SubMenu.tsx // ui — composant React
+│       │   │   │   └── utils/
+│       │   │   │       ├── HiddenDelayComponent.tsx // ui — composant React
+│       │   │   │       ├── menuUtils.ts // ui — utilitaire ui
+│       │   │   │       └── useResize.ts // ui — utilitaire ui
+│       │   │   ├── Legal/
+│       │   │   │   ├── ApplicableLaw\.tsx // ui — composant React
+│       │   │   │   ├── CompanyDetailsInfo.tsx // ui — composant React
+│       │   │   │   ├── Cookies.tsx // ui — composant React
+│       │   │   │   ├── DevLegalNotices.tsx // ui — composant React
+│       │   │   │   ├── LegalNotices.tsx // ui — composant React
+│       │   │   │   ├── PrivacyPolicy.tsx // ui — composant React
+│       │   │   │   ├── PublicationDirector.tsx // ui — composant React
+│       │   │   │   ├── RegistrationAndVAT.tsx // ui — composant React
+│       │   │   │   ├── Rgpd.tsx // ui — composant React
+│       │   │   │   ├── SiteEditorCreator.tsx // ui — composant React
+│       │   │   │   ├── SiteHost.tsx // ui — composant React
+│       │   │   │   └── TermsOfUse.tsx // ui — composant React
+│       │   │   ├── loader/
+│       │   │   │   ├── \_loader.scss // ui — styles
+│       │   │   │   └── Loader.jsx // ui — composant React
+│       │   │   ├── Profile/
+│       │   │   │   ├── \_UserNameManager.scss // ui — styles
+│       │   │   │   ├── \_UserProfileManager.scss // ui — styles
+│       │   │   │   ├── UserNameManager.tsx // ui — composant React
+│       │   │   │   ├── UserNameModal.tsx // ui — composant React
+│       │   │   │   ├── UserProfileManager.tsx // ui — composant React
+│       │   │   │   ├── utilsUserName.tsx // ui — composant React
+│       │   │   │   └── utilsUserProfile.tsx // ui — composant React
+│       │   │   └── svg\_Icon/
+│       │   │       ├── Blog.jsx // ui — composant React
+│       │   │       ├── Connection.jsx // ui — composant React
+│       │   │       ├── Contact.jsx // ui — composant React
+│       │   │       ├── Home.jsx // ui — composant React
+│       │   │       ├── Logo.jsx // ui — composant React
+│       │   │       ├── Reservation.jsx // ui — composant React
+│       │   │       ├── Search.jsx // ui — composant React
+│       │   │       ├── SearchClose.jsx // ui — composant React
+│       │   │       ├── Services.jsx // ui — composant React
+│       │   │       ├── Tarifs.jsx // ui — composant React
+│       │   │       ├── social/
+│       │   │       │   ├── Facebook.jsx // ui — composant React
+│       │   │       │   ├── Instagram.jsx // ui — composant React
+│       │   │       │   ├── Linkedin.jsx // ui — composant React
+│       │   │       │   ├── TikTok.jsx // ui — composant React
+│       │   │       │   ├── Twitter.jsx // ui — composant React
+│       │   │       │   ├── WhatsApp.jsx // ui — composant React
+│       │   │       │   └── Youtube.jsx // ui — composant React
+│       │   │       └── utils/
+│       │   │           ├── Arrow\.jsx // ui — composant React
+│       │   │           └── CheckedIcon.jsx // ui — composant React
+│       │   ├── context/
+│       │   │   └── DataBlogProvider.tsx // ui — composant React
+│       │   ├── entities/
+│       │   │   ├── index.ts // domain — barrel entities
+│       │   │   ├── core/
+│       │   │   │   ├── auth.ts // services — util auth
+│       │   │   │   ├── doc.md // infra — documentation
+│       │   │   │   ├── index.ts // domain — barrel core
+│       │   │   │   ├── hooks/
+│       │   │   │   │   ├── index.ts // ui — util hooks
+│       │   │   │   │   ├── useModelForm.ts // ui — hook formulaire
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       └── useModelForm.test.tsx // tests — unitaire
+│       │   │   │   ├── services/
+│       │   │   │   │   ├── amplifyClient.ts // services — client Amplify
+│       │   │   │   │   ├── cascade.ts // services — orchestration IO
+│       │   │   │   │   ├── crudService.ts // services — CRUD IO
+│       │   │   │   │   ├── doc.md // infra — documentation
+│       │   │   │   │   ├── index.ts // services — barrel services
+│       │   │   │   │   ├── relationService.ts // services — relations IO
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       ├── cascade.test.ts // tests — unitaire
+│       │   │   │   │       └── crudService.test.ts // tests — unitaire
+│       │   │   │   ├── types/
+│       │   │   │   │   ├── amplifyBaseTypes.ts // types — types partagés
+│       │   │   │   │   ├── config.ts // types — types partagés
+│       │   │   │   │   ├── doc.md // infra — documentation
+│       │   │   │   │   ├── form.ts // types — types partagés
+│       │   │   │   │   ├── index.ts // types — barrel types
+│       │   │   │   │   └── model.ts // types — types partagés
+│       │   │   │   └── utils/
+│       │   │   │       ├── amplifyUiConfig.ts // ui — config UI Amplify
+│       │   │   │       ├── createM2MSync.ts // domain — sync M2M
+│       │   │   │       ├── createModelForm.ts // domain — factory form
+│       │   │   │       ├── doc.md // infra — documentation
+│       │   │   │       ├── index.ts // domain — barrel utils
+│       │   │   │       ├── normalize.ts // domain — normalisation
+│       │   │   │       ├── syncManyToMany.ts // domain — sync M2M
+│       │   │   │       ├── toggleId.ts // domain — helper id
+│       │   │   │       └── **tests**/
+│       │   │   │           └── syncManyToMany.test.ts // tests — unitaire
+│       │   │   ├── customTypes/
+│       │   │   │   └── seo/
+│       │   │   │       ├── form.ts // domain — form logic
+│       │   │   │       ├── index.ts // types — barrel types
+│       │   │   │       └── types.ts // types — types partagés
+│       │   │   ├── models/
+│       │   │   │   ├── author/
+│       │   │   │   │   ├── config.ts // domain — config modèle
+│       │   │   │   │   ├── form.ts // domain — form logic
+│       │   │   │   │   ├── hooks.tsx // ui — composant React
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   ├── types.ts // types — types partagés
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       ├── form.test.ts // tests — unitaire
+│       │   │   │   │       └── useAuthorForm.test.ts // tests — unitaire
+│       │   │   │   ├── comment/
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       └── service.test.ts // tests — unitaire
+│       │   │   │   ├── post/
+│       │   │   │   │   ├── config.ts // domain — config modèle
+│       │   │   │   │   ├── form.ts // domain — form logic
+│       │   │   │   │   ├── hooks.tsx // ui — composant React
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   ├── types.ts // types — types partagés
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       ├── form.test.ts // tests — unitaire
+│       │   │   │   │       └── usePostForm.test.ts // tests — unitaire
+│       │   │   │   ├── section/
+│       │   │   │   │   ├── config.ts // domain — config modèle
+│       │   │   │   │   ├── form.ts // domain — form logic
+│       │   │   │   │   ├── hooks.tsx // ui — composant React
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   ├── types.ts // types — types partagés
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       └── form.test.ts // tests — unitaire
+│       │   │   │   ├── tag/
+│       │   │   │   │   ├── config.ts // domain — config modèle
+│       │   │   │   │   ├── form.ts // domain — form logic
+│       │   │   │   │   ├── hooks.tsx // ui — composant React
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   ├── types.ts // types — types partagés
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       ├── form.test.ts // tests — unitaire
+│       │   │   │   │       └── hooks.test.tsx // tests — unitaire
+│       │   │   │   ├── todo/
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       └── service.test.ts // tests — unitaire
+│       │   │   │   ├── userName/
+│       │   │   │   │   ├── bus.ts // domain — bus interne
+│       │   │   │   │   ├── config.ts // domain — config modèle
+│       │   │   │   │   ├── form.ts // domain — form logic
+│       │   │   │   │   ├── hooks.tsx // ui — composant React
+│       │   │   │   │   ├── index.ts // domain — barrel modèle
+│       │   │   │   │   ├── service.ts // services — use-case modèle
+│       │   │   │   │   ├── types.ts // types — types partagés
+│       │   │   │   │   └── **tests**/
+│       │   │   │   │       └── form.test.ts // tests — unitaire
+│       │   │   │   └── userProfile/
+│       │   │   │       ├── config.ts // domain — config modèle
+│       │   │   │       ├── form.ts // domain — form logic
+│       │   │   │       ├── hooks.tsx // ui — composant React
+│       │   │   │       ├── index.ts // domain — barrel modèle
+│       │   │   │       ├── service.ts // services — use-case modèle
+│       │   │   │       ├── types.ts // types — types partagés
+│       │   │   │       └── **tests**/
+│       │   │   │           └── form.test.ts // tests — unitaire
+│       │   │   └── relations/
+│       │   │       ├── postTag/
+│       │   │       │   ├── index.ts // domain — barrel relation
+│       │   │       │   ├── service.ts // services — orchestration relation
+│       │   │       │   ├── sync.ts // services — sync relation
+│       │   │       │   ├── types.ts // types — types partagés
+│       │   │       │   └── **tests**/
+│       │   │       │       └── service.test.ts // tests — unitaire
+│       │   │       └── sectionPost/
+│       │   │           ├── index.ts // domain — barrel relation
+│       │   │           ├── service.ts // services — orchestration relation
+│       │   │           ├── sync.ts // services — sync relation
+│       │   │           ├── types.ts // types — types partagés
+│       │   │           └── **tests**/
+│       │   │               └── service.test.ts // tests — unitaire
+│       │   ├── home/
+│       │   │   ├── about/
+│       │   │   │   ├── \_about.scss // ui — styles
+│       │   │   │   └── about.tsx // ui — composant React
+│       │   │   ├── contact-section/
+│       │   │   │   ├── \_contact.scss // ui — styles
+│       │   │   │   ├── contactBackGround.tsx // ui — composant React
+│       │   │   │   ├── index.tsx // ui — composant React
+│       │   │   │   ├── socialSvgComponents.ts // ui — utilitaire ui
+│       │   │   │   ├── contactCard/
+│       │   │   │   │   ├── contactAnnouncement.tsx // ui — composant React
+│       │   │   │   │   ├── contactInfo.tsx // ui — composant React
+│       │   │   │   │   ├── index.tsx // ui — composant React
+│       │   │   │   │   └── SocialLinks.tsx // ui — composant React
+│       │   │   │   └── contactForm/
+│       │   │   │       ├── \_form.scss // ui — styles
+│       │   │   │       ├── contactCGU.tsx // ui — composant React
+│       │   │   │       ├── contactFormTitle.tsx // ui — composant React
+│       │   │   │       ├── contactQuestions.tsx // ui — composant React
+│       │   │   │       ├── form.jsx // ui — composant React
+│       │   │   │       ├── formSuite.jsx // ui — composant React
+│       │   │   │       ├── index.tsx // ui — composant React
+│       │   │   │       ├── mapCGU/
+│       │   │   │       │   └── index.tsx // ui — composant React
+│       │   │   │       └── mapContactQuestions/
+│       │   │   │           └── index.tsx // ui — composant React
+│       │   │   ├── service/
+│       │   │   │   ├── \_questionaire.scss // ui — styles
+│       │   │   │   ├── \_services.scss // ui — styles
+│       │   │   │   ├── permitStatus.tsx // ui — composant React
+│       │   │   │   ├── services.tsx // ui — composant React
+│       │   │   │   ├── beginner/
+│       │   │   │   │   ├── \_beginner.scss // ui — styles
+│       │   │   │   │   └── beginner.tsx // ui — composant React
+│       │   │   │   ├── confirmed/
+│       │   │   │   │   ├── \_confirmed.scss // ui — styles
+│       │   │   │   │   └── confirmed.tsx // ui — composant React
+│       │   │   │   └── questions/
+│       │   │   │       ├── accompanistQuestions.tsx // ui — composant React
+│       │   │   │       ├── driveQuestions.tsx // ui — composant React
+│       │   │   │       ├── dataQuestions/
+│       │   │   │       │   ├── accompanistDataQuestions.tsx // ui — composant React
+│       │   │   │       │   └── drivingDataQuestions.tsx // ui — composant React
+│       │   │   │       └── mapQuestions/
+│       │   │   │           └── index.tsx // ui — composant React
+│       │   │   └── slider/
+│       │   │       ├── \_slider.scss // ui — styles
+│       │   │       ├── \_sliderArrow\.scss // ui — styles
+│       │   │       ├── \_sliderContent.scss // ui — styles
+│       │   │       ├── \_sliderCTA.scss // ui — styles
+│       │   │       ├── \_sliderInfo.scss // ui — styles
+│       │   │       ├── \_sliderRoad.scss // ui — styles
+│       │   │       ├── \_sunBG.scss // ui — styles
+│       │   │       ├── Slider.tsx // ui — composant React
+│       │   │       ├── SliderArrow\.tsx // ui — composant React
+│       │   │       ├── SliderContent.tsx // ui — composant React
+│       │   │       ├── SliderCTA.tsx // ui — composant React
+│       │   │       ├── SliderInfo.tsx // ui — composant React
+│       │   │       ├── SliderRoad.tsx // ui — composant React
+│       │   │       ├── SunBG.tsx // ui — composant React
+│       │   │       └── svg/
+│       │   │           └── SliderNumber.jsx // ui — composant React
+│       │   ├── i18n/
+│       │   │   ├── types.ts // types — types partagés
+│       │   │   └── fr/
+│       │   │       └── usernameModal.json // ui — contenu i18n
+│       │   ├── services/
+│       │   │   ├── blogDataService.ts // services — service IO
+│       │   │   └── index.ts // services — barrel services
+│       │   ├── types/
+│       │   │   ├── blog.d.ts // types — types partagés
+│       │   │   ├── buttons.d.ts // types — types partagés
+│       │   │   ├── global.d.ts // types — types partagés
+│       │   │   ├── index.ts // types — barrel types
+│       │   │   └── models/
+│       │   │       ├── comment.ts // types — types partagés
+│       │   │       ├── todo.ts // types — types partagés
+│       │   │       ├── userName.ts // types — types partagés
+│       │   │       └── userProfile.ts // types — types partagés
+│       │   └── utils/
+│       │       ├── addScrollListener.ts // ui — util DOM scroll
+│       │       ├── autocomplete.ts // ui — util saisie
+│       │       ├── cookiesUtils.ts // ui — util cookies
+│       │       ├── fnScrollUtils.ts // domain — calcul scroll
+│       │       ├── getSectionIds.ts // domain — calcul ids
+│       │       ├── goToLoginWithReturn.ts // services — redirection auth
+│       │       ├── HtmlRenderer.tsx // ui — composant React
+│       │       ├── initializeMenu.ts // ui — init menu
+│       │       ├── scrollUtils.ts // ui — util scroll
+│       │       ├── searchMenu.js // ui — util recherche
+│       │       ├── searchUtils.ts // ui — util recherche
+│       │       ├── Space.tsx // ui — composant React
+│       │       ├── Tabulation.tsx // ui — composant React
+│       │       ├── updateMenuUtils.ts // ui — util menu
+│       │       ├── useIsBrowser.ts // ui — hook utilitaire
+│       │       ├── useToggle.ts // ui — hook utilitaire
+│       │       ├── useURLParams.tsx // ui — composant React
+│       │       ├── validationForm.js // domain — validation formulaire
+│       │       ├── blogData/
+│       │       │   ├── fetchData.ts // services — fetch data
+│       │       │   └── loadData.ts // services — data loader
+│       │       ├── context/
+│       │       │   ├── DrivingContext.tsx // ui — contexte React
+│       │       │   ├── NavigationContext.tsx // ui — contexte React
+│       │       │   ├── ScrollContext.tsx // ui — contexte React
+│       │       │   ├── SearchContext.tsx // ui — contexte React
+│       │       │   └── slider/
+│       │       │       ├── fnSliderContext.ts // ui — util slider
+│       │       │       ├── SliderContext.tsx // ui — contexte React
+│       │       │       ├── slideRefParam.ts // ui — util slider
+│       │       │       ├── useAutoSlide.ts // ui — hook slider
+│       │       │       ├── useScrollListener.ts // ui — hook scroll
+│       │       │       ├── useSessionSlideRef.ts // ui — hook slider
+│       │       │       ├── useSlideRefParam.ts // ui — hook slider
+│       │       │       └── useSlides.ts // ui — hook slider
+│       │       ├── cookieStorage/
+│       │       │   └── useCookie.tsx // ui — hook React
+│       │       ├── localStorage/
+│       │       │   ├── useLocalStorage.tsx // ui — hook React
+│       │       │   └── boolean-convertor/
+│       │       │       └── useLocalStorageBoolean.tsx // ui — hook React
+│       │       └── sessionStorage/
+│       │           └── useSessionStorage.tsx // ui — hook React
+│       └── tests/
+│           ├── setupTests.ts // tests — setup
+│           ├── \_legacy/
+│           │   ├── setupTests.ts // tests — setup
+│           │   ├── .gitkeep // tests — placeholder
+│           │   ├── **tests**/
+│           │   │   └── .gitkeep // tests — placeholder
+│           │   ├── e2e/
+│           │   │   └── .gitkeep // tests — placeholder
+│           │   ├── fixtures/
+│           │   │   └── relations.ts // tests — fixture
+│           │   └── mocks/
+│           │       └── amplifyClient.ts // tests — mock
+│           ├── api/
+│           │   ├── example.api.test.ts // tests — api
+│           │   └── .gitkeep // tests — placeholder
+│           ├── e2e/
+│           │   ├── example.spec.ts // tests — e2e
+│           │   ├── hash-scroll.spec.ts // tests — e2e
+│           │   ├── menu.spec.ts // tests — e2e
+│           │   ├── section-management.spec.ts // tests — e2e
+│           │   ├── setupPaths.ts // tests — e2e
+│           │   ├── tag-post.spec.ts // tests — e2e
+│           │   ├── user-login.spec.ts // tests — e2e
+│           │   ├── app/
+│           │   │   └── auth/
+│           │   │       └── callback/
+│           │   │           └── testY.tsx // tests — e2e
+│           │   └── utils/
+│           │       └── auth.ts // tests — e2e
+│           ├── integration/
+│           │   ├── menu.integration.test.tsx // tests — intégration
+│           │   ├── menu.legacy.integration.test.tsx // tests — intégration
+│           │   └── navInput.integration.test.tsx // tests — intégration
+│           └── unit/
+│               ├── example.test.ts // tests — unitaire
+│               ├── hash-scroll.integration.test.tsx // tests — intégration
+│               ├── menu.actions.test.ts // tests — unitaire
+│               ├── menu.scroll.test.ts // tests — unitaire
+│               ├── menu.update.test.ts // tests — unitaire
+│               ├── renderInputButton.test.tsx // tests — unitaire
+│               ├── resolveScrollOffset.test.ts // tests — unitaire
+│               ├── .gitkeep // tests — placeholder
+│               └── entities/
+│                   ├── core/
+│                   │   ├── hooks/
+│                   │   │   └── useModelForm.test.tsx // tests — unitaire
+│                   │   ├── services/
+│                   │   │   ├── cascade.test.ts // tests — unitaire
+│                   │   │   └── crudService.test.ts // tests — unitaire
+│                   │   └── utils/
+│                   │       └── syncManyToMany.test.ts // tests — unitaire
+│                   ├── models/
+│                   │   ├── author/
+│                   │   │   ├── form.test.ts // tests — unitaire
+│                   │   │   └── useAuthorForm.test.ts // tests — unitaire
+│                   │   ├── comment/
+│                   │   │   └── service.test.ts // tests — unitaire
+│                   │   ├── post/
+│                   │   │   ├── form.test.ts // tests — unitaire
+│                   │   │   └── usePostForm.test.ts // tests — unitaire
+│                   │   ├── section/
+│                   │   │   └── form.test.ts // tests — unitaire
+│                   │   ├── tag/
+│                   │   │   ├── form.test.ts // tests — unitaire
+│                   │   │   └── hooks.test.tsx // tests — unitaire
+│                   │   ├── todo/
+│                   │   │   └── service.test.ts // tests — unitaire
+│                   │   ├── userName/
+│                   │   │   └── form.test.ts // tests — unitaire
+│                   │   └── userProfile/
+│                   │       └── form.test.ts // tests — unitaire
+│                   └── relations/
+│                       ├── postTag/
+│                       │   └── service.test.ts // tests — unitaire
+│                       └── sectionPost/
+│                           └── service.test.ts // tests — unitaire
+├── docs/
+│   ├── menu-actions-v2.md // infra — documentation
+│   └── audit/
+│       ├── menu-actions-map.md // infra — documentation
+│       ├── menu-deps.mmd // infra — fichier configuration
+│       ├── menu-open-questions.md // infra — documentation
+│       ├── menu-scss.md // infra — documentation
+│       ├── menu-structure.md // infra — documentation
+│       └── User stories.md // infra — documentation
+├── packages/
+│   ├── domain/
+│   │   ├── package.json // infra — dépendances projet
+│   │   ├── tsconfig.json // infra — config typescript
+│   │   └── src/
+│   │       └── index.ts // domain — logique métier
+│   ├── services/
+│   │   ├── package.json // infra — dépendances projet
+│   │   ├── tsconfig.json // infra — config typescript
+│   │   └── src/
+│   │       └── index.ts // services — barrel
+│   ├── types/
+│   │   ├── package.json // infra — dépendances projet
+│   │   ├── tsconfig.json // infra — config typescript
+│   │   └── src/
+│   │       └── index.ts // types — barrel
+│   └── ui/
+│       ├── package.json // infra — dépendances projet
+│       ├── tsconfig.json // infra — config typescript
+│       └── src/
+│           └── index.ts // ui — barrel UI
+├── scripts/
+│   └── .gitkeep // infra — placeholder
+└── tooling/
+├── eslint/
+│   └── eslint/
+│       └── rules/
+│           └── no-onclick-wrapper.ts // infra — règle eslint
+├── eslint-plugin-internal/
+│   ├── index.js // infra — plugin eslint
+│   └── package.json // infra — dépendances plugin
+├── playwright/
+│   └── playwright.config.ts // infra — config Playwright
+├── tsconfig/
+│   ├── tsconfig.ci.json // infra — config typescript
+│   └── tsconfig.eslint.json // infra — config typescript
+└── vitest/
+└── vitest.config.ts // infra — config Vitest
