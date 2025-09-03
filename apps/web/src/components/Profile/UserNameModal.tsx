@@ -12,8 +12,8 @@ import { BackButton } from "@components/buttons";
 import Link from "next/link";
 
 // 👇 i18n
-import type { Messages } from "@/src/i18n/types";
-import messagesJson from "@/src/i18n/fr/usernameModal.json";
+import type { Messages } from "@src/i18n/types";
+import messagesJson from "@src/i18n/fr/usernameModal.json";
 
 interface UserNameModalProps {
     isOpen: boolean;

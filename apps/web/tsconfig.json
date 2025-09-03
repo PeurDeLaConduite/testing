@@ -1,36 +1,48 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "strict": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "strict": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "lib": ["dom", "dom.iterable", "esnext"],
+
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./*"],
+            "@app/*": ["app/*"],
+            "@src/*": ["src/*"],
+            "@assets/*": ["src/assets/*"],
+            "@components/*": ["src/components/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@context/*": ["src/context/*"],
+            "@utils/*": ["src/utils/*"],
+            "@public/*": ["public/*"],
+            "@test/*": ["tests/*"],
+            "@entities/*": ["src/entities/*"],
+            // Pont de migration : d’abord legacy local, puis nouveaux packages
+            "@services/*": ["src/services/*", "../../packages/services/src/*"]
+        },
+
+        "plugins": [{ "name": "next" }]
+    },
+    "include": [
+        "next-env.d.ts",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "app/**/*.js",
+        "app/**/*.jsx",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "public/**/*.json",
+        ".next/types/**/*.ts"
     ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
-  },
-  "include": [
-    "next-env.d.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "public/**/*.json",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "exclude": ["node_modules"]
 }

@@ -15,8 +15,8 @@ import {
 } from "@entities/models/userName";
 
 // ⚠️ importe ton JSON i18n réel (ex. le fichier que tu as préparé)
-import type { Messages } from "@/src/i18n/types";
-import messagesJson from "@/src/i18n/fr/usernameModal.json";
+import type { Messages } from "@src/i18n/types";
+import messagesJson from "@src/i18n/fr/usernameModal.json";
 
 type IdLike = string | number;
 const fields: (keyof UserNameFormType)[] = ["userName"];

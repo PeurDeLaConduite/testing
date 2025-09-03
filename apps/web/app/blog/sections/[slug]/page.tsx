@@ -1,5 +1,5 @@
 // app/blog/sections/[slug]/page.tsx
-import { loadData } from "@/src/utils/blogData/loadData"; // ✅ maintenant externe
+import { loadData } from "@src/utils/blogData/loadData"; // ✅ maintenant externe
 import { Metadata, ResolvingMetadata } from "next";
 import ButtonPage from "@components/Blog/ButtonPage";
 import SectionContainer from "@/app/blog/SectionContainer";

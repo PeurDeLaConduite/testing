@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import type { Metadata } from "next";
-import { RequireLoginButton } from "@/src/auth/Authentication/RequireLoginButton";
+import { RequireLoginButton } from "@src/auth/Authentication/RequireLoginButton";
 export const metadata: Metadata = {
     title: "Blog",
     description:

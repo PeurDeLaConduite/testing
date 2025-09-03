@@ -9,9 +9,9 @@ import HeaderProps from "./headerProps";
 import { ScrollProvider } from "../src/utils/context/ScrollContext";
 import ScrollSectionsWrapper from "./ScrollSectionsWrapper";
 import Footer from "../src/components/footer/footer";
-import Loader from "@/src/components/loader/Loader";
+import Loader from "@src/components/loader/Loader";
 import MobileRedirect from "./MobileRedirect";
-import AuthProvider from "@/src/auth/Authentication/auth-provider";
+import AuthProvider from "@src/auth/Authentication/auth-provider";
 
 // import "@aws-amplify/ui-react/styles.css";
 

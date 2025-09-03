@@ -1,5 +1,5 @@
 // app/blog/[slug]/page.tsx
-import { loadData } from "@/src/utils/blogData/loadData";
+import { loadData } from "@src/utils/blogData/loadData";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import PostClient from "./PostClient";

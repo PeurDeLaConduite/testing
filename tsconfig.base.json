@@ -3,6 +3,7 @@
         "target": "ES2019",
         "module": "ESNext",
         "moduleResolution": "Node",
+        "strict": true,
         "baseUrl": ".",
         "paths": {
             "@domain/*": ["packages/domain/src/*"],

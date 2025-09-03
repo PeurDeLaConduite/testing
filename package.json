@@ -7,5 +7,12 @@
     "packageManager": "yarn@4.9.4",
     "engines": {
         "node": "20.18.x"
+    },
+    "scripts": {
+        "dev": "yarn workspace web dev",
+        "build": "yarn workspaces foreach -p run build",
+        "lint": "yarn workspaces foreach -p run lint",
+        "test": "yarn workspaces foreach -p run test",
+        "test:web": "yarn workspace web test"
     }
 }

@@ -1,5 +1,5 @@
 // src/entities/core/services/amplifyClient.ts
-import "@/src/amplify/setup";
+import "@src/amplify/setup";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 

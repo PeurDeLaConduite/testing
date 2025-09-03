@@ -2,8 +2,8 @@
 "use client";
 import React from "react";
 import { DataBlogProvider, useDataBlog } from "@context/DataBlogProvider";
-import Blog from "@/src/components/Blog/Blog";
-import Loader from "@/src/components/loader/Loader";
+import Blog from "@src/components/Blog/Blog";
+import Loader from "@src/components/loader/Loader";
 function InnerBlog() {
     const { data, loading, error } = useDataBlog();
 
