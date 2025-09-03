@@ -1,28 +1,16 @@
 {
-    "private": true,
-    "workspaces": [
-        "apps/*",
-        "packages/*",
-        "tooling/*"
-    ],
-    "packageManager": "yarn@4.9.4",
-    "engines": {
-        "node": "20.18.x"
-    },
-    "scripts": {
-        "dev": "yarn workspace web dev",
-        "build": "yarn workspaces foreach -p run build",
-        "lint": "yarn workspaces foreach -p run lint",
-        "test": "pnpm test:unit && pnpm test:api && pnpm test:e2e",
-        "test:unit": "vitest --config tooling/vitest/vitest.config.ts --coverage",
-        "test:api": "vitest --config tooling/vitest/vitest.config.ts run apps/web/tests/api --coverage",
-        "test:e2e": "playwright test -c tooling/playwright/playwright.config.ts",
-        "test:changed": "vitest --config tooling/vitest/vitest.config.ts --changed --watch=false",
-        "e2e:ui": "playwright test -c tooling/playwright/playwright.config.ts --project=chromium",
-        "e2e:headed": "playwright test -c tooling/playwright/playwright.config.ts --headed",
-        "test:web": "yarn workspace web test"
-    },
-    "devDependencies": {
-        "vite-tsconfig-paths": "^5.1.4"
-    }
+  "private": true,
+  "workspaces": ["apps/*", "packages/*", "tooling/*"],
+  "packageManager": "yarn@4.9.4",
+  "engines": { "node": "20.18.x" },
+  "scripts": {
+    "dev": "yarn workspace web dev",
+    "build": "yarn workspaces foreach -Rv run build",
+    "typecheck": "yarn workspaces foreach -Rv run typecheck",
+    "lint": "yarn workspaces foreach -Rv run lint",
+    "test": "yarn workspaces foreach -Rv run test"
+  },
+  "devDependencies": {
+    "vite-tsconfig-paths": "^5.1.4"
+  }
 }
