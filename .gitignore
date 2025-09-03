@@ -47,3 +47,7 @@ yarn-error.log*
 
 #Help
 .help
+
+# .gitignore (racine)
+next-env.d.ts
+apps/*/next-env.d.ts
