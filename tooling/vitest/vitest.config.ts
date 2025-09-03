@@ -1,29 +1,31 @@
-import { defineConfig } from "vitest/config";
-import path from "path";
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "./"),
-            "@app": path.resolve(__dirname, "app"),
-            "@src": path.resolve(__dirname, "src"),
-            "@amplify": path.resolve(__dirname, "amplify"),
-            "@components": path.resolve(__dirname, "src/components"),
-            "@hooks": path.resolve(__dirname, "src/hooks"),
-            "@context": path.resolve(__dirname, "src/context"),
-            "@utils": path.resolve(__dirname, "src/utils"),
-            "@assets": path.resolve(__dirname, "src/assets"),
-            "@services": path.resolve(__dirname, "src/services"),
-            "@myTypes": path.resolve(__dirname, "src/types"),
-            "@entities": path.resolve(__dirname, "src/entities"),
-            "@public": path.resolve(__dirname, "public"),
-            "@test": path.resolve(__dirname, "tests"),
-            tests: path.resolve(__dirname, "tests"),
-        },
+  plugins: [tsconfigPaths()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['apps/web/tests/setupTests.ts'],
+    include: [
+      'packages/**/src/**/*.{test,spec}.ts?(x)',
+      'packages/**/tests/**/*.{test,spec}.ts?(x)',
+      'apps/web/tests/(unit|api)/**/*.{test,spec}.ts?(x)',
+    ],
+    exclude: [
+      'node_modules',
+      '.next',
+      'dist',
+      'coverage',
+      'playwright-report',
+      'apps/web/tests/_legacy/**',
+    ],
+    coverage: {
+      provider: 'v8',
+      reportsDirectory: 'coverage',
+      reporter: ['text', 'lcov'],
     },
-    test: {
-        environment: "jsdom",
-        setupFiles: ["./tests/setupTests.ts"],
-        exclude: ["**/node_modules/**", "tests/e2e/**"],
-    },
+  },
+  esbuild: { jsx: 'automatic', jsxDev: true },
+  server: { fs: { allow: ['./'] } },
 });

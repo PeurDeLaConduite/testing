@@ -1,12 +1,29 @@
-import { defineConfig, devices } from "playwright/test";
+import { defineConfig, devices } from '@playwright/test';
 
-// Configuration Playwright ciblant le dossier des tests E2E
 export default defineConfig({
-    // Spécifie le répertoire contenant les tests end-to-end
-    testDir: "./tests/e2e",
-    reporter: "html",
-    use: {
-        baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000",
-        ...devices["Desktop Chrome"],
+  testDir: '../../apps/web/tests/e2e',
+  timeout: 30_000,
+  expect: { timeout: 5_000 },
+  retries: 2,
+  use: {
+    baseURL: 'http://localhost:3000',
+    headless: true,
+    trace: 'on-first-retry',
+    video: 'retain-on-failure',
+  },
+  webServer: {
+    command: 'pnpm --filter web dev',
+    port: 3000,
+    reuseExistingServer: !process.env.CI,
+  },
+  projects: [
+    {
+      name: 'desktop',
+      use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'mobile',
+      use: { ...devices['Pixel 5'] },
+    },
+  ],
 });
