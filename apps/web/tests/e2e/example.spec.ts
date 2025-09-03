@@ -1,6 +1,9 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
-test("page d'accueil accessible", async ({ page }) => {
-    await page.goto("/");
-    await expect(page).toHaveTitle(/.+/);
+test('parcours de base', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: /accueil/i })).toBeVisible();
+
+  await page.click('a[href="/blog"]');
+  await expect(page).toHaveURL('/blog');
 });

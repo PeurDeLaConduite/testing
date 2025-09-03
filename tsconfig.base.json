@@ -8,6 +8,8 @@
         "paths": {
             "@domain/*": ["packages/domain/src/*"],
             "@services/*": ["packages/services/src/*"],
+            "@services/app/*": ["packages/services/src/app/*"],
+            "@services/adapters/*": ["packages/services/src/adapters/*"],
             "@ui/*": ["packages/ui/src/*"],
             "@types/*": ["packages/types/src/*"],
             "@web/*": ["apps/web/src/*"]

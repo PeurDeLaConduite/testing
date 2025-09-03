@@ -1,19 +1,29 @@
-import { Amplify } from "aws-amplify";
-import { beforeAll, afterEach, afterAll } from "vitest";
-import { setupServer } from "msw/node";
-import outputs from "@/amplify_outputs.json";
-import "@testing-library/jest-dom/vitest";
-import "whatwg-fetch";
+import '@testing-library/jest-dom';
+import { afterEach, vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { TextEncoder, TextDecoder } from 'util';
 
-/**
- * Initialisation du mock AWS Amplify et du serveur MSW pour l'ensemble des tests.
- * Ce fichier configure Amplify avec les sorties locales et démarre MSW pour intercepter les requêtes réseau.
- */
-export const server = setupServer();
+vi.mock('aws-amplify', () => ({
+  Auth: {
+    signIn: vi.fn(),
+    currentAuthenticatedUser: vi.fn(),
+    signOut: vi.fn(),
+  },
+  API: {
+    get: vi.fn(),
+    post: vi.fn(),
+    del: vi.fn(),
+  },
+}));
 
-beforeAll(() => {
-    Amplify.configure(outputs);
-    server.listen();
+vi.mock('@aws-amplify/ui-react', () => ({
+  Authenticator: ({ children }: any) => children,
+}));
+
+afterEach(() => {
+  cleanup();
 });
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+
+(global as any).URL.createObjectURL =
+  (global as any).URL.createObjectURL || vi.fn();
+Object.assign(global, { TextEncoder, TextDecoder });
