@@ -1,10 +1,8 @@
 {
-    "name": "@project/ui",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "main": "src/index.ts",
-    "exports": {
-        ".": "./src/index.ts"
-    }
+  "name": "@repo/ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": { ".": "./src/index.ts" }
 }
