@@ -1,10 +1,10 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { useAuthorForm } from "@entities/models/author/hooks";
-import { authorService } from "@entities/models/author/service";
-import { type AuthorType } from "@entities/models/author/types";
+import { useAuthorForm } from "@ui/models/author/hooks";
+import { authorService } from "@services/app/models/author/service";
+import { type AuthorType } from "@types/models/author/types";
 
-vi.mock("@entities/models/author/service", () => ({
+vi.mock("@services/app/models/author/service", () => ({
     authorService: {
         create: vi.fn(),
         update: vi.fn(),

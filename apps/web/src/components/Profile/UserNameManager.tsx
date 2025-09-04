@@ -6,13 +6,13 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import EntityEditor from "@components/forms/EntityEditor";
 import { label as fieldLabel } from "./utilsUserName";
 import PersonIcon from "@mui/icons-material/Person";
-import { useUserNameForm } from "@entities/models/userName/hooks";
-import { onUserNameUpdated } from "@entities/models/userName/bus";
+import { useUserNameForm } from "@ui/models/userName/hooks";
+import { onUserNameUpdated } from "@domain/models/userName/bus";
 import {
     type UserNameFormType,
     type UserNameType,
     initialUserNameForm,
-} from "@entities/models/userName";
+} from "@domain/models/userName";
 
 // ⚠️ importe ton JSON i18n réel (ex. le fichier que tu as préparé)
 import type { Messages } from "@src/i18n/types";

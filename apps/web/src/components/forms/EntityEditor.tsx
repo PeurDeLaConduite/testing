@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import clsx from "clsx";
-import type { FieldKey, FormMode } from "@entities/core/hooks";
+import type { FieldKey, FormMode } from "@ui/core/hooks";
 import ReadOnlyView from "./ReadOnlyView";
 import EditField from "./EditField";
 import EntityForm from "./EntityForm";

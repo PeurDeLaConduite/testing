@@ -1,6 +1,6 @@
 import { UpdateButton, BackButton } from "@packages/ui/components/buttons";
 import React from "react";
-import type { FieldKey } from "@entities/core/hooks";
+import type { FieldKey } from "@ui/core/hooks";
 import { autocompleteFor } from "@utils/autocomplete";
 
 export type EditFieldProps<T extends Record<string, unknown>> = {

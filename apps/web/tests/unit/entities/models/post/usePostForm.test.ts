@@ -1,11 +1,11 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { usePostForm } from "@entities/models/post/hooks";
-import { postService } from "@entities/models/post/service";
-import { syncPostToTags } from "@entities/relations/postTag";
-import { syncPostToSections } from "@entities/relations/sectionPost";
+import { usePostForm } from "@ui/models/post/hooks";
+import { postService } from "@services/app/models/post/service";
+import { syncPostToTags } from "@domain/relations/postTag";
+import { syncPostToSections } from "@domain/relations/sectionPost";
 
-vi.mock("@entities/models/post/service", () => ({
+vi.mock("@services/app/models/post/service", () => ({
     postService: {
         create: vi.fn().mockResolvedValue({ data: { id: "post1" } }),
         update: vi.fn().mockResolvedValue({ data: { id: "post1" } }),
@@ -13,25 +13,25 @@ vi.mock("@entities/models/post/service", () => ({
     },
 }));
 
-vi.mock("@entities/relations/postTag", () => ({
+vi.mock("@domain/relations/postTag", () => ({
     syncPostToTags: vi.fn(),
     postTagService: { listByParent: vi.fn().mockResolvedValue([]) },
 }));
 
-vi.mock("@entities/relations/sectionPost", () => ({
+vi.mock("@domain/relations/sectionPost", () => ({
     syncPostToSections: vi.fn(),
     sectionPostService: { listByChild: vi.fn().mockResolvedValue([]) },
 }));
 
-vi.mock("@entities/models/author/service", () => ({
+vi.mock("@services/app/models/author/service", () => ({
     authorService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 
-vi.mock("@entities/models/tag/service", () => ({
+vi.mock("@services/app/models/tag/service", () => ({
     tagService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 
-vi.mock("@entities/models/section/service", () => ({
+vi.mock("@services/app/models/section/service", () => ({
     sectionService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 

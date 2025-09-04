@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
-import { syncManyToMany } from "@packages/domain/relations";
-import { relationService } from "@entities/core/services";
+import { syncManyToMany } from "@domain/relations";
+import { relationService } from "@services/adapters/core/relationService";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/_legacy/setupTests";
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
+vi.mock("@services/adapters/core/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 describe("syncManyToMany", () => {
     it("appelle createFn et deleteFn avec les ID corrects", async () => {

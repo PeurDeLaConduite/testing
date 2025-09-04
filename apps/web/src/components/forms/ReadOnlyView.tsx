@@ -1,6 +1,6 @@
 import React from "react";
 import { EditButton, DeleteButton } from "@packages/ui/components/buttons";
-import { type FieldKey } from "@entities/core/hooks";
+import { type FieldKey } from "@ui/core/hooks";
 
 export type ReadOnlyViewProps<T> = {
     titleHeading?: string;

@@ -1,6 +1,6 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { useModelForm } from "@entities/core/hooks";
+import { useModelForm } from "@ui/core/hooks";
 
 interface Form {
     title: string;

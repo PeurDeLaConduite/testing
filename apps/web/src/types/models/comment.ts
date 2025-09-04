@@ -1,4 +1,4 @@
-import type { BaseModel, UpdateInput, ModelForm } from "@entities/core";
+import type { BaseModel, UpdateInput, ModelForm } from "@types/core";
 
 export type CommentModel = BaseModel<"Comment">;
 export type CommentCreateInput = {

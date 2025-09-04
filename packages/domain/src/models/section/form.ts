@@ -1,0 +1,62 @@
+import { z, type ZodType } from "zod";
+import type {
+    SectionType,
+    SectionFormType,
+    SectionTypeUpdateInput,
+} from "@types/models/section/types";
+import {
+    toSeoForm,
+    initialSeoForm,
+    seoSchema,
+} from "@domain/customTypes/seo";
+import type { SeoType } from "@types/customTypes/seo/types";
+import { createModelForm } from "@domain/utils";
+
+export const {
+    zodSchema: sectionSchema,
+    initialForm: initialSectionForm,
+    toForm: toSectionForm,
+    toCreate: toSectionCreate,
+    toUpdate: toSectionUpdate,
+} = createModelForm<
+    SectionType,
+    SectionFormType,
+    SectionTypeUpdateInput,
+    SectionTypeUpdateInput,
+    [string[]]
+>({
+    zodSchema: z.object({
+        slug: z.string(),
+        title: z.string(),
+        description: z.string(),
+        order: z.number(),
+        seo: seoSchema,
+        postIds: z.array(z.string()),
+    }) as ZodType<SectionFormType>,
+    initialForm: {
+        slug: "",
+        title: "",
+        description: "",
+        order: 1,
+        seo: { ...initialSeoForm },
+        postIds: [],
+    },
+    toForm: (section, postIds: string[] = []) => ({
+        slug: section.slug ?? "",
+        title: section.title ?? "",
+        description: section.description ?? "",
+        order: section.order ?? 1,
+        seo: toSeoForm((section.seo ?? {}) as SeoType),
+        postIds,
+    }),
+    toCreate: (form: SectionFormType): SectionTypeUpdateInput => {
+        const { postIds, ...values } = form;
+        void postIds;
+        return values;
+    },
+    toUpdate: (form: SectionFormType): SectionTypeUpdateInput => {
+        const { postIds, ...values } = form;
+        void postIds;
+        return values;
+    },
+});
