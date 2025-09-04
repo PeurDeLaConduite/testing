@@ -4,4 +4,4 @@ export type {
     UserProfileTypeUpdateInput as UserProfileUpdateInput,
     UserProfileFormType,
     UserProfileMinimalType,
-} from "@entities/models/userProfile/types";
+} from "@types/models/userProfile/types";

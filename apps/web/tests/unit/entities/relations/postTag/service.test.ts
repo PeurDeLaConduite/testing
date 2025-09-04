@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/_legacy/setupTests";
-import { postTagService } from "@entities/relations/postTag/service";
+import { postTagService } from "@services/app/relations/postTag/service";
 import type { ListRequest, CreateRequest, DeleteRequest } from "@test/_legacy/fixtures/relations";
 
 interface PostTagIds {
@@ -9,7 +9,7 @@ interface PostTagIds {
     tagId: string;
 }
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
+vi.mock("@services/adapters/core/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
 describe("postTagService", () => {
     it("listByParent retourne les IDs tag", async () => {
