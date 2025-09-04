@@ -13,7 +13,8 @@
             "@packages/services/app/*": ["packages/services/src/app/*"],
             "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
             "@ui/*": ["packages/ui/src/*"],
-            "@packages/types/*": ["packages/types/src/*"]
+            "@packages/types/*": ["packages/types/src/*"],
+            "@packages/ui/*": ["packages/ui/src/*"]
         }
     },
     "references": [

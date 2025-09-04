@@ -1,4 +1,4 @@
-import { UpdateButton, BackButton } from "@components/buttons";
+import { UpdateButton, BackButton } from "@packages/ui/components/buttons";
 import React from "react";
 import type { FieldKey } from "@entities/core/hooks";
 import { autocompleteFor } from "@utils/autocomplete";

@@ -8,7 +8,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useUserNameForm } from "@entities/models/userName/hooks";
 import { onUserNameUpdated } from "@entities/models/userName/bus";
 import type { UserNameType } from "@entities/models/userName";
-import { BackButton } from "@components/buttons";
+import { BackButton } from "@packages/ui/components/buttons";
 import Link from "next/link";
 
 // 👇 i18n

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense, lazy, useState } from "react";
-import Loader from "../loader/Loader";
+import Loader from "@packages/ui/components/loader/Loader";
 import YouTubePlaceholder from "./YouTubePlaceholder";
 
 function getYouTubeId(url?: string): string | null {

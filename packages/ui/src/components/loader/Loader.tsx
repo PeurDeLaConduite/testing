@@ -1,6 +1,7 @@
-import React from "react";
 import Image from "next/image";
-const Loader = () => {
+import React from "react";
+
+export default function Loader() {
     return (
         <div className="loader">
             <div className="ld-circleBG"></div>
@@ -17,6 +18,4 @@ const Loader = () => {
             </div>
         </div>
     );
-};
-
-export default Loader;
+}

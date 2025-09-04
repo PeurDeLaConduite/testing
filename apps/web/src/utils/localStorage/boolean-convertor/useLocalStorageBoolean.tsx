@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import useIsBrowser from "../../useIsBrowser";
+import useIsBrowser from "@packages/ui/hooks/useIsBrowser";
 
 const yesValues = ["oui", "Oui", "yes", "Yes", "true", "True"];
 const noValues = ["non", "Non", "no", "No", "false", "False"];

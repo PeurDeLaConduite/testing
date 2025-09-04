@@ -5,7 +5,7 @@ import type { FieldKey, FormMode } from "@entities/core/hooks";
 import ReadOnlyView from "./ReadOnlyView";
 import EditField from "./EditField";
 import EntityForm from "./EntityForm";
-import { DeleteButton } from "@components/buttons";
+import { DeleteButton } from "@packages/ui/components/buttons";
 
 export type EntityEditorProps<T extends Record<string, unknown>> = {
     /** Titre de la section */
