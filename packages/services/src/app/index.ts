@@ -1,2 +1,2 @@
-export { createUser } from "./createUser";
-export { getBlogData } from "./getBlogData";
+export { createUser } from "@packages/services/app/createUser";
+export { getBlogData } from "@packages/services/app/getBlogData";

@@ -1,4 +1,4 @@
-import { fetchBlogData } from "@services/adapters/blog/fetchBlogData";
+import { fetchBlogData } from "@packages/services/adapters/blog/fetchBlogData";
 import type { BlogData } from "@packages/types/web/blog";
 
 export async function getBlogData(): Promise<BlogData> {

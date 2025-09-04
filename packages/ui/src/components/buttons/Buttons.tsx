@@ -59,8 +59,8 @@
  */
 
 import React from "react";
-import { UiButton } from "./UiButton";
-import { getEditButtonStyles } from "./buttonStyles";
+import { UiButton } from "@packages/ui/components/buttons/UiButton";
+import { getEditButtonStyles } from "@packages/ui/components/buttons/buttonStyles";
 import {
     Save as SaveIcon,
     Delete as DeleteIcon,

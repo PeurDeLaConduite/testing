@@ -1,5 +1,5 @@
 import React from "react";
-import CheckedIcon from "../svg_Icon/utils/CheckedIcon";
+import CheckedIcon from "@packages/ui/components/svg_Icon/utils/CheckedIcon";
 
 interface InputCheckboxProps {
     option: {

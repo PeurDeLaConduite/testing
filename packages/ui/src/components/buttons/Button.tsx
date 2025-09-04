@@ -1,2 +1,2 @@
-export { UiButton as default } from "./UiButton";
-export type { UiButtonProps as ButtonProps } from "./UiButton";
+export { UiButton as default } from "@packages/ui/components/buttons/UiButton";
+export type { UiButtonProps as ButtonProps } from "@packages/ui/components/buttons/UiButton";
