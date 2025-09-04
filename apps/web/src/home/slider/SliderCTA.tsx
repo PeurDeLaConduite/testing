@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonLink from "../../components/button/ButtonLink";
+import ButtonLink from "@packages/ui/components/button/ButtonLink";
 import { menuItems } from "@assets/data/menuItems";
 import { sliderInfo } from "@assets/data/content/info";
 

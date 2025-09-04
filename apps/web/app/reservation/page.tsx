@@ -1,4 +1,4 @@
-import Loader from "../../src/components/loader/Loader";
+import Loader from "@packages/ui/components/loader/Loader";
 import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Réservation",

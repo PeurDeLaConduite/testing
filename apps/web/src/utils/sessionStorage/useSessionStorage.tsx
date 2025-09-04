@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useIsBrowser from "../useIsBrowser";
+import useIsBrowser from "@packages/ui/hooks/useIsBrowser";
 
 export default function useSessionStorage<T>(key: string, initialValue: T) {
     const isBrowser = useIsBrowser();

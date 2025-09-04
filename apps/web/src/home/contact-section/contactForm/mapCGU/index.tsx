@@ -1,5 +1,5 @@
 import React from "react";
-import InputCheckbox from "../../../../components/checkbox/inputCheckbox";
+import InputCheckbox from "@packages/ui/components/checkbox/inputCheckbox";
 
 interface DrivingFormProps {
     cguState: boolean | null;

@@ -1,6 +1,6 @@
 // useSlides.ts
 import { useCallback } from "react";
-import { useURLParams } from "../../useURLParams";
+import { useURLParams } from "@packages/ui/hooks/useURLParams";
 
 export const useSlides = (
     currentSlide: number,

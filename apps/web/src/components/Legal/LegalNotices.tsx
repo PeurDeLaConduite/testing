@@ -4,7 +4,7 @@ import React from "react";
 import CompanyDetailsInfo from "./CompanyDetailsInfo";
 import SiteEditorCreator from "./SiteEditorCreator";
 import PublicationDirector from "./PublicationDirector";
-import ButtonLink from "../button/ButtonLink";
+import ButtonLink from "@packages/ui/components/button/ButtonLink";
 import SiteHost from "./SiteHost";
 import ApplicableLaw from "./ApplicableLaw";
 import Rgpd from "./Rgpd";

@@ -1,5 +1,5 @@
 import React from "react";
-import { EditButton, UpdateButton, CancelButton } from "@components/buttons";
+import { EditButton, UpdateButton, CancelButton } from "./Buttons";
 
 type ActionButtonsProps = {
     isEditing: boolean;

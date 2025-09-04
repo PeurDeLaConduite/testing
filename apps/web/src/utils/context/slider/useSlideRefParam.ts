@@ -1,6 +1,6 @@
 // useSlideRefParam.ts
 import { useEffect } from "react";
-import { useURLParams } from "../../useURLParams";
+import { useURLParams } from "@packages/ui/hooks/useURLParams";
 
 export const useSlideRefParam = (
     setStopTimerButton: React.Dispatch<React.SetStateAction<boolean>>,

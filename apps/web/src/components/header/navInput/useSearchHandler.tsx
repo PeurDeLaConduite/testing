@@ -3,7 +3,7 @@ import { useSearch } from "../../../utils/context/SearchContext";
 import searchQuery from "../../../utils/searchMenu";
 import { filterSuggestions, SearchItem } from "../../../utils/searchUtils";
 import { useRouter } from "next/navigation";
-import { useURLParams } from "../../../utils/useURLParams";
+import { useURLParams } from "@packages/ui/hooks/useURLParams";
 
 const useSearchHandler = (
     router: ReturnType<typeof useRouter>

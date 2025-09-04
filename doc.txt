@@ -689,3 +689,20 @@ Directory structure:
 - apps/web/src/entities/models/post/service.ts — suppression en cascade mêlée à des appels réseau.
 - apps/web/src/entities/models/tag/service.ts — suppression en cascade mêlée à des appels réseau.
 - apps/web/src/entities/models/section/service.ts — suppression en cascade mêlée à des appels réseau.
+- apps/web/src/context/DataBlogProvider.tsx — appels réseau via getBlogData.
+- apps/web/src/utils/localStorage/useLocalStorage.tsx — accès localStorage (IO).
+- apps/web/src/utils/localStorage/boolean-convertor/useLocalStorageBoolean.tsx — accès localStorage (IO).
+- apps/web/src/utils/sessionStorage/useSessionStorage.tsx — accès sessionStorage (IO).
+- apps/web/src/utils/cookieStorage/useCookie.tsx — accès cookies navigateur (IO).
+- apps/web/src/components/forms/EntityEditor.tsx — dépend de hooks métier.
+- apps/web/src/components/forms/ItemSelector.tsx — dépend de données métier.
+- apps/web/src/components/forms/EntityForm.tsx — logique de formulaire métier.
+- apps/web/src/components/forms/EditField.tsx — logique métier.
+- apps/web/src/components/forms/ReadOnlyView.tsx — logique métier.
+- apps/web/src/components/Profile/UserNameManager.tsx — logique Amplify et hooks métier.
+- apps/web/src/components/Profile/UserProfileManager.tsx — logique Amplify et CRUD.
+- apps/web/src/components/Profile/UserNameModal.tsx — logique Amplify et bus.
+- apps/web/src/components/Profile/utilsUserName.tsx — logique métier.
+- apps/web/src/components/Profile/utilsUserProfile.tsx — logique métier.
+- apps/web/src/i18n/types.ts — spécifique à l'application.
+- apps/web/src/i18n/fr/usernameModal.json — spécifique à l'application.

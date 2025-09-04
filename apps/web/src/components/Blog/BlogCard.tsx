@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import VideoEmbed from "./VideoEmbed";
-import ButtonLink from "../button/ButtonLink";
+import ButtonLink from "@packages/ui/components/button/ButtonLink";
 import { Post, Author } from "@packages/types/web/blog";
 import AuthorSignature from "./AuthorSignature";
 type Props = {

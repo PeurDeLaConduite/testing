@@ -2,7 +2,7 @@
 import React from "react";
 import { Section, Post, Author } from "@packages/types/web/blog";
 import BlogList from "./BlogList";
-import ButtonLink from "../button/ButtonLink";
+import ButtonLink from "@packages/ui/components/button/ButtonLink";
 
 interface SectionCardProps {
     section: Section;
