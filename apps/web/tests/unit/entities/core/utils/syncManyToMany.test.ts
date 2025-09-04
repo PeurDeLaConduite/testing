@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { syncManyToMany } from "@entities/core/utils/syncManyToMany";
+import { syncManyToMany } from "@packages/domain/relations";
 import { relationService } from "@entities/core/services";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/_legacy/setupTests";

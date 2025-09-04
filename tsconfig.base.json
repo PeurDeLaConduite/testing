@@ -7,6 +7,7 @@
         "baseUrl": ".",
         "paths": {
             "@domain/*": ["packages/domain/src/*"],
+            "@packages/domain/*": ["packages/domain/src/*"],
             "@services/app/*": ["packages/services/src/app/*"],
             "@services/adapters/*": ["packages/services/src/adapters/*"],
             "@ui/*": ["packages/ui/src/*"],

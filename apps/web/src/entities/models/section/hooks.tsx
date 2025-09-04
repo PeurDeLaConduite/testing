@@ -8,7 +8,7 @@ import { initialSectionForm, toSectionForm } from "@entities/models/section/form
 import { type SectionFormType, type SectionType } from "@entities/models/section/types";
 import { type PostType } from "@entities/models/post/types";
 import { syncSectionToPosts } from "@entities/relations/sectionPost";
-import { toggleId } from "@entities/core/utils";
+import { toggleId } from "@packages/domain/utils";
 
 type Extras = { posts: PostType[]; sections: SectionType[] };
 

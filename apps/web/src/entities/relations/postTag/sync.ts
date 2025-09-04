@@ -1,5 +1,5 @@
 // src/entities/relations/postTag/sync.ts
-import { createM2MSync } from "@entities/core/utils/createM2MSync";
+import { createM2MSync } from "@packages/domain/relations";
 import { postTagService } from "./service";
 
 // postTagService doit venir de:

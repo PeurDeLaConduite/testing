@@ -13,7 +13,7 @@ import { type TagType } from "@entities/models/tag/types";
 import { type SectionType } from "@entities/models/section/types";
 import { syncPostToTags } from "@entities/relations/postTag";
 import { syncPostToSections } from "@entities/relations/sectionPost";
-import { toggleId } from "@entities/core/utils";
+import { toggleId } from "@packages/domain/utils";
 
 interface Extras extends Record<string, unknown> {
     authors: AuthorType[];
