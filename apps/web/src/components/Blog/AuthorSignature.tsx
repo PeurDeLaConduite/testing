@@ -1,6 +1,6 @@
 // src/components/Blog/AuthorSignature.tsx
 import React from "react";
-import { Author } from "@src/types/blog";
+import { Author } from "@types/blog";
 
 interface AuthorSignatureProps {
     author: Author;

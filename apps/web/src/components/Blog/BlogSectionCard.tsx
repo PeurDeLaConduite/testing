@@ -1,6 +1,6 @@
 // src/components/Blog/SectionCard.tsx
 import React from "react";
-import { Section, Post, Author } from "@src/types/blog";
+import { Section, Post, Author } from "@types/blog";
 import BlogList from "./BlogList";
 import ButtonLink from "../button/ButtonLink";
 

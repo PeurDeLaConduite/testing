@@ -1,6 +1,6 @@
 // src/components/Blog/Blog.tsx
 import React from "react";
-import { Section, Post, Author } from "@src/types/blog";
+import { Section, Post, Author } from "@types/blog";
 import BlogSectionCard from "./BlogSectionCard";
 import PostContent from "./PostContent";
 

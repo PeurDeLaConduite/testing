@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import VideoEmbed from "./VideoEmbed";
 import ButtonLink from "../button/ButtonLink";
-import { Post, Author } from "@src/types/blog";
+import { Post, Author } from "@types/blog";
 import AuthorSignature from "./AuthorSignature";
 type Props = {
     post: Post;

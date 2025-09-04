@@ -1,5 +1,5 @@
 import { client, crudService } from "@domain/core";
-import type { CommentCreateInput, CommentUpdateInput } from "@src/types/models/comment";
+import type { CommentCreateInput, CommentUpdateInput } from "@types/models/comment";
 
 export const commentService = crudService<
     "Comment",

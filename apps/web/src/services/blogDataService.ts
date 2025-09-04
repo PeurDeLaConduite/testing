@@ -6,7 +6,7 @@ import { tagService } from "@domain/models/tag/service";
 import { postTagService } from "@domain/relations/postTag/service";
 import { sectionPostService } from "@domain/relations/sectionPost/service";
 
-import type { BlogData, Author, Post, Section } from "@src/types/blog";
+import type { BlogData, Author, Post, Section } from "@types/blog";
 
 export async function fetchBlogData(): Promise<BlogData> {
     try {

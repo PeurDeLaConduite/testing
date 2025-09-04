@@ -1,5 +1,5 @@
 import { client, crudService } from "@domain/core";
-import type { TodoCreateInput, TodoUpdateInput } from "@src/types/models/todo";
+import type { TodoCreateInput, TodoUpdateInput } from "@types/models/todo";
 
 export const todoService = crudService<
     "Todo",

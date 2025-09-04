@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import BlogCard from "./BlogCard";
-import { Post, Author } from "@src/types/blog";
+import { Post, Author } from "@types/blog";
 
 type Props = {
     posts: Post[];
