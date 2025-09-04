@@ -26,6 +26,7 @@
             "@test/*": ["tests/*"],
             "@entities/*": ["src/entities/*"],
             "@packages/types/*": ["../../packages/types/src/*"],
+            "@packages/services/*": ["../../packages/services/src/*"],
             // Pont de migration : d’abord legacy local, puis nouveaux packages
             "@services/*": ["src/services/*", "../../packages/services/src/*"]
         },
