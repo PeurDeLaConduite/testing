@@ -1,9 +1,9 @@
-@import "../../home/slider/sliderRoad";
-@import "../../home/slider/sliderContent";
-@import "../../home/slider/sliderArrow";
-@import "../../home/slider/sliderCTA";
-@import "../../home/slider/sliderInfo";
-@import "../../home/slider/sunBG";
+@import "./sliderRoad";
+@import "./sliderContent";
+@import "./sliderArrow";
+@import "./sliderCTA";
+@import "./sliderInfo";
+@import "./sunBG";
 .slider-bg {
     position: relative;
     margin: 0 auto;
