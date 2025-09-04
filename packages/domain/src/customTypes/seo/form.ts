@@ -3,7 +3,7 @@ import type {
     SeoType,
     SeoFormType,
     SeoTypeUpdateInput,
-} from "@types/customTypes/seo/types";
+} from "@packages/types/customTypes/seo/types";
 import { createModelForm } from "@domain/utils";
 
 // 1) On génère via createModelForm
