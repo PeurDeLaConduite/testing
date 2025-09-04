@@ -2,7 +2,7 @@
 "use client";
 import { useMemo } from "react";
 import PostContent from "@components/Blog/PostContent";
-import { Section, Post, Author } from "@src/types/blog";
+import { Section, Post, Author } from "@packages/types/web/blog";
 
 type Props = {
     section: Section;

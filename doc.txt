@@ -678,3 +678,6 @@ Directory structure:
 │   └── tsconfig.eslint.json // infra — config typescript
 └── vitest/
 └── vitest.config.ts // infra — config Vitest
+
+# BLOQUÉS
+- Aucun fichier ambigu identifié.

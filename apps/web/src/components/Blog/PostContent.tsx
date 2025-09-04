@@ -1,7 +1,7 @@
 // src/components/Blog/PostContent.tsx
 import React from "react";
 import VideoEmbed from "./VideoEmbed";
-import { Post, Author } from "@src/types/blog";
+import { Post, Author } from "@packages/types/web/blog";
 import MarkdownRenderer from "./MarkdownRenderer";
 import AuthorSignature from "./AuthorSignature";
 interface PostContentProps {

@@ -25,6 +25,7 @@
             "@public/*": ["public/*"],
             "@test/*": ["tests/*"],
             "@entities/*": ["src/entities/*"],
+            "@packages/types/*": ["../../packages/types/src/*"],
             // Pont de migration : d’abord legacy local, puis nouveaux packages
             "@services/*": ["src/services/*", "../../packages/services/src/*"]
         },
