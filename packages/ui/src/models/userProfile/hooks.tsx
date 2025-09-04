@@ -5,7 +5,7 @@ import { useModelForm } from "@ui/core/hooks";
 import { userProfileService } from "@services/app/models/userProfile/service";
 import { initialUserProfileForm, toUserProfileForm } from "@domain/models/userProfile/form";
 import type { UserProfileFormType, UserProfileType } from "@types/models/userProfile/types";
-import { label as fieldLabel } from "@src/components/Profile/utilsUserProfile";
+import { label as fieldLabel } from "@ui/models/userProfile/utilsUserProfile";
 
 type Extras = Record<string, never>;
 

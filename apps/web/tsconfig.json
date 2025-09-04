@@ -14,11 +14,6 @@
 
         "baseUrl": "../..",
         "paths": {
-            "@packages/types/*": ["packages/types/src/*"],
-            "@packages/domain/*": ["packages/domain/src/*"],
-            "@packages/services/app/*": ["packages/services/src/app/*"],
-            "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
-            "@packages/ui/*": ["packages/ui/src/*"],
             "@types/*": ["packages/types/src/*"],
             "@domain/*": ["packages/domain/src/*"],
             "@services/app/*": ["packages/services/src/app/*"],
@@ -34,7 +29,6 @@
             "@utils/*": ["apps/web/src/utils/*"],
             "@public/*": ["apps/web/public/*"],
             "@test/*": ["apps/web/tests/*"],
-            "@packages/services/*": ["../../packages/services/src/*"],
             "@services/*": ["apps/web/src/services/*", "packages/services/src/*"]
         },
 

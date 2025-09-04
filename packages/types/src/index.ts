@@ -15,3 +15,4 @@ export * from "@types/web/buttons";
 export * from "@types/web/global";
 export * from "@types/web/amplify/global";
 export * from "@types/web/amplify/env";
+export * from "@types/web/amplify/schema";

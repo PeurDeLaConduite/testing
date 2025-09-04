@@ -1,4 +1,4 @@
-import type { AuthRule } from "./types";
+import type { AuthRule } from "@types/core/config";
 
 export interface AuthUser {
     username?: string;

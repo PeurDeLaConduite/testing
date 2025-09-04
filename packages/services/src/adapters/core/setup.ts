@@ -1,6 +1,6 @@
 // src/amplify/setup.ts
 import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
+import outputs from "../../../../apps/web/amplify_outputs.json";
 
 const overrides = {
     auth: {

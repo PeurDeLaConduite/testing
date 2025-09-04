@@ -5,7 +5,7 @@ import { server } from "@test/setup";
 
 vi.mock("@services/adapters/core/amplifyClient", () => import("@test/mocks/amplifyClient"));
 
-vi.mock("@src/entities/core/auth", () => ({ canAccess: () => true }));
+vi.mock("@domain/core/auth", () => ({ canAccess: () => true }));
 
 beforeEach(() => {
     server.use(

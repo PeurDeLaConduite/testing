@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import EntityEditor from "@components/forms/EntityEditor";
-import { label as fieldLabel } from "./utilsUserProfile";
+import { label as fieldLabel } from "@ui/models/userProfile/utilsUserProfile";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";

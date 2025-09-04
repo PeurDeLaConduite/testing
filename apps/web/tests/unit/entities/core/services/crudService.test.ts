@@ -5,7 +5,7 @@ import { server } from "@test/_legacy/setupTests";
 
 vi.mock("@services/adapters/core/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
-vi.mock("@src/entities/core/auth", () => ({
+vi.mock("@domain/core/auth", () => ({
     canAccess: (_user: unknown, entity: any) => Boolean(entity.allow),
 }));
 
