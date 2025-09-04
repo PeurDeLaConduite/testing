@@ -26,21 +26,21 @@
 @import "./components/forms/EntityEditor";
 @import "./components/forms/EntityForm";
 
-@import "../../home/slider/slider";
-@import "../../home/about/about";
-@import "../../home/service/services";
-@import "../../home/contact-section/contact";
+@import "./components/slider/slider";
+@import "./components/about/about";
+@import "./components/service/services";
+@import "./components/contact-section/contact";
 
-@import "../../home/contact-section/contactForm/form";
+@import "./components/contact-section/form";
 @import "./components/modal";
 
 // @import "../../../app/tarifs/tarifs";
 
-@import "../../components/footer/footer";
-@import "../../components/loader/loader";
+@import "./components/footer/footer";
+@import "./components/loader/loader";
 
-@import "../../../app/services/tarifs";
-@import "../../../app/blog/blog";
+@import "./03_pages/services/tarifs";
+@import "./03_pages/blog/blog";
 
 // // @import "./03_responsive/03_tablet";
 // @import "./03_responsive/test";

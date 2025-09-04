@@ -1,6 +1,6 @@
-@import "../../home/service/questionaire";
-@import "../../home/service/confirmed/confirmed";
-@import "../../home/service/beginner/beginner";
+@import "./questionaire";
+@import "./confirmed";
+@import "./beginner";
 .services {
     .card_bg {
         // Ajoute du style ici si nécessaire
