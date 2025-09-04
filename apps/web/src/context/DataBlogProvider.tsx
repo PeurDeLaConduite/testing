@@ -2,9 +2,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react";
 import type { BlogData } from "@packages/types/web/blog";
-
-// prettier-ignore
-const PUBLIC_DATA_URL = "https://amplify-d2jefuxcjjakai-ma-publiquestoragebucketac0-tjlluvtci6g6.s3.eu-west-3.amazonaws.com/publique-storage/data.json";
+import { fetchBlogData } from "@packages/services/adapters/blog/fetchBlogData";
 
 interface DataBlogContextProps {
     data: BlogData | null;
@@ -19,13 +17,10 @@ export function DataBlogProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    // Charge le JSON depuis l’URL publique
     async function fetchData() {
         try {
             setLoading(true);
-            const res = await fetch(PUBLIC_DATA_URL);
-            if (!res.ok) throw new Error(`Erreur fetch : ${res.status}`);
-            const json = (await res.json()) as BlogData;
+            const json = await fetchBlogData();
             setData(json);
             setError(null);
         } catch (err: unknown) {
@@ -40,7 +35,7 @@ export function DataBlogProvider({ children }: { children: ReactNode }) {
     }
 
     useEffect(() => {
-        fetchData();
+        void fetchData();
     }, []);
 
     const value = useMemo(() => ({ data, loading, error }), [data, loading, error]);

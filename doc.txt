@@ -683,3 +683,10 @@ Directory structure:
 
 - apps/web/src/utils/getSectionIds.ts — dépend aux données de menu spécifiques.
 - apps/web/src/entities/core/utils/createModelForm.ts — dépend de la lib externe zod.
+- apps/web/src/entities/core/services/amplifyClient.ts — dépend de la configuration Amplify de l'application.
+- apps/web/src/services/blogDataService.ts — agrège plusieurs services et contient de la logique métier.
+- apps/web/src/entities/models/author/service.ts — suppression en cascade mêlée à des appels réseau.
+- apps/web/src/entities/models/post/service.ts — suppression en cascade mêlée à des appels réseau.
+- apps/web/src/entities/models/tag/service.ts — suppression en cascade mêlée à des appels réseau.
+- apps/web/src/entities/models/section/service.ts — suppression en cascade mêlée à des appels réseau.
+- apps/web/src/context/DataBlogProvider.tsx — gestion d'état et accès réseau dans le même module.

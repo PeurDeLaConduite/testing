@@ -10,6 +10,7 @@
             "@packages/domain/*": ["packages/domain/src/*"],
             "@services/app/*": ["packages/services/src/app/*"],
             "@services/adapters/*": ["packages/services/src/adapters/*"],
+            "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
             "@ui/*": ["packages/ui/src/*"],
             "@packages/types/*": ["packages/types/src/*"]
         }
