@@ -1,4 +1,4 @@
-import type { BlogData } from "@src/types/blog";
+import type { BlogData } from "@packages/types/web/blog";
 
 const PUBLIC_DATA_URL =
     "https://amplify-d2jefuxcjjakai-ma-publiquestoragebucketac0-tjlluvtci6g6.s3.eu-west-3.amazonaws.com/publique-storage/data.json";

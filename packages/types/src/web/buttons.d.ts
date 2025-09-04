@@ -1,5 +1,5 @@
 import type { SxProps, Theme } from "@mui/material";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export type ButtonBaseProps = {
     label?: string;

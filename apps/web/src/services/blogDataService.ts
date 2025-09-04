@@ -6,7 +6,7 @@ import { tagService } from "@src/entities/models/tag/service";
 import { postTagService } from "@src/entities/relations/postTag/service";
 import { sectionPostService } from "@src/entities/relations/sectionPost/service";
 
-import type { BlogData, Author, Post, Section } from "@src/types/blog";
+import type { BlogData, Author, Post, Section } from "@packages/types/web/blog";
 
 export async function fetchBlogData(): Promise<BlogData> {
     try {

@@ -1,23 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "ES2019",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "@types/*": ["packages/types/src/*"],
-      "@domain/*": ["packages/domain/src/*"],
-      "@services/app/*": ["packages/services/src/app/*"],
-      "@services/adapters/*": ["packages/services/src/adapters/*"],
-      "@ui/*": ["packages/ui/src/*"]
-    }
-  },
-  "references": [
-    { "path": "packages/types" },
-    { "path": "packages/domain" },
-    { "path": "packages/services" },
-    { "path": "packages/ui" },
-    { "path": "apps/web" }
-  ]
+    "compilerOptions": {
+        "target": "ES2019",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "baseUrl": ".",
+        "paths": {
+            "@domain/*": ["packages/domain/src/*"],
+            "@services/app/*": ["packages/services/src/app/*"],
+            "@services/adapters/*": ["packages/services/src/adapters/*"],
+            "@ui/*": ["packages/ui/src/*"],
+            "@packages/types/*": ["packages/types/src/*"]
+        }
+    },
+    "references": [
+        {
+            "path": "packages/types"
+        },
+        {
+            "path": "packages/domain"
+        },
+        {
+            "path": "packages/services"
+        },
+        {
+            "path": "packages/ui"
+        },
+        {
+            "path": "apps/web"
+        }
+    ]
 }
