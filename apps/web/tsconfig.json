@@ -12,23 +12,26 @@
         "isolatedModules": true,
         "lib": ["dom", "dom.iterable", "esnext"],
 
-        "baseUrl": ".",
+        "baseUrl": "../..",
         "paths": {
-            "@/*": ["./*"],
-            "@app/*": ["app/*"],
-            "@src/*": ["src/*"],
-            "@assets/*": ["src/assets/*"],
-            "@components/*": ["src/components/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@context/*": ["src/context/*"],
-            "@utils/*": ["src/utils/*"],
-            "@public/*": ["public/*"],
-            "@test/*": ["tests/*"],
-            "@entities/*": ["src/entities/*"],
-            "@packages/types/*": ["../../packages/types/src/*"],
-            "@packages/services/*": ["../../packages/services/src/*"],
+            "@packages/types/*": ["packages/types/src/*"],
+            "@packages/domain/*": ["packages/domain/src/*"],
+            "@packages/services/app/*": ["packages/services/src/app/*"],
+            "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
+            "@packages/ui/*": ["packages/ui/src/*"],
+            "@/*": ["apps/web/*"],
+            "@app/*": ["apps/web/app/*"],
+            "@src/*": ["apps/web/src/*"],
+            "@assets/*": ["apps/web/src/assets/*"],
+            "@components/*": ["apps/web/src/components/*"],
+            "@hooks/*": ["apps/web/src/hooks/*"],
+            "@context/*": ["apps/web/src/context/*"],
+            "@utils/*": ["apps/web/src/utils/*"],
+            "@public/*": ["apps/web/public/*"],
+            "@test/*": ["apps/web/tests/*"],
+            "@entities/*": ["apps/web/src/entities/*"],
             // Pont de migration : d’abord legacy local, puis nouveaux packages
-            "@services/*": ["src/services/*", "../../packages/services/src/*"]
+            "@services/*": ["apps/web/src/services/*", "packages/services/src/*"]
         },
 
         "plugins": [{ "name": "next" }]
