@@ -1,6 +1,6 @@
 // src/app/profile/page.tsx
 import "@aws-amplify/ui-react/styles.css";
-import "@assets/styles/amplify/authenticator.scss";
+import "@packages/ui/styles/amplify/authenticator.scss";
 import Loader from "@packages/ui/components/loader/Loader";
 
 import UserProfileManager from "@src/components/Profile/UserProfileManager";

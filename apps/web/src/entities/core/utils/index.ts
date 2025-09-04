@@ -1,2 +1,2 @@
-export * from "./amplifyUiConfig";
+export * from "./configureI18n";
 export * from "./createModelForm";

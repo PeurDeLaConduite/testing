@@ -14,7 +14,6 @@
 
         "baseUrl": "../..",
         "paths": {
-
             "@packages/types/*": ["packages/types/src/*"],
             "@packages/domain/*": ["packages/domain/src/*"],
             "@packages/services/app/*": ["packages/services/src/app/*"],
@@ -31,21 +30,7 @@
             "@public/*": ["apps/web/public/*"],
             "@test/*": ["apps/web/tests/*"],
             "@entities/*": ["apps/web/src/entities/*"],
-
-            "@/*": ["./*"],
-            "@app/*": ["app/*"],
-            "@src/*": ["src/*"],
-            "@assets/*": ["src/assets/*"],
-            "@components/*": ["src/components/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@context/*": ["src/context/*"],
-            "@utils/*": ["src/utils/*"],
-            "@public/*": ["public/*"],
-            "@test/*": ["tests/*"],
-            "@entities/*": ["src/entities/*"],
-            "@packages/types/*": ["../../packages/types/src/*"],
             "@packages/services/*": ["../../packages/services/src/*"],
-            "@packages/ui/*": ["../../packages/ui/src/*"],
             "@services/*": ["apps/web/src/services/*", "packages/services/src/*"]
         },
 

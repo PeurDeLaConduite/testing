@@ -3,10 +3,10 @@
 import React from "react";
 import { Authenticator, View, Heading, useTheme } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import "@assets/styles/amplify/authenticator.scss";
+import "@packages/ui/styles/amplify/authenticator.scss";
 import { signUp } from "aws-amplify/auth";
 import { configureI18n, formFields } from "@entities/core";
-import { userNameService } from "@src/entities/models/userName";
+import { userNameService } from "@entities/models/userName";
 
 configureI18n();
 
