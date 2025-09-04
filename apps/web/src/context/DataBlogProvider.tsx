@@ -2,7 +2,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react";
 import type { BlogData } from "@packages/types/web/blog";
-import { fetchBlogData } from "@packages/services/adapters/blog/fetchBlogData";
+import { getBlogData } from "@packages/services/app/getBlogData";
 
 interface DataBlogContextProps {
     data: BlogData | null;
@@ -20,7 +20,7 @@ export function DataBlogProvider({ children }: { children: ReactNode }) {
     async function fetchData() {
         try {
             setLoading(true);
-            const json = await fetchBlogData();
+            const json = await getBlogData();
             setData(json);
             setError(null);
         } catch (err: unknown) {

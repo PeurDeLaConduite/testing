@@ -689,4 +689,3 @@ Directory structure:
 - apps/web/src/entities/models/post/service.ts — suppression en cascade mêlée à des appels réseau.
 - apps/web/src/entities/models/tag/service.ts — suppression en cascade mêlée à des appels réseau.
 - apps/web/src/entities/models/section/service.ts — suppression en cascade mêlée à des appels réseau.
-- apps/web/src/context/DataBlogProvider.tsx — gestion d'état et accès réseau dans le même module.
