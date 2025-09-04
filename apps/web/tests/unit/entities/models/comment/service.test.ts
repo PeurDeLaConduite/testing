@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { commentService } from "@entities/models/comment";
+import { commentService } from "@domain/models/comment";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/_legacy/setupTests";
 
-vi.mock("@entities/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
+vi.mock("@domain/core/services/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
 
-vi.mock("@entities/core/auth", () => ({ canAccess: () => true }));
+vi.mock("@domain/core/auth", () => ({ canAccess: () => true }));
 
 beforeEach(() => {
     server.use(

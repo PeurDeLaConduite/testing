@@ -28,7 +28,7 @@ type DeleteButtonProps = ButtonWrapperProps & {
 
 ```tsx
 import { DeleteButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function Row({ id }: { id: string }) {
     const { remove } = useEntityManager<{ id: string }>();

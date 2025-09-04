@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
-import { useUserNameForm } from "@entities/models/userName/hooks";
+import { useUserNameForm } from "@domain/models/userName/hooks";
 
 // route auth/callback
 export default function ConnectForm() {

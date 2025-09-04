@@ -1,4 +1,4 @@
-import type { BaseModel, UpdateInput, ModelForm } from "@entities/core";
+import type { BaseModel, UpdateInput, ModelForm } from "@domain/core";
 
 export type TodoModel = BaseModel<"Todo">;
 export type TodoCreateInput = { content?: string };

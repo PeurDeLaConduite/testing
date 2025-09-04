@@ -78,8 +78,8 @@ sequenceDiagram
 ```tsx
 import React from "react";
 import { UpdateButton, BackButton } from "@components/ui/Button";
-import type { FieldKey } from "@entities/core/hooks";
-import { useEntityManager } from "@entities/core/manager"; // Exemple de hook Manager
+import type { FieldKey } from "@domain/core/hooks";
+import { useEntityManager } from "@domain/core/manager"; // Exemple de hook Manager
 
 type EditFieldProps<T extends Record<string, unknown>> = {
     editModeField: { field: FieldKey<T>; value: string };
@@ -139,7 +139,7 @@ export function EditField<T extends Record<string, unknown>>({
 
 ```tsx
 import { DeleteButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function RowActions({ id }: { id: string }) {
     const { remove } = useEntityManager<{ id: string }>();
@@ -157,7 +157,7 @@ function RowActions({ id }: { id: string }) {
 
 ```tsx
 import { SubmitButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 export function CreateTag() {
     const { create } = useEntityManager<{ name: string }>();
