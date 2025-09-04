@@ -1,4 +1,4 @@
-import { syncManyToMany } from "./syncManyToMany";
+import { syncManyToMany } from "@packages/domain/relations/syncManyToMany";
 
 export interface ManyToManyCrud<P extends string = string, C extends string = string> {
     listByParent(parentId: string): Promise<readonly C[]>;

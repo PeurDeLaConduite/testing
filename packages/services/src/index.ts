@@ -1,2 +1,2 @@
-export * from "./app";
-export * from "./adapters";
+export * from "@packages/services/app";
+export * from "@packages/services/adapters";
