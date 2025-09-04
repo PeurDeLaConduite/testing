@@ -11,12 +11,12 @@
 
 @import "./amplify/auth.overrides";
 
-@import "../../components/header/header";
-@import "../../components/button/button";
-@import "../../components/checkbox/input-checkbox";
+@import "./components/header/header";
+@import "./components/button/button";
+@import "./components/checkbox/input-checkbox";
 
-@import "../../components/Profile/UserNameManager";
-@import "../../components/Profile/UserProfileManager";
+@import "./components/profile/UserNameManager";
+@import "./components/profile/UserProfileManager";
 @import "./components/forms/SelectField";
 @import "./components/forms/ReadOnlyView";
 @import "./components/forms/SeoFields";
