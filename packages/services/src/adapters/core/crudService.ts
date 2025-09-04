@@ -1,8 +1,8 @@
 // src/entities/core/services/crudService.ts
 // import "@src/amplify/setup";
 import { client, Schema } from "./amplifyClient";
-import { canAccess } from "../auth";
-import type { AuthRule } from "../types";
+import { canAccess } from "../../../../../apps/web/src/entities/core/auth";
+import type { AuthRule } from "@packages/types/core/config";
 // src/entities/core/services/crudService.ts
 // import { client } from "./amplifyClient";
 

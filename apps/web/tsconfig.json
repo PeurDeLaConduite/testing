@@ -24,7 +24,7 @@
             "@services/app/*": ["packages/services/src/app/*"],
             "@services/adapters/*": ["packages/services/src/adapters/*"],
             "@ui/*": ["packages/ui/src/*"],
-            "@/*": ["apps/web/*"],
+            "@apps/*": ["apps/web/*"],
             "@app/*": ["apps/web/app/*"],
             "@src/*": ["apps/web/src/*"],
             "@assets/*": ["apps/web/src/assets/*"],

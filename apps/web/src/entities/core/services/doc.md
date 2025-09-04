@@ -7,8 +7,8 @@ Le fichier `amplifyClient.ts` configure Amplify avec les sorties générées par
 ```ts
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
-import outputs from "@/amplify_outputs.json";
-import type { Schema } from "@/amplify/data/resource";
+import outputs from "@apps/amplify_outputs.json";
+import type { Schema } from "@apps/amplify/data/resource";
 
 Amplify.configure(outputs);
 export const client = generateClient<Schema>();

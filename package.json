@@ -1,24 +1,28 @@
 {
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "tooling/*"
-  ],
-  "packageManager": "yarn@4.9.4",
-  "engines": {
-    "node": "20.18.x"
-  },
-  "scripts": {
-    "dev": "yarn workspace web dev",
-    "build": "yarn workspaces foreach -Rv run build",
-    "typecheck": "yarn workspaces foreach -Rv run typecheck",
-    "lint": "yarn workspaces foreach -Rv run lint",
-    "test": "yarn workspaces foreach -Rv run test",
-    "gen:entities:debug": "tsx scripts/generator/entry.ts --debug"
-  },
-  "devDependencies": {
-    "eslint-plugin-boundaries": "^5.0.1",
-    "vite-tsconfig-paths": "^5.1.4"
-  }
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*",
+        "tooling/*"
+    ],
+    "packageManager": "yarn@4.9.4",
+    "engines": {
+        "node": "20.18.x"
+    },
+    "scripts": {
+        "dev": "yarn workspace web dev",
+        "build": "yarn workspaces foreach -Rv --from web run build",
+        "typecheck": "yarn workspaces foreach -Rv --from web run typecheck",
+        "lint": "yarn workspaces foreach -Rv --from web run lint",
+        "test": "yarn workspaces foreach -Rv --from web run test",
+        "build:web": "yarn workspace web build",
+        "typecheck:web": "yarn workspace web run typecheck",
+        "lint:web": "yarn workspace web run lint",
+        "test:web": "yarn workspace web run test",
+        "gen:entities:debug": "tsx scripts/generator/entry.ts --debug"
+    },
+    "devDependencies": {
+        "eslint-plugin-boundaries": "^5.0.1",
+        "vite-tsconfig-paths": "^5.1.4"
+    }
 }

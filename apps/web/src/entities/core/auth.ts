@@ -1,9 +1,4 @@
-import type { AuthRule } from "./types";
-
-export interface AuthUser {
-    username?: string;
-    groups?: string[];
-}
+import type { AuthRule, AuthUser } from "@packages/types/core";
 
 export function canAccess(
     user: AuthUser | null,

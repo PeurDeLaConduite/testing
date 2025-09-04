@@ -5,7 +5,7 @@
 import { describe, it, expect } from "vitest";
 
 // ⚠️ Ajustez cet import à votre arborescence réelle
-// import { toAction } from '@/menu/actions/adapter';
+// import { toAction } from '@apps/menu/actions/adapter';
 
 type MenuItem = {
     id: string;

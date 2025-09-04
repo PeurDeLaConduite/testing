@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { resolveScrollOffset } from "@/menu/scroll/resolveScrollOffset";
+import { resolveScrollOffset } from "@apps/menu/scroll/resolveScrollOffset";
 
 describe("resolveScrollOffset", () => {
     it("privilégie l'offset du MenuItem", () => {

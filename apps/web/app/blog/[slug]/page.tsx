@@ -4,7 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import PostClient from "./PostClient";
 import ButtonPage from "@components/Blog/ButtonPage";
-import SectionContainer from "@/app/blog/SectionContainer";
+import SectionContainer from "@apps/app/blog/SectionContainer";
 import BlogIcon from "@components/svg_Icon/Blog";
 type Props = {
     params: Promise<{ slug: string }>;

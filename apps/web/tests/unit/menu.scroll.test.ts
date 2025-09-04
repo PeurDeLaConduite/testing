@@ -4,7 +4,7 @@
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-import { scrollToId } from "@/menu/scroll/scrollToId";
+import { scrollToId } from "@apps/menu/scroll/scrollToId";
 
 let focusMock: ReturnType<typeof vi.fn>;
 

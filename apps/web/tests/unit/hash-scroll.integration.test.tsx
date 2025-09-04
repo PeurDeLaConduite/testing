@@ -1,12 +1,12 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-vi.mock("@/utils/fnScrollUtils", () => ({
+vi.mock("@apps/utils/fnScrollUtils", () => ({
     handleScrollClick: vi.fn(),
 }));
 
-import { handleScrollClick } from "@/utils/fnScrollUtils";
-import { useInitialScroll } from "@/utils/scrollUtils";
+import { handleScrollClick } from "@apps/utils/fnScrollUtils";
+import { useInitialScroll } from "@apps/utils/scrollUtils";
 
 describe("useInitialScroll", () => {
     beforeEach(() => {

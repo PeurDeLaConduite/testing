@@ -1,5 +1,8 @@
 // src/entities/core/types/config.ts
-
+export interface AuthUser {
+    username?: string;
+    groups?: string[];
+}
 /**
  * Règles d'authentification appliquées à une entité.
  */

@@ -1,5 +1,5 @@
 // app/amplifyConfig.ts
-import outputs from "@/amplify_outputs.json";
+import outputs from "@apps/amplify_outputs.json";
 export const amplifyConfig = {
     ...outputs,
     Auth: {
