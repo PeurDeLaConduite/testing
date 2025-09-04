@@ -27,7 +27,7 @@ type ClearFieldButtonProps = ButtonWrapperProps & {
 
 ```tsx
 import { ClearFieldButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function ClearName({ id }: { id: string }) {
     const { update } = useEntityManager<{ name: string }>();

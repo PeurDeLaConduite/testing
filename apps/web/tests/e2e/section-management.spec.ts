@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { sectionService } from "@entities/models/section/service";
+import { sectionService } from "@domain/models/section/service";
 import { signInUser, signOutUser, requireCredentials } from "./utils/auth";
 
 test.describe("Section", () => {

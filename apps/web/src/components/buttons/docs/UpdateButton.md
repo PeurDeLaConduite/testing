@@ -27,7 +27,7 @@ type UpdateButtonProps = ButtonWrapperProps & {
 
 ```tsx
 import { UpdateButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function EditForm({ id }: { id: string }) {
     const { update } = useEntityManager<{ name: string }>();

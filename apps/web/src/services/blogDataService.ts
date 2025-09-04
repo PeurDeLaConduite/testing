@@ -1,10 +1,10 @@
-import { canAccess, type AuthRule } from "@src/entities/core";
-import { authorService } from "@src/entities/models/author/service";
-import { sectionService } from "@src/entities/models/section/service";
-import { postService } from "@src/entities/models/post/service";
-import { tagService } from "@src/entities/models/tag/service";
-import { postTagService } from "@src/entities/relations/postTag/service";
-import { sectionPostService } from "@src/entities/relations/sectionPost/service";
+import { canAccess, type AuthRule } from "@domain/core";
+import { authorService } from "@domain/models/author/service";
+import { sectionService } from "@domain/models/section/service";
+import { postService } from "@domain/models/post/service";
+import { tagService } from "@domain/models/tag/service";
+import { postTagService } from "@domain/relations/postTag/service";
+import { sectionPostService } from "@domain/relations/sectionPost/service";
 
 import type { BlogData, Author, Post, Section } from "@src/types/blog";
 

@@ -27,7 +27,7 @@ type AddButtonProps = ButtonWrapperProps & {
 
 ```tsx
 import { AddButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function QuickCreate() {
     const { create } = useEntityManager<{ name: string }>();

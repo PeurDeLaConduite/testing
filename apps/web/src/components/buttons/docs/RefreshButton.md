@@ -27,7 +27,7 @@ type RefreshButtonProps = ButtonWrapperProps & {
 
 ```tsx
 import { RefreshButton } from "@components/ui/Button";
-import { useEntityManager } from "@entities/core/manager";
+import { useEntityManager } from "@domain/core/manager";
 
 function Reload() {
     const { refresh } = useEntityManager<any>();

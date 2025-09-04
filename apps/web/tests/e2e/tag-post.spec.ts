@@ -1,8 +1,8 @@
 import { test, expect } from "playwright/test";
-import { tagService } from "@entities/models/tag/service";
-import { postService } from "@src/entities/models/post/service";
-import { authorService } from "@entities/models/author/service";
-import { postTagService } from "@entities/relations/postTag/service";
+import { tagService } from "@domain/models/tag/service";
+import { postService } from "@domain/models/post/service";
+import { authorService } from "@domain/models/author/service";
+import { postTagService } from "@domain/relations/postTag/service";
 import { signInUser, signOutUser, requireCredentials } from "./utils/auth";
 
 test.describe("Tag & Post", () => {
