@@ -14,7 +14,8 @@
     "build": "yarn workspaces foreach -Rv run build",
     "typecheck": "yarn workspaces foreach -Rv run typecheck",
     "lint": "yarn workspaces foreach -Rv run lint",
-    "test": "yarn workspaces foreach -Rv run test"
+    "test": "yarn workspaces foreach -Rv run test",
+    "gen:entities:debug": "tsx scripts/generator/entry.ts --debug"
   },
   "devDependencies": {
     "vite-tsconfig-paths": "^5.1.4"
