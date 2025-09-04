@@ -1,8 +1,14 @@
 {
   "private": true,
-  "workspaces": ["apps/*", "packages/*", "tooling/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tooling/*"
+  ],
   "packageManager": "yarn@4.9.4",
-  "engines": { "node": "20.18.x" },
+  "engines": {
+    "node": "20.18.x"
+  },
   "scripts": {
     "dev": "yarn workspace web dev",
     "build": "yarn workspaces foreach -Rv run build",
