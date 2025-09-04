@@ -8,7 +8,7 @@ import { type TagFormType, type TagType } from "@entities/models/tag/types";
 import { type PostType } from "@entities/models/post/types";
 import { initialTagForm, toTagForm } from "@entities/models/tag/form";
 import { syncTagToPosts } from "@entities/relations/postTag/sync";
-import { toggleId, normalizeTagName } from "@entities/core/utils";
+import { toggleId, normalizeTagName } from "@packages/domain/utils";
 
 // Pivot léger côté UI
 type PostTagLink = { postId: string; tagId: string };

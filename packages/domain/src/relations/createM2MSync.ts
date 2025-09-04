@@ -1,4 +1,3 @@
-// src/entities/core/utils/createM2MSync.ts
 import { syncManyToMany } from "./syncManyToMany";
 
 export interface ManyToManyCrud<P extends string = string, C extends string = string> {
@@ -21,9 +20,9 @@ export function createM2MSync<P extends string = string, C extends string = stri
 ) {
     const syncByParent = async (parentId: P, targetChildIds: readonly C[]) => {
         const current = await service.listByParent(parentId);
-        const target = Array.from(new Set(targetChildIds)); // dedupe
+        const target = Array.from(new Set(targetChildIds));
 
-        if (isSameSet(current, target)) return; // short-circuit
+        if (isSameSet(current, target)) return;
         await syncManyToMany(
             current,
             target,
@@ -34,9 +33,9 @@ export function createM2MSync<P extends string = string, C extends string = stri
 
     const syncByChild = async (childId: C, targetParentIds: readonly P[]) => {
         const current = await service.listByChild(childId);
-        const target = Array.from(new Set(targetParentIds)); // dedupe
+        const target = Array.from(new Set(targetParentIds));
 
-        if (isSameSet(current, target)) return; // short-circuit
+        if (isSameSet(current, target)) return;
         await syncManyToMany(
             current,
             target,
