@@ -10,6 +10,22 @@ interface DrivingFormProps {
     onSupervisedChange: (condition: boolean | null) => void;
 }
 
+type Option = {
+    id: string;
+    label: string;
+    value: string;
+    condition: boolean;
+};
+
+type Question = {
+    id: string;
+    question: string;
+    name: string;
+    options: Option[];
+    state: boolean | null;
+    onOptionChange: (condition: boolean | null) => void;
+};
+
 const MapQuestions: React.FC<DrivingFormProps> = ({
     locationState,
     onLocationChange,
@@ -18,7 +34,7 @@ const MapQuestions: React.FC<DrivingFormProps> = ({
     onPermitChange,
     onSupervisedChange,
 }) => {
-    const options = [
+    const options: Question[] = [
         {
             id: "location",
             question: "Vous résidez à moins de 50 km du havre ?",
@@ -82,16 +98,16 @@ const MapQuestions: React.FC<DrivingFormProps> = ({
     };
     return (
         <div className="form-questions flx-c">
-            {options.map((option) => (
+            {options.map((option: Question) => (
                 <div className="questions" key={option.id}>
                     <p>{option.question}</p>
                     <div className="response boolean-checkbox">
-                        {option.options.map((opt) => (
+                        {option.options.map((opt: Option) => (
                             <InputCheckbox
                                 key={opt.id}
                                 option={opt}
                                 state={option.state}
-                                handleInputClick={(condition) =>
+                                handleInputClick={(condition: boolean) =>
                                     handleInputClick(option.onOptionChange, option.state, condition)
                                 }
                                 question={option.name}

@@ -7,6 +7,9 @@ import { postTagService } from "@src/entities/relations/postTag/service";
 import { sectionPostService } from "@src/entities/relations/sectionPost/service";
 
 import type { BlogData, Author, Post, Section } from "@packages/types/web/blog";
+import type { TagType } from "@packages/types/models/tag/types";
+import type { PostTagType } from "@packages/types/relations/postTag/types";
+import type { SectionPostType } from "@packages/types/relations/sectionPost/types";
 
 export async function fetchBlogData(): Promise<BlogData> {
     try {
@@ -22,16 +25,16 @@ export async function fetchBlogData(): Promise<BlogData> {
 
         const publicRule: AuthRule[] = [{ allow: "public" }];
 
-        const authorData = authorsRes.data.filter((a) => canAccess(null, a, publicRule));
-        const sectionData = sectionsRes.data.filter((s) => canAccess(null, s, publicRule));
-        const postData = postsRes.data.filter((p) => canAccess(null, p, publicRule));
+        const authorData = authorsRes.data.filter((a: Author) => canAccess(null, a, publicRule));
+        const sectionData = sectionsRes.data.filter((s: Section) => canAccess(null, s, publicRule));
+        const postData = postsRes.data.filter((p: Post) => canAccess(null, p, publicRule));
 
         const tagsById: Record<string, string> = {};
-        tagsRes.data.forEach((t) => {
+        tagsRes.data.forEach((t: TagType) => {
             tagsById[t.id] = t.name;
         });
 
-        const posts: Post[] = postData.map((p) => ({
+        const posts: Post[] = postData.map((p: Post) => ({
             id: p.id,
             title: p.title ?? "",
             slug: p.slug ?? "",
@@ -54,11 +57,11 @@ export async function fetchBlogData(): Promise<BlogData> {
         }));
 
         const postsById: Record<string, Post> = {};
-        posts.forEach((p) => {
+        posts.forEach((p: Post) => {
             postsById[p.id] = p;
         });
 
-        const sections: Section[] = sectionData.map((s) => ({
+        const sections: Section[] = sectionData.map((s: Section) => ({
             id: s.id,
             title: s.title ?? "",
             slug: s.slug ?? "",
@@ -75,12 +78,12 @@ export async function fetchBlogData(): Promise<BlogData> {
         }));
 
         const sectionsById: Record<string, Section> = {};
-        sections.forEach((s) => {
+        sections.forEach((s: Section) => {
             sectionsById[s.id] = s;
         });
 
         // Map SectionPost relationships
-        sectionPostsRes.data.forEach((sp) => {
+        sectionPostsRes.data.forEach((sp: SectionPostType) => {
             const post = postsById[sp.postId];
             if (post) {
                 post.sectionIds.push(sp.sectionId);
@@ -92,7 +95,7 @@ export async function fetchBlogData(): Promise<BlogData> {
         });
 
         // Map PostTag relationships
-        postTagsRes.data.forEach((pt) => {
+        postTagsRes.data.forEach((pt: PostTagType) => {
             const post = postsById[pt.postId];
             const tagName = tagsById[pt.tagId];
             if (post && tagName) {
@@ -100,7 +103,7 @@ export async function fetchBlogData(): Promise<BlogData> {
             }
         });
 
-        const authors: Author[] = authorData.map((a) => ({
+        const authors: Author[] = authorData.map((a: Author) => ({
             id: a.id,
             name: a.authorName ?? "",
             avatar: a.avatar ?? "",
