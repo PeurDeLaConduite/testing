@@ -2,12 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     experimental: {},
-    transpilePackages: [
-        "@packages/ui",
-        "@packages/types",
-        "@packages/services",
-        "@packages/domain",
-    ],
+    transpilePackages: ["@ui", "@types", "@services", "@domain"],
 
     eslint: { ignoreDuringBuilds: true },
     typescript: { ignoreBuildErrors: true },

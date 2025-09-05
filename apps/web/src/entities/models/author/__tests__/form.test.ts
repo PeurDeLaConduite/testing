@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
-import { toAuthorForm, toAuthorCreate, toAuthorUpdate } from "@domain/models/author/form";
+import { toAuthorForm, toAuthorCreate, toAuthorUpdate } from "@packages/domain/models/author/form";
 import type { AuthorType, AuthorFormType } from "models/author/types";
 
 describe("toAuthorForm", () => {

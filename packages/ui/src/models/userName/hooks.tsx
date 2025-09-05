@@ -1,20 +1,20 @@
 // src/entities/models/userName/hooks.tsx
 import { useCallback, useEffect, useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useModelForm } from "@ui/core/hooks";
-import { userNameService } from "@services/app/models/userName/service";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { userNameService } from "@packages/services/app/models/userName/service";
 import {
     initialUserNameForm,
     toUserNameForm,
     toUserNameCreate,
     toUserNameUpdate,
-} from "@domain/models/userName/form";
+} from "@packages/domain/models/userName/form";
 import type {
     UserNameFormType,
     UserNameType,
     UserNameTypeUpdateInput,
-} from "@types/models/userName/types";
-import { emitUserNameUpdated } from "@domain/models/userName/bus";
+} from "@packages/types/models/userName/types";
+import { emitUserNameUpdated } from "@packages/domain/models/userName/bus";
 
 type Extras = { userNames: UserNameType[] };
 

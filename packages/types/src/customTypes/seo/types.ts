@@ -1,9 +1,4 @@
-import type {
-    BaseModel,
-    CreateOmit,
-    UpdateInput,
-    ModelForm,
-} from "@types/core";
+import type { BaseModel, CreateOmit, UpdateInput, ModelForm } from "@packages/types/core";
 
 export type SeoType = BaseModel<"Seo">;
 export type SeoTypeOmit = CreateOmit<"Seo">;

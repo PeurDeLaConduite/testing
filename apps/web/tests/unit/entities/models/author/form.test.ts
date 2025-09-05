@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
-import { toAuthorForm, toAuthorCreate, toAuthorUpdate } from "@domain/models/author/form";
-import type { AuthorType, AuthorFormType } from "@types/models/author/types";
+import { toAuthorForm, toAuthorCreate, toAuthorUpdate } from "@packages/domain/models/author/form";
+import type { AuthorType, AuthorFormType } from "@packages/types/models/author/types";
 
 describe("toAuthorForm", () => {
     it("convertit AuthorType en AuthorFormType", () => {

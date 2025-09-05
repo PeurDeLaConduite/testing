@@ -5,8 +5,8 @@ import { Authenticator, View, Heading, useTheme } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "@packages/ui/styles/amplify/authenticator.scss";
 import { signUp } from "aws-amplify/auth";
-import { configureI18n, formFields } from "@ui/i18n/configureI18n";
-import { userNameService } from "@services/app/models/userName/service";
+import { configureI18n, formFields } from "@packages/ui/i18n/configureI18n";
+import { userNameService } from "@packages/services/app/models/userName/service";
 
 configureI18n();
 

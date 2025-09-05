@@ -1,14 +1,14 @@
 /* // src/entities/models/section/hooks.tsx
 import { useEffect, useCallback, useState } from "react";
-import { useModelForm } from "@ui/core/hooks";
-import { postService } from "@services/app/models/post/service";
-import { sectionService } from "@services/app/models/section/service";
-import { sectionPostService } from "@services/app/relations/sectionPost/service";
-import { initialSectionForm, toSectionForm } from "@domain/models/section/form";
-import type { SectionFormType, SectionType } from "@types/models/section/types";
-import type { PostType } from "@types/models/post/types";
-import { syncSectionToPosts } from "@services/app/relations/sectionPost/sync";
-import { toggleId } from "@domain/utils";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { postService } from "@packages/services/app/models/post/service";
+import { sectionService } from "@packages/services/app/models/section/service";
+import { sectionPostService } from "@packages/services/app/relations/sectionPost/service";
+import { initialSectionForm, toSectionForm } from "@packages/domain/models/section/form";
+import type { SectionFormType, SectionType } from "@packages/types/models/section/types";
+import type { PostType } from "@packages/types/models/post/types";
+import { syncSectionToPosts } from "@packages/services/app/relations/sectionPost/sync";
+import { toggleId } from "@packages/domain/utils";
 
 type Extras = { posts: PostType[]; sections: SectionType[] };
 

@@ -1,10 +1,7 @@
-import { crudService } from "@services/adapters/core/crudService";
-import { deleteEdges } from "@services/app/core/cascade";
-import { sectionPostService } from "@services/app/relations/sectionPost/service";
-import type {
-    SectionTypeOmit,
-    SectionTypeUpdateInput,
-} from "@types/models/section/types";
+import { crudService } from "@packages/services/adapters/core/crudService";
+import { deleteEdges } from "@packages/services/app/core/cascade";
+import { sectionPostService } from "@packages/services/app/relations/sectionPost/service";
+import type { SectionTypeOmit, SectionTypeUpdateInput } from "@packages/types/models/section/types";
 
 const base = crudService<
     "Section",

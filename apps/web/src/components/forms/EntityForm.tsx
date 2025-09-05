@@ -2,7 +2,7 @@
 "use client";
 import React, { type FormEvent } from "react";
 import { UpdateButton, AddButton, CancelButton } from "@packages/ui/components/buttons";
-import { type FieldKey } from "@ui/core/hooks";
+import { type FieldKey } from "@packages/ui/core/hooks";
 
 type Props<T extends Record<string, unknown>> = {
     formData: Partial<T>;

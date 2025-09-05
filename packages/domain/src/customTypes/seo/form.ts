@@ -4,7 +4,7 @@ import type {
     SeoFormType,
     SeoTypeUpdateInput,
 } from "@packages/types/customTypes/seo/types";
-import { createModelForm } from "@domain/utils";
+import { createModelForm } from "@packages/domain/utils";
 
 // 1) On génère via createModelForm
 const seoCMF = createModelForm<SeoType, SeoFormType, SeoTypeUpdateInput, SeoTypeUpdateInput>({

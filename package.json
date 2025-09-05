@@ -12,16 +12,16 @@
     "scripts": {
         "dev": "yarn workspace web dev",
         "build": "yarn workspaces foreach -Rv --from web run build",
-        "typecheck": "yarn workspaces foreach -Rv --from web run typecheck",
+        "tsc": "yarn workspaces foreach -Rv --from web run tsc",
         "lint": "yarn workspaces foreach -Rv --from web run lint",
         "test": "yarn workspaces foreach -Rv --from web run test",
         "build:web": "yarn workspace web build",
-        "typecheck:web": "yarn workspace web run typecheck",
+        "tsc:web": "yarn workspace web run tsc",
         "lint:web": "yarn workspace web run lint",
         "test:web": "yarn workspace web run test",
         "gen:entities:debug": "tsx scripts/generator/entry.ts --debug",
         "clean": "yarn workspaces foreach -ptv run clean",
-        "typecheck:all": "yarn workspaces foreach -ptv run typecheck",
+        "tsc:all": "yarn workspaces foreach -ptv run tsc",
         "audit": "yarn audit",
         "format": "yarn workspaces foreach -ptv run format",
         "test:watch": "yarn workspaces foreach -ptv run test:watch",
@@ -29,6 +29,7 @@
         "reinstall": "rm -rf node_modules && yarn install"
     },
     "devDependencies": {
+        "eslint": "^9.15.0",
         "eslint-plugin-boundaries": "^5.0.1",
         "vite-tsconfig-paths": "^5.1.4"
     }

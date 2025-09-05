@@ -1,7 +1,7 @@
 // src/amplify/setup.ts
 import { Amplify } from "aws-amplify";
 import outputs from "@apps/amplify_outputs.json";
-import type { AmplifyGlobal } from "@types/web/amplify/global";
+import type { AmplifyGlobal } from "@packages/types/web/amplify/global";
 
 const overrides = {
     auth: {

@@ -1,11 +1,11 @@
 import { z, type ZodType } from "zod";
-import { createModelForm } from "@domain/utils";
+import { createModelForm } from "@packages/domain/utils";
 import type {
     UserNameType,
     UserNameFormType,
     UserNameTypeCreateInput,
     UserNameTypeUpdateInput,
-} from "@types/models/userName/types";
+} from "@packages/types/models/userName/types";
 
 export const {
     zodSchema: userNameSchema,

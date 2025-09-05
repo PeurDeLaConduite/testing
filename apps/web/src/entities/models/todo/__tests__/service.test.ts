@@ -1,9 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { todoService } from "@domain/models/todo";
+import { todoService } from "@packages/domain/models/todo";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/setup";
 
-vi.mock("@services/adapters/core/amplifyClient", () => import("@test/mocks/amplifyClient"));
+vi.mock(
+    "@packages/services/adapters/core/amplifyClient",
+    () => import("@test/mocks/amplifyClient")
+);
 
 vi.mock("@src/entities/core/auth", () => ({ canAccess: () => true }));
 

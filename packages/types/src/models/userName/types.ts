@@ -1,9 +1,4 @@
-import type {
-    BaseModel,
-    UpdateInput,
-    ModelForm,
-    CreateOmit,
-} from "@types/core";
+import type { BaseModel, UpdateInput, ModelForm, CreateOmit } from "@packages/types/core";
 
 export type UserNameType = BaseModel<"UserName">;
 export type UserNameTypeOmit = CreateOmit<"UserName">;

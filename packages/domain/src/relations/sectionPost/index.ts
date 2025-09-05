@@ -1,1 +1,1 @@
-export * from "@types/relations/sectionPost/types";
+export * from "@packages/types/relations/sectionPost/types";

@@ -1,9 +1,9 @@
 // src/entities/models/userName/service.ts
-import { crudService } from "@services/adapters/core/crudService";
+import { crudService } from "@packages/services/adapters/core/crudService";
 import type {
     UserNameTypeCreateInput,
     UserNameTypeUpdateInput,
-} from "@types/models/userName/types";
+} from "@packages/types/models/userName/types";
 
 // ✅ Lecture en public (API key), écritures avec User Pool
 export const userNameService = crudService<

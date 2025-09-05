@@ -1,10 +1,6 @@
 import { z, type ZodType } from "zod";
-import { createModelForm } from "@domain/utils";
-import type {
-    TagType,
-    TagFormType,
-    TagTypeUpdateInput,
-} from "@types/models/tag/types";
+import { createModelForm } from "@packages/domain/utils";
+import type { TagType, TagFormType, TagTypeUpdateInput } from "@packages/types/models/tag/types";
 
 export const {
     zodSchema: tagSchema,

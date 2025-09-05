@@ -1,1 +1,1 @@
-export * from "@types/relations/postTag/types";
+export * from "@packages/types/relations/postTag/types";

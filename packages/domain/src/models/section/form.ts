@@ -3,14 +3,10 @@ import type {
     SectionType,
     SectionFormType,
     SectionTypeUpdateInput,
-} from "@types/models/section/types";
-import {
-    toSeoForm,
-    initialSeoForm,
-    seoSchema,
-} from "@domain/customTypes/seo";
-import type { SeoType } from "@types/customTypes/seo/types";
-import { createModelForm } from "@domain/utils";
+} from "@packages/types/models/section/types";
+import { toSeoForm, initialSeoForm, seoSchema } from "@packages/domain/customTypes/seo";
+import type { SeoType } from "@packages/types/customTypes/seo/types";
+import { createModelForm } from "@packages/domain/utils";
 
 export const {
     zodSchema: sectionSchema,

@@ -1,12 +1,12 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { usePostForm } from "@ui/models/post/hooks";
+import { usePostForm } from "@packages/ui/models/post/hooks";
 import { type PostType } from "models/post/types";
-import { postService } from "@services/app/models/post/service";
-import { syncPostToTags } from "@domain/relations/postTag";
-import { syncPostToSections } from "@domain/relations/sectionPost";
+import { postService } from "@packages/services/app/models/post/service";
+import { syncPostToTags } from "@packages/domain/relations/postTag";
+import { syncPostToSections } from "@packages/domain/relations/sectionPost";
 
-vi.mock("@services/app/models/post/service", () => ({
+vi.mock("@packages/services/app/models/post/service", () => ({
     postService: {
         create: vi.fn().mockResolvedValue({ data: { id: "post1" } }),
         update: vi.fn().mockResolvedValue({ data: { id: "post1" } }),
@@ -14,25 +14,25 @@ vi.mock("@services/app/models/post/service", () => ({
     },
 }));
 
-vi.mock("@domain/relations/postTag", () => ({
+vi.mock("@packages/domain/relations/postTag", () => ({
     syncPostToTags: vi.fn(),
     postTagService: { listByParent: vi.fn().mockResolvedValue([]) },
 }));
 
-vi.mock("@domain/relations/sectionPost", () => ({
+vi.mock("@packages/domain/relations/sectionPost", () => ({
     syncPostToSections: vi.fn(),
     sectionPostService: { listByChild: vi.fn().mockResolvedValue([]) },
 }));
 
-vi.mock("@services/app/models/author/service", () => ({
+vi.mock("@packages/services/app/models/author/service", () => ({
     authorService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 
-vi.mock("@services/app/models/tag/service", () => ({
+vi.mock("@packages/services/app/models/tag/service", () => ({
     tagService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 
-vi.mock("@services/app/models/section/service", () => ({
+vi.mock("@packages/services/app/models/section/service", () => ({
     sectionService: { list: vi.fn().mockResolvedValue({ data: [] }) },
 }));
 

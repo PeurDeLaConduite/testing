@@ -1,10 +1,10 @@
 import { z, type ZodType } from "zod";
-import { createModelForm } from "@domain/utils";
+import { createModelForm } from "@packages/domain/utils";
 import type {
     UserProfileType,
     UserProfileFormType,
     UserProfileTypeUpdateInput,
-} from "@types/models/userProfile/types";
+} from "@packages/types/models/userProfile/types";
 
 export const {
     zodSchema: userProfileSchema,

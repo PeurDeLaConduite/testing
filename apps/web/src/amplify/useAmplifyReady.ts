@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AmplifyGlobal } from "@types/web/amplify/global";
+import type { AmplifyGlobal } from "@packages/types/web/amplify/global";
 
 export function useAmplifyReady() {
     const [ready, setReady] = useState<boolean>(

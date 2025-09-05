@@ -1,10 +1,7 @@
-import { crudService } from "@services/adapters/core/crudService";
-import { deleteEdges } from "@services/app/core/cascade";
-import { postTagService } from "@services/app/relations/postTag/service";
-import type {
-    TagTypeOmit,
-    TagTypeUpdateInput,
-} from "@types/models/tag/types";
+import { crudService } from "@packages/services/adapters/core/crudService";
+import { deleteEdges } from "@packages/services/app/core/cascade";
+import { postTagService } from "@packages/services/app/relations/postTag/service";
+import type { TagTypeOmit, TagTypeUpdateInput } from "@packages/types/models/tag/types";
 
 const base = crudService<
     "Tag",

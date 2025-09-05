@@ -10,9 +10,11 @@
         "paths": {
             "@packages/types/*": ["packages/types/src/*"],
             "@packages/domain/*": ["packages/domain/src/*"],
+            "@packages/ui/*": ["packages/ui/src/*"],
+            "@packages/services/*": ["packages/services/src/*"],
             "@packages/services/app/*": ["packages/services/src/app/*"],
             "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
-            "@packages/ui/*": ["packages/ui/src/*"],
+
             "@apps/*": ["apps/web/*"],
             "@app/*": ["apps/web/app/*"],
             "@src/*": ["apps/web/src/*"],
@@ -23,12 +25,7 @@
             "@utils/*": ["apps/web/src/utils/*"],
             "@public/*": ["apps/web/public/*"],
             "@test/*": ["apps/web/tests/*"],
-            "@packages/services/*": ["packages/services/src/*"],
-            "@services/*": ["apps/web/src/services/*", "packages/services/src/*"],
             "@/*": ["./*"]
-            // "@services/app/*": ["packages/services/src/app/*"],
-            // "@services/adapters/*": ["packages/services/src/adapters/*"],
-            // "@ui/*": ["packages/ui/src/*"]
         }
     },
     "references": [

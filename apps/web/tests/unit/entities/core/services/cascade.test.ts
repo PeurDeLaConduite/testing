@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { withConcurrency, deleteEdges, setNullBatch } from "@services/app/core/cascade";
+import { withConcurrency, deleteEdges, setNullBatch } from "@packages/services/app/core/cascade";
 
 function sleep(ms: number) {
     return new Promise((res) => setTimeout(res, ms));

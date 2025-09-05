@@ -1,6 +1,6 @@
 // src/entities/core/types/model.ts
 
-import type { EntityConfig } from "@types/core/config";
+import type { EntityConfig } from "@packages/types/core/config";
 
 /**
  * Modèle typé dérivé d'une configuration d'entité.

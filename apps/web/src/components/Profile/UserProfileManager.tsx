@@ -8,13 +8,13 @@ import { label as fieldLabel } from "./utilsUserProfile";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
-import { useUserProfileForm } from "@ui/models/userProfile/hooks";
+import { useUserProfileForm } from "@packages/ui/models/userProfile/hooks";
 import {
     type UserProfileFormType,
     type UserProfileType,
     type UserProfileTypeUpdateInput,
     initialUserProfileForm,
-} from "@domain/models/userProfile";
+} from "@packages/domain/models/userProfile";
 
 type IdLike = string | number;
 

@@ -1,8 +1,8 @@
 /* import { useCallback, useEffect, useState } from "react";
-import { useModelForm } from "@ui/core/hooks";
-import { authorService } from "@services/app/models/author/service";
-import { initialAuthorForm, toAuthorForm } from "@domain/models/author/form";
-import { type AuthorFormType, type AuthorType } from "@types/models/author/types";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { authorService } from "@packages/services/app/models/author/service";
+import { initialAuthorForm, toAuthorForm } from "@packages/domain/models/author/form";
+import { type AuthorFormType, type AuthorType } from "@packages/types/models/author/types";
 
 interface Extras extends Record<string, unknown> {
     authors: AuthorType[];

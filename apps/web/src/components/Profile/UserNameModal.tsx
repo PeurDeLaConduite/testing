@@ -5,9 +5,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal-component-by-jeremy";
 import UserNameManager from "./UserNameManager";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useUserNameForm } from "@ui/models/userName/hooks";
-import { onUserNameUpdated } from "@domain/models/userName/bus";
-import type { UserNameType } from "@domain/models/userName";
+import { useUserNameForm } from "@packages/ui/models/userName/hooks";
+import { onUserNameUpdated } from "@packages/domain/models/userName/bus";
+import type { UserNameType } from "@packages/domain/models/userName";
 import { BackButton } from "@packages/ui/components/buttons";
 import Link from "next/link";
 

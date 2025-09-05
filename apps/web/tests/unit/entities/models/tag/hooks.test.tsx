@@ -1,9 +1,9 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { TagType } from "@types/models/tag/types";
-import type { PostType } from "@types/models/post/types";
+import type { TagType } from "@packages/types/models/tag/types";
+import type { PostType } from "@packages/types/models/post/types";
 
-vi.mock("@services/app/models/tag/service", () => ({
+vi.mock("@packages/services/app/models/tag/service", () => ({
     tagService: {
         list: vi.fn(),
         create: vi.fn(),
@@ -12,13 +12,13 @@ vi.mock("@services/app/models/tag/service", () => ({
     },
 }));
 
-vi.mock("@services/app/models/post/service", () => ({
+vi.mock("@packages/services/app/models/post/service", () => ({
     postService: {
         list: vi.fn(),
     },
 }));
 
-vi.mock("@services/app/relations/postTag/service", () => ({
+vi.mock("@packages/services/app/relations/postTag/service", () => ({
     postTagService: {
         list: vi.fn(),
         listByParent: vi.fn(),
@@ -27,10 +27,10 @@ vi.mock("@services/app/relations/postTag/service", () => ({
     },
 }));
 
-import { tagService } from "@services/app/models/tag/service";
-import { postService } from "@services/app/models/post/service";
-import { postTagService } from "@services/app/relations/postTag/service";
-import { useTagForm } from "@ui/models/tag/hooks";
+import { tagService } from "@packages/services/app/models/tag/service";
+import { postService } from "@packages/services/app/models/post/service";
+import { postTagService } from "@packages/services/app/relations/postTag/service";
+import { useTagForm } from "@packages/ui/models/tag/hooks";
 
 const tags: TagType[] = [
     { id: "t1", name: "Tag1" } as TagType,

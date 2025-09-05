@@ -1,8 +1,4 @@
-import type {
-    BaseModel,
-    CreateOmit,
-    UpdateInput,
-} from "@types/core";
+import type { BaseModel, CreateOmit, UpdateInput } from "@packages/types/core";
 
 export type PostTagType = BaseModel<"PostTag">;
 export type PostTagTypeOmit = CreateOmit<"PostTag">;

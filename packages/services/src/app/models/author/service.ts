@@ -1,10 +1,7 @@
-import { crudService } from "@services/adapters/core/crudService";
-import { setNullBatch } from "@services/app/core/cascade";
-import { postService } from "@services/app/models/post/service";
-import type {
-    AuthorTypeOmit,
-    AuthorTypeUpdateInput,
-} from "@types/models/author/types";
+import { crudService } from "@packages/services/adapters/core/crudService";
+import { setNullBatch } from "@packages/services/app/core/cascade";
+import { postService } from "@packages/services/app/models/post/service";
+import type { AuthorTypeOmit, AuthorTypeUpdateInput } from "@packages/types/models/author/types";
 
 const base = crudService<
     "Author",

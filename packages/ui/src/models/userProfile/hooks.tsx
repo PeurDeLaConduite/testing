@@ -1,10 +1,16 @@
 // src/entities/models/userProfile/hooks.tsx
 import { useCallback, useEffect, useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useModelForm } from "@ui/core/hooks";
-import { userProfileService } from "@services/app/models/userProfile/service";
-import { initialUserProfileForm, toUserProfileForm } from "@domain/models/userProfile/form";
-import type { UserProfileFormType, UserProfileType } from "@types/models/userProfile/types";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { userProfileService } from "@packages/services/app/models/userProfile/service";
+import {
+    initialUserProfileForm,
+    toUserProfileForm,
+} from "@packages/domain/models/userProfile/form";
+import type {
+    UserProfileFormType,
+    UserProfileType,
+} from "@packages/types/models/userProfile/types";
 import { label as fieldLabel } from "@src/components/Profile/utilsUserProfile";
 
 type Extras = Record<string, never>;

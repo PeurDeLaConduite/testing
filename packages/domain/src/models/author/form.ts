@@ -3,8 +3,8 @@ import type {
     AuthorType,
     AuthorFormType,
     AuthorTypeUpdateInput,
-} from "@types/models/author/types";
-import { createModelForm } from "@domain/utils";
+} from "@packages/types/models/author/types";
+import { createModelForm } from "@packages/domain/utils";
 
 export const {
     zodSchema: authorSchema,

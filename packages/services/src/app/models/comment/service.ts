@@ -1,9 +1,6 @@
-import { client } from "@services/adapters/core/amplifyClient";
-import { crudService } from "@services/adapters/core/crudService";
-import type {
-    CommentCreateInput,
-    CommentUpdateInput,
-} from "@types/models/comment/types";
+import { client } from "@packages/services/adapters/core/amplifyClient";
+import { crudService } from "@packages/services/adapters/core/crudService";
+import type { CommentCreateInput, CommentUpdateInput } from "@packages/types/models/comment/types";
 
 export const commentService = crudService<
     "Comment",

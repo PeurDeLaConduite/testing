@@ -1,5 +1,5 @@
 // src/entities/relations/sectionPost/sync.ts
-import { createM2MSync } from "@domain/relations";
+import { createM2MSync } from "@packages/domain/relations";
 import { sectionPostService } from "./service";
 
 // sectionPostService doit venir de : relationService("SectionPost", "sectionId", "postId")

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
-import { toPostForm, toPostCreate, toPostUpdate } from "@domain/models/post/form";
-import type { PostType, PostFormType } from "@types/models/post/types";
+import { toPostForm, toPostCreate, toPostUpdate } from "@packages/domain/models/post/form";
+import type { PostType, PostFormType } from "@packages/types/models/post/types";
 
 describe("toPostForm", () => {
     it("convertit PostType en PostFormType", () => {

@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { tagService } from "@services/app/models/tag/service";
+import { tagService } from "@packages/services/app/models/tag/service";
 import { email, password, signInUser, signOutUser } from "./utils/auth";
 
 test.describe("Authentification", () => {

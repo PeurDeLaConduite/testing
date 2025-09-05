@@ -1,14 +1,14 @@
 /* // src/entities/models/tag/hooks.tsx
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useModelForm } from "@ui/core/hooks";
-import { postService } from "@services/app/models/post/service";
-import { tagService } from "@services/app/models/tag/service";
-import { postTagService } from "@services/app/relations/postTag/service";
-import type { TagFormType, TagType } from "@types/models/tag/types";
-import type { PostType } from "@types/models/post/types";
-import { initialTagForm, toTagForm } from "@domain/models/tag/form";
-import { syncTagToPosts } from "@services/app/relations/postTag/sync";
-import { toggleId, normalizeTagName } from "@domain/utils";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { postService } from "@packages/services/app/models/post/service";
+import { tagService } from "@packages/services/app/models/tag/service";
+import { postTagService } from "@packages/services/app/relations/postTag/service";
+import type { TagFormType, TagType } from "@packages/types/models/tag/types";
+import type { PostType } from "@packages/types/models/post/types";
+import { initialTagForm, toTagForm } from "@packages/domain/models/tag/form";
+import { syncTagToPosts } from "@packages/services/app/relations/postTag/sync";
+import { toggleId, normalizeTagName } from "@packages/domain/utils";
 
 // Pivot léger côté UI
 type PostTagLink = { postId: string; tagId: string };

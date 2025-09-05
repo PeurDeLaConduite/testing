@@ -1,9 +1,9 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { useAuthorForm } from "@ui/models/author/hooks";
-import { authorService } from "@services/app/models/author/service";
+import { useAuthorForm } from "@packages/ui/models/author/hooks";
+import { authorService } from "@packages/services/app/models/author/service";
 
-vi.mock("@services/app/models/author/service", () => ({
+vi.mock("@packages/services/app/models/author/service", () => ({
     authorService: {
         create: vi.fn(),
         update: vi.fn(),

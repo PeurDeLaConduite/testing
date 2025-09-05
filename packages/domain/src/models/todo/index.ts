@@ -1,1 +1,1 @@
-export * from '@types/models/todo/types';
+export * from "@packages/types/models/todo/types";

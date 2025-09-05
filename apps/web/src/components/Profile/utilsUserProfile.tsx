@@ -1,5 +1,5 @@
-import { toUserProfileForm } from "@domain/models/userProfile/form";
-import { type UserProfileTypeUpdateInput } from "@types/models/userProfile/types";
+import { toUserProfileForm } from "@packages/domain/models/userProfile/form";
+import { type UserProfileTypeUpdateInput } from "@packages/types/models/userProfile/types";
 
 const labels: Partial<Record<keyof UserProfileTypeUpdateInput, string>> = {
     firstName: "Prénom",

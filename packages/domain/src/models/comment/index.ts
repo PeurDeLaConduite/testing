@@ -1,1 +1,1 @@
-export * from '@types/models/comment/types';
+export * from "@packages/types/models/comment/types";

@@ -1,12 +1,9 @@
-import { crudService } from "@services/adapters/core/crudService";
-import { deleteEdges } from "@services/app/core/cascade";
-import { commentService } from "@services/app/models/comment/service";
-import { postTagService } from "@services/app/relations/postTag/service";
-import { sectionPostService } from "@services/app/relations/sectionPost/service";
-import type {
-    PostTypeOmit,
-    PostTypeUpdateInput,
-} from "@types/models/post/types";
+import { crudService } from "@packages/services/adapters/core/crudService";
+import { deleteEdges } from "@packages/services/app/core/cascade";
+import { commentService } from "@packages/services/app/models/comment/service";
+import { postTagService } from "@packages/services/app/relations/postTag/service";
+import { sectionPostService } from "@packages/services/app/relations/sectionPost/service";
+import type { PostTypeOmit, PostTypeUpdateInput } from "@packages/types/models/post/types";
 
 const base = crudService<
     "Post",

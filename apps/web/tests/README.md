@@ -24,11 +24,11 @@ yarn test:e2e     # tests end-to-end Playwright
 
 1. Placer le fichier sous le dossier approprié (`unit`, `api` ou `e2e`).
 2. Respecter les conventions `*.test.ts` / `*.test.tsx`.
-3. Utiliser les alias TypeScript (`@ui/*`, `@services/app/*`, etc.).
+3. Utiliser les alias TypeScript (`@packages/ui/*`, `@packages/services/app/*`, etc.).
 4. Les tests unitaires doivent mocker Amplify :
-   ```ts
-   vi.mock('aws-amplify', () => ({ Auth: { signIn: vi.fn() } }));
-   ```
+    ```ts
+    vi.mock("aws-amplify", () => ({ Auth: { signIn: vi.fn() } }));
+    ```
 
 ## Mocks d'Amplify
 

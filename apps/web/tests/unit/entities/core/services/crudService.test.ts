@@ -1,9 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { crudService } from "@services/adapters/core/crudService";
+import { crudService } from "@packages/services/adapters/core/crudService";
 import { http, HttpResponse } from "msw";
 import { server } from "@test/_legacy/setupTests";
 
-vi.mock("@services/adapters/core/amplifyClient", () => import("@test/_legacy/mocks/amplifyClient"));
+vi.mock(
+    "@packages/services/adapters/core/amplifyClient",
+    () => import("@test/_legacy/mocks/amplifyClient")
+);
 
 vi.mock("@src/entities/core/auth", () => ({
     canAccess: (_user: unknown, entity: any) => Boolean(entity.allow),

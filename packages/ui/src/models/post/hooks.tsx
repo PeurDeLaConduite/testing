@@ -1,19 +1,19 @@
 import { useEffect, useCallback, useState } from "react";
-import { useModelForm } from "@ui/core/hooks";
-import { postService } from "@services/app/models/post/service";
-import { postTagService } from "@services/app/relations/postTag/service";
-import { sectionPostService } from "@services/app/relations/sectionPost/service";
-import { authorService } from "@services/app/models/author/service";
-import { tagService } from "@services/app/models/tag/service";
-import { sectionService } from "@services/app/models/section/service";
-import { initialPostForm, toPostForm } from "@domain/models/post/form";
-import type { PostFormType, PostType } from "@types/models/post/types";
-import type { AuthorType } from "@types/models/author/types";
-import type { TagType } from "@types/models/tag/types";
-import type { SectionType } from "@types/models/section/types";
-import { syncPostToTags } from "@services/app/relations/postTag/sync";
-import { syncPostToSections } from "@services/app/relations/sectionPost/sync";
-import { toggleId } from "@domain/utils";
+import { useModelForm } from "@packages/ui/core/hooks";
+import { postService } from "@packages/services/app/models/post/service";
+import { postTagService } from "@packages/services/app/relations/postTag/service";
+import { sectionPostService } from "@packages/services/app/relations/sectionPost/service";
+import { authorService } from "@packages/services/app/models/author/service";
+import { tagService } from "@packages/services/app/models/tag/service";
+import { sectionService } from "@packages/services/app/models/section/service";
+import { initialPostForm, toPostForm } from "@packages/domain/models/post/form";
+import type { PostFormType, PostType } from "@packages/types/models/post/types";
+import type { AuthorType } from "@packages/types/models/author/types";
+import type { TagType } from "@packages/types/models/tag/types";
+import type { SectionType } from "@packages/types/models/section/types";
+import { syncPostToTags } from "@packages/services/app/relations/postTag/sync";
+import { syncPostToSections } from "@packages/services/app/relations/sectionPost/sync";
+import { toggleId } from "@packages/domain/utils";
 
 interface Extras extends Record<string, unknown> {
     authors: AuthorType[];

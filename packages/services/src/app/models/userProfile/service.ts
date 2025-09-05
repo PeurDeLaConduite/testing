@@ -1,9 +1,9 @@
 // src/entities/models/userProfile/service.ts
-import { crudService } from "@services/adapters/core/crudService";
+import { crudService } from "@packages/services/adapters/core/crudService";
 import type {
     UserProfileTypeOmit,
     UserProfileTypeUpdateInput,
-} from "@types/models/userProfile/types";
+} from "@packages/types/models/userProfile/types";
 
 export const userProfileService = crudService<
     "UserProfile",

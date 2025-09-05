@@ -3,14 +3,10 @@ import type {
     PostType,
     PostFormType,
     PostTypeUpdateInput,
-} from "@types/models/post/types";
-import {
-    toSeoForm,
-    initialSeoForm,
-    seoSchema,
-} from "@domain/customTypes/seo";
-import type { SeoType } from "@types/customTypes/seo/types";
-import { createModelForm } from "@domain/utils";
+} from "@packages/types/models/post/types";
+import { toSeoForm, initialSeoForm, seoSchema } from "@packages/domain/customTypes/seo";
+import type { SeoType } from "@packages/types/customTypes/seo/types";
+import { createModelForm } from "@packages/domain/utils";
 
 export const {
     zodSchema: postSchema,

@@ -1,31 +1,38 @@
 {
-  "root": true,
-  "extends": ["eslint:recommended"],
-  "plugins": ["boundaries"],
-  "settings": {
-    "boundaries/elements": [
-      { "type": "types", "pattern": "packages/types/src/**" },
-      { "type": "domain", "pattern": "packages/domain/src/**" },
-      { "type": "services-app", "pattern": "packages/services/src/app/**" },
-      { "type": "services-adapters", "pattern": "packages/services/src/adapters/**" },
-      { "type": "ui", "pattern": "packages/ui/src/**" }
-    ]
-  },
-  "overrides": [
-    {
-      "files": ["packages/**/src/**/*.{ts,tsx,js,jsx}", "apps/web/**/*.{ts,tsx,js,jsx}"],
-      "rules": {
-        "boundaries/element-types": [
-          "error",
-          {
-            "default": "disallow",
-            "ui": ["types"],
-            "domain": ["types"],
-            "services-app": ["domain", "types"],
-            "services-adapters": ["services-app", "domain", "types"]
-          }
+    "root": true,
+    "extends": ["next/core-web-vitals"],
+    "plugins": ["boundaries"],
+    "settings": {
+        "boundaries/elements": [
+            { "type": "types", "pattern": "^@packages/types/" },
+            { "type": "domain", "pattern": "^@packages/domain/" },
+            { "type": "services-app", "pattern": "^@packages/services/app/" },
+            { "type": "services-adapters", "pattern": "^@packages/services/adapters/" },
+            { "type": "ui", "pattern": "^(?:@packages/ui/|@components/|@assets/|@utils/|@src/)" },
+            { "type": "app", "pattern": "^(?:@app/|apps/web/app/)" }
         ]
-      }
-    }
-  ]
+    },
+    "overrides": [
+        {
+            "files": ["apps/web/**/*.{ts,tsx,js,jsx}"],
+            "rules": {
+                "boundaries/element-types": [
+                    "error",
+                    {
+                        "default": "disallow",
+                        "rules": [
+                            { "from": ["ui"], "allow": ["types"] },
+                            { "from": ["domain"], "allow": ["types"] },
+                            { "from": ["services-app"], "allow": ["domain", "types"] },
+                            {
+                                "from": ["services-adapters"],
+                                "allow": ["services-app", "domain", "types"]
+                            },
+                            { "from": ["app"], "allow": ["ui", "services-app", "types"] }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
 }

@@ -1,7 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
-import { toUserNameForm, toUserNameCreate, toUserNameUpdate } from "@domain/models/userName/form";
-import type { UserNameType, UserNameFormType } from "@types/models/userName/types";
+import {
+    toUserNameForm,
+    toUserNameCreate,
+    toUserNameUpdate,
+} from "@packages/domain/models/userName/form";
+import type { UserNameType, UserNameFormType } from "@packages/types/models/userName/types";
 
 describe("toUserNameForm", () => {
     it("convertit UserNameType en UserNameFormType", () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
-import { toTagForm, toTagCreate, toTagUpdate } from "@domain/models/tag/form";
+import { toTagForm, toTagCreate, toTagUpdate } from "@packages/domain/models/tag/form";
 import type { TagType, TagFormType } from "models/tag/types";
 
 describe("toTagForm", () => {
