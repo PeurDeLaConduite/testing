@@ -3,4 +3,4 @@ export type {
     UserNameTypeCreateInput,
     UserNameTypeUpdateInput,
     UserNameFormType,
-} from "@types/models/userName/types";
+} from "models/userName/types";

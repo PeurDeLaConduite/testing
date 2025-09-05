@@ -1,7 +1,7 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { TagType } from "@types/models/tag/types";
-import type { PostType } from "@types/models/post/types";
+import type { TagType } from "models/tag/types";
+import type { PostType } from "models/post/types";
 
 vi.mock("@services/app/models/tag/service", () => ({
     tagService: {

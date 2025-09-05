@@ -2,7 +2,7 @@ import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { useAuthorForm } from "@ui/models/author/hooks";
 import { authorService } from "@services/app/models/author/service";
-import { type AuthorType } from "@types/models/author/types";
+import { type AuthorType } from "models/author/types";
 
 vi.mock("@services/app/models/author/service", () => ({
     authorService: {

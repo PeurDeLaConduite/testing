@@ -5,7 +5,7 @@ import {
     toUserProfileCreate,
     toUserProfileUpdate,
 } from "@domain/models/userProfile/form";
-import type { UserProfileType, UserProfileFormType } from "@types/models/userProfile/types";
+import type { UserProfileType, UserProfileFormType } from "models/userProfile/types";
 
 describe("toUserProfileForm", () => {
     it("convertit UserProfileType en UserProfileFormType", () => {
