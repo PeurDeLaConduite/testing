@@ -9,7 +9,6 @@
     "include": ["src"],
     "references": [
         { "path": "../../packages/types" },
-        { "path": "../../packages/domain" },
         { "path": "../../packages/services" },
         { "path": "../../packages/ui" }
     ]
