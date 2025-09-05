@@ -19,7 +19,14 @@
         "typecheck:web": "yarn workspace web run typecheck",
         "lint:web": "yarn workspace web run lint",
         "test:web": "yarn workspace web run test",
-        "gen:entities:debug": "tsx scripts/generator/entry.ts --debug"
+        "gen:entities:debug": "tsx scripts/generator/entry.ts --debug",
+        "clean": "yarn workspaces foreach -ptv run clean",
+        "typecheck:all": "yarn workspaces foreach -ptv run typecheck",
+        "audit": "yarn audit",
+        "format": "yarn workspaces foreach -ptv run format",
+        "test:watch": "yarn workspaces foreach -ptv run test:watch",
+        "sync:deps": "syncpack fix-mismatches",
+        "reinstall": "rm -rf node_modules && yarn install"
     },
     "devDependencies": {
         "eslint-plugin-boundaries": "^5.0.1",

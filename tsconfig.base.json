@@ -3,6 +3,8 @@
         "target": "ES2019",
         "module": "ESNext",
         "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "strict": true,
         "baseUrl": ".",
         "paths": {
@@ -11,11 +13,11 @@
             "@packages/services/app/*": ["packages/services/src/app/*"],
             "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
             "@packages/ui/*": ["packages/ui/src/*"],
-            "@types/*": ["packages/types/src/*"],
-            "@domain/*": ["packages/domain/src/*"],
-            "@services/app/*": ["packages/services/src/app/*"],
-            "@services/adapters/*": ["packages/services/src/adapters/*"],
-            "@ui/*": ["packages/ui/src/*"]
+            "@apps/*": ["apps/web/*"],
+            "@/*": ["./*"]
+            // "@services/app/*": ["packages/services/src/app/*"],
+            // "@services/adapters/*": ["packages/services/src/adapters/*"],
+            // "@ui/*": ["packages/ui/src/*"]
         }
     },
     "references": [

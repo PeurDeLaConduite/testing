@@ -7792,6 +7792,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@packages/domain@workspace:packages/domain":
+  version: 0.0.0-use.local
+  resolution: "@packages/domain@workspace:packages/domain"
+  languageName: unknown
+  linkType: soft
+
+"@packages/services@workspace:packages/services":
+  version: 0.0.0-use.local
+  resolution: "@packages/services@workspace:packages/services"
+  languageName: unknown
+  linkType: soft
+
+"@packages/types@workspace:packages/types":
+  version: 0.0.0-use.local
+  resolution: "@packages/types@workspace:packages/types"
+  languageName: unknown
+  linkType: soft
+
+"@packages/ui@workspace:packages/ui":
+  version: 0.0.0-use.local
+  resolution: "@packages/ui@workspace:packages/ui"
+  languageName: unknown
+  linkType: soft
+
 "@parcel/watcher-android-arm64@npm:2.5.1":
   version: 2.5.1
   resolution: "@parcel/watcher-android-arm64@npm:2.5.1"
@@ -8467,30 +8491,6 @@ __metadata:
   checksum: 10c0/0dac4f0f15691199abe6a0e067821ddd9d0349c0c05f39834e4eafc8403caf724106884035ae91bbc826e10367e6a5672e7bec4d4243860fa7649de246b1f60b
   languageName: node
   linkType: hard
-
-"@repo/domain@workspace:packages/domain":
-  version: 0.0.0-use.local
-  resolution: "@repo/domain@workspace:packages/domain"
-  languageName: unknown
-  linkType: soft
-
-"@repo/services@workspace:packages/services":
-  version: 0.0.0-use.local
-  resolution: "@repo/services@workspace:packages/services"
-  languageName: unknown
-  linkType: soft
-
-"@repo/types@workspace:packages/types":
-  version: 0.0.0-use.local
-  resolution: "@repo/types@workspace:packages/types"
-  languageName: unknown
-  linkType: soft
-
-"@repo/ui@workspace:packages/ui":
-  version: 0.0.0-use.local
-  resolution: "@repo/ui@workspace:packages/ui"
-  languageName: unknown
-  linkType: soft
 
 "@rollup/rollup-android-arm-eabi@npm:4.50.0":
   version: 4.50.0

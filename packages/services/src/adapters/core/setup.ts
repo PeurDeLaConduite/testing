@@ -2,10 +2,14 @@
 import { Amplify } from "aws-amplify";
 import outputs from "@apps/amplify_outputs.json";
 
+declare global {
+    var __AMPLIFY_CONFIGURED__: boolean | undefined;
+}
+
 const overrides = {
     auth: {
         ...outputs.auth,
-        // oauth: { domain: "auth.peur-de-la-conduite.fr" },
+        oauth: { domain: "auth.peur-de-la-conduite.fr" },
     },
     data: {
         ...outputs.data,
@@ -17,6 +21,6 @@ const cfg = { ...outputs, ...overrides };
 
 // Idempotence globale (dev + HMR + client/serveur)
 if (!globalThis.__AMPLIFY_CONFIGURED__) {
-    Amplify.configure(cfg, { ssr: true }); // <-- ici on balance bien cfg
+    Amplify.configure(cfg, { ssr: true });
     globalThis.__AMPLIFY_CONFIGURED__ = true;
 }

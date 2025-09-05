@@ -11,7 +11,6 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "lib": ["dom", "dom.iterable", "esnext"],
-
         "baseUrl": "../..",
         "paths": {
             "@packages/types/*": ["packages/types/src/*"],
@@ -37,7 +36,6 @@
             "@packages/services/*": ["../../packages/services/src/*"],
             "@services/*": ["apps/web/src/services/*", "packages/services/src/*"]
         },
-
         "plugins": [{ "name": "next" }]
     },
     "include": [
@@ -53,5 +51,11 @@
         "public/**/*.json",
         ".next/types/**/*.ts"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "references": [
+        { "path": "../../packages/types" },
+        { "path": "../../packages/domain" },
+        { "path": "../../packages/services" },
+        { "path": "../../packages/ui" }
+    ]
 }
