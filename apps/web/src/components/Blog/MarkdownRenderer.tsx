@@ -1,6 +1,7 @@
 // src/components/Blog/MarkdownRenderer.tsx
 "use client";
 import React from "react";
+import type { JSXElementConstructor } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSanitize, { defaultSchema, type Options as Schema } from "rehype-sanitize";
@@ -13,16 +14,15 @@ type MarkdownRendererProps = {
 };
 
 // Props passés par react-markdown aux composants
-type RendererProps<K extends keyof JSX.IntrinsicElements> = {
+type RendererProps<K extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = {
     node?: unknown;
 } & React.ComponentProps<K>;
 
-export function withClass<K extends keyof JSX.IntrinsicElements>(
+export function withClass<K extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>>(
     Tag: K,
     defaultProps?: Partial<React.ComponentProps<K>>
 ) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return function Renderer({ node, ...props }: RendererProps<K>) {
+    return function Renderer({ node: _node, ...props }: RendererProps<K>) {
         return <Tag {...defaultProps} {...props} />;
     };
 }
