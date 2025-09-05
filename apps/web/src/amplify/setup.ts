@@ -1,6 +1,7 @@
 // src/amplify/setup.ts
 import { Amplify } from "aws-amplify";
 import outputs from "@apps/amplify_outputs.json";
+import type { AmplifyGlobal } from "@types/web/amplify/global";
 
 const overrides = {
     auth: {
@@ -15,8 +16,10 @@ const overrides = {
 
 const cfg = { ...outputs, ...overrides };
 
+const globals = globalThis as AmplifyGlobal;
+
 // Idempotence globale (dev + HMR + client/serveur)
-if (!globalThis.__AMPLIFY_CONFIGURED__) {
+if (!globals.__AMPLIFY_CONFIGURED__) {
     Amplify.configure(cfg, { ssr: true }); // <-- ici on balance bien cfg
-    globalThis.__AMPLIFY_CONFIGURED__ = true;
+    globals.__AMPLIFY_CONFIGURED__ = true;
 }
