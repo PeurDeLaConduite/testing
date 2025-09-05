@@ -19,6 +19,8 @@
             "@packages/services/adapters/*": ["packages/services/src/adapters/*"],
             "@packages/ui/*": ["packages/ui/src/*"],
             "@types/*": ["packages/types/src/*"],
+            "models/*/types": ["packages/types/src/models/*/types"],
+            "models/*": ["packages/types/src/models/*"],
             "@domain/*": ["packages/domain/src/*"],
             "@services/app/*": ["packages/services/src/app/*"],
             "@services/adapters/*": ["packages/services/src/adapters/*"],

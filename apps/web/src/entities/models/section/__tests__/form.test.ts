@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
 import { toSectionForm, toSectionCreate, toSectionUpdate } from "@domain/models/section/form";
-import type { SectionType, SectionFormType } from "@types/models/section/types";
+import type { SectionType, SectionFormType } from "models/section/types";
 
 describe("toSectionForm", () => {
     it("convertit SectionType en SectionFormType", () => {

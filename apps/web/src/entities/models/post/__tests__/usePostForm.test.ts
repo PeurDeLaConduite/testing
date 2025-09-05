@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { usePostForm } from "@ui/models/post/hooks";
-import { type PostType } from "@types/models/post/types";
+import { type PostType } from "models/post/types";
 import { postService } from "@services/app/models/post/service";
 import { syncPostToTags } from "@domain/relations/postTag";
 import { syncPostToSections } from "@domain/relations/sectionPost";

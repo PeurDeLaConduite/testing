@@ -1,4 +1,4 @@
-import type { BaseModel, UpdateInput, ModelForm } from "@types/core";
+import type { BaseModel, UpdateInput, ModelForm } from "@packages/types/core";
 
 export type TodoModel = BaseModel<"Todo">;
 export type TodoCreateInput = { content?: string };
