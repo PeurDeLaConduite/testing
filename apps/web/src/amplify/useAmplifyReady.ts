@@ -2,9 +2,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { AmplifyGlobal } from "@types/web/amplify/global";
 
 export function useAmplifyReady() {
-    const [ready, setReady] = useState<boolean>(!!globalThis.__AMPLIFY_CONFIGURED__);
+    const [ready, setReady] = useState<boolean>(
+        !!(globalThis as AmplifyGlobal).__AMPLIFY_CONFIGURED__
+    );
 
     useEffect(() => {
         if (ready) return;
@@ -13,7 +16,7 @@ export function useAmplifyReady() {
         let canceled = false;
         import("@src/amplify/setup")
             .then(() => {
-                if (!canceled) setReady(!!globalThis.__AMPLIFY_CONFIGURED__);
+                if (!canceled) setReady(!!(globalThis as AmplifyGlobal).__AMPLIFY_CONFIGURED__);
             })
             .catch((e) => {
                 console.error("[Amplify] setup import failed:", e);
